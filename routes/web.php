@@ -12,7 +12,7 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/users/login/store', [LoginController::class, 'store']);
 
-    Route::get('/main', [MainController::class, 'index'])->name('admin');
+    Route::get('/', [MainController::class, 'index'])->name('admin');
 });
 
 // User client

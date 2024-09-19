@@ -9,7 +9,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        echo 'dfsdfsdf';
-        // return view("admin.index");
+        return view("admin.home");
     }
 }
