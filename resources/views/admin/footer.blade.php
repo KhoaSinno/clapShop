@@ -31,21 +31,21 @@
 
  <!-- Home -->
  <!-- Essential javascripts for application to work-->
- <script src="/admin_UI/js/jquery-3.2.1.min.js"></script>
- <script src="/admin_UI/js/popper.min.js"></script>
- <script src="/admin_UI/js/bootstrap.min.js"></script>
+ <script src="/admin_UI/vendor/jquery/jquery-3.2.1.min.js"></script>
+ <script src="/admin_UI/vendor/bootstrap/js/popper.min.js"></script>
+ <script src="/admin_UI/vendor/bootstrap/js/bootstrap.min.js"></script>
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <!-- <script src="/admin_UI/doc/js/plugins/jq_1111.js"></script> -->
  <!-- <script src="src/jquery.table2excel.js"></script> -->
  <script src="/admin_UI/js/main.js"></script>
  <!-- The javascript plugin to display page loading on top-->
- <script src="/admin_UI/js/plugins/pace.min.js"></script>
+ <script src="/admin_UI/doc/js/plugins/pace.min.js"></script>
  <!-- Page specific javascripts-->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
  <!-- <script src="/admin_UI/doc/js/plugins/jq_332_confirm.js"></script> -->
  <!-- Data table plugin-->
- <script type="text/javascript" src="/admin_UI/js/plugins/jquery.dataTables.min.js"></script>
- <script type="text/javascript" src="/admin_UI/js/plugins/dataTables.bootstrap.min.js"></script>
+ <script type="text/javascript" src="/admin_UI/doc/js/plugins/jquery.dataTables.min.js"></script>   
+ <script type="text/javascript" src="/admin_UI/doc/js/plugins/dataTables.bootstrap.min.js"></script>
  <script type="text/javascript">
      $('#sampleTable').DataTable();
  </script>

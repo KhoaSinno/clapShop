@@ -24,7 +24,7 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/avtHotBoy.jpg" width="50px"
+        <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/admin_UI/images/avtHotBoy.jpg" width="50px"
                 alt="User Image">
             <div>
                 <p class="app-sidebar__user-name"><b>Sinoo</b></p>
@@ -144,7 +144,7 @@
                                     <td width="10"><input type="checkbox" name="check2" value="2"></td>
                                     <td>#SX22837</td>
                                     <td>Trần Khả Ái</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/2.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/2.jpg" alt=""></td>
                                     <td>6 Nguyễn Lương Bằng, Tân Phú, Quận 7, Hồ Chí Minh</td>
                                     <td>22/12/1999</td>
                                     <td>Nữ</td>
@@ -162,7 +162,7 @@
                                     <td width="10"><input type="checkbox" name="check3" value="3"></td>
                                     <td>#LO2871</td>
                                     <td>Phạm Thu Cúc</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/3.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/3.jpg" alt=""></td>
                                     <td>Số 3 Hòa Bình, Phường 3, Quận 11, Hồ Chí Minh </td>
                                     <td>02/06/1998</td>
                                     <td>Nữ</td>
@@ -180,7 +180,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#SR28746</td>
                                     <td>Trần Anh Khoa</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/4.jpg" alt=""></td>
                                     <td>19 Đường Nguyễn Hữu Thọ, Tân Hưng, Quận 7, Hồ Chí Minh </td>
                                     <td>18/02/1995</td>
                                     <td>Nam</td>
@@ -198,7 +198,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#KJS276</td>
                                     <td>Nguyễn Thành Nhân</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/5.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/5.jpg" alt=""></td>
                                     <td>Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh </td>
                                     <td>10/03/1996</td>
                                     <td>Nam</td>
@@ -216,7 +216,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#BS76228</td>
                                     <td>Nguyễn Đặng Trọng Nhân</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/6.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/6.jpg" alt=""></td>
                                     <td>59C Nguyễn Đình Chiểu, Quận 3, Hồ Chí Minh </td>
                                     <td>23/07/1996</td>
                                     <td>Nam</td>
@@ -234,7 +234,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#YUI21376</td>
                                     <td>Nguyễn Thị Mai</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/4.jpg" alt=""></td>
                                     <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                                     <td>09/12/2000</td>
                                     <td>Nữ </td>
@@ -252,7 +252,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#YUI21376</td>
                                     <td>Nguyễn Thị Mai</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/4.jpg" alt=""></td>
                                     <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                                     <td>09/12/2000</td>
                                     <td>Nữ </td>
@@ -270,7 +270,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#YUI21376</td>
                                     <td>Nguyễn Thị Mai</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/3.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/3.jpg" alt=""></td>
                                     <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                                     <td>09/12/2000</td>
                                     <td>Nữ </td>
@@ -288,7 +288,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#YUI21376</td>
                                     <td>Nguyễn Thị Mai</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/3.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/3.jpg" alt=""></td>
                                     <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                                     <td>09/12/2000</td>
                                     <td>Nữ </td>
@@ -306,7 +306,7 @@
                                     <td width="10"><input type="checkbox"></td>
                                     <td>#YUI21376</td>
                                     <td>Nguyễn Thị Mai</td>
-                                    <td><img class="img-card-person" src="/img-anhthe/3.jpg" alt=""></td>
+                                    <td><img class="img-card-person" src="/admin_UI/img-anhthe/3.jpg" alt=""></td>
                                     <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
                                     <td>09/12/2000</td>
                                     <td>Nữ </td>
