@@ -10,3 +10,5 @@
 2. php artisan tinker
 
 3. echo bcrypt('123456');
+
+$2y$12$gUqNgLSFHUjtU79qvg0XOuJQUqSSmNMk0ZSyms5en5aP8M84iUxFu
