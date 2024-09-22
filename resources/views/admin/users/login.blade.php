@@ -3,6 +3,10 @@
 
 <head>
     @include('admin.head')
+    <link rel="stylesheet" type="text/css" href="/e_adminSN/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/e_adminSN/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/e_adminSN/css/index.css">
+
 </head>
 
 <body>
@@ -10,7 +14,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
-                    <img src="/admin_UI/images/team.jpg" alt="IMG">
+                    <img src="/e_adminSN/assets/images/team.jpg" alt="IMG">
                 </div>
                 <div class="login100-form validate-form">
                     <span class="login100-form-title">
@@ -35,17 +39,16 @@
                                 <i class='bx bx-key'></i>
                             </span>
                         </div>
-                        <div class="wrap-input100 form-check validate-input">
-                            <input class="form-check-input" type="checkbox" name="remember">
-                            <label class="form-check-label" for="remember">
+                        <div class="wrap-input100 form-check validate-input d-flex justify-center align-items-center">
+                            <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember"
+                                style="width: 20px;">
+                            <label class="form-check-label pl-3" for="remember">
                                 Remember me
                             </label>
                         </div>
-                        <!--=====ĐĂNG NHẬP======-->
                         <div class="container-login100-form-btn">
                             <button type="submit" class="btn btn-info w-100">Đăng nhập</button>
                         </div>
-                        <!--=====LINK TÌM MẬT KHẨU======-->
                         <div class="text-right p-t-12">
                             <a class="txt2" href="/admin_UI/forgot.html">
                                 Bạn quên mật khẩu?
@@ -53,20 +56,24 @@
                         </div>
                         @csrf
                     </form>
-                    <!--=====FOOTER======-->
-                    <div class="text-center p-t-70 txt2">
-                        Phần mềm quản lý bán hàng ClapShop<i class="far fa-copyright" aria-hidden="true"></i>
-                        <script type="text/javascript">
-                            document.write(new Date().getFullYear());
-                        </script> <a
-                            class="txt2" href="#"> Five Hero Team </a>
+                    <div class="text-center p-t-70 txt2 d-flex flex-col">
+                        <span>Phần mềm quản lý bán hàng ClapShop</span>
+                        <div>
+                            <i class="far fa-copyright" aria-hidden="true"></i>
+                            <script type="text/javascript">
+                                document.write(new Date().getFullYear());
+                            </script>
+                            <a class="txt2" href="#"> Five Hero Team </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     @include('admin.footer')
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
