@@ -2,43 +2,65 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\User as Authenticatable; // Thêm dòng này
+use Illuminate\Notifications\Notifiable; // Thêm dòng này
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+/**
+ * Class User
+ *
+ * @property string $usersID
+ * @property string|null $username
+ * @property string|null $role
+ * @property string|null $password
+ * @property string|null $email
+ * @property string|null $phone
+ * @property string|null $address
+ * @property string|null $gender
+ * @property Carbon|null $dateOfBirth
+ *
+ * @property Collection|Cart[] $carts
+ * @property Collection|Order[] $orders
+ *
+ * @package App\Models
+ */
+class User extends Authenticatable // Thay đổi ở đây
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable; // Thêm dòng này
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $table = 'users';
+    protected $primaryKey = 'usersID';
+    public $incrementing = false;
+    public $timestamps = false;
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'dateOfBirth' => 'datetime'
     ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    protected $fillable = [
+        'username',
+        'role',
+        'password',
+        'email',
+        'phone',
+        'address',
+        'gender',
+        'dateOfBirth'
+    ];
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'usersID');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'usersID');
+    }
 }

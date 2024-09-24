@@ -20,3 +20,12 @@
 - Do đó, khi gửi các yêu cầu thay đổi dữ liệu như DELETE hay POST, bạn cần gửi kèm CSRF token để đảm bảo tính bảo mật.
 
 ### BS4 - V4.1.1
+
+php artisan make:seeder UserSeeder
+php artisan db:seed --class=UserSeeder
+
+composer dump-autoload
+
+### Tạo middleware
+
+php artisan make:middleware RoleMiddleware
