@@ -54,6 +54,12 @@ class User extends Authenticatable // Thay đổi ở đây
         'dateOfBirth'
     ];
 
+    // Thêm phương thức hasRole
+    public function hasRole($role)
+    {
+        return $this->role === $role; // So sánh vai trò
+    }
+    
     public function carts()
     {
         return $this->hasMany(Cart::class, 'usersID');

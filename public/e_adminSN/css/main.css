@@ -3095,7 +3095,7 @@ border: none !important;
 .swal-overlay {
 
   background-color: rgba(0, 0, 0, 0.781);
- 
+
 }
 .swal-text {
   color: black;
@@ -9602,7 +9602,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
   margin-bottom: 10px;
- 
+
 }
 .btn-delete{
   background: #d0d0d0;
@@ -13720,6 +13720,8 @@ be a descendant of the grid when it is being dragged.
   -webkit-transition: background-color 0.3s ease;
   -o-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  cursor: pointer;
+
 }
 
 .app-nav__item:hover, .app-nav__item:focus {
@@ -15434,7 +15436,7 @@ be a descendant of the grid when it is being dragged.
 }
 .btn-actv{
   background: green;
- 
+
   color: white !important;
 }
 .btn-stop-actv{
@@ -15480,7 +15482,7 @@ be a descendant of the grid when it is being dragged.
     border-collapse: collapse;
     width: 100%;
   }
-  
+
   td, th {
     border: 1px solid #dddddd;
     text-align: left;
@@ -15494,7 +15496,7 @@ be a descendant of the grid when it is being dragged.
   border: 1px solid black;
 }
 .tieu--de--phan h3{
- 
+
  color: rgb(0, 28, 64) ;
 }
 .alert {
@@ -15615,7 +15617,7 @@ text-align:center;
 }
 /* Add Animation */
 @-webkit-keyframes animatetop {
-  from {top:-300px; opacity:0} 
+  from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }
 

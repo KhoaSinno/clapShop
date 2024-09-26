@@ -83,4 +83,16 @@ class LoginController extends Controller
 
         return redirect()->back()->withErrors(['login' => 'Invalid credentials']);
     }
+
+    // Logout
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Đăng xuất người dùng
+
+        $request->session()->invalidate(); // Xóa tất cả session
+
+        $request->session()->regenerateToken(); // Tạo token CSRF mới
+
+        return redirect('/login')->with('success', 'Đăng xuất thành công!'); // Chuyển hướng về trang đăng nhập
+    }
 }

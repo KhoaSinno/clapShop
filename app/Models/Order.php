@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Order
- * 
+ *
  * @property string $orderID
  * @property string|null $usersID
  * @property string|null $address
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $orderDate
  * @property float|null $totalPrice
  * @property string|null $status
- * 
+ *
  * @property User|null $user
  * @property Collection|Orderdetail[] $orderdetails
  *

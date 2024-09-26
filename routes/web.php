@@ -27,20 +27,30 @@ Route::get('/', function () {
 });
 
 // Routes cho Đăng Nhập và Đăng Ký
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login/store', [LoginController::class, 'store']);
-Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register/store', [LoginController::class, 'register']);
+// Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::post('/login/store', [LoginController::class, 'store']);
+// Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
+// Route::post('/register/store', [LoginController::class, 'register']);
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [LoginController::class, 'register'])->name('register.store');
+    // Logout
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 // Routes cho Admin
 Route::prefix('admin')->group(function () {
     Route::middleware('role:admin')->group(function () {
-        Route::get('/', [MainController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
     });
 });
 
 // Routes cho hành động cần đăng nhập
 Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
     // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
     // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
