@@ -75,9 +75,11 @@ class LoginController extends Controller
 
             // Kiểm tra vai trò
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard'); // Giao diện admin
-            }
+                // return redirect()->route('admin.dashboard'); // Giao diện admin
+                return redirect()->route('admin.customer'); // Giao diện admin
 
+            }
+            // Giao diện customer
             return redirect('/'); // Giao diện khách hàng
         }
 

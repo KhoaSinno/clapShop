@@ -38,8 +38,8 @@
                 <div class="tile">
                     <div class="tile-body">
                         <div class="row element-button">
+                            
                             <div class="col-sm-2">
-
                                 <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
                                     Tạo mới khách hàng</a>
                             </div>

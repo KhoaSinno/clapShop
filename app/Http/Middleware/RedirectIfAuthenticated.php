@@ -57,10 +57,12 @@ class RedirectIfAuthenticated
                 // dd($user); // Xem thông tin người dùng
                 // Kiểm tra vai trò của người dùng
                 if ($user && $user->hasRole('admin')) {
-                    return redirect('/admin/dashboard'); // Chuyển hướng đến trang admin
+                    return redirect('/admin/order'); // Chuyển hướng đến trang admin
+                } else if ($user && $user->hasRole('customer')) {
+                    return redirect('/'); // Chuyển hướng đến trang khách hàng
                 }
 
-                return redirect('/home'); // Chuyển hướng đến trang khách hàng
+                return redirect('/'); // Chuyển về
             }
         }
 
