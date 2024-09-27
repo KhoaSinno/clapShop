@@ -14,24 +14,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::create([
-        //     'usersID' => '1',
-        //     'username' => 'sinoo',
-        //     'role' => 'admin',
-        //     'password' => Hash::make('123456'),
-        //     'email' => 'admin@gmail.com',
-        //     'phone' => '0123456789',
-        //     'address' => '123 Main St, City A',
-        //     'gender' => 'Male',
-        //     'dateOfBirth' => '2004-01-11',
-        // ]);
+        User::create([
+            'username' => 'sinoo',
+            'role' => 'admin',
+            'fullname' => 'sinoo',
+            'password' => Hash::make('123456'),
+            'email' => 'admin@gmail.com',
+            'phone' => '0123456789',
+            'address' => '123 Main St, City A',
+            'gender' => 'Male',
+            'dateOfBirth' => '2004-01-11',
+        ]);
 
         // client
 
         User::create([
-            'usersID' => 'customer1',
-            'username' => 'customer1',
+            'username' => 'cus1',
             'role' => 'customer',
+            'fullname' => 'Alexander',
             'password' => Hash::make('cus123'), // Mật khẩu cho customer1
             'email' => 'customer1@example.com',
             'phone' => '0123456789',
@@ -41,9 +41,9 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'usersID' => 'customer2',
-            'username' => 'customer2',
+            'username' => 'cus2',
             'role' => 'customer',
+            'fullname' => 'Justen',
             'password' => Hash::make('cus123'), // Mật khẩu cho customer2
             'email' => 'customer2@example.com',
             'phone' => '0987654321',
