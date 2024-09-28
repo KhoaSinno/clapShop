@@ -21,6 +21,24 @@
 
 ### BS4 - V4.1.1
 
+
+Bước 1
+composer update
+composer install
+
+Bước 2
+php artisan config:clear
+php artisan cache:clear
+php artisan config:cache
+
+Kế sách cuối cùng
+composer dump-autoload
+
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+=======
 php artisan make:seeder UserSeeder
 php artisan db:seed --class=UserSeeder
 
@@ -36,3 +54,4 @@ php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
 php artisan view:clear
+
