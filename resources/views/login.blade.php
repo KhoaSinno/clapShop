@@ -20,11 +20,11 @@
                     <span class="login100-form-title">
                         <b>{{$title}}</b>
                     </span>
-                    <form action="/admin/users/login/store" method="post">
+                    <form action="{{ route('login.store') }}" method="post">
                         @include('admin.alert')
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="email"
-                                id="email">
+                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
+                                id="username">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>

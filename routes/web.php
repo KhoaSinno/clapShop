@@ -1,19 +1,71 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\MainController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use Illuminate\Support\Facades\Route;
 
-
-
-Route::prefix('admin')->group(function () {
-
-    Route::get('/users/login', [LoginController::class, 'index']);
-
-    Route::post('/users/login/store', [LoginController::class, 'store']);
-
-    Route::get('/', [MainController::class, 'index'])->name('admin');
+// Routes cho Giao diện Khách Hàng
+Route::get('/', function () {
+    return view('welcome'); // Trang chủ
 });
 
-// User client
+// Routes cho Đăng Nhập và Đăng Ký
+// Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::post('/login/store', [LoginController::class, 'store']);
+// Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
+// Route::post('/register/store', [LoginController::class, 'register']);
 
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [LoginController::class, 'register'])->name('register.store');
+    // Logout
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+// Routes cho Admin
+Route::prefix('admin')->group(function () {
+    Route::middleware('role:admin')->group(function () {
+        // Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+        // Customer Routes
+        Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
+        Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
+        Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
+        Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
+        Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
+        Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('admin.customer.delete');
+        // Category Routes
+        Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+
+        // Product Routes
+        Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+        Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
+        Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
+        Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+        Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+        Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
+
+        // Order Routes
+        Route::get('/order', [OrderController::class, 'index'])->name('admin.order');
+        Route::get('/order/view/{id}', [OrderController::class, 'view'])->name('admin.order.view');
+        Route::get('/order/edit/{id}', [OrderController::class, 'edit'])->name('admin.order.edit');
+        Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
+        Route::delete('/order/delete/{id}', [OrderController::class, 'destroy'])->name('admin.order.delete');
+    });
+});
+
+// Routes cho hành động cần đăng nhập
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
+    // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
+    // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
+});
+
+// Route cho Logout
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
