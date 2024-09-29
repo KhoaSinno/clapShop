@@ -6,18 +6,14 @@ use App\Http\Controllers\admin\MainController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 // Routes cho Giao diện Khách Hàng
 Route::get('/', function () {
-    return view('welcome'); // Trang chủ
-});
-
-// Routes cho Đăng Nhập và Đăng Ký
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
-// Route::post('/login/store', [LoginController::class, 'store']);
-// Route::get('/register', [LoginController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register/store', [LoginController::class, 'register']);
+    return view('customer.home'); // Trang chủ
+})->name('customer.home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -57,6 +53,23 @@ Route::prefix('admin')->group(function () {
         Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
         Route::delete('/order/delete/{id}', [OrderController::class, 'destroy'])->name('admin.order.delete');
     });
+});
+
+// Routes cho Customer
+Route::prefix('customer')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('customer.products');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('customer.product.detail');
+
+    Route::get('/categories', [CategoryController::class, 'index'])->name('customer.categories');
+    Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
+
+    Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
+    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('customer.cart.add');
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('customer.cart.remove');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('customer.orders');
 });
 
 // Routes cho hành động cần đăng nhập
