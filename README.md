@@ -1,7 +1,32 @@
 # Account: `Username` | `Password`
 
 + `ADMIN:` sinoo | 123456
-+ `CUSTOMER:` cus1 | cus123
++ `CUSTOMER:` anh teo | cus123
+
+# Công việc các thành viên
+
+### `Anh Khoa - HTTT2211026`
+
++ Thành lập dự án, khởi tạo và thiết lập môi trường
++ Chọn `template` Admin và Customer
++ Phân `chia route` cho Admin và Customer
++ `Hiển thị/ Update khách hàng` với ajax
+
+### `Thành Đạt - HTTT2211003`
+
++ Do something...
+
+### `Như É - HTTT2211015`
+
++ Do this.. do that...
+
+### `Thành Phát - HTTT2211004`
+
++ Dou someone...
+
+### `Trường Nguyên - HTTT2211025`
+
++ Do ware...
 
 ## Tại sao cần CSRF?
 
