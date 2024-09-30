@@ -95,6 +95,9 @@ var myApp = new function () {
 
 
 //Modal
-$("#show-emp").on("click", function () {
-    $("#ModalUP").modal({ backdrop: false, keyboard: false })
-});
+// $("#show-emp").on("click", function () {
+//     $("#ModalUP").modal({ backdrop: false, keyboard: false })
+// });
+
+// $('#ModalUP').modal('show');
+

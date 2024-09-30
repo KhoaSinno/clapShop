@@ -1,4 +1,6 @@
   <!-- Essential javascripts for application to work-->
+
+
   <script src="/e_adminSN/js/jquery-3.2.1.min.js"></script>
   <script src="/e_adminSN/js/popper.min.js"></script>
   <script src="/e_adminSN/js/bootstrap.min.js"></script>
@@ -16,4 +18,3 @@
   </script>
 
   <script src="/e_adminSN/js/helper.js"></script>
-
