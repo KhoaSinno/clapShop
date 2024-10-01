@@ -94,17 +94,31 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="/e_customerSN/img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
+                                <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
+                                <div>Vietnamese</div>
                             </div>
+
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                @auth
+                                <!-- Kiểm tra nếu người dùng là khách hàng -->
+                                @if(auth()->user()->role == 'customer')
+                                <a class="d-inline-block border-right" href="#"><i class="fa fa-user"></i> {{ auth()->user()->username }}</a>
+                                <a class="d-inline-block " href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                @endif
+                                @else
+                                <!-- Nếu người dùng chưa đăng nhập -->
+                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                                @endauth
                             </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -120,18 +134,18 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ route(name: 'customer.home') }}">Trang chủ</a></li>
-                            <li><a href="{{ route(name: 'customer.products') }}">Sản phẩm</a></li>
-                            <li><a href="#">Danh mục</a>
+                            <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route(name: 'customer.home') }}">Trang chủ</a></li>
+                            <li class="{{ request()->is('customer/products') ? 'active' : '' }}"><a href="{{ route(name: 'customer.products') }}">Sản phẩm</a></li>
+                            <!-- <li><a href="#">Danh mục</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
                                     <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <!-- <li><a href="./blog.html">Blog</a></li> -->
-                            <li><a href="./contact.html">Liên hệ</a></li>
+                            <li class="{{ request()->is('customer/contact') ? 'active' : '' }}"><a href="{{ route(name: 'customer.contact') }}">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -159,7 +173,7 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>Danh sách các hãng</span>
+                            <span>Danh mục</span>
                         </div>
                         <ul>
                             <li><a href="#">Fresh Meat</a></li>

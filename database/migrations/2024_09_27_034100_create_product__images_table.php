@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('productID');
             $table->string('image_url', 255);
+            $table->string('desc', 255);
             $table->string('type', 50);
             $table->timestamps();
 

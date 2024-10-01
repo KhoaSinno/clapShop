@@ -63,7 +63,7 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate($request, rules: [
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
@@ -95,6 +95,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken(); // Tạo token CSRF mới
 
-        return redirect('/login')->with('success', 'Đăng xuất thành công!'); // Chuyển hướng về trang đăng nhập
+        return redirect('/')->with('success', 'Đăng xuất thành công!'); // Chuyển hướng về trang đăng nhập
     }
 }

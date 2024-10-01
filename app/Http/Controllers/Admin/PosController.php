@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class PosController extends Controller
 {
     public function index()
     {
         $products = Product::get();
-        return view('customer.product.index', [
-            'title' => 'Danh sách sản phẩm',
+        return view('admin.pos.index', [
+            'title' => 'POS Bán hàng',
             'products' => $products,
         ]);
     }

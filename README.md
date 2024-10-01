@@ -1,32 +1,71 @@
 # Account: `Username` | `Password`
 
 + `ADMIN:` sinoo | 123456
-+ `CUSTOMER:` anh teo | cus123
++ `CUSTOMER:` teo | cus123
 
 # Công việc các thành viên
 
-### `Anh Khoa - HTTT2211026`
+### `1. Anh Khoa - HTTT2211026`
 
 + Thành lập dự án, khởi tạo và thiết lập môi trường
 + Chọn `template` Admin và Customer
 + Phân `chia route` cho Admin và Customer
 + `Hiển thị/ Update khách hàng` với ajax
++ `Thiết kế database`
 
-### `Thành Đạt - HTTT2211003`
+  #### `>>>To do:`
+
++ Train và hỗ trợ cho mọi người
++ Tối ưu lại Routes
+
+### `2. Thành Đạt - HTTT2211003`
 
 + Do something...
 
-### `Như É - HTTT2211015`
+  #### `>>>Doing:`
+
++ Train cho Nguyên: Cách chạy khi có src và khi mới pull code về
+
++ Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy
+
+### `3. Như É - HTTT2211015`
 
 + Do this.. do that...
++ `Thiết kế database`
 
-### `Thành Phát - HTTT2211004`
+  #### `>>>Doing:`
+
++ Note các bước đã thực hiện ở bên dưới này t có viết sẵn rồi đó
+
++ Train cho Phát: Cách chạy khi có src và khi mới pull code về
+
++ Admin: code Thêm sửa Xóa Danh mục sản phẩm
+
+### `4. Thành Phát - HTTT2211004`
 
 + Dou someone...
 
-### `Trường Nguyên - HTTT2211025`
+  #### `>>>Doing:`
 
-+ Do ware...
++ Lấy Hình ảnh + Nội dung
+
+### `5. Trường Nguyên - HTTT2211025`
+
++ Do wave...
++ `Thiết kế database`
+
+  #### `>>>Doing:`
+
++ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
++ Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
+
+## Bước chạy dự án:
+
+1.
+
+2.
+
+3.
 
 ## Tại sao cần CSRF?
 
@@ -40,26 +79,19 @@
 
 + BS4 - V4.1.1
 
-## Note saflow
-
-1. php artisan migrate
-
-2. php artisan tinker
-
-3. echo bcrypt('123456');
-
 ### `Create dummy data`
 
-+ php artisan make:seeder UserSeeder
-+ php artisan db:seed --class=UserSeeder
+php artisan db:seed
+
+php artisan make:seeder *(name of seed)Seeder
+
+php artisan db:seed --class=*(name of seed)Seeder
 
 ### `Load file auto in lavarel`
 
 + composer dump-autoload
 
 ### `Tạo middleware`
-
-=======
 
 ### BS4 - V4.1.1
 
@@ -72,27 +104,13 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 
-Kế sách cuối cùng
-composer dump-autoload
-
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
-=======
-
-php artisan make:seeder UserSeeder
-php artisan db:seed --class=UserSeeder
+## Kế sách cuối cùng
 
 composer dump-autoload
-
-### Tạo middleware
-
-php artisan make:middleware RoleMiddleware
 
 ### `Reset cache`
 
 php artisan config:clear
 php artisan cache:clear
-php artisan route:clear
 php artisan view:clear
+php artisan route:clear

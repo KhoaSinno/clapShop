@@ -16,7 +16,7 @@
             <!-- <li>
                 <a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
             </li> -->
-            <form action="{{ route('logout') }}" method="POST" class="cursor-pointer">
+            <form action="{{ route('logout') }}" method="POST" class="cursor-pointer m-0">
                 @csrf
                 <button type="submit" class="app-nav__item m-0"><i class='bx bx-log-out bx-rotate-180'></i></button>
             </form>
@@ -56,7 +56,7 @@
 
     <!-- Modal -->
     @include('admin.footer')
-    
+
     @yield('modal')
 </body>
 

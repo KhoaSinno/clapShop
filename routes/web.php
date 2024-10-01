@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\MainController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\PosController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Customer\CartController;
@@ -24,9 +25,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
+// // Logout dành cho người đã đăng nhập (sử dụng auth middleware)
+// Route::middleware('auth')->post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 // Routes cho Admin
 Route::prefix('admin')->group(function () {
     Route::middleware('role:admin')->group(function () {
+
+        Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
+
         // Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
         // Customer Routes
         Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customer');
@@ -68,6 +75,9 @@ Route::prefix('customer')->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('customer.categories');
     Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
+
+    Route::get('/contact', [CategoryController::class, 'index'])->name('customer.contact');
+
 
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('customer.cart.add');

@@ -9,7 +9,7 @@
     </div>
     <hr>
     <ul class="app-menu">
-        <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
+        <li><a class="app-menu__item haha" href="{{ route('admin.pos') }}"><i class='app-menu__icon bx bx-cart-alt'></i>
                 <span class="app-menu__label">POS Bán Hàng</span></a></li>
 
         <li><a class="app-menu__item {{ request()->is('admin/customers') ? 'active' : '' }} " href="{{ route('admin.customer') }}"><i class='app-menu__icon bx bx-id-card'></i>
