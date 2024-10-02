@@ -10,10 +10,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
-        return view('customer.product.index', [
-            'title' => 'Danh sách sản phẩm',
-            'products' => $products,
-        ]);
+        return view('customer.product.index');
     }
 }
