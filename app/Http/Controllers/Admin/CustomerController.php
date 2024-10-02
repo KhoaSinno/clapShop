@@ -13,6 +13,7 @@ class CustomerController extends Controller
         $cus = User::where('role', 'customer')->get();
         return view('admin.customer.index', [
             'title' => 'Danh sách khách hàng',
+            'customers'=> $cus
         ]);
     }
 }

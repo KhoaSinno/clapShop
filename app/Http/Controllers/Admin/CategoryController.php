@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('customer.category.index', [
+        return view('admin.category.index', [
             'title' => 'Danh sách danh mục',
         ]);
     }

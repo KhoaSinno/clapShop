@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\CheckoutController;
+use App\Http\Controllers\Customer\ContactController;
+use App\Http\Controllers\Customer\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // Routes cho Giao diện Khách Hàng
@@ -67,13 +69,13 @@ Route::prefix('admin')->group(function () {
 
 // Routes cho Customer
 Route::prefix('customer')->group(function () {
-    Route::get('/products', [ProductController::class, 'index'])->name('customer.products');
-    Route::get('/products/{id}', [ProductController::class, 'show'])->name('customer.product.detail');
+    Route::get('/products', [HomeController::class, 'getProducts'])->name('customer.products');
+    Route::get('/products/{id}', [HomeController::class, 'show'])->name('customer.product.detail');
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('customer.categories');
     Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
 
-    Route::get('/contact', [CategoryController::class, 'index'])->name('customer.contact');
+    Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
 
 
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
