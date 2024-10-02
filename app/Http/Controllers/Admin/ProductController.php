@@ -12,4 +12,13 @@ class ProductController extends Controller
     {
         return view('customer.product.index');
     }
+    public function create(){
+        //
+    }
+    public function update(){
+        //
+    }
+    public function delete(){
+        //
+    }
 }
