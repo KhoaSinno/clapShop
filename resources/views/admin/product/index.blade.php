@@ -3,7 +3,7 @@
 @section('function_nav')
 <div class="col-sm-2">
     <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
-        Tạo mới khách hàng</a>
+        Tạo mới sản phẩm</a>
 </div>
 @endsection
 
@@ -12,31 +12,29 @@
     id="sampleTable">
     <thead>
         <tr>
-            <th>Mã KH</th>
-            <th width="150">Họ và tên</th>
-            <th width="300">Địa chỉ</th>
-            <th>SĐT</th>
-            <th>Email</th>
-            <th>Ngày sinh</th>
-            <th>Giới tính</th>
+            <th>Mã SP</th>
+            <th width="150">Tên SP</th>
+            <th width="150">Thương hiệu</th>
+            <th>Chi tiết cấu hình</th>
+            <th>Giá</th>
+            <th>Tồn kho</th>
+            <th>Hoạt động</th>
             <th width="100">Tính năng</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($customers as $cus)
+        @foreach($products as $p)
         <tr>
-            <td>{{ $cus->id }}</td> <!-- Mã khách hàng -->
-            <td>{{ $cus->fullname }}</td> <!-- Họ và tên -->
-            <td>{{ $cus->address }}</td> <!-- Địa chỉ -->
-            <td>{{ $cus->phone }}</td> <!-- SĐT -->
-            <td>{{ $cus->email }}</td> <!-- Email -->
-            <td>{{ $cus->dateOfBirth }}</td> <!-- Ngày sinh -->
-            <td>{{ $cus->gender }}</td> <!-- Giới tính -->
+            <td>{{ $p->id }}</td>
+            <td>{{ $p->name }}</td>
+            <td>{{ $p->brand }}</td>
+            <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
+            <td>{{ $p->cpu }}</td>
+            <td>{{ $p->price }}</td>
+            <td>{{ $p->stock }}</td>
+            <td>{{ $p->active ? 'Còn bán': 'Ngừng bán'}}</td>
             <td class="table-td-center">
-                <!-- <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                    data-toggle="modal" data-id="{{ $cus->id }}"><i class="fas fa-edit"></i>
-                </button> -->
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-id="{{ $cus->id }}" data-toggle="modal" data-target="#ModalUP">
+                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-id="{{ $p->id }}" data-toggle="modal" data-target="#ModalUP">
                     <i class="fas fa-edit"></i>
                 </button>
 
