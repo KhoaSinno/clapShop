@@ -39,9 +39,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customer');
         // Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
         // Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
-        // Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('admin.customer.edit');
-        // Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('admin.customer.update');
-        // Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('admin.customer.delete');
 
         Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 

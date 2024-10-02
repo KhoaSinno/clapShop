@@ -39,7 +39,7 @@
 
 + Train cho Phát: Cách chạy khi có src và khi mới pull code về
 
-+ Admin: code Thêm sửa Xóa Danh mục sản phẩm
++ Admin: code  Danh mục: Xem/ Thêm/ Sửa/ Xóa
 
 ### `4. Thành Phát - HTTT2211004`
 
@@ -59,7 +59,17 @@
 + Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
 + Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
 
-## Bước chạy dự án:
+
+| **Tên** | **To do** | **Doing**  | **Done** | 
+|---------------------------------|-----------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| **Anh Khoa - HTTT2211026**      | - Train và hỗ trợ cho mọi người        | - Tối ưu lại Routes  | - Thành lập dự án, khởi tạo và thiết lập môi trường<br>- Chọn `template` Admin và Customer<br>- Phân `chia route` cho Admin và Customer<br>- `Hiển thị/ Update khách hàng` với ajax<br>- `Thiết kế database` |
+| **Thành Đạt - HTTT2211003**     | -                       | - Train cho Nguyên: Cách chạy khi có src và khi mới pull code về<br>- Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy |                                                                                                |
+| **Như É - HTTT2211015**         | -                  | - Note các bước đã thực hiện lên đây<br>- Train cho Phát: Cách chạy khi có src và khi mới pull code về<br>- Admin: code Danh mục: Xem/ Thêm/ Sửa/ Xóa | - `Thiết kế database`                                                                          |
+| **Thành Phát - HTTT2211004**    | -                        | - Lấy Hình ảnh + Nội dung                                                                       |                                                                                                |
+| **Trường Nguyên - HTTT2211025** | - Suy nghĩ cách xử lý khi nhập hàng      | - Admin: code Sản phẩm: Xem/ Thêm/ Sửa/ Xóa                                                          | - `Thiết kế database`                                                                          |
+
+
+## Bước chạy dự án
 
 1.
 
