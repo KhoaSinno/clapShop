@@ -22,11 +22,12 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
-
-        return redirect()->route('admin.category.index');
+        try {
+            Category::create($request->all());
+            return redirect()->route('admin.category')->with('success', 'Category created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.category')->with('error', 'Failed to create category.');
+        }
     }
 
     public function edit($id)
@@ -37,18 +38,27 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
-        $category->name = $request->name;
-        $category->save();
-
-        return redirect()->route('admin.category.index');
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+    
+        try {
+            $category = Category::findOrFail($id);
+            $category->update($request->all());
+            return redirect()->route('admin.category')->with('success', 'Category updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.category')->with('error', 'Failed to update category.');
+        }
     }
 
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-
-        return redirect()->route('admin.category.index');
+        try {
+            $category = Category::findOrFail($id);
+            $category->delete();
+            return redirect()->route('admin.category.index')->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.category.index')->with('error', 'Failed to delete category.');
+        }
     }
 }
