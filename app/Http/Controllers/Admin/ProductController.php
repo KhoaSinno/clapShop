@@ -49,11 +49,15 @@ class ProductController extends Controller
             // tim product them name
             $product = Product::where('name', $product->name)->first();
 
-            $images = [];
-            foreach ($request->file('images') as $image){
-                $imageName = $image->name;
-                $image->storeAs('public/products', $imageName);
-                $images[] = 'storage/products/' . $imageName;
+            if ($request->hasFile('images')) {
+                $images = [];
+            
+                foreach ($request->file('images') as $image) {
+                    $imageName = $image->getClientOriginalName();
+                    $image->storeAs('public/products', $imageName);
+                    $images[] = 'storage/products/' . $imageName;
+                }
+            
             }
             // Lưu đường dẫn hình ảnh vào bảng product_images
             if (!empty($images)) {
@@ -62,6 +66,7 @@ class ProductController extends Controller
                     $productImage->product_id = $product->id; // ID của sản phẩm
                     $productImage->image_path = $imagePath; // Đường dẫn hình ảnh
                     $productImage->save();
+
                 }
             }
             return redirect()->route('admin.product')->with('success', 'Them sản phẩm thành công');
