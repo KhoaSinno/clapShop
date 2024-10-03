@@ -1,3 +1,4 @@
+
 @extends('admin.main_layout')
 
 @section('function_nav')
@@ -445,3 +446,4 @@
 
     });
 </script>
+
