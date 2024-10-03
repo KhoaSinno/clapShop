@@ -16,10 +16,11 @@ use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
-// Routes cho Giao diện Khách Hàng
-// Route::get('/', function () {
-//     return view('customer.home'); // Trang chủ
-// })->name('customer.home');
+// Test route
+Route::get('/admin/create', function () {
+    return view('admin.product.create'); // Trang chủ
+})->name('customer.home');
+
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
 Route::middleware('guest')->group(function () {

@@ -235,6 +235,7 @@
                 </div>
 </div>
 <!-- MODAL Create customer -->
+
 <div class="modal fade" id="ModalCRE" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
     data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -361,7 +362,7 @@
                         <div class="form-group col-12">
                             <label class="control-label">Hinh anh</label>
                             <div id="imageInputs">
-                                <input type="file" name="images[]" accept="image/*" class="image-input">                                
+                                <input type="file" name="images[]" accept="image/*" class="image-input">
                             </div>
                             <button type="button" id="addImageBtn">Thêm mot hình ảnh nua</button>
                         </div>
