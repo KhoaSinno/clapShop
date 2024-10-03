@@ -56,9 +56,9 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
             $category->delete();
-            return redirect()->route('admin.category.index')->with('success', 'Category deleted successfully.');
+            return redirect()->route('admin.category')->with('success', 'Category deleted successfully.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.category.index')->with('error', 'Failed to delete category.');
+            return redirect()->route('admin.category')->with('error', 'Failed to delete category.');
         }
     }
 }
