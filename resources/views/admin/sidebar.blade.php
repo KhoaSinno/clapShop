@@ -21,7 +21,7 @@
         <li><a class="app-menu__item {{ request()->is('admin/order') ? 'active' : '' }} " href="{{ route('admin.order') }}"><i class='app-menu__icon bx bx-id-card'></i>
                 <span class="app-menu__label">Quản lý đơn hàng</span></a></li>
 
-        <li><a class="app-menu__item {{ request()->is('admin/category') ? 'active' : '' }} {{ request()->is('admin/category') ? 'active' : '' }}" href="{{ route('admin.category') }}"><i class='app-menu__icon bx bx-id-card'></i>
+        <li><a class="app-menu__item {{ request()->is('admin/category') ? 'active' : '' }} " href="{{ route('admin.category') }}"><i class='app-menu__icon bx bx-id-card'></i>
                 <span class="app-menu__label">Quản lý danh mục</span></a></li>
 
     </ul>
