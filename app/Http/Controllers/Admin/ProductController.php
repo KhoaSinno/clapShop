@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+
 use App\Models\Product_Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -70,7 +71,13 @@ class ProductController extends Controller
             return redirect()->route('admin.product')->with('error', 'Them sản phẩm that bai');
         }
 
+
+        return view('admin.product.index', [
+            'title' => 'Danh sách sản phẩm',
+            'products' => $products
+        ]);
     }
+
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -116,12 +123,20 @@ class ProductController extends Controller
             }
             return redirect()->route('admin.product')->with('error', 'Cập nhật khong sản phẩm thành công');
 
+        
+        if ($product) {
+            $product->name = $request->input('name');
+            $product->description = $request->input('description');
+            $product->save();
+            
+            return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công');
         }        
         return redirect()->back()->with('error', 'Cập nhật sản phẩm không thành công');
+        }
     }
     public function delete($id)
     {
         //
     }
-
+    
 }

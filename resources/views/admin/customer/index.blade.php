@@ -126,7 +126,11 @@
 
             // Gọi AJAX để lấy dữ liệu khách hàng theo ID
             $.ajax({
+<<<<<<< HEAD
                 url: '/admin/customers/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
+=======
+                url: '/admin/customer/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
                 type: 'GET',
                 success: function(response) {
                     $('#customerId').val(response.id);
@@ -162,7 +166,11 @@
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
             $.ajax({
+<<<<<<< HEAD
                 url: '/admin/customers/' + customerId, // Gọi đúng URL với ID
+=======
+                url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
                 type: 'PUT',
                 data: formData, // Dữ liệu từ form
                 headers: {

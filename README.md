@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+# Documentation
+
++ Link Plan: `<https://docs.google.com/spreadsheets/d/14FsP_WT7bO9Px5cJIJGaz0Ljs5mbC_g9_CklYtxpvKM/edit?usp=sharing>`
+
++ Link SRC: `<https://drive.google.com/drive/folders/1iz-iIZITxwT4mafGzPmvLm0ycVzTC_sE?usp=drive_link>`
+
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 # Account: `Username` | `Password`
 
 + `ADMIN:` sinoo | 123456
@@ -13,15 +22,19 @@
 + `Hiển thị/ Update khách hàng` với ajax
 + `Thiết kế database`
 
+<<<<<<< HEAD
   #### `>>>To do:`
 
 + Train và hỗ trợ cho mọi người
 + Tối ưu lại Routes
 
+=======
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 ### `2. Thành Đạt - HTTT2211003`
 
 + Do something...
 
+<<<<<<< HEAD
   #### `>>>Doing:`
 
 + Train cho Nguyên: Cách chạy khi có src và khi mới pull code về
@@ -29,10 +42,14 @@
 + Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy
 
 ### `3. Như É - HTTT2211015`
+=======
+### `3. Như Ý - HTTT2211015`
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 
 + Do this.. do that...
 + `Thiết kế database`
 
+<<<<<<< HEAD
   #### `>>>Doing:`
 
 + Note các bước đã thực hiện ở bên dưới này t có viết sẵn rồi đó
@@ -41,10 +58,13 @@
 
 + Admin: code  Danh mục: Xem/ Thêm/ Sửa/ Xóa
 
+=======
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 ### `4. Thành Phát - HTTT2211004`
 
 + Dou someone...
 
+<<<<<<< HEAD
   #### `>>>Doing:`
 
 + Lấy Hình ảnh + Nội dung
@@ -70,6 +90,20 @@
 
 
 ## Bước chạy dự án
+=======
+### `5. Trường Nguyên - HTTT2211025`
+
++ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
++ `Thiết kế database`
+
+# Refresh database
+
+php artisan migrate:fresh
+
+php artisan db:seed
+
+## Bước chạy dự án (Bạn nào note lại push lên đi)
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 
 1.
 
@@ -77,7 +111,11 @@
 
 3.
 
+<<<<<<< HEAD
 ## Tại sao cần CSRF?
+=======
+### Tại sao cần CSRF?
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 
 + CSRF (Cross-Site Request Forgery) là một loại tấn công mà hacker lợi dụng người dùng đã đăng nhập vào hệ thống, sau đó tự động gửi yêu cầu đến server của bạn mà người dùng không biết. Hacker có thể thực hiện các hành động trái phép (như xóa tài khoản, chuyển tiền, v.v.).
 
@@ -101,10 +139,13 @@ php artisan db:seed --class=*(name of seed)Seeder
 
 + composer dump-autoload
 
+<<<<<<< HEAD
 ### `Tạo middleware`
 
 ### BS4 - V4.1.1
 
+=======
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 Bước 1
 composer update
 composer install
@@ -116,8 +157,11 @@ php artisan config:cache
 
 ## Kế sách cuối cùng
 
+<<<<<<< HEAD
 composer dump-autoload
 
+=======
+>>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 ### `Reset cache`
 
 php artisan config:clear
