@@ -8,16 +8,19 @@ use App\Http\Controllers\Admin\PosController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
 // Routes cho Giao diện Khách Hàng
-Route::get('/', function () {
-    return view('customer.home'); // Trang chủ
-})->name('customer.home');
+// Route::get('/', function () {
+//     return view('customer.home'); // Trang chủ
+// })->name('customer.home');
+Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -81,8 +84,8 @@ Route::prefix('customer')->group(function () {
     Route::get('/products/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
 
     // Customer product
-    Route::get('/category', [CategoryController::class, 'index'])->name('customer.category');
-    Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
+    Route::get('/category', [CustomerCategoryController::class, 'index'])->name('customer.category');
+    Route::get('/category/{id}', [CustomerCategoryController::class, 'show'])->name('customer.category.detail');
 
     // Customer contact
     Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
@@ -96,7 +99,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
 
     // Customer order
-    Route::get('/order', [OrderController::class, 'index'])->name('customer.order');
+    Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
 });
 
 // Routes cho hành động cần đăng nhập
