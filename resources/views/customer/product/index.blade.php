@@ -1,12 +1,9 @@
 @extends('customer.main_layout')
 
-<<<<<<< HEAD
 @section('content')
 <!-- Breadcrumb Section Begin -->
-=======
 <!-- Breadcrumb Section Begin -->
 @section('breadcrumb')
->>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 <section class="breadcrumb-section set-bg" data-setbg="/e_customerSN/img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
@@ -14,11 +11,8 @@
                 <div class="breadcrumb__text">
                     <h2>Organi Shop</h2>
                     <div class="breadcrumb__option">
-<<<<<<< HEAD
                         <a href="./index.html">Home</a>
-=======
                         <a href="{{ route('customer.home') }}">Home</a>
->>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
                         <span>Shop</span>
                     </div>
                 </div>
@@ -26,15 +20,12 @@
         </div>
     </div>
 </section>
-<<<<<<< HEAD
 <!-- Breadcrumb Section End -->
 
-=======
 @endsection
 <!-- Breadcrumb Section End -->
 
 @section('content')
->>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">

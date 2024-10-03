@@ -3,24 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-=======
 use App\Models\Category;
->>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
         return view('admin.category.index', [
             'title' => 'Danh sách danh mục',
         ]);
-=======
         $categories = Category::all();
         return view('admin.category.index', compact('categories'), ['title' => 'Danh sách danh mục']);
-        
     }
 
     public function create()
@@ -58,6 +52,5 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.category.index');
->>>>>>> 43d007ae8e232b9507bf4172dbdbe89c72cfad3a
     }
 }
