@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+<div id="alert-container"></div> <!-- Hiển thị thông báo từ AJAX -->
+
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
     <thead>
@@ -126,7 +128,6 @@
 
             // Gọi AJAX để lấy dữ liệu khách hàng theo ID
             $.ajax({
-                url: '/admin/customers/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
                 url: '/admin/customer/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
                 type: 'GET',
                 success: function(response) {
@@ -135,7 +136,6 @@
                     $('#address').val(response.address);
                     $('#phone').val(response.phone);
                     $('#email').val(response.email);
-
 
                     // Lấy ngày sinh và chuyển đổi sang định dạng yyyy-MM-dd
                     var dob = response.dateOfBirth; // lấy ngày từ server
@@ -163,7 +163,6 @@
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
             $.ajax({
-                url: '/admin/customers/' + customerId, // Gọi đúng URL với ID
                 url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
                 type: 'PUT',
                 data: formData, // Dữ liệu từ form
@@ -171,9 +170,29 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
                 },
                 success: function(response) {
-                    // $('#ModalUP').modal('hide');
-                    alert('Cập nhật thành công');
                     location.reload(); // Reload trang sau khi cập nhật thành công
+
+                    if (response.success) {
+                        // Hiển thị thông báo thành công trong phần giao diện HTML
+                        $('#alert-container').html(`
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${response.message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `);
+                    } else {
+                        // Hiển thị thông báo lỗi nếu có
+                        $('#alert-container').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${response.message}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            `);
+                    }
                 },
                 error: function(xhr) {
                     alert('Cập nhật thất bại');
