@@ -10,9 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index', [
-            'title' => 'Danh sách danh mục',
-        ]);
+
         $categories = Category::all();
         return view('admin.category.index', compact('categories'), ['title' => 'Danh sách danh mục']);
     }
@@ -43,7 +41,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
-    
+
         try {
             $category = Category::findOrFail($id);
             $category->update($request->all());
