@@ -2,6 +2,7 @@
 @extends('admin.main_layout')
 
 @section('function_nav')
+
     <div class="col-sm-2">
         <button class="btn btn-add btn-sm" data-toggle="modal" data-target="#createCategoryModal" title="Thêm">
             <i class="fas fa-plus"></i>
@@ -140,4 +141,5 @@
             </div>
         </div>
     @endforeach
+
 @endsection

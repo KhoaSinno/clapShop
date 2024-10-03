@@ -10,9 +10,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        return view('admin.category.index', [
+            'title' => 'Danh sách danh mục',
+        ]);
         $categories = Category::all();
         return view('admin.category.index', compact('categories'), ['title' => 'Danh sách danh mục']);
-        
     }
 
     public function create()
