@@ -55,9 +55,14 @@
                         <i class="fas fa-edit"></i>
                     </button>
 
-                    <button class="btn btn-danger btn-sm delete" type="button" title="Xóa" data-id="{{ $p->id }}">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <form action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="btn btn-danger btn-sm" title="Xóa">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+
                 </td>
             </tr>
         @endforeach
@@ -242,7 +247,7 @@
                         </span>
                     </div>
                 </div>
-                <form id="CreateCustomer" action="{{ route('admin.product.create')}}" method="POST">
+                <form id="CreateCustomer" action="{{ route('admin.product.create')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- <input type="hidden" id="customerId" name="id"> -->
                     @csrf
@@ -356,8 +361,7 @@
                         <div class="form-group col-12">
                             <label class="control-label">Hinh anh</label>
                             <div id="imageInputs">
-                                <input type="file" name="images[]" accept="image/*" class="image-input"
-                                    enctype="multipart/form-data">
+                                <input type="file" name="images[]" accept="image/*" class="image-input">                                
                             </div>
                             <button type="button" id="addImageBtn">Thêm mot hình ảnh nua</button>
                         </div>
