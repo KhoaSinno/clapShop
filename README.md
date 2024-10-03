@@ -1,3 +1,9 @@
+# Documentation
+
++ Link Plan: `<https://docs.google.com/spreadsheets/d/14FsP_WT7bO9Px5cJIJGaz0Ljs5mbC_g9_CklYtxpvKM/edit?usp=sharing>`
+
++ Link SRC: `<https://drive.google.com/drive/folders/1iz-iIZITxwT4mafGzPmvLm0ycVzTC_sE?usp=drive_link>`
+
 # Account: `Username` | `Password`
 
 + `ADMIN:` sinoo | 123456
@@ -30,6 +36,8 @@
 
 ### `3. Như É - HTTT2211015`
 
+### `3. Như Ý - HTTT2211015`
+
 + Do this.. do that...
 + `Thiết kế database`
 
@@ -59,17 +67,18 @@
 + Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
 + Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
 
+### `5. Trường Nguyên - HTTT2211025`
 
-| **Tên** | **To do** | **Doing**  | **Done** | 
-|---------------------------------|-----------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **Anh Khoa - HTTT2211026**      | - Train và hỗ trợ cho mọi người        | - Tối ưu lại Routes  | - Thành lập dự án, khởi tạo và thiết lập môi trường<br>- Chọn `template` Admin và Customer<br>- Phân `chia route` cho Admin và Customer<br>- `Hiển thị/ Update khách hàng` với ajax<br>- `Thiết kế database` |
-| **Thành Đạt - HTTT2211003**     | -                       | - Train cho Nguyên: Cách chạy khi có src và khi mới pull code về<br>- Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy |                                                                                                |
-| **Như É - HTTT2211015**         | -                  | - Note các bước đã thực hiện lên đây<br>- Train cho Phát: Cách chạy khi có src và khi mới pull code về<br>- Admin: code Danh mục: Xem/ Thêm/ Sửa/ Xóa | - `Thiết kế database`                                                                          |
-| **Thành Phát - HTTT2211004**    | -                        | - Lấy Hình ảnh + Nội dung                                                                       |                                                                                                |
-| **Trường Nguyên - HTTT2211025** | - Suy nghĩ cách xử lý khi nhập hàng      | - Admin: code Sản phẩm: Xem/ Thêm/ Sửa/ Xóa                                                          | - `Thiết kế database`                                                                          |
++ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
++ `Thiết kế database`
 
+# Refresh database
 
-## Bước chạy dự án
+php artisan migrate:fresh
+
+php artisan db:seed
+
+## Bước chạy dự án (Bạn nào note lại push lên đi)
 
 1.
 
@@ -101,9 +110,7 @@ php artisan db:seed --class=*(name of seed)Seeder
 
 + composer dump-autoload
 
-### `Tạo middleware`
-
-### BS4 - V4.1.1
+## Kế sách cuối cùng
 
 Bước 1
 composer update
@@ -113,9 +120,6 @@ Bước 2
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
-
-## Kế sách cuối cùng
-
 composer dump-autoload
 
 ### `Reset cache`

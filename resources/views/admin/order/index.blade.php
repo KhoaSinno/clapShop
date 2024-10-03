@@ -124,6 +124,7 @@
             // Gọi AJAX để lấy dữ liệu khách hàng theo ID
             $.ajax({
                 url: '/admin/customers/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
+                url: '/admin/customer/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
                 type: 'GET',
                 success: function(response) {
                     $('#customerId').val(response.id);
@@ -160,6 +161,7 @@
 
             $.ajax({
                 url: '/admin/customers/' + customerId, // Gọi đúng URL với ID
+                url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
                 type: 'PUT',
                 data: formData, // Dữ liệu từ form
                 headers: {
