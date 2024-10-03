@@ -62,7 +62,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
         Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update'); //done
 
-        Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
+        Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
 
         // Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
