@@ -35,7 +35,7 @@
             <tr>
                 <th>ID</th>
                 <th width="150">Tên</th>
-                <!-- <th width="20">Ảnh thẻ</th> -->
+                <th width="20">Logo</th>
                 <th width="100">Tính năng</th>
             </tr>
         </thead>
@@ -43,14 +43,14 @@
             @foreach($categories as $category)
                 <tr>
                     <td class="col-1">{{ $category->id }}</td>
-                    <td class="col-9">{{ $category->name }}</td>
-                    <!-- <td class="col-2"><img class="img-card-person" src="/e_adminSN/assets/img-anhthe/1.jpg" alt=""></td> -->
+                    <td class="col-5">{{ $category->name }}</td>
+                    <td class="col-3"><img class="img-card-person" src="/e_adminSN/assets/img-anhthe/2.jpg" alt=""></td>
                     <td class="col table-td-center">
-                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#editCategoryModal{{ $category->id }}">
                             <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
                 </tr>
