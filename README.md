@@ -86,8 +86,8 @@ php artisan config:cache
 
 ## Kế sách cuối cùng
 
-### `Reset cache`
-
+```bash
+#Reset cache
 php artisan config:clear
 php artisan cache:clear
 php artisan view:clear
