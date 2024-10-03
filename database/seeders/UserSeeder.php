@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        // Admin
         User::create([
             'username' => 'sinoo',
             'role' => 'admin',
@@ -26,32 +24,29 @@ class UserSeeder extends Seeder
             'dateOfBirth' => '2004-01-11',
         ]);
 
-        // client
-
+        // Customer
         User::create([
-            'username' => 'cus1',
+            'username' => 'teo',
             'role' => 'customer',
-            'fullname' => 'Alexander',
-            'password' => Hash::make('cus123'), // Mật khẩu cho customer1
-            'email' => 'customer1@example.com',
+            'fullname' => 'Tèo Em',
+            'password' => Hash::make('cus123'),
+            'email' => 'teoem@gmail.com',
             'phone' => '0123456789',
             'address' => '123 Main St, City',
             'gender' => 'male',
-            'dateOfBirth' => now()->subYears(25), // 25 tuổi
+            'dateOfBirth' => now()->subYears(25),
         ]);
 
         User::create([
-            'username' => 'cus2',
+            'username' => 'tun',
             'role' => 'customer',
-            'fullname' => 'Justen',
-            'password' => Hash::make('cus123'), // Mật khẩu cho customer2
-            'email' => 'customer2@example.com',
+            'fullname' => 'Anh Tủn',
+            'password' => Hash::make('cus123'),
+            'email' => 'tun@gmail.com',
             'phone' => '0987654321',
             'address' => '456 Elm St, City',
             'gender' => 'female',
-            'dateOfBirth' => now()->subYears(30), // 30 tuổi
+            'dateOfBirth' => now()->subYears(30),
         ]);
-
-
     }
 }
