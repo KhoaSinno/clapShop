@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
 
-=======
->>>>>>> 8b1532547c112ff5617950301a9fcfe10cc9af9f
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,13 +11,12 @@ class CategoryController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
+
 
         return view('admin.category.index', [
             'title' => 'Danh sách danh mục',
         ]);
-=======
->>>>>>> 8b1532547c112ff5617950301a9fcfe10cc9af9f
+
         $categories = Category::all();
         return view('admin.category.index', compact('categories'), ['title' => 'Danh sách danh mục']);
     }
@@ -63,13 +59,13 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-<<<<<<< HEAD
+
         $category = Category::findOrFail($id);
         $category->delete();
 
         return redirect()->route('admin.category.index');
 
-=======
+
         try {
             $category = Category::findOrFail($id);
             $category->delete();
@@ -77,6 +73,5 @@ class CategoryController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('admin.category')->with('error', 'Failed to delete category.');
         }
->>>>>>> 8b1532547c112ff5617950301a9fcfe10cc9af9f
     }
 }

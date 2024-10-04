@@ -21,12 +21,12 @@ Route::get('/', function () {
 
 
 use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
-use App\Http\Controllers\Customer\CheckoutController;
-use App\Http\Controllers\Customer\ContactController;
-use App\Http\Controllers\Customer\HomeController;
+// use App\Http\Controllers\Customer\CheckoutController;
+// use App\Http\Controllers\Customer\ContactController;
+// use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
 // Test route
 Route::get('/admin/create', function () {
