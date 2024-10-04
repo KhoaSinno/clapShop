@@ -24,6 +24,7 @@ class ProductController extends Controller
             'product_images' => $product_images
         ]);
     }
+
     public function create(Request $request)
     {
         $product = new Product();
@@ -48,24 +49,44 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         if($product->save()){
             // tim product them name
-            $product = Product::where('name', $product->name)->first();
+            $updatedProduct = Product::where('name', $product->name)->first();
 
-            $images = [];
-            foreach ($request->file('images') as $image){
-                $imageName = $image->name;
-                $image->storeAs('public/products', $imageName);
-                $images[] = 'storage/products/' . $imageName;
+           // Xử lý lưu trữ hình ảnh
+           if ($request->hasFile('images')) {
+                $images = $request->file('images');
+                
+                foreach ($images as $image) {
+                    // Kiểm tra xem file có phải là hình ảnh không
+                    if ($image->isValid() && $image->getClientOriginalExtension() == 'jpg') {
+                        $imageName = $image->store('public/products');
+                        
+                        // Xóa file tạm thời sau khi lưu trữ
+                        if (file_exists($image->getPathname())) {
+                            unlink($image->getPathname());
+                        }
+                    } else {
+                        return redirect()->route('admin.product')->with('success', 'Khong phai anh');
+                    }
+                }
             }
+
+            else{
+                return redirect()->route('admin.product')->with('error', 'khong the tai file');
+            }
+
             // Lưu đường dẫn hình ảnh vào bảng product_images
             if (!empty($images)) {
                 foreach ($images as $imagePath) {
                     $productImage = new Product_Image();
-                    $productImage->product_id = $product->id; // ID của sản phẩm
-                    $productImage->image_path = $imagePath; // Đường dẫn hình ảnh
+                    $productImage->productID = $updatedProduct->id; // ID của sản phẩm
+                    $productImage->image_url = $imagePath; // Đường dẫn hình ảnh
+                    $productImage->desc = "";
+                    $productImage->type = "";
                     $productImage->save();
+                    return redirect()->route('admin.product')->with('success', 'Them sản phẩm thành công');
                 }
             }
-            return redirect()->route('admin.product')->with('success', 'Them sản phẩm thành công');
+            return redirect()->route('admin.product')->with('error', 'Them sản phẩm that thành công');
         }
         else{
             return redirect()->route('admin.product')->with('error', 'Them sản phẩm that bai');
@@ -78,6 +99,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //gan thanh cong
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -134,9 +156,17 @@ class ProductController extends Controller
         return redirect()->back()->with('error', 'Cập nhật sản phẩm không thành công');
         }
     }
+    //thanh cong
     public function delete($id)
     {
-        //
+        $product = Product::find($id);    
+        if ($product) {
+                $product->delete();
+                return redirect()->route('admin.product')->with('success', 'Sản phẩm đã được xóa thành công.');
+            } 
+        else {
+                return redirect()->route('admin.product')->with('error', 'Không thể tìm thấy sản phẩm để xóa.');
+            }
     }
     
 }
