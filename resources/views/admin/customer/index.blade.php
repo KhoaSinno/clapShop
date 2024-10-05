@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+<div id="alert-container"></div> <!-- Hiển thị thông báo từ AJAX -->
+
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
     <thead>
@@ -49,13 +51,12 @@
 </table>
 @endsection
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <!--MODAL Update customer-->
 @section('modal')
 <!-- MODAL Update customer -->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -107,7 +108,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-save">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal">Hủy bỏ</a>
+                    <a class="btn btn-cancel" data-dismiss="modal" id="btnCloseFm">Hủy bỏ</a>
                 </form>
             </div>
         </div>
@@ -117,6 +118,23 @@
 
 @endsection
 
+@section('footer')
+<!--
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -135,7 +153,6 @@
                     $('#phone').val(response.phone);
                     $('#email').val(response.email);
 
-
                     // Lấy ngày sinh và chuyển đổi sang định dạng yyyy-MM-dd
                     var dob = response.dateOfBirth; // lấy ngày từ server
                     var dateParts = dob.split(" ")[0].split("-"); // chia theo dấu cách để lấy phần ngày, sau đó chia theo "-"
@@ -147,7 +164,6 @@
                     }
 
                     $('#gender').val(response.gender);
-                    // $('#ModalUP').modal('show'); // Hiển thị modal
                 },
                 error: function(xhr) {
                     alert('Lỗi khi lấy thông tin khách hàng');
@@ -169,9 +185,40 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
                 },
                 success: function(response) {
-                    // $('#ModalUP').modal('hide');
-                    alert('Cập nhật thành công');
-                    location.reload(); // Reload trang sau khi cập nhật thành công
+                    if (response.success) {
+                        // Cập nhật trực tiếp thông tin trên bảng
+                        const row = $(`button[data-id="${customerId}"]`).closest('tr');
+                        row.find('td:nth-child(2)').text(response.data.fullname); // Cập nhật Họ và tên
+                        row.find('td:nth-child(3)').text(response.data.address); // Cập nhật Địa chỉ
+                        row.find('td:nth-child(4)').text(response.data.phone); // Cập nhật SĐT
+                        row.find('td:nth-child(5)').text(response.data.email); // Cập nhật Email
+                        row.find('td:nth-child(6)').text(response.data.dateOfBirth); // Cập nhật Ngày sinh
+                        row.find('td:nth-child(7)').text(response.data.gender); // Cập nhật Giới tính
+
+                        // Hiển thị thông báo thành công
+                        $('#alert-container').html(`
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        `);
+
+                        // Đóng modal -- bug
+                        jQuery('#ModalUP').modal('hide');
+                        $('.modal-backdrop.fade.show').remove();
+
+                    } else {
+                        $('#alert-container').html(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${response.message}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                `);
+                    }
                 },
                 error: function(xhr) {
                     alert('Cập nhật thất bại');
@@ -179,5 +226,8 @@
             });
         });
 
+
+
     });
 </script>
+@endsection

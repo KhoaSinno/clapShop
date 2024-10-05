@@ -8,16 +8,20 @@ use App\Http\Controllers\Admin\PosController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
 use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use Illuminate\Support\Facades\Route;
 
-// Routes cho Giao diện Khách Hàng
-Route::get('/', function () {
-    return view('customer.home'); // Trang chủ
+// Test route
+Route::get('/admin/create', function () {
+    return view('admin.product.create'); // Trang chủ
 })->name('customer.home');
+
+Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -47,6 +51,11 @@ Route::prefix('admin')->group(function () {
 
         // Category Routes
         Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
+        Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.category.create');
+        Route::post('/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+        Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
         // Product Routes
         Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
@@ -60,7 +69,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
         Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
-        Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
+        Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
 
         // Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
@@ -81,8 +90,8 @@ Route::prefix('customer')->group(function () {
     Route::get('/products/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
 
     // Customer product
-    Route::get('/category', [CategoryController::class, 'index'])->name('customer.category');
-    Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
+    Route::get('/category', [CustomerCategoryController::class, 'index'])->name('customer.category');
+    Route::get('/category/{id}', [CustomerCategoryController::class, 'show'])->name('customer.category.detail');
 
     // Customer contact
     Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
@@ -96,7 +105,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
 
     // Customer order
-    Route::get('/order', [OrderController::class, 'index'])->name('customer.order');
+    Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
 });
 
 // Routes cho hành động cần đăng nhập

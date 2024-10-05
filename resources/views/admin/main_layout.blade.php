@@ -3,6 +3,7 @@
 
 <head>
     @include('admin.head')
+    @yield('head')
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -55,9 +56,9 @@
     </main>
 
     <!-- Modal -->
-    @include('admin.footer')
-
     @yield('modal')
+    @include('admin.footer')
+    @yield('footer')
 </body>
 
 </html>

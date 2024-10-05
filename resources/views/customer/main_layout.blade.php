@@ -22,6 +22,7 @@
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -135,16 +136,9 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route(name: 'customer.home') }}">Trang chủ</a></li>
-                            <li class="{{ request()->is('customer/products') ? 'active' : '' }}"><a href="{{ route(name: 'customer.products') }}">Sản phẩm</a></li>
-                            <!-- <li><a href="#">Danh mục</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li> -->
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
+                            <li class="{{ request()->is('customer/products') ? 'active' : '' }}">
+                                <a href="{{ route(name: 'customer.products') }}">Sản phẩm</a>
+                            </li>
                             <li class="{{ request()->is('customer/contact') ? 'active' : '' }}"><a href="{{ route(name: 'customer.contact') }}">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -153,6 +147,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -216,6 +211,7 @@
     </section>
     <!-- Hero Section End -->
 
+    @yield('breadcrumb')
     @yield('content')
 
     <!-- Footer Section Begin -->
