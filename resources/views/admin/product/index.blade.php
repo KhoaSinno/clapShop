@@ -3,10 +3,11 @@
 
 @section('function_nav')
 <div class="col-sm-2">
-    <button class="btn btn-add btn-sm" title="Thêm" data-toggle="modal" data-target="#ModalCRE">
+    <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail') }}">
         <i class="fas fa-plus"></i>
         Tạo mới sản phẩm
-    </button>
+    </a>
+
 
 </div>
 

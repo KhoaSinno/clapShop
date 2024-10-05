@@ -96,29 +96,31 @@
 
 @section('content')
 
-<form class="row">
-
+<form class="row" action="{{ route('admin.product.create') }}" >
+@csrf <!-- Bảo vệ CSRF -->
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
-        <input class="form-control" type="text">
+        <input class="form-control" type="text" name="name" value="ten san pham 1">
     </div>
 
     <div class="form-group col-md-3">
         <label class="control-label">Số lượng</label>
-        <input class="form-control" type="number">
+        <input class="form-control" type="number" name="stock" value=12>
     </div>
 
 
     <div class="form-group col-md-3">
         <label for="exampleSelect2" class="control-label">Danh mục</label>
-        <select class="form-control" id="exampleSelect2">
-            <option>-- Chọn danh mục --</option>
-            <option>Bàn ăn</option>
-            <option>Bàn thông minh</option>
+        <select class="form-control" id="exampleSelect2" name="category">
+            <option value="1">-- Chọn danh mục --</option>
+            @foreach ($categories as $category)
+            <option value="{{$category->id}}">{{$category -> name}}</option>
+            @endforeach
+            
         </select>
     </div>
 
-    <div class="form-group col-md-3">
+    <!-- <div class="form-group col-md-3">
         <label for="exampleSelect3" class="control-label">Nhà cung cấp</label>
         <select class="form-control" id="exampleSelect3">
             <option>-- Chọn nhà cung cấp --</option>
@@ -127,11 +129,76 @@
             <option>FPT</option>
             <option>Sinoo</option>
         </select>
-    </div>
+    </div> -->
 
     <div class="form-group col-md-3">
         <label class="control-label">Giá bán</label>
-        <input class="form-control" type="text">
+        <input class="form-control" type="number" name="price" value="12">
+    </div>
+    <!-- cpu -->
+    <div class="form-group col-md-3">
+        <label class="control-label">CPU</label>
+        <input class="form-control" type="text" name="cpu" value="cpu 1">
+    </div>
+        <!-- ram -->
+        <div class="form-group col-md-3">
+        <label class="control-label">ram</label>
+        <input class="form-control" type="text" name="ram" value="ram 1">
+    </div>
+        <!-- storage -->
+        <div class="form-group col-md-3">
+        <label class="control-label">storage</label>
+        <input class="form-control" type="text" name="storage" value="storage 1">
+    </div>
+        <!-- screen -->
+        <div class="form-group col-md-3">
+        <label class="control-label">screen</label>
+        <input class="form-control" type="text" name="screen" value="screen 1">
+    </div>
+            <!-- card -->
+            <div class="form-group col-md-3">
+        <label class="control-label">card</label>
+        <input class="form-control" type="text" name="card" value="screen 1">
+    </div>
+            <!-- connector -->
+            <div class="form-group col-md-3">
+        <label class="control-label">connector</label>
+        <input class="form-control" type="text" name="connector" value="screen 1">
+    </div>
+            <!-- weight -->
+            <div class="form-group col-md-3">
+        <label class="control-label">weight</label>
+        <input class="form-control" type="text" name="weight" value="screen 1">
+    </div>
+            <!-- keyboard -->
+            <div class="form-group col-md-3">
+        <label class="control-label">keyboard</label>
+        <input class="form-control" type="text" name="keyboard" value="screen 1">
+    </div>
+            <!-- battery -->
+            <div class="form-group col-md-3">
+        <label class="control-label">battery</label>
+        <input class="form-control" type="text" name="battery" value="screen 1">
+    </div>
+            <!-- os -->
+            <div class="form-group col-md-3">
+        <label class="control-label">os</label>
+        <input class="form-control" type="text" name="os" value="screen 1">
+    </div>
+            <!-- warranty -->
+            <div class="form-group col-md-3">
+        <label class="control-label">warranty</label>
+        <input class="form-control" type="text" name="warranty" value="screen 1">
+    </div>
+            <!-- color -->
+            <div class="form-group col-md-3">
+        <label class="control-label">color</label>
+        <input class="form-control" type="text" name="color" value="screen 1">
+    </div>
+            <!-- material -->
+            <div class="form-group col-md-3">
+        <label class="control-label">material</label>
+        <input class="form-control" type="text" name="material" value="screen 1">
     </div>
 
     <div class="custom-control custom-checkbox form-group col-md-3">
@@ -156,14 +223,14 @@
 
     <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
-        <textarea class="form-control" name="mota" id="mota"></textarea>
+        <textarea class="form-control" name="description" id="mota" value="screen 1"></textarea>
         <script>
             CKEDITOR.replace('mota');
         </script>
     </div>
 
     <div class="form-group col-md-12">
-        <button class="btn btn-save" type="button">Lưu lại</button>
+        <button class="btn btn-save" type="submit" >Lưu lại</button>
         <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
     </div>
 </form>

@@ -81,7 +81,11 @@ Route::prefix('admin')->group(function () {
 
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 
+        // Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
         Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
+
+        Route::get('/product/detail', [ProductController::class, 'show'])->name('admin.product.detail');
+
         Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
         Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
@@ -123,7 +127,7 @@ Route::prefix('customer')->group(function () {
     // Customer contact
     Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
 
-    // Customer cart
+    // Customer cart 
 
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('customer.cart.add');

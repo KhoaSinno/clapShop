@@ -24,7 +24,14 @@ class ProductController extends Controller
             'product_images' => $product_images
         ]);
     }
-
+    public function show($id = null)
+    {
+        $categories = Category::all();
+        return view('admin.product.detail',[
+        'title' =>'Chi tiet san pham',
+        'categories' => $categories]
+    ); // Đảm bảo đường dẫn đúng đến view
+    }
     public function create(Request $request)
     {
         $product = new Product();
@@ -46,7 +53,8 @@ class ProductController extends Controller
         $product->material = $request->input('material');
         $product->price = $request->input('price');        
         $product->stock = $request->input('stock');
-        $product->description = $request->input('description');
+        // $product->description = $request->input('description');
+        $product->description = "...";
         if($product->save()){
             // tim product them name
             $updatedProduct = Product::where('name', $product->name)->first();
@@ -99,7 +107,7 @@ class ProductController extends Controller
         ]);
     }
 
-    //gan thanh cong
+    
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
