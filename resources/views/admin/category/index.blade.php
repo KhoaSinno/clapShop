@@ -48,8 +48,8 @@
                     <td class="col table-td-center">
                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#editCategoryModal{{ $category->id }}">
                             <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">
+                        </button> 
+                        <button class="btn btn-primary btn-sm btn-danger" type="button" title="Xóa" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
