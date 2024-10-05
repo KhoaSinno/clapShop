@@ -3,10 +3,11 @@
 
 @section('function_nav')
 <div class="col-sm-2">
-    <button class="btn btn-add btn-sm" title="Thêm" data-toggle="modal" data-target="#ModalCRE">
+    <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail') }}">
         <i class="fas fa-plus"></i>
         Tạo mới sản phẩm
-    </button>
+    </a>
+
 
 </div>
 
@@ -15,7 +16,7 @@
 @section('content')
 @if (session('success'))
     <div class="alert alert-success">
-        {{ session('success') }}
+        {{ session('success') }} 
     </div>
 @endif
 
@@ -81,163 +82,6 @@
 
 @endsection
 
-<!-- MODAL Update customer -->
-
-
-<!-- MODAL Create customer -->
-
-<div class="modal fade" id="ModalCRE" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-    data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <span class="thong-tin-thanh-toan">
-                            <h5>Them thông tin san pham</h5>
-                        </span>
-                    </div>
-                </div>
-                <form id="CreateCustomer" action="{{ route('admin.product.create')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <!-- <input type="hidden" id="customerId" name="id"> -->
-                    @csrf
-                    <!-- <input type="hidden" id="customerId" name="id"> -->
-                    <div class="row">
-                        <!-- ten san pham -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Ten san pham</label>
-                            <input class="form-control" type="text" id="product" name="name" value="TEN SAN PHAM">
-                        </div>
-                        <!-- danh muc san pham -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Danh muc san pham</label>
-                            <select class="form-control" id="category" name="category" required>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <!-- cpu -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">CPU</label>
-                            <input class="form-control" type="text" id="cpu" name="cpu" required value="TEN SAN PHAM">
-                        </div>
-                        <!-- ram -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">RAM</label>
-                            <input class="form-control" type="text" id="ram" name="ram" required value="TEN SAN PHAM">
-                        </div>
-                        <!-- storage -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">STORAGE</label>
-                            <input class="form-control" type="text" id="storage" name="storage" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- screen -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">SCREEN</label>
-                            <input class="form-control" type="text" id="screen" name="screen" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- card -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">CARD</label>
-                            <input class="form-control" type="text" id="card" name="card" required value="TEN SAN PHAM">
-                        </div>
-                        <!-- connector -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">CONNECTOR</label>
-                            <input class="form-control" type="text" id="connector" name="connector" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- weight -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">WEIGHT</label>
-                            <input class="form-control" type="text" id="weight" name="weight" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- keyboard -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">KEYBOARD</label>
-                            <input class="form-control" type="text" id="keyboard" name="keyboard" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- battery -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">BATTERY</label>
-                            <input class="form-control" type="text" id="battery" name="battery" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- os -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">OS</label>
-                            <input class="form-control" type="text" id="os" name="os" required value="TEN SAN PHAM">
-                        </div>
-                        <!-- warranty -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">WARRANTY</label>
-                            <input class="form-control" type="text" id="warranty" name="warranty" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- color -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">COLOR</label>
-                            <input class="form-control" type="text" id="color" name="color" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- material -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">MATERIAL</label>
-                            <input class="form-control" type="text" id="material" name="material" required
-                                value="TEN SAN PHAM">
-                        </div>
-                        <!-- price -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">PRICE</label>
-                            <input class="form-control" type="number" id="price" name="price" required value=10>
-                        </div>
-                        <!-- stock -->
-                        <div class="form-group col-md-6">
-                            <label class="control-label">STOCK</label>
-                            <input class="form-control" type="number" id="stock" name="stock" required value=2>
-                        </div>
-
-                        <div class="form-group col-12">
-                            <label class="control-label">Mo ta chi tiet</label>
-                            <textarea class="form-control" id="description" name="description"
-                                required>value="TEN SAN PHAM"</textarea>
-                        </div>
-                        <!-- image -->
-                        <div class="form-group col-12">
-                            <label class="control-label">Hinh anh</label>
-                            <div id="imageInputs">
-                                <input type="file" name="images[]" accept="image/*" class="image-input">
-                            </div>
-                            <button type="button" id="addImageBtn">Thêm mot hình ảnh nua</button>
-                        </div>
-
-                        <script>
-                            document.getElementById('addImageBtn').addEventListener('click', function () {
-                                const imageInputs = document.getElementById('imageInputs');
-                                const newInput = document.createElement('input');
-                                newInput.type = 'file';
-                                newInput.name = 'images[]';
-                                newInput.accept = 'image/*';
-                                newInput.className = 'image-input';
-                                imageInputs.appendChild(newInput);
-                            });
-                        </script>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-save">Them</button>
-                    <a class="btn btn-cancel" data-dismiss="modal">Hủy bỏ</a>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     $(document).ready(function() {
         // Khi click vào nút sửa, hiển thị modal với thông tin của khách hàng
