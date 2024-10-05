@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\MainController;
@@ -8,7 +7,9 @@ use App\Http\Controllers\Admin\PosController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
 use App\Http\Controllers\Customer\CartController;
-
+use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
+use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
+use App\Http\Controllers\Customer\ProductController as CustomerProductController;
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
@@ -20,18 +21,10 @@ Route::get('/', function () {
 })->name('customer.home');
 
 
-use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
-// use App\Http\Controllers\Customer\CheckoutController;
-// use App\Http\Controllers\Customer\ContactController;
-// use App\Http\Controllers\Customer\HomeController;
-use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
-use App\Http\Controllers\Customer\ProductController as CustomerProductController;
-// use Illuminate\Support\Facades\Route;
-
 // Test route
-Route::get('/admin/create', function () {
-    return view('admin.product.create'); // Trang chủ
-})->name('customer.home');
+// Route::get('/admin/create', function () {
+//     return view('admin.product.create'); // Trang chủ
+// })->name('customer.home');
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -53,33 +46,16 @@ Route::middleware('guest')->group(function () {
 // Routes cho Admin
 Route::prefix('admin')->group(function () {
     Route::middleware('role:admin')->group(function () {
-
-
-        Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
-
         // Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
         // Customer Routes
-        Route::get('/customers', [CustomerController::class, 'index'])->name('admin.customer');
-        // Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
-        // Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
-
-        Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
-
-        Route::put('/customers/{id}', [CustomerController::class, 'update']);
+        Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
+        Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
+        Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
+        Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+        Route::put('/customer/{id}', [CustomerController::class, 'update']);
 
         // POS bán hàng: nơi cho quản lý lên đơn cho KH
         Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
-
-        // Customer Routes
-        Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
-        // Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
-        // Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
-
-        Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
-
-        Route::put('/customer/{id}', [CustomerController::class, 'update']);
-
-
 
         // Category Routes
         Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
@@ -89,7 +65,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::put('/category/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::delete('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
-
 
         // Product Routes
         Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
