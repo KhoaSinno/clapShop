@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('address', 255)->nullable();
             $table->string('gender', 10)->nullable();
-            $table->dateTime('dateOfBirth')->nullable();
+            $table->date('dateOfBirth')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
