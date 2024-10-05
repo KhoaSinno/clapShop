@@ -122,7 +122,7 @@ class ProductController extends Controller
             $request->input('os') != $product->os || 
             $request->input('material') != $product->material || 
             $request->input('stock') != $product->stock || 
-            $request->input('description') != $product->description){
+            $request->input('description') != $product->description){ 
                 $product->name = $request->input('name');
                 $product->categoryID = $categoryIDFromInput;
                 $product->cpu = $request->input('cpu');
@@ -156,11 +156,16 @@ class ProductController extends Controller
         return redirect()->back()->with('error', 'Cập nhật sản phẩm không thành công');
         }
     }
-    //thanh cong
+    
+    //done
     public function delete($id)
     {
         $product = Product::find($id);    
+
         if ($product) {
+                        // Xóa tất cả hình ảnh liên quan đến sản phẩm
+                Product_Image::where('productID', $id)->delete(); // Xóa hình ảnh theo ID sản phẩm
+
                 $product->delete();
                 return redirect()->route('admin.product')->with('success', 'Sản phẩm đã được xóa thành công.');
             } 
