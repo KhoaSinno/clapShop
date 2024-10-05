@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\admin\MainController;
@@ -16,14 +17,8 @@ use App\Http\Controllers\Customer\HomeController;
 use Illuminate\Support\Facades\Route;
 
 // Routes cho Giao diện Khách Hàng
-Route::get('/', function () {
-    return view('customer.home'); // Trang chủ
-})->name('customer.home');
-
-
-// Test route
-// Route::get('/admin/create', function () {
-//     return view('admin.product.create'); // Trang chủ
+// Route::get('/', function () {
+//     return view('customer.home'); // Trang chủ
 // })->name('customer.home');
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
@@ -81,7 +76,11 @@ Route::prefix('admin')->group(function () {
 
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 
+        // Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
         Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
+
+        Route::get('/product/detail', [ProductController::class, 'show'])->name('admin.product.detail');
+
         Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
 
         Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
@@ -102,8 +101,7 @@ Route::prefix('admin')->group(function () {
 // Routes cho Customer
 Route::prefix('customer')->group(function () {
 
-    Route::get('/products', [HomeController::class, 'getProducts'])->name('customer.products');
-    Route::get('/products/{id}', [HomeController::class, 'show'])->name('customer.product.detail');
+    // Route::get('/products', [HomeController::class, 'getProducts'])->name('customer.products');
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('customer.categories');
     Route::get('/category/{id}', [categoryController::class, 'show'])->name('customer.category.detail');
@@ -114,7 +112,10 @@ Route::prefix('customer')->group(function () {
 
     // Customer product
     Route::get('/products', [CustomerProductController::class, 'index'])->name('customer.products');
-    Route::get('/products/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
+    Route::get('/products/{slug}', [CustomerProductController::class, 'showProductsBySlug'])->name('customer.products.by_slug');
+
+
+    Route::get('/products/detail/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
 
     // Customer product
     Route::get('/category', [CustomerCategoryController::class, 'index'])->name('customer.category');
@@ -123,7 +124,7 @@ Route::prefix('customer')->group(function () {
     // Customer contact
     Route::get('/contact', [ContactController::class, 'index'])->name('customer.contact');
 
-    // Customer cart
+    // Customer cart 
 
     Route::get('/cart', [CartController::class, 'index'])->name('customer.cart');
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('customer.cart.add');
@@ -139,7 +140,6 @@ Route::prefix('customer')->group(function () {
 
     // Customer order
     Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
-
 });
 
 // Routes cho hành động cần đăng nhập
@@ -155,4 +155,3 @@ Route::middleware('auth')->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-

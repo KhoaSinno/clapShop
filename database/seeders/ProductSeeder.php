@@ -46,7 +46,7 @@ class ProductSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'categoryID' => 2,
+                'categoryID' => 1,
                 'name' => 'Lenovo ThinkBook 14P Gen 2',
                 'cpu' => 'AMD Ryzen 7 5800H (8 nhân 16 luồng, xung nhịp cơ bản 3.2GHz, tối đa 4.4GHz, 4MB L2 Cache / 16MB L3 Cache)',
                 'ram' => '16GB DDR4 3200MHz dual channel',
@@ -61,7 +61,7 @@ class ProductSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'categoryID' => 3,
+                'categoryID' => 1,
                 'name' => 'Lenovo Legion 5 Y7000P 16IRX9 2024',
                 'cpu' => 'Intel 14th Gen i7-14650HX, 16C (8P + 8E), 24T, P-core up to 5.2GHz, E-core up to 3.7GHz, 30MB Cache',
                 'ram' => '16GB DDR5',
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'categoryID' => 4,
+                'categoryID' => 1,
                 'name' => 'Lenovo Thinkpad X1 Nano Gen 1',
                 'cpu' => 'Core i7-1160G7 (4 nhân, 8 luồng)',
                 'ram' => '16GB LPDDR4',
@@ -91,7 +91,7 @@ class ProductSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'categoryID' => 5,
+                'categoryID' => 1,
                 'name' => 'Lenovo ThinkPad E15 Gen 4 i7 1260P Ram 16GB SSD 512GB',
                 'cpu' => 'Core i7-1260P - 2.1GHz',
                 'ram' => '16GB DDR4 (8GB onboard + 8GB slot) 3200MHz',
