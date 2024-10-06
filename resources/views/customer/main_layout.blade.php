@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-
 <head>
     @include('customer.head')
+    @yield('header')
 </head>
 
 <body>
@@ -21,8 +21,8 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <!-- <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li> -->
+                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="header__top__right__auth">
-                                @auth 
+                                @auth
                                 <!-- Kiểm tra nếu người dùng là khách hàng -->
                                 @if(auth()->user()->role == 'customer')
                                 <a class="d-inline-block border-right" href="#"><i class="fa fa-user"></i> {{ auth()->user()->username }}</a>
@@ -146,8 +146,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -285,6 +284,7 @@
 
     <!-- Js Plugins -->
     @include('customer.footer')
+    @yield('footer')
 
 </body>
 

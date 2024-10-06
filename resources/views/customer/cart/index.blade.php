@@ -30,82 +30,48 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="shoping__product">Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng cộng</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if(session('cart'))
+                            @foreach(session('cart') as $id => $details)
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-1.jpg" alt="">
-                                    <h5>Vegetable’s Package</h5>
+                                    <img src="{{ $details['image'] }}" alt="">
+                                    <h5>{{ $details['name'] }}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    $55.00
+                                    {{ $details['price'] }}$
                                 </td>
                                 <td class="shoping__cart__quantity">
                                     <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
+                                        <input type="text" value="{{ $details['quantity'] }}">
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
-                                    $110.00
+                                    {{ $details['price'] * $details['quantity'] }}$
                                 </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
+                                <td>
+                                    <form action="{{ route('customer.cart.remove', ['id' => $id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Xóa</button> <!-- Chỉ sử dụng POST -->
+                                    </form>
                                 </td>
                             </tr>
+                            @endforeach
+                            @else
                             <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-2.jpg" alt="">
-                                    <h5>Fresh Garden Vegetable</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $39.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $39.99
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
+                                <td colspan="5">Giỏ hàng của bạn đang trống.</td>
                             </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="img/cart/cart-3.jpg" alt="">
-                                    <h5>Organic Bananas</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    $69.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $69.99
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
+                            @endif
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

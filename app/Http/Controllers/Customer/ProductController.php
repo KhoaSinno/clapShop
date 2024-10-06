@@ -12,11 +12,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
+        // Lấy danh sách sản phẩm và phân trang
+        $products = Product::paginate(3); // 10 sản phẩm trên mỗi trang
+        $categories = Category::all();
 
         return view('customer.product.index', [
             'title' => 'Danh sách sản phẩm',
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories,
         ]);
     }
 
@@ -30,8 +33,8 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Danh mục không tồn tại.');
         }
 
-        // Lấy tất cả sản phẩm theo categoryID
-        $products = Product::where('categoryID', $category->id)->get();
+        // Lấy tất cả sản phẩm theo categoryID và phân trang
+        $products = Product::where('categoryID', $category->id)->paginate(3);
 
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [
@@ -40,6 +43,7 @@ class ProductController extends Controller
             'category' => $category
         ]);
     }
+
 
     public function show($id)
     {
