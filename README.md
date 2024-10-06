@@ -73,10 +73,12 @@
 + `Thiết kế database`
 
 # Refresh database
+```bash
 
 php artisan migrate:fresh
 
 php artisan db:seed
+```
 
 ## Bước chạy dự án (Bạn nào note lại push lên đi)
 
@@ -99,16 +101,18 @@ php artisan db:seed
 + BS4 - V4.1.1
 
 ### `Create dummy data`
+```bash
 
 php artisan db:seed
 
 php artisan make:seeder *(name of seed)Seeder
 
 php artisan db:seed --class=*(name of seed)Seeder
+```
 
 ### `Load file auto in lavarel`
-
-+ composer dump-autoload
+```bash
+composer dump-autoload
 
 ## Kế sách cuối cùng
 
@@ -120,11 +124,3 @@ Bước 2
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
-composer dump-autoload
-
-### `Reset cache`
-
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
