@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-
 <head>
     @include('customer.head')
+    @yield('header')
 </head>
 
 <body>
@@ -21,7 +21,8 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <!-- <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li> -->
+                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -138,15 +139,6 @@
                             <li class="{{ request()->is('customer/products') ? 'active' : '' }}">
                                 <a href="{{ route(name: 'customer.products') }}">Sản phẩm</a>
                             </li>
-                            <!-- <li><a href="#">Danh mục</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li> -->
-                            <!-- <li><a href="./blog.html">Blog</a></li> -->
                             <li class="{{ request()->is('customer/contact') ? 'active' : '' }}"><a href="{{ route(name: 'customer.contact') }}">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -154,7 +146,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
                         </ul>
                         <div class="header__cart__price">item: <span>$150.00</span></div>
                     </div>
@@ -178,17 +170,12 @@
                             <span>Danh mục</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            @foreach ($categories as $category )
+
+                            <li><a href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a></li>
+
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
@@ -297,6 +284,7 @@
 
     <!-- Js Plugins -->
     @include('customer.footer')
+    @yield('footer')
 
 </body>
 

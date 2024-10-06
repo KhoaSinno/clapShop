@@ -20,8 +20,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'phone' => '0123456789',
             'address' => '123 Main St, City A',
-            'gender' => 'Male',
-            'dateOfBirth' => '2004-01-11',
+            'gender' => 'Nam',
+            'dateOfBirth' => now()->subYears(20),
         ]);
 
         // Customer
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'email' => 'teoem@gmail.com',
             'phone' => '0123456789',
             'address' => '123 Main St, City',
-            'gender' => 'male',
+            'gender' => 'Nam',
             'dateOfBirth' => now()->subYears(25),
         ]);
 
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'email' => 'tun@gmail.com',
             'phone' => '0987654321',
             'address' => '456 Elm St, City',
-            'gender' => 'female',
+            'gender' => 'Nữ',
             'dateOfBirth' => now()->subYears(30),
         ]);
     }

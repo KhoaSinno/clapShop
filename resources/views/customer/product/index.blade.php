@@ -1,5 +1,6 @@
 @extends('customer.main_layout')
 
+@section('content')
 <!-- Breadcrumb Section Begin -->
 @section('breadcrumb')
 <section class="breadcrumb-section set-bg" data-setbg="/e_customerSN/img/breadcrumb.jpg">
@@ -28,21 +29,43 @@
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>Department</h4>
+                        <h4>Danh mục</h4>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
+                            @foreach ($categories as $category)
+
+                            <li><a href="#">{{$category->name}}</a></li>
+                            @endforeach
+
                         </ul>
                     </div>
                     <div class="sidebar__item">
+                        <h4>Giá</h4>
+                        <div class="sidebar__item__size">
+                            <label for="large">
+                                < 10tr
+                                    <input type="radio" id="large">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="medium">
+                                10tr - 20tr
+                                <input type="radio" id="medium">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="small">
+                                20tr - 30tr
+                                <input type="radio" id="small">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="tiny">
+                                > 30tr
+                                <input type="radio" id="tiny">
+                            </label>
+                        </div>
+                    </div>
+                    <!-- <div class="sidebar__item">
                         <h4>Price</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -58,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="sidebar__item sidebar__item__color--option">
                         <h4>Colors</h4>
                         <div class="sidebar__item__color sidebar__item__color--white">
@@ -95,33 +118,6 @@
                             <label for="green">
                                 Green
                                 <input type="radio" id="green">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="sidebar__item">
-                        <h4>Popular Size</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Large
-                                <input type="radio" id="large">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                Medium
-                                <input type="radio" id="medium">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                Small
-                                <input type="radio" id="small">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                Tiny
-                                <input type="radio" id="tiny">
                             </label>
                         </div>
                     </div>
@@ -193,7 +189,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
-                <div class="product__discount">
+                <!-- <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Sale Off</h2>
                     </div>
@@ -309,218 +305,60 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
+                        <div class="col-6">
                             <div class="filter__sort">
-                                <span>Sort By</span>
+                                <span>Sắp xếp</span>
                                 <select>
-                                    <option value="0">Default</option>
-                                    <option value="0">Default</option>
+                                    <option value="0">Mặc định</option>
+                                    <option value="0">Giá tăng dần
+                                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                                    </option>
+
+                                    <option value="0">Giá giảm dần</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-6">
                             <div class="filter__found">
                                 <h6><span>16</span> Products found</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    @foreach ($products as $product)
+
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-1.jpg">
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <!-- <li><a href="{{ route('customer.cart.add', ['id' => $product->id]) }}"><i class="fa fa-shopping-cart"></i></a></li> -->
+
+                                    <li>
+                                        <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
+                                <h6>
+                                    <a href="{{route('customer.product.detail', $product->categoryID) }}">{{$product->name}}</a>
+                                </h6>
+                                <h5>{{$product->price}}</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-2.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-3.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-4.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-5.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-6.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-7.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-8.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-9.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-10.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-11.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-12.jpg">
-                                <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="#">Crab Pool Security</a></h6>
-                                <h5>$30.00</h5>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
-                <div class="product__pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                <div class="d-flex justify-content-center align-items-center">
+                    {{ $products->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>
@@ -528,5 +366,38 @@
 </section>
 <!-- Product Section End -->
 
+
+@endsection
+
+
+@section('footer')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.add-to-cart', function(e) {
+        e.preventDefault();
+        var productId = $(this).data('id'); // Lấy productId từ thuộc tính data-id của nút
+
+        // Kiểm tra xem productId có tồn tại không
+        if (!productId) {
+            alert('Sản phẩm không hợp lệ.');
+            return;
+        }
+
+        $.ajax({
+            url: '/customer/cart/add/' + productId,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}' // Bao gồm token CSRF
+            },
+            success: function(response) {
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // Bạn có thể cập nhật biểu tượng giỏ hàng hoặc số lượng sản phẩm ở đây
+            },
+            error: function(xhr) {
+                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+            }
+        });
+    });
+</script>
 
 @endsection

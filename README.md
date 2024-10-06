@@ -19,18 +19,53 @@
 + `Hiển thị/ Update khách hàng` với ajax
 + `Thiết kế database`
 
+  #### `>>>To do:`
+
++ Train và hỗ trợ cho mọi người
++ Tối ưu lại Routes
+
 ### `2. Thành Đạt - HTTT2211003`
 
 + Do something...
+
+  #### `>>>Doing:`
+
++ Train cho Nguyên: Cách chạy khi có src và khi mới pull code về
+
++ Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy
+
+### `3. Như É - HTTT2211015`
 
 ### `3. Như Ý - HTTT2211015`
 
 + Do this.. do that...
 + `Thiết kế database`
 
+  #### `>>>Doing:`
+
++ Note các bước đã thực hiện ở bên dưới này t có viết sẵn rồi đó
+
++ Train cho Phát: Cách chạy khi có src và khi mới pull code về
+
++ Admin: code  Danh mục: Xem/ Thêm/ Sửa/ Xóa
+
 ### `4. Thành Phát - HTTT2211004`
 
 + Dou someone...
+
+  #### `>>>Doing:`
+
++ Lấy Hình ảnh + Nội dung
+
+### `5. Trường Nguyên - HTTT2211025`
+
++ Do wave...
++ `Thiết kế database`
+
+  #### `>>>Doing:`
+
++ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
++ Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
 
 ### `5. Trường Nguyên - HTTT2211025`
 
@@ -53,7 +88,7 @@ php artisan db:seed
 
 3.
 
-### Tại sao cần CSRF?
+## Tại sao cần CSRF?
 
 + CSRF (Cross-Site Request Forgery) là một loại tấn công mà hacker lợi dụng người dùng đã đăng nhập vào hệ thống, sau đó tự động gửi yêu cầu đến server của bạn mà người dùng không biết. Hacker có thể thực hiện các hành động trái phép (như xóa tài khoản, chuyển tiền, v.v.).
 
@@ -79,6 +114,8 @@ php artisan db:seed --class=*(name of seed)Seeder
 ```bash
 composer dump-autoload
 
+## Kế sách cuối cùng
+
 Bước 1
 composer update
 composer install
@@ -87,13 +124,3 @@ Bước 2
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
-```
-
-## `Kế sách cuối cùng`
-```bash
-#Reset cache
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
-```
