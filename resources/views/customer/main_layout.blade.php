@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="header__top__right__auth">
-                                @auth
+                                @auth 
                                 <!-- Kiểm tra nếu người dùng là khách hàng -->
                                 @if(auth()->user()->role == 'customer')
                                 <a class="d-inline-block border-right" href="#"><i class="fa fa-user"></i> {{ auth()->user()->username }}</a>
