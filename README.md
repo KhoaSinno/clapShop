@@ -56,6 +56,20 @@ php artisan db:seed
 
 + Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
 
+### `5. Trường Nguyên - HTTT2211025`
+
++ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
++ `Thiết kế database`
+
+# Refresh database
+```bash
+
+php artisan migrate:fresh
+
+php artisan db:seed
+```
+
+## Bước chạy dự án (Bạn nào note lại push lên đi)
 ## Bước chạy dự án Ý note lại đi
 
 1.
@@ -77,16 +91,18 @@ php artisan db:seed
 + BS4 - V4.1.1
 
 ### `Create dummy data`
+```bash
 
 php artisan db:seed
 
 php artisan make:seeder *(name of seed)Seeder
 
 php artisan db:seed --class=*(name of seed)Seeder
+```
 
 ### `Load file auto in lavarel`
-
-+ composer dump-autoload
+```bash
+composer dump-autoload
 
 ## Kế sách cuối cùng - `Đạt`
 
@@ -105,3 +121,8 @@ php artisan route:clear
 
 php artisan view:clear
 
+
+
+
+Note's Nguyên kĩ thuật `symbolic link`: 
+php artisan storage:link : thêm link cho nơi lưu trữ file

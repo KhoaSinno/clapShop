@@ -96,27 +96,30 @@
 
 @section('content')
 
-<form class="row" action="{{ route('admin.product.create') }}" method="POST" enctype = "multipart/form-data">
+<form class="row" action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype = "multipart/form-data">
         @csrf
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
-        <input class="form-control" type="text" name="name" value="ten san pham 1">
+        <input class="form-control" type="text" name="name" value="{{$product ->name}}">
     </div>
 
     <div class="form-group col-md-3">
         <label class="control-label">Số lượng</label>
-        <input class="form-control" type="number" name="stock" value=12>
+        <input class="form-control" type="number" name="stock" value="{{$product ->stock}}">
     </div>
 
 
     <div class="form-group col-md-3">
         <label for="exampleSelect2" class="control-label">Danh mục</label>
         <select class="form-control" id="exampleSelect2" name="category">
-            <option value="1">-- Chọn danh mục --</option>
+            <option>-- Chọn danh mục --</option>
             @foreach ($categories as $category)
-            <option value="{{$category->id}}">{{$category -> name}}</option>
+                @if($product->categoryID == $category->id)
+                <option value="{{$category->id}}" selected>{{$category -> name}}</option>
+                @else
+                <option value="{{$category->id}}">{{$category -> name}}</option>
+                @endif
             @endforeach
-            
         </select>
     </div>
 
@@ -133,72 +136,72 @@
 
     <div class="form-group col-md-3">
         <label class="control-label">Giá bán</label>
-        <input class="form-control" type="number" name="price" value="12">
+        <input class="form-control" type="number" name="price" value="{{$product ->price}}">
     </div>
     <!-- cpu -->
     <div class="form-group col-md-3">
         <label class="control-label">CPU</label>
-        <input class="form-control" type="text" name="cpu" value="cpu 1">
+        <input class="form-control" type="text" name="cpu" value="{{$product ->cpu}}">
     </div>
         <!-- ram -->
         <div class="form-group col-md-3">
         <label class="control-label">ram</label>
-        <input class="form-control" type="text" name="ram" value="ram 1">
+        <input class="form-control" type="text" name="ram" value="{{$product ->ram}}">
     </div>
         <!-- storage -->
         <div class="form-group col-md-3">
         <label class="control-label">storage</label>
-        <input class="form-control" type="text" name="storage" value="storage 1">
+        <input class="form-control" type="text" name="storage" value="{{$product ->storage}}">
     </div>
         <!-- screen -->
         <div class="form-group col-md-3">
         <label class="control-label">screen</label>
-        <input class="form-control" type="text" name="screen" value="screen 1">
+        <input class="form-control" type="text" name="screen" value="{{$product ->screen}}">
     </div>
             <!-- card -->
             <div class="form-group col-md-3">
         <label class="control-label">card</label>
-        <input class="form-control" type="text" name="card" value="screen 1">
+        <input class="form-control" type="text" name="card" value="{{$product ->card}}">
     </div>
             <!-- connector -->
             <div class="form-group col-md-3">
         <label class="control-label">connector</label>
-        <input class="form-control" type="text" name="connector" value="screen 1">
+        <input class="form-control" type="text" name="connector" value="{{$product ->connector}}">
     </div>
             <!-- weight -->
             <div class="form-group col-md-3">
         <label class="control-label">weight</label>
-        <input class="form-control" type="text" name="weight" value="screen 1">
+        <input class="form-control" type="text" name="weight" value="{{$product ->weight}}">
     </div>
             <!-- keyboard -->
             <div class="form-group col-md-3">
         <label class="control-label">keyboard</label>
-        <input class="form-control" type="text" name="keyboard" value="screen 1">
+        <input class="form-control" type="text" name="keyboard" value="{{$product ->keyboard}}">
     </div>
             <!-- battery -->
             <div class="form-group col-md-3">
         <label class="control-label">battery</label>
-        <input class="form-control" type="text" name="battery" value="screen 1">
+        <input class="form-control" type="text" name="battery" value="{{$product ->battery}}">
     </div>
             <!-- os -->
             <div class="form-group col-md-3">
         <label class="control-label">os</label>
-        <input class="form-control" type="text" name="os" value="screen 1">
+        <input class="form-control" type="text" name="os" value="{{$product ->os}}">
     </div>
             <!-- warranty -->
             <div class="form-group col-md-3">
         <label class="control-label">warranty</label>
-        <input class="form-control" type="text" name="warranty" value="screen 1">
+        <input class="form-control" type="text" name="warranty" value="{{$product ->warranty}}">
     </div>
             <!-- color -->
             <div class="form-group col-md-3">
         <label class="control-label">color</label>
-        <input class="form-control" type="text" name="color" value="screen 1">
+        <input class="form-control" type="text" name="color" value="{{$product ->color}}">
     </div>
             <!-- material -->
             <div class="form-group col-md-3">
         <label class="control-label">material</label>
-        <input class="form-control" type="text" name="material" value="screen 1">
+        <input class="form-control" type="text" name="material" value="{{$product ->material}}">
     </div>
 
     <div class="custom-control custom-checkbox form-group col-md-3">
@@ -208,22 +211,20 @@
 
     <div class="form-group col-md-12">
         <label class="control-label">Ảnh sản phẩm</label>
-        <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-        </div>
         <div id="thumbbox">
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
             <a class="removeimg" href="javascript:"></a>
         </div>
-        <div id="boxchoice">
-            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-            <p style="clear:both"></p>
+        <div id="myfileupload">
+            @foreach($product_images as $image)
+                <image src="{{$image->image_url}}" weight="400" height="400">
+            @endforeach
         </div>
     </div>
 
     <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
-        <textarea class="form-control" name="description" id="mota" value="screen 1"></textarea>
+        <textarea class="form-control" name="description" id="mota" value="screen 1">{{$product->description}}</textarea>
         <script>
             CKEDITOR.replace('mota');
         </script>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Admin;
 
@@ -24,14 +24,31 @@ class ProductController extends Controller
             'product_images' => $product_images
         ]);
     }
-    public function show($id = null)
+    //done - show form tạo sản phẩm
+    public function show()
     {
-        $categories = Category::all();
-        return view('admin.product.detail',[
-        'title' =>'Chi tiet san pham',
-        'categories' => $categories]
-    ); // Đảm bảo đường dẫn đúng đến view
+            $categories = Category::all();
+            return view('admin.product.detail',[
+            'title' =>'Chi tiết sản phẩm',
+            'categories' => $categories]
+            );
+
     }
+    public function edit($id){
+        $categories = Category::all();
+        $product=Product::find($id);
+        $product_images = Product_Image::where('productID', $id)->get();
+    
+        return view('admin.product.edit', [
+            'title' => 'Chi tiết sản phẩm',
+            'categories' => $categories,
+            'product' => $product,
+            'product_images' => $product_images,
+        ]);
+    
+    }
+
+    //done
     public function create(Request $request)
     {
         $product = new Product();
@@ -55,49 +72,26 @@ class ProductController extends Controller
         $product->stock = $request->input('stock');
         // $product->description = $request->input('description');
         $product->description = "...";
+
+        //khi them thong tin san pham thanh cong thi tai anh
         if($product->save()){
             // tim product them name
             $updatedProduct = Product::where('name', $product->name)->first();
 
-           // Xử lý lưu trữ hình ảnh
-           if ($request->hasFile('images')) {
-                $images = $request->file('images');
-                
-                foreach ($images as $image) {
-                    // Kiểm tra xem file có phải là hình ảnh không
-                    if ($image->isValid() && $image->getClientOriginalExtension() == 'jpg') {
-                        $imageName = $image->store('public/products');
-                        
-                        // Xóa file tạm thời sau khi lưu trữ
-                        if (file_exists($image->getPathname())) {
-                            unlink($image->getPathname());
-                        }
-                    } else {
-                        return redirect()->route('admin.product')->with('success', 'Khong phai anh');
-                    }
-                }
-            }
+            $fileName = time().$request->file('ImageUpload')->getClientOriginalName();
+            $path = $request->file('ImageUpload')->storeAs('images', $fileName, 'public');
 
-            else{
-                return redirect()->route('admin.product')->with('error', 'khong the tai file');
-            }
+            $productImage = new Product_Image();
+            $productImage->productID = $updatedProduct->id; // ID của sản phẩm
+            $productImage->image_url = '/storage/'.$path;; // Đường dẫn hình ảnh
+            $productImage->desc = "";
+            $productImage->type = "";
+            $productImage->save();
 
-            // Lưu đường dẫn hình ảnh vào bảng product_images
-            if (!empty($images)) {
-                foreach ($images as $imagePath) {
-                    $productImage = new Product_Image();
-                    $productImage->productID = $updatedProduct->id; // ID của sản phẩm
-                    $productImage->image_url = $imagePath; // Đường dẫn hình ảnh
-                    $productImage->desc = "";
-                    $productImage->type = "";
-                    $productImage->save();
-                    return redirect()->route('admin.product')->with('success', 'Them sản phẩm thành công');
-                }
-            }
-            return redirect()->route('admin.product')->with('error', 'Them sản phẩm that thành công');
+            return redirect()->route('admin.product')->with('success', 'Thêm sản phẩm thành công');
         }
         else{
-            return redirect()->route('admin.product')->with('error', 'Them sản phẩm that bai');
+            return redirect()->route('admin.product')->with('error', 'Them sản phẩm thất bại');
         }
 
 
