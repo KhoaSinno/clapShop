@@ -1,7 +1,7 @@
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
-        <img class="app-sidebar__user-avatar" src="../e_customerSN/img/vietnamese.jpg"
+        <img class="app-sidebar__user-avatar" src="/e_customerSN/img/vietnamese.jpg"
             style="width: 100px; height: 100px; object-fit: cover;" alt="User Image">
         <div>
             <p class="app-sidebar__user-name text-white"><b>CLAPSHOP</b></p>

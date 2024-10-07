@@ -25,6 +25,8 @@ class ProductController extends Controller
 
     public function showProductsBySlug($slug)
     {
+        $categories = Category::all();
+
         // Tìm danh mục dựa theo slug
         $category = Category::where('slug', $slug)->first();
 
@@ -36,11 +38,14 @@ class ProductController extends Controller
         // Lấy tất cả sản phẩm theo categoryID và phân trang
         $products = Product::where('categoryID', $category->id)->paginate(3);
 
+
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [
             'title' => 'Sản phẩm thuộc danh mục: ' . $category->name,
             'products' => $products,
-            'category' => $category
+            'category' => $category,
+            'categories' => $categories,
+
         ]);
     }
 
