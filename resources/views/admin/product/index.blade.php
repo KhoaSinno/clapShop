@@ -51,11 +51,9 @@
                 <td>{{ $p->active ? 'Còn bán' : 'Ngừng bán'}}</td>
                 <td class="table-td-center">
 
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
-                        data-target="#ModalUP" data-id="{{ $p->id }}">
-                        <i class="fas fa-edit"></i>
-                    </button>
-
+                <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail.edit', ['id' => $p->id]) }}">
+                    <i class="fas fa-edit"></i>
+                </a>
                     <form action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
                         @csrf
                         @method('POST')
@@ -76,13 +74,8 @@
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!--MODAL Update customer-->
-@section('modal')
 
-
-@endsection
-
-<script>
+<!-- <script>
     $(document).ready(function() {
         // Khi click vào nút sửa, hiển thị modal với thông tin của khách hàng
         $(".edit").on("click", function() {
@@ -144,5 +137,5 @@
         });
 
     });
-</script>
+</script> -->
 

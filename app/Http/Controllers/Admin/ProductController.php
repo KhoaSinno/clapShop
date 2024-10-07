@@ -24,14 +24,31 @@ class ProductController extends Controller
             'product_images' => $product_images
         ]);
     }
-    public function show($id = null)
+    //done - show form tạo sản phẩm
+    public function show()
     {
-        $categories = Category::all();
-        return view('admin.product.detail',[
-        'title' =>'Chi tiết sản phẩm',
-        'categories' => $categories]
-    ); // Đảm bảo đường dẫn đúng đến view
+            $categories = Category::all();
+            return view('admin.product.detail',[
+            'title' =>'Chi tiết sản phẩm',
+            'categories' => $categories]
+            );
+
     }
+    public function edit($id){
+        $categories = Category::all();
+        $product=Product::find($id);
+        $product_images = Product_Image::where('productID', $id)->get();
+    
+        return view('admin.product.edit', [
+            'title' => 'Chi tiết sản phẩm',
+            'categories' => $categories,
+            'product' => $product,
+            'product_images' => $product_images,
+        ]);
+    
+    }
+
+    //done
     public function create(Request $request)
     {
         $product = new Product();
@@ -70,8 +87,8 @@ class ProductController extends Controller
             $productImage->desc = "";
             $productImage->type = "";
             $productImage->save();
-            
-            return redirect()->route('admin.product')->with('success', 'Them sản phẩm thành công');
+
+            return redirect()->route('admin.product')->with('success', 'Thêm sản phẩm thành công');
         }
         else{
             return redirect()->route('admin.product')->with('error', 'Them sản phẩm thất bại');

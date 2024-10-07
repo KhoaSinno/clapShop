@@ -124,3 +124,7 @@ Bước 2
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
+
+
+Note's Nguyên
+php artisan storage:link : thêm link cho nơi lưu trữ file

@@ -69,14 +69,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update'); //done
 
     Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
-
-    // Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
     Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
 
     Route::get('/product/detail', [ProductController::class, 'show'])->name('admin.product.detail');
 
-    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.detail.edit');
+    Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
 
