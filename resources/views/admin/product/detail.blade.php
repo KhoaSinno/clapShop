@@ -1,4 +1,4 @@
-@extends('admin.main_layout')
+@extends('admin.main_layout') 
 @section('head')
 <link rel="stylesheet" type="text/css"
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -96,8 +96,8 @@
 
 @section('content')
 
-<form class="row" action="{{ route('admin.product.create') }}" >
-@csrf <!-- Bảo vệ CSRF -->
+<form class="row" action="{{ route('admin.product.create') }}" method="POST" enctype = "multipart/form-data">
+        @csrf
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
         <input class="form-control" type="text" name="name" value="ten san pham 1">
