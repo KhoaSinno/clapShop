@@ -1,13 +1,21 @@
-# Documentation
+# Fresh database
 
-+ Link Plan: `<https://docs.google.com/spreadsheets/d/14FsP_WT7bO9Px5cJIJGaz0Ljs5mbC_g9_CklYtxpvKM/edit?usp=sharing>`
+php artisan migrate:fresh
 
-+ Link SRC: `<https://drive.google.com/drive/folders/1iz-iIZITxwT4mafGzPmvLm0ycVzTC_sE?usp=drive_link>`
+php artisan db:seed
 
 # Account: `Username` | `Password`
 
 + `ADMIN:` sinoo | 123456
 + `CUSTOMER:` teo | cus123
+
+# Documentation
+
++ Link Plan: `<https://docs.google.com/spreadsheets/d/14FsP_WT7bO9Px5cJIJGaz0Ljs5mbC_g9_CklYtxpvKM/edit?usp=sharing>`
+
++ Link Dữ liệu mẫu: `https://docs.google.com/spreadsheets/d/1O18eoNwREFU0ARyQGcHxTNt9ueVI0rz5opADQSRVpv4/edit?usp=drive_link`
+
++ Link SRC: `<https://drive.google.com/drive/folders/1iz-iIZITxwT4mafGzPmvLm0ycVzTC_sE?usp=drive_link>`
 
 # Công việc các thành viên
 
@@ -18,27 +26,16 @@
 + Phân `chia route` cho Admin và Customer
 + `Hiển thị/ Update khách hàng` với ajax
 + `Thiết kế database`
-
-  #### `>>>To do:`
-
 + Train và hỗ trợ cho mọi người
 + Tối ưu lại Routes
 
 ### `2. Thành Đạt - HTTT2211003`
 
-+ Do something...
-
-  #### `>>>Doing:`
-
-+ Train cho Nguyên: Cách chạy khi có src và khi mới pull code về
-
 + Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy
-
-### `3. Như É - HTTT2211015`
++ Admin: code Danh mục: Thêm/ Sửa/ Xóa
 
 ### `3. Như Ý - HTTT2211015`
 
-+ Do this.. do that...
 + `Thiết kế database`
 
   #### `>>>Doing:`
@@ -47,38 +44,19 @@
 
 + Train cho Phát: Cách chạy khi có src và khi mới pull code về
 
-+ Admin: code  Danh mục: Xem/ Thêm/ Sửa/ Xóa
-
 ### `4. Thành Phát - HTTT2211004`
 
-+ Dou someone...
-
-  #### `>>>Doing:`
-
 + Lấy Hình ảnh + Nội dung
++ Làm ProductSeeder
 
 ### `5. Trường Nguyên - HTTT2211025`
 
-+ Do wave...
 + `Thiết kế database`
-
-  #### `>>>Doing:`
-
 + Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
+
 + Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
 
-### `5. Trường Nguyên - HTTT2211025`
-
-+ Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
-+ `Thiết kế database`
-
-# Refresh database
-
-php artisan migrate:fresh
-
-php artisan db:seed
-
-## Bước chạy dự án (Bạn nào note lại push lên đi)
+## Bước chạy dự án Ý note lại đi
 
 1.
 
@@ -110,7 +88,7 @@ php artisan db:seed --class=*(name of seed)Seeder
 
 + composer dump-autoload
 
-## Kế sách cuối cùng
+## Kế sách cuối cùng - `Đạt`
 
 Bước 1
 composer update
@@ -118,13 +96,12 @@ composer install
 
 Bước 2
 php artisan config:clear
+
 php artisan cache:clear
+
 php artisan config:cache
-composer dump-autoload
 
-### `Reset cache`
-
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
 php artisan route:clear
+
+php artisan view:clear
+

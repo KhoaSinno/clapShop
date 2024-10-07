@@ -104,9 +104,9 @@
                         <div class="form-group col-md-6">
                             <label class="control-label">Giới tính</label>
                             <select class="form-control" id="gender" name="gender">
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Bí mật</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Bí mật</option>
                             </select>
                         </div>
                     </div>
