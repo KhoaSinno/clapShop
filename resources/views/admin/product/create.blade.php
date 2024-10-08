@@ -34,7 +34,7 @@
     #thumbbox {
         position: relative;
         width: 100%;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .removeimg {
@@ -110,8 +110,8 @@
 
 
     <div class="form-group col-md-3">
-        <label for="exampleSelect2" class="control-label">Danh mục</label>
-        <select class="form-control" id="exampleSelect2">
+        <label for="cate" class="control-label">Danh mục</label>
+        <select class="form-control" id="cate">
             <option>-- Chọn danh mục --</option>
             <option>Bàn ăn</option>
             <option>Bàn thông minh</option>

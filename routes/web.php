@@ -35,7 +35,7 @@ Route::middleware('guest')->group(function () {
 
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    // Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
     Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');

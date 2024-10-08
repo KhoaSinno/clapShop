@@ -122,7 +122,6 @@ php artisan route:clear
 php artisan view:clear
 
 
+Note's Nguyên kĩ thuật `symbolic link` để thêm link cho nơi lưu trữ file: 
+php artisan storage:link 
 
-
-Note's Nguyên kĩ thuật `symbolic link`: 
-php artisan storage:link : thêm link cho nơi lưu trữ file
