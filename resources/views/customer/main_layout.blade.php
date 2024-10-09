@@ -24,11 +24,11 @@
                 <!-- <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li> -->
                 <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">Tổng tiền: <span>$150.00</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="/e_customerSN/img/language.png" alt="">
+                <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -148,7 +148,7 @@
                         <ul>
                             <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartItemCount }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">Tổng tiền: <span>$150.00</span></div>
                     </div>
                 </div>
             </div>

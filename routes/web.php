@@ -94,6 +94,8 @@ Route::prefix('customer')->group(function () {
     // Customer product
     Route::get('/products', [CustomerProductController::class, 'index'])->name('customer.products');
     Route::get('/products/{slug}', [CustomerProductController::class, 'showProductsBySlug'])->name('customer.products.by_slug');
+    Route::get('/products/filter', [CustomerProductController::class, 'filter'])->name('products.filter');
+
     Route::get('/products/detail/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
 
     // Customer contact
