@@ -42,7 +42,7 @@
                             @foreach(session('cart') as $id => $details)
                             <tr>
                                 <td class="shoping__cart__item">
-                                    <img src="{{ $details['image'] }}" alt="">
+                                    <img src="{{ $details['image'] ?? null }}" alt="">
                                     <h5>{{ $details['name'] }}</h5>
                                 </td>
                                 <td class="shoping__cart__price">

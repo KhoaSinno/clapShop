@@ -407,7 +407,7 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<!-- <script>
     $(document).on('click', '.add-to-cart', function(e) {
         e.preventDefault();
         var productId = $(this).data('id'); // Lấy productId từ thuộc tính data-id của nút
@@ -427,6 +427,30 @@
             success: function(response) {
                 alert('Sản phẩm đã được thêm vào giỏ hàng!');
                 // Bạn có thể cập nhật biểu tượng giỏ hàng hoặc số lượng sản phẩm ở đây
+            },
+            error: function(xhr) {
+                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+            }
+        });
+    });
+</script> -->
+
+<script>
+    $(document).on('click', '.add-to-cart', function(e) {
+        e.preventDefault();
+        var productId = $(this).data('id');
+
+        $.ajax({
+            url: `/customer/cart/add/${productId}`,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // Cập nhật tổng tiền ngay lập tức
+                $('.header__cart__price span').text('$' + response.total.toFixed(2));
+                $('.span__quantity_cart').text(response.totalQuantity);
             },
             error: function(xhr) {
                 alert('Đã xảy ra lỗi. Vui lòng thử lại!');
