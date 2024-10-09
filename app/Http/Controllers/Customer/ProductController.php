@@ -10,20 +10,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // public function index()
-    // {
-    //     // Lấy danh sách sản phẩm và phân trang
-    //     $products = Product::paginate(3); // 10 sản phẩm trên mỗi trang
-    //     $categories = Category::all();
-
-    //     return view('customer.product.index', [
-    //         'title' => 'Danh sách sản phẩm',
-    //         'products' => $products,
-    //         'categories' => $categories,
-    //     ]);
-    // }
-
-    public function index(Request $request)
+    private function applySort($request, $proPerPage = 10)
     {
         // Lấy giá trị của 'sort' từ request, mặc định là 'default' nếu không có giá trị
         $sort = $request->input('sort', 'default');
@@ -44,8 +31,16 @@ class ProductController extends Controller
                 break;
         }
 
-        // Lấy danh sách sản phẩm và phân trang
-        $products = $productsQuery->paginate(3); // 3 sản phẩm trên mỗi trang
+        // Sau khi đã thêm điều kiện sắp xếp, tiến hành phân trang
+        $products = $productsQuery->paginate($proPerPage);
+
+        return [$sort, $products];
+    }
+
+    public function index(Request $request)
+    {
+        // Gọi hàm applySort để lấy giá trị sort và danh sách sản phẩm
+        list($sort, $products) = $this->applySort($request, 3);
         $categories = Category::all();
 
         // Trả về view với biến $sort được truyền đi
@@ -56,7 +51,6 @@ class ProductController extends Controller
             'sort' => $sort // Truyền biến $sort vào view
         ]);
     }
-
 
 
     public function showProductsBySlug(Request $request, $slug)
@@ -74,32 +68,13 @@ class ProductController extends Controller
         // Lấy tất cả sản phẩm theo categoryID và phân trang
         $products = Product::where('categoryID', $category->id)->paginate(3);
 
-        // Lấy giá trị của 'sort' từ request, mặc định là 'default' nếu không có giá trị
-        $sort = $request->input('sort', 'default');
-
-        // Khởi tạo truy vấn sản phẩm
-        $productsQuery = Product::query();
-
-        // Thêm điều kiện sắp xếp dựa trên giá trị của $sort
-        switch ($sort) {
-            case 'asc':
-                $productsQuery->orderBy('price', 'asc'); // Sắp xếp giá tăng dần
-                break;
-            case 'desc':
-                $productsQuery->orderBy('price', 'desc'); // Sắp xếp giá giảm dần
-                break;
-            default:
-                $productsQuery->orderBy('created_at', 'desc'); // Mặc định: sắp xếp theo sản phẩm mới nhất
-                break;
-        }
-
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [
             'title' => 'Sản phẩm thuộc danh mục: ' . $category->name,
             'products' => $products,
             'category' => $category,
             'categories' => $categories,
-            'sort' => $sort
+            'sort' => 'default'
 
         ]);
     }
