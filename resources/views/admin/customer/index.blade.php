@@ -32,7 +32,7 @@
             <td>{{ $cus->address }}</td> <!-- Địa chỉ -->
             <td>{{ $cus->phone }}</td> <!-- SĐT -->
             <td>{{ $cus->email }}</td> <!-- Email -->
-            <td>{{ $cus->dateOfBirth }}</td> <!-- Ngày sinh -->
+            <td>{{ \Carbon\Carbon::parse($cus->dateOfBirth)->format('d-m-Y') }}</td> <!-- Ngày sinh -->
             <td>{{ $cus->gender }}</td> <!-- Giới tính -->
             <td class="table-td-center">
                 <!-- <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
@@ -51,13 +51,12 @@
 </table>
 @endsection
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <!--MODAL Update customer-->
 @section('modal')
 <!-- MODAL Update customer -->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -71,7 +70,6 @@
                 <!-- Form cập nhật khách hàng -->
                 <form id="updateCustomerForm">
                     @csrf
-                    <!-- <input type="hidden" id="customerId" name="id"> -->
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">Mã KH</label>
@@ -79,38 +77,44 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Họ và tên</label>
-                            <input class="form-control" type="text" id="fullname" name="fullname" required>
+                            <input class="form-control" type="text" id="fullname" name="fullname">
+                            <div class="text-danger" id="fullnameError"></div> <!-- Thêm thẻ để hiển thị lỗi -->
                         </div>
                         <div class="form-group col-12">
                             <label class="control-label">Địa chỉ</label>
-                            <textarea class="form-control" id="address" name="address" required></textarea>
+                            <textarea class="form-control" id="address" name="address"></textarea>
+                            <div class="text-danger" id="addressError"></div> <!-- Thêm thẻ để hiển thị lỗi -->
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="number" id="phone" name="phone" required>
+                            <input class="form-control" type="number" id="phone" name="phone">
+                            <div class="text-danger" id="phoneError"></div> <!-- Thêm thẻ để hiển thị lỗi -->
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" type="email" id="email" name="email" required>
+                            <input class="form-control" type="email" id="email" name="email">
+                            <div class="text-danger" id="emailError"></div> <!-- Thêm thẻ để hiển thị lỗi -->
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth">
+                            <div class="text-danger" id="dateOfBirthError"></div> <!-- Thêm thẻ để hiển thị lỗi -->
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label">Giới tính</label>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Bí mật</option>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Bí mật</option>
                             </select>
                         </div>
                     </div>
                     <br>
                     <button type="submit" class="btn btn-save">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal">Hủy bỏ</a>
+                    <a class="btn btn-cancel" data-dismiss="modal" id="btnCloseFm">Hủy bỏ</a>
                 </form>
+
             </div>
         </div>
     </div>
@@ -119,6 +123,23 @@
 
 @endsection
 
+@section('footer')
+<!--
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -148,7 +169,6 @@
                     }
 
                     $('#gender').val(response.gender);
-                    // $('#ModalUP').modal('show'); // Hiển thị modal
                 },
                 error: function(xhr) {
                     alert('Lỗi khi lấy thông tin khách hàng');
@@ -157,48 +177,174 @@
             });
         });
 
+        // $("#updateCustomerForm").on("submit", function(e) {
+        //     e.preventDefault(); // Ngăn chặn việc gửi form mặc định
+        //     var customerId = $('#customerId').val(); // Lấy ID từ hidden input
+        //     var formData = $(this).serialize(); // Lấy dữ liệu từ form
+
+        //     $.ajax({
+        //         url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
+        //         type: 'PUT',
+        //         data: formData, // Dữ liệu từ form
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+        //         },
+        //         success: function(response) {
+        //             if (response.success) {
+        //                 // Cập nhật trực tiếp thông tin trên bảng
+        //                 const row = $(`button[data-id="${customerId}"]`).closest('tr');
+        //                 row.find('td:nth-child(2)').text(response.data.fullname); // Cập nhật Họ và tên
+        //                 row.find('td:nth-child(3)').text(response.data.address); // Cập nhật Địa chỉ
+        //                 row.find('td:nth-child(4)').text(response.data.phone); // Cập nhật SĐT
+        //                 row.find('td:nth-child(5)').text(response.data.email); // Cập nhật Email
+        //                 row.find('td:nth-child(6)').text(response.data.dateOfBirth); // Cập nhật Ngày sinh
+        //                 row.find('td:nth-child(7)').text(response.data.gender); // Cập nhật Giới tính
+
+        //                 // Hiển thị thông báo thành công
+        //                 $('#alert-container').html(`
+        //                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+        //                         ${response.message}
+        //                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //                             <span aria-hidden="true">&times;</span>
+        //                         </button>
+        //                     </div>
+        //                 `);
+
+        //                 // Đóng modal -- bug
+        //                 jQuery('#ModalUP').modal('hide');
+        //                 $('.modal-backdrop.fade.show').remove();
+
+        //             } else {
+        //                 $('#alert-container').html(`
+        //             <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        //                 ${response.message}
+        //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //                     <span aria-hidden="true">&times;</span>
+        //                 </button>
+        //             </div>
+        //         `);
+        //             }
+        //         },
+        //         error: function(xhr) {
+        //             alert('Cập nhật thất bại');
+        //         }
+        //     });
+        // });
+
         $("#updateCustomerForm").on("submit", function(e) {
             e.preventDefault(); // Ngăn chặn việc gửi form mặc định
-            var customerId = $('#customerId').val(); // Lấy ID từ hidden input
-            var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
+            // Lấy giá trị từ form
+            var customerId = $('#customerId').val();
+            var fullname = $('#fullname').val().trim();
+            var address = $('#address').val().trim();
+            var phone = $('#phone').val().trim();
+            var email = $('#email').val().trim();
+            var dateOfBirth = $('#dateOfBirth').val();
+            var gender = $('#gender').val();
+
+            // Xóa thông báo lỗi cũ
+            $('.text-danger').html('').removeClass('d-none');
+
+            // Xóa viền lỗi cũ
+            $('.form-control').removeClass('input-error');
+
+            // Kiểm tra dữ liệu hợp lệ
+            var errors = [];
+
+            if (fullname === "") {
+                errors.push("Họ và tên không được để trống.");
+                $('#fullnameError').html("Họ và tên không được để trống.").removeClass('d-none');
+                $('#fullname').addClass('input-error'); // Thêm viền đỏ cho ô này
+            }
+            if (address === "") {
+                errors.push("Địa chỉ không được để trống.");
+                $('#addressError').html("Địa chỉ không được để trống.").removeClass('d-none');
+                $('#address').addClass('input-error'); // Thêm viền đỏ cho ô này
+            }
+            var phonePattern = /^[0-9]{10}$/; // Ví dụ kiểm tra số điện thoại có 10 chữ số
+            if (!phonePattern.test(phone)) {
+                errors.push("Số điện thoại không hợp lệ.");
+                $('#phoneError').html("Số điện thoại không hợp lệ.").removeClass('d-none');
+                $('#phone').addClass('input-error'); // Thêm viền đỏ cho ô này
+            }
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Kiểm tra định dạng email
+            if (!emailPattern.test(email)) {
+                errors.push("Email không hợp lệ.");
+                $('#emailError').html("Email không hợp lệ.").removeClass('d-none');
+                $('#email').addClass('input-error'); // Thêm viền đỏ cho ô này
+            }
+            if (dateOfBirth === "") {
+                errors.push("Ngày sinh không được để trống.");
+                $('#dateOfBirthError').html("Ngày sinh không được để trống.").removeClass('d-none');
+                $('#dateOfBirth').addClass('input-error'); // Thêm viền đỏ cho ô này
+            }
+
+            // Nếu có lỗi, hiển thị thông báo và dừng lại
+            if (errors.length > 0) {
+                return; // Dừng không gửi form nếu có lỗi
+            }
+
+            // Tạo dữ liệu form để gửi qua AJAX
+            var formData = $(this).serialize();
+
+            // Gọi AJAX để cập nhật khách hàng
             $.ajax({
                 url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
                 type: 'PUT',
-                data: formData, // Dữ liệu từ form
+                data: formData,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
                 },
                 success: function(response) {
-                    location.reload(); // Reload trang sau khi cập nhật thành công
-
                     if (response.success) {
-                        // Hiển thị thông báo thành công trong phần giao diện HTML
+                        // Cập nhật trực tiếp thông tin trên bảng
+                        const row = $(`button[data-id="${customerId}"]`).closest('tr');
+                        row.find('td:nth-child(2)').text(response.data.fullname); // Cập nhật Họ và tên
+                        row.find('td:nth-child(3)').text(response.data.address); // Cập nhật Địa chỉ
+                        row.find('td:nth-child(4)').text(response.data.phone); // Cập nhật SĐT
+                        row.find('td:nth-child(5)').text(response.data.email); // Cập nhật Email
+                        row.find('td:nth-child(6)').text(response.data.dateOfBirth); // Cập nhật Ngày sinh
+                        row.find('td:nth-child(7)').text(response.data.gender); // Cập nhật Giới tính
+
+                        // Hiển thị thông báo thành công
                         $('#alert-container').html(`
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    ${response.message}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            `);
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        `);
+
+                        // Tự động ẩn thông báo sau 5 giây
+                        setTimeout(function() {
+                            $('#alert-container .alert').alert('close'); // Đóng thông báo
+                        }, 5000); // 5000 milliseconds = 5 seconds
+
+                        // Đóng modal và xóa lớp phủ modal
+                        jQuery('#ModalUP').modal('hide');
+                        $('.modal-backdrop.fade.show').remove();
                     } else {
-                        // Hiển thị thông báo lỗi nếu có
-                        $('#alert-container').html(`
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    ${response.message}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            `);
+                        // Hiển thị thông báo lỗi từ server
+                        $('#error-container').html(`
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        ${response.message}
+                    </div>
+                `).removeClass('d-none');
                     }
                 },
                 error: function(xhr) {
-                    alert('Cập nhật thất bại');
+                    // Hiển thị lỗi chung khi có vấn đề với yêu cầu AJAX
+                    $('#error-container').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Cập nhật thất bại. Vui lòng thử lại sau.
+                </div>
+            `).removeClass('d-none');
                 }
             });
         });
 
     });
 </script>
+@endsection

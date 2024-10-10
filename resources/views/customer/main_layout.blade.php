@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 
-
 <head>
     @include('customer.head')
+    @yield('header')
 </head>
 
 <body>
@@ -21,14 +21,13 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">Tổng tiền: <span>{{ session('total', 0) }}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="/e_customerSN/img/language.png" alt="">
+                <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -146,10 +145,9 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">Tổng tiền: <span>{{ session('total', 0) }}</span></div>
                     </div>
                 </div>
             </div>
@@ -171,17 +169,12 @@
                             <span>Danh mục</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            @foreach ($categories as $category )
+
+                            <li><a href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a></li>
+
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
@@ -290,6 +283,7 @@
 
     <!-- Js Plugins -->
     @include('customer.footer')
+    @yield('footer')
 
 </body>
 

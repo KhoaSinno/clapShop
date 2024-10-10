@@ -35,25 +35,17 @@ class CustomerController extends Controller
     // }
 
     public function update(Request $request, $id)
-    {
-        try {
-            // Tìm khách hàng dựa trên ID
-            $customer = User::findOrFail($id);
+{
+    $customer = User::findOrFail($id);
 
-            // Cập nhật thông tin khách hàng
-            $customer->update($request->all());
+    $customer->update($request->all());
 
-            // Trả về phản hồi JSON với thông báo thành công
-            return response()->json([
-                'message' => 'Cập nhật thành công!',
-                'success' => true
-            ]);
-        } catch (\Exception $e) {
-            // Nếu có lỗi, trả về phản hồi JSON với thông báo lỗi
-            return response()->json([
-                'message' => 'Đã xảy ra lỗi khi cập nhật!',
-                'success' => false
-            ], 500);
-        }
-    }
+    // Trả về thông tin cập nhật mới nhất
+    return response()->json([
+        'success' => true,
+        'message' => 'Cập nhật thành công!',
+        'data' => $customer // Trả về đối tượng customer đã được cập nhật
+    ]);
+}
+
 }
