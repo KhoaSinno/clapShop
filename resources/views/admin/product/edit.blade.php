@@ -15,7 +15,7 @@
         text-decoration: none;
         cursor: pointer;
         padding: 5px 0px;
-        border-radius: 5px;
+        border-radius: 5px; 
         font-weight: 500;
         align-items: center;
         justify-content: center;
@@ -215,9 +215,9 @@
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
             <a class="removeimg" href="javascript:"></a>
         </div>
-        <div id="myfileupload">
+        <div id="myfileupload">            
             @foreach($product_images as $image)
-                <image src="{{$image->image_url}}" weight="400" height="400">
+                <image src="{{$image->image_url}}" weight="300" height="300">
             @endforeach
         </div>
     </div>

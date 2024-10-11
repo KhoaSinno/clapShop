@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-
 use App\Models\Product_Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -21,7 +20,7 @@ class ProductController extends Controller
             'title' => 'Danh sách sản phẩm',
             'products' => $products,
             'categories' => $categories,
-            'product_images' => $product_images
+            'product_images' => $product_images 
         ]);
     }
     //done - show form tạo sản phẩm
