@@ -43,12 +43,16 @@ class ProductController extends Controller
         list($sort, $products) = $this->applySort($request, 3);
         $categories = Category::all();
 
+        $productCount = Product::all()->count();
+
+
         // Trả về view với biến $sort được truyền đi
         return view('customer.product.index', [
             'title' => 'Danh sách sản phẩm',
             'products' => $products,
             'categories' => $categories,
-            'sort' => $sort // Truyền biến $sort vào view
+            'sort' => $sort,
+            'count' => $productCount
         ]);
     }
 
@@ -67,6 +71,7 @@ class ProductController extends Controller
 
         // Lấy tất cả sản phẩm theo categoryID và phân trang
         $products = Product::where('categoryID', $category->id)->paginate(3);
+        $productCount = Product::all()->count();
 
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [
@@ -74,28 +79,37 @@ class ProductController extends Controller
             'products' => $products,
             'category' => $category,
             'categories' => $categories,
-            'sort' => 'default'
+            'sort' => 'default',
+            'count' => $productCount
 
         ]);
     }
 
     public function show($id)
     {
-        // Tìm sản phẩm theo ID
-        $product = Product::with('category')->find($id); // Sử dụng eager loading để lấy category
+        // Tìm sản phẩm theo ID và lấy thông tin category
+        $product = Product::with('category')->find($id);
 
         // Kiểm tra nếu không tìm thấy sản phẩm
         if (!$product) {
             return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
         }
 
-        // Trả về view để hiển thị chi tiết sản phẩm
+        // Lấy danh sách sản phẩm liên quan cùng category, loại trừ sản phẩm hiện tại
+        $relatedProducts = Product::where('categoryID', $product->categoryID)
+            ->where('id', '!=', $product->id) // Loại trừ sản phẩm hiện tại
+            ->limit(4) // Giới hạn số lượng sản phẩm liên quan, ví dụ 4 sản phẩm
+            ->get();
+
+        // Trả về view để hiển thị chi tiết sản phẩm cùng với các sản phẩm liên quan
         return view('customer.product.detail', [
             'title' => 'Chi tiết sản phẩm',
             'product' => $product,
-            'category' => $product->category // Truyền category vào view
+            'category' => $product->category,
+            'relatedProducts' => $relatedProducts // Truyền danh sách sản phẩm liên quan vào view
         ]);
     }
+
 
     public function filter(Request $request)
     {
@@ -128,6 +142,32 @@ class ProductController extends Controller
             'title' => 'Danh sách sản phẩm',
             'products' => $products,
             'categories' => $categories,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+
+        list($sort, $products) = $this->applySort($request, 3);
+
+        // Lấy từ khóa từ request
+        $query = $request->input('query');
+        // Tìm kiếm sản phẩm theo từ khóa trong tên sản phẩm hoặc mô tả
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->paginate(30); // Phân trang kết quả tìm kiếm
+
+        $productCount = $products->count();
+
+        // Trả về view kèm theo danh sách sản phẩm tìm kiếm được
+        return view('customer.product.search_results', [
+            'title' => 'Kết quả tìm kiếm cho: ' . $query,
+            'products' => $products,
+            'query' => $query,
+            'categories' => $categories,
+            'sort' => $sort,
+            'count' => $productCount
         ]);
     }
 }

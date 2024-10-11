@@ -48,9 +48,16 @@
                                 <td class="shoping__cart__price">
                                     {{ $details['price'] }}$
                                 </td>
-                                <td class="shoping__cart__quantity">
+                                <!-- <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <input type="text" value="{{ $details['quantity'] }}">
+                                    </div>
+                                </td> -->
+                                <td class="product__details__quantity">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="{{ $details['quantity'] }}">
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
@@ -78,7 +85,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
                     <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                         Upadate Cart</a>
                 </div>

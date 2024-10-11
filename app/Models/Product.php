@@ -13,11 +13,10 @@ class Product extends Model
     protected $fillable = [
         'categoryID',
         'name',
-        'brand',
         'cpu',
         'ram',
         'storage',
-        'screen_size',
+        'screen',
         'battery',
         'warranty',
         'os',
