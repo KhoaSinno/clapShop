@@ -44,7 +44,13 @@
         <tr>
             <td>{{ $p->id }}</td>
             <td>{{ $p->name }}</td>
-            <td></td>
+            <td>
+                @if($p->mainImage)
+                <img src="{{ asset($p->mainImage->image_url) }}" alt="Product Image" weight="100" height="100">
+                @else
+                <!-- <img src="{{ asset('storage/images/default.jpg') }}" alt="No Image Available" weight="100" height="100"> -->
+                @endif
+            </td>
             <td>{{ $p->category->name }}</td>
             <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
             <td>{{ $p->price }}</td>

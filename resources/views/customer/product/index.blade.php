@@ -32,15 +32,18 @@
                         <h4>Danh mục</h4>
                         <ul>
                             @foreach ($categories as $category)
-
-                            <li><a href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a></li>
+                            <li>
+                                <a
+                                    href="{{ route('customer.products.by_slug', $category->slug) }}"
+                                    class="{{ request()->is('customer/products/' . $category->slug) ? 'text-primary text-bold' : '' }}">{{$category->name}}</a>
+                            </li>
                             @endforeach
 
                         </ul>
                     </div>
-                    <div class="sidebar__item">
+                    <!-- <div class="sidebar__item">
                         <h4>Giá</h4>
-                        <div class="sidebar__item__size">
+                        <div class="sidebar__item__size price_active">
                             <label for="large">
                                 < 10tr
                                     <input type="radio" id="large">
@@ -64,7 +67,40 @@
                                 <input type="radio" id="tiny">
                             </label>
                         </div>
+                    </div> -->
+
+                    <div class="sidebar__item">
+                        <h4>Giá</h4>
+                        <form method="GET" action="{{ route('products.filter') }}">
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    <input type="radio" id="large" name="price_range" value="0" onchange="this.form.submit()" {{ request('price_range') == '0' ? 'checked' : '' }}>
+                                    <span>&lt; 10tr</span>
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="medium">
+                                    <input type="radio" id="medium" name="price_range" value="1" onchange="this.form.submit()" {{ request('price_range') == '1' ? 'checked' : '' }}>
+                                    <span>10tr - 20tr</span>
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="small">
+                                    <input type="radio" id="small" name="price_range" value="2" onchange="this.form.submit()" {{ request('price_range') == '2' ? 'checked' : '' }}>
+                                    <span>20tr - 30tr</span>
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="tiny">
+                                    <input type="radio" id="tiny" name="price_range" value="3" onchange="this.form.submit()" {{ request('price_range') == '3' ? 'checked' : '' }}>
+                                    <span>&gt; 30tr</span>
+                                </label>
+                            </div>
+                        </form>
                     </div>
+
+
+
                     <!-- <div class="sidebar__item">
                         <h4>Price</h4>
                         <div class="price-range-wrap">
@@ -309,17 +345,16 @@
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-6">
-                            <div class="filter__sort">
+                            <form action="{{ route('customer.products') }}" method="GET" class="filter__sort">
                                 <span>Sắp xếp</span>
-                                <select>
-                                    <option value="0">Mặc định</option>
-                                    <option value="0">Giá tăng dần
-                                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                                    </option>
-
-                                    <option value="0">Giá giảm dần</option>
+                                <select id="sort" name="sort" onchange="this.form.submit()">
+                                    <option value="default" {{ $sort == 'default' ? 'selected' : '' }}>Mặc định</option>
+                                    <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Giá tăng dần</option>
+                                    <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Giá giảm dần</option>
                                 </select>
-                            </div>
+
+
+                            </form>
                         </div>
                         <div class="col-6">
                             <div class="filter__found">
@@ -335,8 +370,8 @@
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-1.jpg">
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
                                     <!-- <li><a href="{{ route('customer.cart.add', ['id' => $product->id]) }}"><i class="fa fa-shopping-cart"></i></a></li> -->
 
                                     <li>
@@ -372,7 +407,7 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<!-- <script>
     $(document).on('click', '.add-to-cart', function(e) {
         e.preventDefault();
         var productId = $(this).data('id'); // Lấy productId từ thuộc tính data-id của nút
@@ -392,6 +427,30 @@
             success: function(response) {
                 alert('Sản phẩm đã được thêm vào giỏ hàng!');
                 // Bạn có thể cập nhật biểu tượng giỏ hàng hoặc số lượng sản phẩm ở đây
+            },
+            error: function(xhr) {
+                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+            }
+        });
+    });
+</script> -->
+
+<script>
+    $(document).on('click', '.add-to-cart', function(e) {
+        e.preventDefault();
+        var productId = $(this).data('id');
+
+        $.ajax({
+            url: `/customer/cart/add/${productId}`,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // Cập nhật tổng tiền ngay lập tức
+                $('.header__cart__price span').text('$' + response.total.toFixed(2));
+                $('.span__quantity_cart').text(response.totalQuantity);
             },
             error: function(xhr) {
                 alert('Đã xảy ra lỗi. Vui lòng thử lại!');

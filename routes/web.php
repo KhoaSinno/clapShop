@@ -35,7 +35,7 @@ Route::middleware('guest')->group(function () {
 
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    // Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
     Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
@@ -94,6 +94,8 @@ Route::prefix('customer')->group(function () {
     // Customer product
     Route::get('/products', [CustomerProductController::class, 'index'])->name('customer.products');
     Route::get('/products/{slug}', [CustomerProductController::class, 'showProductsBySlug'])->name('customer.products.by_slug');
+    Route::get('/products/filter', [CustomerProductController::class, 'filter'])->name('products.filter');
+
     Route::get('/products/detail/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
 
     // Customer contact

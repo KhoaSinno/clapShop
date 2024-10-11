@@ -9,8 +9,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view("admin.home", [
-            'title'=> 'Trang quản trị ClapShop'
+        return view("admin.dashboard", [
+            'title' => 'Quản trị ClapShop'
         ]);
     }
 }

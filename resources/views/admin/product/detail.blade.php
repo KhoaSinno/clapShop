@@ -1,4 +1,4 @@
-@extends('admin.main_layout') 
+@extends('admin.main_layout')
 @section('head')
 <link rel="stylesheet" type="text/css"
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +34,7 @@
     #thumbbox {
         position: relative;
         width: 100%;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .removeimg {
@@ -110,13 +110,13 @@
 
 
     <div class="form-group col-md-3">
-        <label for="exampleSelect2" class="control-label">Danh mục</label>
-        <select class="form-control" id="exampleSelect2" name="category">
+        <label for="categoryCL" class="control-label">Danh mục</label>
+        <select class="form-control" id="categoryCL" name="category">
             <option value="1">-- Chọn danh mục --</option>
             @foreach ($categories as $category)
             <option value="{{$category->id}}">{{$category -> name}}</option>
             @endforeach
-            
+
         </select>
     </div>
 
