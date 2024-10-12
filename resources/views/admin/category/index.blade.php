@@ -30,7 +30,7 @@
         </div>
     @endif
 
-    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0">
+    <table class="table table-hover table-bordered js-copytextarea" id="sampleTable" cellpadding="0" cellspacing="0" border="0">
         <thead>
             <tr>
                 <th>ID</th>
