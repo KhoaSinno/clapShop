@@ -16,7 +16,7 @@ class ProductController extends Controller
         $sort = $request->input('sort', 'default');
 
         // Khởi tạo truy vấn sản phẩm
-        $productsQuery = Product::query();
+        $productsQuery = Product::query()->with(['category', 'mainImage']);
 
         // Thêm điều kiện sắp xếp dựa trên giá trị của $sort
         switch ($sort) {
@@ -39,6 +39,10 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+
+        // $products = Product::with(['category', 'mainImage'])->get(); // Lấy category và mainImage
+
+
         // Gọi hàm applySort để lấy giá trị sort và danh sách sản phẩm
         list($sort, $products) = $this->applySort($request, 3);
         $categories = Category::all();

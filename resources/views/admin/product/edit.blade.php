@@ -15,7 +15,7 @@
         text-decoration: none;
         cursor: pointer;
         padding: 5px 0px;
-        border-radius: 5px; 
+        border-radius: 5px;
         font-weight: 500;
         align-items: center;
         justify-content: center;
@@ -222,7 +222,7 @@
                     <div>
                     <a class="btn btn-add btn-sm" title="Xóa" href="{{ route('admin.product.image.destroy', ['product' => $product->id, 'image' => $image->id]) }}">
                         <i class="fas fa-alt"></i>
-                        Xóa ành
+                        Xóa ảnh
                     </a>
                     </div>
                 </div>
@@ -243,8 +243,8 @@
             <p style="clear:both"></p>
         </div>
     </div>
-    
-    
+
+
         <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
         <textarea class="form-control" name="description" id="mota" value="screen 1">{{$product->description}}</textarea>

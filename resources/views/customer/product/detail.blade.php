@@ -32,7 +32,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                            src="/e_customerSN/img/product/details/product-details-1.jpg" alt="">
+                            src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="">
                     </div>
                     <div class="product__details__pic__slider owl-carousel">
                         <img data-imgbigurl="/e_customerSN/img/product/details/product-details-2.jpg"
@@ -127,7 +127,7 @@
             @foreach ($relatedProducts as $relatedProduct)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-1.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="{{ $relatedProduct->mainImage ? asset($relatedProduct->mainImage->image_url) : asset('storage/images/default.jpg') }}">
                         <ul class="product__item__pic__hover">
                             <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->

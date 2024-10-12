@@ -118,10 +118,10 @@
                         </div>
                     </div> -->
                     <div class="sidebar__item sidebar__item__color--option">
-                        <h4>Colors</h4>
+                        <h4>Màu sắc</h4>
                         <div class="sidebar__item__color sidebar__item__color--white">
                             <label for="white">
-                                White
+                                Silver
                                 <input type="radio" id="white">
                             </label>
                         </div>
@@ -129,30 +129,6 @@
                             <label for="gray">
                                 Gray
                                 <input type="radio" id="gray">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--red">
-                            <label for="red">
-                                Red
-                                <input type="radio" id="red">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--black">
-                            <label for="black">
-                                Black
-                                <input type="radio" id="black">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--blue">
-                            <label for="blue">
-                                Blue
-                                <input type="radio" id="blue">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--green">
-                            <label for="green">
-                                Green
-                                <input type="radio" id="green">
                             </label>
                         </div>
                     </div>
@@ -367,11 +343,9 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="/e_customerSN/img/product/product-1.jpg">
+                            <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
                                 <ul class="product__item__pic__hover">
-                                    <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-                                    <!-- <li><a href="{{ route('customer.cart.add', ['id' => $product->id]) }}"><i class="fa fa-shopping-cart"></i></a></li> -->
+
 
                                     <li>
                                         <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
