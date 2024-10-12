@@ -181,10 +181,11 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="What do yo u need?">
+                            <form action="{{ route('customer.product.search') }}" method="GET"> <!-- Route đến hàm xử lý tìm kiếm -->
+                                <input type="text" name="query" placeholder="Bạn muốn tìm gì?" value="{{ request()->input('query') }}">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
+
                         </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">

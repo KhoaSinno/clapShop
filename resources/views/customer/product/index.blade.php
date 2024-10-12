@@ -1,6 +1,5 @@
 @extends('customer.main_layout')
 
-@section('content')
 <!-- Breadcrumb Section Begin -->
 @section('breadcrumb')
 <section class="breadcrumb-section set-bg" data-setbg="/e_customerSN/img/breadcrumb.jpg">
@@ -8,7 +7,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Organi Shop</h2>
+                    <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
                         <a href="{{ route('customer.home') }}">Home</a>
                         <span>Shop</span>
@@ -358,7 +357,7 @@
                         </div>
                         <div class="col-6">
                             <div class="filter__found">
-                                <h6><span>16</span> Products found</h6>
+                                <h6><span>{{$count}}</span> sản phẩm</h6>
                             </div>
                         </div>
                     </div>
@@ -383,7 +382,7 @@
                             </div>
                             <div class="product__item__text">
                                 <h6>
-                                    <a href="{{route('customer.product.detail', $product->categoryID) }}">{{$product->name}}</a>
+                                    <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
                                 </h6>
                                 <h5>{{$product->price}}</h5>
                             </div>

@@ -48,9 +48,16 @@
                                 <td class="shoping__cart__price">
                                     {{ $details['price'] }}$
                                 </td>
-                                <td class="shoping__cart__quantity">
+                                <!-- <td class="shoping__cart__quantity">
                                     <div class="quantity">
                                         <input type="text" value="{{ $details['quantity'] }}">
+                                    </div>
+                                </td> -->
+                                <td class="product__details__quantity">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="{{ $details['quantity'] }}">
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total">
@@ -78,7 +85,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
                     <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                         Upadate Cart</a>
                 </div>
@@ -96,12 +103,12 @@
             </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
-                    <h5>Cart Total</h5>
+                    <h5>Tổng giỏ hàng</h5>
                     <ul>
-                        <li>Subtotal <span>$454.98</span></li>
+                        <li>Tổng giá: <span>$454.98</span></li>
                         <li>Total <span>$454.98</span></li>
                     </ul>
-                    <a href="{{route('customer.checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="{{route('customer.checkout')}}" class="primary-btn">Tiến hành thanh toán</a>
                 </div>
             </div>
         </div>
