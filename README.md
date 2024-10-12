@@ -62,6 +62,7 @@ php artisan db:seed
 + `Thiết kế database`
 
 # Refresh database
+
 ```bash
 
 php artisan migrate:fresh
@@ -70,6 +71,7 @@ php artisan db:seed
 ```
 
 ## Bước chạy dự án (Bạn nào note lại push lên đi)
+
 ## Bước chạy dự án Ý note lại đi
 
 1.
@@ -91,6 +93,7 @@ php artisan db:seed
 + BS4 - V4.1.1
 
 ### `Create dummy data`
+
 ```bash
 
 php artisan db:seed
@@ -101,6 +104,7 @@ php artisan db:seed --class=*(name of seed)Seeder
 ```
 
 ### `Load file auto in lavarel`
+
 ```bash
 composer dump-autoload
 
@@ -122,6 +126,23 @@ php artisan route:clear
 php artisan view:clear
 
 
-Note's Nguyên kĩ thuật `symbolic link` để thêm link cho nơi lưu trữ file: 
-php artisan storage:link 
+`in storage/app`
+.gitignore:
 
+`*
+
+!public/
+
+!.gitignore`
+
+`in storage/app/public`
+.gitignore:
+
+`*
+!.gitignore
+`
+```
+
+
+Note's Nguyên kĩ thuật `symbolic link` để thêm link cho nơi lưu trữ file: 
+- php artisan storage:link 
