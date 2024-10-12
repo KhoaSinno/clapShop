@@ -77,6 +77,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
     Route::post('/product/delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
 
+    Route::get('/products/{product}/images/{image}', [ProductController::class, 'destroyImage'])->name('admin.product.image.destroy');
 
     // Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('admin.product.delete');
 

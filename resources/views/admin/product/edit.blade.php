@@ -95,8 +95,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('content')
-
-<form class="row" action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<form id="inforProduct" class="row" action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
@@ -145,96 +149,103 @@
     </div>
     <!-- ram -->
     <div class="form-group col-md-3">
-        <label class="control-label">ram</label>
+        <label class="control-label">RAM</label>
         <input class="form-control" type="text" name="ram" value="{{$product ->ram}}">
     </div>
     <!-- storage -->
     <div class="form-group col-md-3">
-        <label class="control-label">storage</label>
+        <label class="control-label">Lưu trữ</label>
         <input class="form-control" type="text" name="storage" value="{{$product ->storage}}">
     </div>
     <!-- screen -->
     <div class="form-group col-md-3">
-        <label class="control-label">screen</label>
+        <label class="control-label">Màn hình</label>
         <input class="form-control" type="text" name="screen" value="{{$product ->screen}}">
     </div>
     <!-- card -->
     <div class="form-group col-md-3">
-        <label class="control-label">card</label>
+        <label class="control-label">Card đồ họa</label>
         <input class="form-control" type="text" name="card" value="{{$product ->card}}">
     </div>
     <!-- connector -->
     <div class="form-group col-md-3">
-        <label class="control-label">connector</label>
+        <label class="control-label">Cổng kết nối</label>
         <input class="form-control" type="text" name="connector" value="{{$product ->connector}}">
     </div>
     <!-- weight -->
     <div class="form-group col-md-3">
-        <label class="control-label">weight</label>
+        <label class="control-label">Khối lượng</label>
         <input class="form-control" type="text" name="weight" value="{{$product ->weight}}">
     </div>
     <!-- keyboard -->
     <div class="form-group col-md-3">
-        <label class="control-label">keyboard</label>
+        <label class="control-label">Bàn phím</label>
         <input class="form-control" type="text" name="keyboard" value="{{$product ->keyboard}}">
     </div>
     <!-- battery -->
     <div class="form-group col-md-3">
-        <label class="control-label">battery</label>
+        <label class="control-label">Pin</label>
         <input class="form-control" type="text" name="battery" value="{{$product ->battery}}">
     </div>
     <!-- os -->
     <div class="form-group col-md-3">
-        <label class="control-label">os</label>
+        <label class="control-label">Hệ điều hành</label>
         <input class="form-control" type="text" name="os" value="{{$product ->os}}">
     </div>
     <!-- warranty -->
     <div class="form-group col-md-3">
-        <label class="control-label">warranty</label>
+        <label class="control-label">Bảo hành</label>
         <input class="form-control" type="text" name="warranty" value="{{$product ->warranty}}">
     </div>
     <!-- color -->
     <div class="form-group col-md-3">
-        <label class="control-label">color</label>
+        <label class="control-label">Màu sắc</label>
         <input class="form-control" type="text" name="color" value="{{$product ->color}}">
     </div>
     <!-- material -->
     <div class="form-group col-md-3">
-        <label class="control-label">material</label>
+        <label class="control-label">Chất liệu</label>
         <input class="form-control" type="text" name="material" value="{{$product ->material}}">
     </div>
 
     <div class="custom-control custom-checkbox form-group col-md-3">
         <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">Active</label>
+        <label class="custom-control-label" for="customCheck1">Còn hàng</label>
     </div>
 
     <div class="form-group col-md-12">
-        <label class="control-label">Ảnh sản phẩm</label>
+    <label class="control-label">Ảnh hiện có</label>
+        <div id="uploaded">
+            @foreach($product_images as $image)
+                <div class="image-item">
+                    <img src="{{$image->image_url}}" height="300" width="350">
+                    <div>
+                    <a class="btn btn-add btn-sm" title="Xóa" href="{{ route('admin.product.image.destroy', ['product' => $product->id, 'image' => $image->id]) }}">
+                        <i class="fas fa-alt"></i>
+                        Xóa ành
+                    </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <br>
+
+    <label class="control-label">Ảnh mới</label>
         <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" multiple/>
         </div>
         <div id="thumbbox">
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
             <a class="removeimg" href="javascript:"></a>
         </div>
-        <div id="myfileupload">            
-            @foreach($product_images as $image)
-                <image src="{{$image->image_url}}" weight="300" height="300">
-            @endforeach
         <div id="boxchoice">
-            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Thêm ảnh</a>
             <p style="clear:both"></p>
         </div>
-
-        <div id="myfileupload">
-            @foreach($product_images as $image)
-            <image src="{{$image->image_url}}" weight="400" height="400">
-                @endforeach
-        </div>
     </div>
-
-    <div class="form-group col-md-12">
+    
+    
+        <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
         <textarea class="form-control" name="description" id="mota" value="screen 1">{{$product->description}}</textarea>
         <script>
@@ -311,3 +322,14 @@
     });
 </script> -->
 @endsection
+
+<!-- nguyen script -->
+<script>
+    document.getElementById('inforImage').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        if (confirm('Bạn có chắc chắn muốn xóa ảnh này không?')) {
+            this.submit();
+        }
+    });
+</script>
