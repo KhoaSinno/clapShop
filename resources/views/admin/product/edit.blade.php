@@ -1,4 +1,4 @@
-@extends('admin.main_layout') 
+@extends('admin.main_layout')
 @section('head')
 <link rel="stylesheet" type="text/css"
     href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +34,7 @@
     #thumbbox {
         position: relative;
         width: 100%;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .removeimg {
@@ -77,7 +77,7 @@
 @endsection
 
 @section('function_nav')
-<div class="col-sm-2">
+<!-- <div class="col-sm-2">
     <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
             class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
 </div>
@@ -88,7 +88,7 @@
 <div class="col-sm-2">
     <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
             class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-</div>
+</div> -->
 
 @endsection
 
@@ -96,8 +96,8 @@
 
 @section('content')
 
-<form class="row" action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype = "multipart/form-data">
-        @csrf
+<form class="row" action="{{ route('admin.product.update',['id' => $product->id]) }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
         <input class="form-control" type="text" name="name" value="{{$product ->name}}">
@@ -114,11 +114,11 @@
         <select class="form-control" id="exampleSelect2" name="category">
             <option>-- Chọn danh mục --</option>
             @foreach ($categories as $category)
-                @if($product->categoryID == $category->id)
-                <option value="{{$category->id}}" selected>{{$category -> name}}</option>
-                @else
-                <option value="{{$category->id}}">{{$category -> name}}</option>
-                @endif
+            @if($product->categoryID == $category->id)
+            <option value="{{$category->id}}" selected>{{$category -> name}}</option>
+            @else
+            <option value="{{$category->id}}">{{$category -> name}}</option>
+            @endif
             @endforeach
         </select>
     </div>
@@ -143,63 +143,63 @@
         <label class="control-label">CPU</label>
         <input class="form-control" type="text" name="cpu" value="{{$product ->cpu}}">
     </div>
-        <!-- ram -->
-        <div class="form-group col-md-3">
+    <!-- ram -->
+    <div class="form-group col-md-3">
         <label class="control-label">ram</label>
         <input class="form-control" type="text" name="ram" value="{{$product ->ram}}">
     </div>
-        <!-- storage -->
-        <div class="form-group col-md-3">
+    <!-- storage -->
+    <div class="form-group col-md-3">
         <label class="control-label">storage</label>
         <input class="form-control" type="text" name="storage" value="{{$product ->storage}}">
     </div>
-        <!-- screen -->
-        <div class="form-group col-md-3">
+    <!-- screen -->
+    <div class="form-group col-md-3">
         <label class="control-label">screen</label>
         <input class="form-control" type="text" name="screen" value="{{$product ->screen}}">
     </div>
-            <!-- card -->
-            <div class="form-group col-md-3">
+    <!-- card -->
+    <div class="form-group col-md-3">
         <label class="control-label">card</label>
         <input class="form-control" type="text" name="card" value="{{$product ->card}}">
     </div>
-            <!-- connector -->
-            <div class="form-group col-md-3">
+    <!-- connector -->
+    <div class="form-group col-md-3">
         <label class="control-label">connector</label>
         <input class="form-control" type="text" name="connector" value="{{$product ->connector}}">
     </div>
-            <!-- weight -->
-            <div class="form-group col-md-3">
+    <!-- weight -->
+    <div class="form-group col-md-3">
         <label class="control-label">weight</label>
         <input class="form-control" type="text" name="weight" value="{{$product ->weight}}">
     </div>
-            <!-- keyboard -->
-            <div class="form-group col-md-3">
+    <!-- keyboard -->
+    <div class="form-group col-md-3">
         <label class="control-label">keyboard</label>
         <input class="form-control" type="text" name="keyboard" value="{{$product ->keyboard}}">
     </div>
-            <!-- battery -->
-            <div class="form-group col-md-3">
+    <!-- battery -->
+    <div class="form-group col-md-3">
         <label class="control-label">battery</label>
         <input class="form-control" type="text" name="battery" value="{{$product ->battery}}">
     </div>
-            <!-- os -->
-            <div class="form-group col-md-3">
+    <!-- os -->
+    <div class="form-group col-md-3">
         <label class="control-label">os</label>
         <input class="form-control" type="text" name="os" value="{{$product ->os}}">
     </div>
-            <!-- warranty -->
-            <div class="form-group col-md-3">
+    <!-- warranty -->
+    <div class="form-group col-md-3">
         <label class="control-label">warranty</label>
         <input class="form-control" type="text" name="warranty" value="{{$product ->warranty}}">
     </div>
-            <!-- color -->
-            <div class="form-group col-md-3">
+    <!-- color -->
+    <div class="form-group col-md-3">
         <label class="control-label">color</label>
         <input class="form-control" type="text" name="color" value="{{$product ->color}}">
     </div>
-            <!-- material -->
-            <div class="form-group col-md-3">
+    <!-- material -->
+    <div class="form-group col-md-3">
         <label class="control-label">material</label>
         <input class="form-control" type="text" name="material" value="{{$product ->material}}">
     </div>
@@ -211,14 +211,22 @@
 
     <div class="form-group col-md-12">
         <label class="control-label">Ảnh sản phẩm</label>
+        <div id="myfileupload">
+            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+        </div>
         <div id="thumbbox">
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
             <a class="removeimg" href="javascript:"></a>
         </div>
+        <div id="boxchoice">
+            <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+            <p style="clear:both"></p>
+        </div>
+
         <div id="myfileupload">
             @foreach($product_images as $image)
-                <image src="{{$image->image_url}}" weight="400" height="400">
-            @endforeach
+            <image src="{{$image->image_url}}" weight="400" height="400">
+                @endforeach
         </div>
     </div>
 
@@ -231,7 +239,7 @@
     </div>
 
     <div class="form-group col-md-12">
-        <button class="btn btn-save" type="submit" >Lưu lại</button>
+        <button class="btn btn-save" type="submit">Lưu lại</button>
         <a class="btn btn-cancel" href="{{route('admin.product')}}">Hủy bỏ</a>
     </div>
 </form>

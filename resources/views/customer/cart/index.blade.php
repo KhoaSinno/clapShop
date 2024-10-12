@@ -103,12 +103,12 @@
             </div>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
-                    <h5>Cart Total</h5>
+                    <h5>Tổng giỏ hàng</h5>
                     <ul>
-                        <li>Subtotal <span>$454.98</span></li>
+                        <li>Tổng giá: <span>$454.98</span></li>
                         <li>Total <span>$454.98</span></li>
                     </ul>
-                    <a href="{{route('customer.checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="{{route('customer.checkout')}}" class="primary-btn">Tiến hành thanh toán</a>
                 </div>
             </div>
         </div>
