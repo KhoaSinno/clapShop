@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         // Lấy tất cả sản phẩm theo categoryID và phân trang
         $products = Product::where('categoryID', $category->id)->paginate(3);
-        $productCount = Product::all()->count();
+        $productCount = Product::where('categoryID', $category->id)->count();
 
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [

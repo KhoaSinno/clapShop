@@ -1184,12 +1184,18 @@ ol {
 }
 
 .sidebar__item__color.sidebar__item__color--white label:after {
-    border: 2px solid #333333;
+    border: 2px solid #f2eaea;
     background: transparent;
 }
 
+.sidebar__item__color.sidebar__item__color--silver label:after {
+    border: 2px solid #ffffff;
+    background: #D3D3D3;
+}
+
 .sidebar__item__color.sidebar__item__color--gray label:after {
-    background: #E9A625;
+    background: #938f8f;
+    border: 2px solid #ffffff;
 }
 
 .sidebar__item__color.sidebar__item__color--red label:after {
@@ -3599,5 +3605,5 @@ ol {
 }
 
 .price_active:hover {
-   background: #000;
+    background: #000;
 }

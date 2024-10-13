@@ -119,10 +119,10 @@
                     </div> -->
                     <div class="sidebar__item sidebar__item__color--option">
                         <h4>Màu sắc</h4>
-                        <div class="sidebar__item__color sidebar__item__color--white">
-                            <label for="white">
+                        <div class="sidebar__item__color sidebar__item__color--silver">
+                            <label for="silver">
                                 Silver
-                                <input type="radio" id="white">
+                                <input type="radio" id="silver">
                             </label>
                         </div>
                         <div class="sidebar__item__color sidebar__item__color--gray">

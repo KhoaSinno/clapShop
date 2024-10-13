@@ -128,26 +128,21 @@
                             <label class="control-label">Họ tên khách hàng</label>
                             <input class="form-control" type="text" placeholder="Tìm kiếm khách hàng">
                         </div>
-                        <div class="form-group  col-md-2">
-                            <label style="text-align: center;" class="control-label">Tạo mới</label>
+                        <div class="form-group  col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
+                            <!-- <label style="text-align: center;" class="control-label">Tạo mới</label> -->
                             <button class="btn btn-primary btn-them" data-toggle="modal" data-target="#exampleModalCenter"><i
                                     class="fas fa-user-plus"></i>
                             </button>
                         </div>
                         <div class="form-group  col-md-12">
-                            <label class="control-label">Nhân viên bán hàng</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option>--- Chọn nhân viên bán hàng ---</option>
-                                <option>Sinoo</option>
-                                <option>Nhật Kim Anh</option>
-                                <option>Đào Thanh Tuấn</option>
-                                <option>Phạm Phong Phú</option>
-                            </select>
+                            <label class="control-label">Địa chỉ đơn hàng</label>
+                            <textarea class="form-control" rows="4" placeholder="Địa chỉ đơn hàng"></textarea>
                         </div>
                         <div class="form-group  col-md-12">
                             <label class="control-label">Ghi chú đơn hàng</label>
                             <textarea class="form-control" rows="4" placeholder="Ghi chú thêm đơn hàng"></textarea>
                         </div>
+
 
                     </div>
                     <div class="row">
@@ -155,29 +150,29 @@
                         <div class="form-group  col-md-12">
                             <label class="control-label">Hình thức thanh toán</label>
                             <select class="form-control" id="exampleSelect2" required>
-                                <option>Thanh toán chuyển khoản</option>
                                 <option>Trả tiền mặt tại quầy</option>
+                                <option>Thanh toán chuyển khoản</option>
                             </select>
                         </div>
-                        <div class="form-group  col-md-6">
+                        <!-- <div class="form-group  col-md-6">
                             <label class="control-label">Tạm tính tiền hàng: </label>
                             <p class="control-all-money-tamtinh">= 129.397.213 VNĐ</p>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Giảm giá (F7): </label>
                             <input class="form-control" type="number" value="0">
-                        </div>
+                        </div> -->
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tổng cộng thanh toán: </label>
-                            <p class="control-all-money-total">= 129.397.213 VNĐ</p>
+                            <p class="control-all-money">= 290.000 VNĐ</p>
                         </div>
                         <div class="form-group  col-md-6">
-                            <label class="control-label">Khách hàng đưa tiền (F8): </label>
-                            <input class="form-control" type="number" value="290000">
+                            <label class="control-label">Khách hàng đưa tiền: </label>
+                            <input class="form-control" type="number" value="300000">
                         </div>
-                        <div class="form-group  col-md-12">
-                            <label class="control-label">Khách hàng còn nợ: </label>
-                            <p class="control-all-money"> - 129.397.213 VNĐ</p>
+                        <div class="form-group  col-md-6">
+                            <label class="control-label">Tiền thừa: </label>
+                            <p class="control-all-money-total"> 10.000 VNĐ</p>
                         </div>
                         <div class="tile-footer col-md-12">
                             <button class="btn btn-primary luu-san-pham" type="button"> Lưu đơn hàng (F9)</button>
@@ -191,60 +186,6 @@
         </div>
         </div>
     </main>
-
-    <!--MODAL Update info staff-->
-    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-        data-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group  col-md-12">
-                            <span class="thong-tin-thanh-toan">
-                                <h5>Chỉnh sửa thông tin nhân viên cơ bản</h5>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">ID nhân viên</label>
-                            <input class="form-control" type="text" required value="#CD2187" disabled>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Họ và tên</label>
-                            <input class="form-control" type="text" required value="Sinoo">
-                        </div>
-                        <div class="form-group  col-md-6">
-                            <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="number" required value="092672342">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" type="text" required value="ctuet@gmail.com">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" type="date" value="2004-03-15">
-                        </div>
-                        <div class="form-group  col-md-6">
-                            <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                            <select class="form-control" id="exampleSelect1">
-                                <option selected>Bán hàng</option>
-                            </select>
-                        </div>
-                    </div>
-                    <BR>
-                    <BR>
-                    <button class="btn btn-save" type="button">Lưu lại</button>
-                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                    <BR>
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
 
     @include('admin.footer')
 
