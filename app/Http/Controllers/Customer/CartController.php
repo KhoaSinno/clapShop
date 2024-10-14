@@ -16,6 +16,7 @@ class CartController extends Controller
         foreach ($cart as $item) {
             $cartTotal += $item['price'] * $item['quantity'];
         }
+        $cartTotal = format_currencyVNĐ($cartTotal);
         return view('customer.cart.index', [
             'cart' => $cart,
             'cartTotal' => $cartTotal

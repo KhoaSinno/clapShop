@@ -46,17 +46,17 @@
                                     <h5>{{ $details['name'] }}</h5>
                                 </td>
                                 <td class="shoping__cart__price">
-                                    {{ $details['price'] }}$
+                                    {{ format_currencyVNĐ($details['price']) }}
                                 </td>
                                 <td class="product__details__quantity h-20">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                        <input type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
+                                            <input type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
                                         </div>
                                     </div>
                                 </td>
                                 <td class="shoping__cart__total" id="product-total-{{ $id }}">
-                                    {{ $details['price'] * $details['quantity'] }}$
+                                    {{ format_currencyVNĐ($details['price'] * $details['quantity']) }}
                                 </td>
                                 <td>
                                     <form action="{{ route('customer.cart.remove', ['id' => $id]) }}" method="POST">
@@ -81,9 +81,9 @@
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
                     <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right">
-                        <!-- <span class="icon_loading"></span> -->
-                        Upadate Cart</a>
+                    <!-- <a href="#" class="primary-btn cart-btn cart-btn-right">
+                        <span class="icon_loading"></span>
+                        Upadate Cart</a> -->
                 </div>
             </div>
             <!-- <div class="col-lg-6">
@@ -103,7 +103,7 @@
                     <ul>
                         <!-- <li>Tổng giá (đã tính VAT): <span>$454.98</span></li> -->
                         <!-- <li>Total <span>$454.98</span></li> -->
-                        <li>Tổng giá (đã tính VAT): <span id="cart-total">{{ $cartTotal}}$</span></li>
+                        <li>Tổng giá (đã tính VAT): <span id="cart-total">{{ $cartTotal}}</span></li>
                     </ul>
                     <a href="{{route('customer.checkout')}}" class="primary-btn">Tiến hành thanh toán</a>
                 </div>
@@ -117,9 +117,7 @@
 @endsection
 
 
-@section(
-'footer'
-)
+@section('footer')
 <script>
     $(document).ready(function() {
         // Khi số lượng thay đổi
@@ -146,4 +144,36 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Xử lý click vào nút trừ
+        document.querySelectorAll('.dec').forEach(function(button) {
+            button.addEventListener('click', function() {
+                // Lấy input tương ứng
+                const input = this.nextElementSibling; // input ở ngay sau span .dec
+                let currentValue = parseInt(input.value);
+
+                // Nếu giá trị lớn hơn 1 thì giảm
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                    input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
+                }
+            });
+        });
+
+        // Xử lý click vào nút cộng
+        document.querySelectorAll('.inc').forEach(function(button) {
+            button.addEventListener('click', function() {
+                // Lấy input tương ứng
+                const input = this.previousElementSibling; // input ở ngay trước span .inc
+                let currentValue = parseInt(input.value);
+
+                // Tăng giá trị
+                input.value = currentValue + 1;
+                input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
+            });
+        });
+    });
+</script>
+
 @endsection
