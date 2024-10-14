@@ -108,7 +108,10 @@ Route::prefix('customer')->group(function () {
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('customer.cart.add');
     Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('customer.cart.remove');
 
-    Route::middleware(['auth', 'role:customer'])->group(function () {
+    // Customer cart
+    Route::post('/cart/update', [CartController::class, 'update'])->name('customer.cart.update');
+
+    Route::middleware(['auth', 'ensureCustomer'])->group(function () {
 
         // Customer checkout
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');

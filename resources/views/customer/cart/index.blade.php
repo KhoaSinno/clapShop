@@ -39,7 +39,7 @@
                         </thead>
                         <tbody>
                             @if(session('cart'))
-                            @foreach(session('cart') as $id => $details)
+                            @foreach($cart as $id => $details)
                             <tr>
                                 <td class="shoping__cart__item">
                                     <img src="{{ $details['image'] ?? null }}" alt="">
@@ -48,25 +48,20 @@
                                 <td class="shoping__cart__price">
                                     {{ $details['price'] }}$
                                 </td>
-                                <!-- <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <input type="text" value="{{ $details['quantity'] }}">
-                                    </div>
-                                </td> -->
-                                <td class="product__details__quantity">
+                                <td class="product__details__quantity h-20">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input type="text" value="{{ $details['quantity'] }}">
+                                        <input type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
                                         </div>
                                     </div>
                                 </td>
-                                <td class="shoping__cart__total">
+                                <td class="shoping__cart__total" id="product-total-{{ $id }}">
                                     {{ $details['price'] * $details['quantity'] }}$
                                 </td>
                                 <td>
                                     <form action="{{ route('customer.cart.remove', ['id' => $id]) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">Xóa</button> <!-- Chỉ sử dụng POST -->
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
                                     </form>
                                 </td>
                             </tr>
@@ -86,11 +81,12 @@
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
                     <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                    <a href="#" class="primary-btn cart-btn cart-btn-right">
+                        <!-- <span class="icon_loading"></span> -->
                         Upadate Cart</a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
                 <div class="shoping__continue">
                     <div class="shoping__discount">
                         <h5>Discount Codes</h5>
@@ -100,13 +96,14 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Tổng giỏ hàng</h5>
                     <ul>
-                        <li>Tổng giá: <span>$454.98</span></li>
-                        <li>Total <span>$454.98</span></li>
+                        <!-- <li>Tổng giá (đã tính VAT): <span>$454.98</span></li> -->
+                        <!-- <li>Total <span>$454.98</span></li> -->
+                        <li>Tổng giá (đã tính VAT): <span id="cart-total">{{ $cartTotal}}$</span></li>
                     </ul>
                     <a href="{{route('customer.checkout')}}" class="primary-btn">Tiến hành thanh toán</a>
                 </div>
@@ -117,4 +114,36 @@
 <!-- Shoping Cart Section End -->
 
 
+@endsection
+
+
+@section(
+'footer'
+)
+<script>
+    $(document).ready(function() {
+        // Khi số lượng thay đổi
+        $('.quantity-input').on('change', function() {
+            var id = $(this).data('id');
+            var quantity = $(this).val();
+
+            $.ajax({
+                url: `{{ route('customer.cart.update') }}`, // Route để cập nhật giỏ hàng
+                method: "post",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id,
+                    quantity: quantity
+                },
+                success: function(response) {
+                    // Cập nhật lại tổng giá sản phẩm
+                    $('#product-total-' + id).text(response.productTotal + "$");
+
+                    // Cập nhật lại tổng giá của toàn bộ giỏ hàng
+                    $('#cart-total').text(response.cartTotal + "$");
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
+                <h6><span class="icon_tag_alt"></span> Mày có phiếu giảm giá không? <a href="#">Bấm vào đây</a> to enter your code
                 </h6>
             </div>
         </div>
