@@ -13,6 +13,9 @@ class CartController extends Controller
     {
         $cart = session()->get('cart');
         $cartTotal = 0;
+        if(!$cart){
+            $cart = [];
+        }
         foreach ($cart as $item) {
             $cartTotal += $item['price'] * $item['quantity'];
         }

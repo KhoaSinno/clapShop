@@ -61,7 +61,7 @@ class LoginController extends Controller
 
     // Check role
 
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $this->validate($request, rules: [
             'username' => 'required|string',
