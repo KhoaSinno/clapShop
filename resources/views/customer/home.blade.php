@@ -55,7 +55,7 @@
             @foreach($latestProducts as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mix {{ strtolower($product->category->name) }}">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->mainImage() }}">
+                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->thumnail() }}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -75,7 +75,7 @@
 <!-- Featured Section End -->
 
 <!-- Latest Product Section Begin -->
-<section class="latest-product spad">
+<!-- <section class="latest-product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6">
@@ -100,10 +100,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Repeat for Top Rated and Review Products if needed -->
         </div>
     </div>
-</section>
+</section> -->
 <!-- Latest Product Section End -->
 
 <!-- Blog Section Begin -->
