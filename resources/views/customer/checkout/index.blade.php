@@ -34,87 +34,79 @@
             <h4>Chi tiết thanh toán</h4>
             <form action="#">
                 <div class="row">
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-7 col-md-12">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Họ tên<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="fullname">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Số điên thoại<span>*</span></p>
-                                    <input type="number">
+                                    <input type="number" name="phone">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
-                            <input type="text" placeholder="Tên đường" class="checkout__input__add">
-                            <input type="text" placeholder="Phường/Xã, Quận/Huyện, Tỉnh/Thành phố">
+                            <!-- <input type="text" placeholder="Tên đường" class="checkout__input__add"> -->
+                            <input type="text" name="address" placeholder="Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="checkout__input">
                                 <p>Email<span>*</span></p>
-                                <input type="email">
+                                <input type="email" name="email">
                             </div>
                         </div>
-                        <div class="checkout__input">
+                        <!-- <div class="checkout__input">
                             <p>Ghi chú</p>
                             <input type="text"
-                                placeholder="Ghi chú về đơn hàng hoặc vận chuyển...">
-                        </div>
+                                placeholder="Ghi chú về đơn hàng hoặc vận chuyển..." name="note">
+                        </div> -->
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="checkout__order">
-                            <h4>Đơn hàng của bạn:</h4>
-                            <div class="checkout__order__products">Sản phẩm <span>Tổng tiền</span></div>
-                            <ul>
-                                @if(session('cart'))
-                                @foreach(session('cart') as $item)
-                                <li class="d-flex justify-content-between align-items-start">
-                                    <span>
-                                        {{ $item['name'] }}
-                                    </span>
-                                    <span class="text-danger text-left">
-                                        (Số lượng: {{ $item['quantity'] }})
-                                    </span>
-                                    <span>{{ format_currencyVNĐ($item['price'] * $item['quantity']) }}</span>
-                                </li>
-                                @endforeach
-                                @else
-                                <li>Không có sản phẩm nào trong giỏ hàng.</li>
-                                @endif
-                            </ul>
+                    <div class="col-lg-5 col-md-12">
+                        <form action="{{ route('customer.checkout.payment') }}" method="POST">
+                            @csrf
+                            <div class="checkout__order">
+                                <h4>Đơn hàng của bạn:</h4>
+                                <ul>
+                                    @if(session('cart'))
+                                    @foreach(session('cart') as $item)
+                                    <li class="d-flex justify-content-between align-items-start">
+                                        <span>{{ $item['name'] }}</span>
+                                        <span class="text-danger">(x{{ $item['quantity'] }})</span>
+                                        <span>{{ format_currencyVNĐ($item['price'] * $item['quantity']) }}</span>
+                                    </li>
+                                    @endforeach
+                                    @else
+                                    <li>Không có sản phẩm nào trong giỏ hàng.</li>
+                                    @endif
+                                </ul>
 
-                            <!-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> -->
-                            <div class="checkout__order__total">Tổng tiền thanh toán <span>{{$cartTotal}}</span></div>
-                            <!-- <div class="checkout__input__checkbox">
-                                <label for="acc-or">
-                                    Create an account?
-                                    <input type="checkbox" id="acc-or">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <div class="checkout__order__total">
+                                    Tổng tiền: <span>{{ $cartTotal }}</span>
+                                </div>
+
+                                <div class="form-group d-flex flex-col">
+                                    <label for="paymentMethod">Phương thức thanh toán <span>*</span></label>
+                                    <select class="form-control" name="paymentMethod" required>
+                                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                        <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="note">Ghi chú</label>
+                                    <textarea class="form-control" name="note" placeholder="Ghi chú về đơn hàng hoặc vận chuyển..." ></textarea>
+                                </div>
+
+                                <button type="submit" class="site-btn">Đặt hàng</button>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
-                            <div class="checkout__input__checkbox">
-                                <label for="payment">
-                                    Check Payment
-                                    <input type="checkbox" id="payment">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="paypal">
-                                    Paypal
-                                    <input type="checkbox" id="paypal">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div> -->
-                            <button type="submit" class="site-btn">Đặt hàng</button>
-                        </div>
+                        </form>
+
+
                     </div>
                 </div>
             </form>
