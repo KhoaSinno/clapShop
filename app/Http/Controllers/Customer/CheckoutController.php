@@ -27,7 +27,6 @@ class CheckoutController extends Controller
     }
     public function checkout(Request $request)
     {
-        dd('Request đã vào controller');
         DB::beginTransaction(); // Bắt đầu transaction để đảm bảo tính toàn vẹn dữ liệu
         try {
             $cart = session()->get('cart', []);
@@ -77,7 +76,10 @@ class CheckoutController extends Controller
 
             // Xóa giỏ hàng sau khi hoàn thành đặt hàng
             session()->forget('cart');
-
+            // Đặt lại tổng số lượng và tổng tiền
+            session()->forget('totalQuantity');
+            session()->forget('total');
+            
             DB::commit(); // Commit transaction
             return redirect()->route('customer.order')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
         } catch (\Exception $e) {

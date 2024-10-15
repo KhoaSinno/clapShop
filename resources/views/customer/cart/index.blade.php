@@ -138,10 +138,10 @@
                 },
                 success: function(response) {
                     // Cập nhật lại tổng giá sản phẩm
-                    $('#product-total-' + id).text(response.productTotal + "$");
+                    $('#product-total-' + id).text(response.productTotal);
 
                     // Cập nhật lại tổng giá của toàn bộ giỏ hàng
-                    $('#cart-total').text(response.cartTotal + "$");
+                    $('#cart-total').text(response.cartTotal);
                 }
             });
         });
@@ -151,14 +151,14 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Xử lý click vào nút trừ
         document.querySelectorAll('.dec').forEach(function(button) {
-            button.addEventListener('click', function() {
-                // Lấy input tương ứng
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định
                 const input = this.nextElementSibling; // input ở ngay sau span .dec
                 let currentValue = parseInt(input.value);
 
                 // Nếu giá trị lớn hơn 1 thì giảm
                 if (currentValue > 1) {
-                    input.value = currentValue - 1;
+                    input.value = --currentValue; // Giảm giá trị trước khi gán
                     input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
                 }
             });
@@ -166,13 +166,12 @@
 
         // Xử lý click vào nút cộng
         document.querySelectorAll('.inc').forEach(function(button) {
-            button.addEventListener('click', function() {
-                // Lấy input tương ứng
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định
                 const input = this.previousElementSibling; // input ở ngay trước span .inc
                 let currentValue = parseInt(input.value);
 
-                // Tăng giá trị
-                input.value = currentValue + 1;
+                input.value = ++currentValue; // Tăng giá trị trước khi gán
                 input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
             });
         });

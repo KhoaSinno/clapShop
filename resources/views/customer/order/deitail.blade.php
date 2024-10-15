@@ -31,25 +31,33 @@
                         <thead>
                             <tr>
                                 <th class="shoping__product">Đơn hàng</th>
-                                <th>Số lượng</th>
-                                <th>Tổng giá</th>
+                                <th>Tổng</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="shoping__cart__item" style="width: 200px;">
+                                <td class="shoping__cart__item">
                                     <!-- <img src="img/cart/cart-1.jpg" alt=""> -->
                                     <h5>Vegetable’s Package</h5>
                                 </td>
-                                <td class="shoping__cart__quantity" style="width: 100px;">
-
+                                <td class="shoping__cart__price">
+                                    $55.00
                                 </td>
-                                <td class="shoping__cart__total" style="width: 240px;">
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="1">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
                                     $110.00
                                 </td>
-                                <td class="shoping__cart__item__close d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-info">Chi tiết</button>
+                                <td class="shoping__cart__item__close">
+                                    <button class="btn btn-link ">Chi tiết</button>
                                 </td>
                             </tr>
 
