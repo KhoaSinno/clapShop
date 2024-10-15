@@ -51,9 +51,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
-    // Route::get('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
-    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
 
     // nguyen
     Route::post('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
