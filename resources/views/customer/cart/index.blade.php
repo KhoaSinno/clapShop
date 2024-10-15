@@ -51,7 +51,7 @@
                                 <td class="shoping__cart__price" style="width: 135px;">
                                     {{ format_currencyVNĐ($details['price']) }}
                                 </td>
-                                <td class="product__details__quantity h-20">
+                                <td class=" h-20">
                                     <div class="quantity">
                                         <div class="pro-qty">
                                             <input type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
