@@ -23,7 +23,7 @@
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
             </ul>
-            <div class="header__cart__price">Tổng tiền: <span>{{ session('total', 0) }}</span></div>
+            <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -147,7 +147,7 @@
                         <ul>
                             <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">Tổng tiền: <span>{{ session('total', 0) }}</span></div>
+                        <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span></div>
                     </div>
                 </div>
             </div>
@@ -215,7 +215,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="/e_customerSN/img/logo.png" alt=""></a>
+                            <a href="{{route('customer.home')}}"><img src="/e_customerSN/img/logo.png" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

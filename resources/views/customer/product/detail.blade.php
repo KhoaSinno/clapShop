@@ -57,10 +57,7 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 reviews)</span>
                     </div> -->
-                    <div class="product__details__price">{{$product->price}}</div>
-                    <!-- <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                        vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                        quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p> -->
+                    <div class="product__details__price">{{format_currencyVNĐ($product->price) }}</div>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
@@ -82,10 +79,10 @@
 
                         <li><b>Chia sẻ</b>
                             <div class="share">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a  href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a  href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a  href="https://pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
                             </div>
                         </li>
                     </ul>

@@ -1985,6 +1985,12 @@ ol {
     color: #6f6f6f;
     padding: 14px 30px 12px;
     background: #f5f5f5;
+    transition: all .2s;
+}
+.primary-btn.cart-btn:hover {
+    color: #fff;
+    padding: 14px 30px 12px;
+    background: #7fad39;
 }
 
 .primary-btn.cart-btn span {
