@@ -208,9 +208,17 @@
         <input class="form-control" type="text" name="material" value="{{$product ->material}}">
     </div>
 
-    <div class="custom-control custom-checkbox form-group col-md-3">
-        <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">Còn hàng</label>
+    <div class="form-group col-md-3">
+                @if ($product ->stock > 0)
+                <label class="control-label text-success" for="customCheck1">
+                    Còn hàng
+                </label>
+            @else
+            <label class="control-label text-danger" for="customCheck1">
+                    Hết hàng
+                </label>
+            @endif
+
     </div>
 
     <div class="form-group col-md-12">
