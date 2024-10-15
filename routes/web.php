@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [LoginController::class, 'index'])->name('register');
     Route::post('/register', [LoginController::class, 'store'])->name('register.store');
     // Logout
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 // Routes cho Admin
@@ -111,9 +111,9 @@ Route::prefix('customer')->group(function () {
 });
 
 // Routes cho hành động cần đăng nhập
-// Route::middleware('auth')->group(function () {
-    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
     // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
     // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
-// });
+});
