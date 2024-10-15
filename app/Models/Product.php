@@ -42,4 +42,9 @@ class Product extends Model
     {
         return $this->hasOne(Product_Image::class, 'productID');
     }
+    public function thumnail()
+    {
+        $mainImage = $this->hasOne(Product_Image::class, 'productID')->first();
+        return $mainImage ? $mainImage->url : '/e_customerSN/img/CLAPSHOP2.png';
+    }
 }

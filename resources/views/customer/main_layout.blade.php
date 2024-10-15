@@ -20,7 +20,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <!-- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li> -->
                 <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
             </ul>
             <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span></div>
@@ -28,11 +28,10 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
-                <div>English</div>
+                <div>Vietnamese</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
+                    <li><a href="#">Vietnamese</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
@@ -41,9 +40,9 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{ route('customer.home') }}">Home</a></li>
-                <li><a href="{{ route('customer.products') }}">Shop</a></li>
-                <li><a href="{{ route('customer.products') }}">Category</a>
+                <li class="active"><a href="{{ route('customer.home') }}">Trang chủ</a></li>
+                <li><a href="{{ route('customer.products') }}">Sản phẩm</a></li>
+                <li><a href="{{ route('customer.products') }}">Danh mục</a>
                     <ul class="header__menu__dropdown">
                         <!-- SN: Load Categories -->
                         <li><a href="{{ route('login.store') }}">Lenovo</a></li>
@@ -145,7 +144,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
+                            <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span class="span__quantity_cart">{{ session('totalQuantity', 0)}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span></div>
                     </div>

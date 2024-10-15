@@ -67,7 +67,7 @@
                             </label>
                         </div>
                     </div> -->
-
+<!-- 
                     <div class="sidebar__item">
                         <h4>Giá</h4>
                         <form method="GET" action="{{ route('products.filter') }}">
@@ -96,8 +96,30 @@
                                 </label>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
 
+                    
+                    <div class="sidebar__item">
+                        <h4>Giá</h4>
+                        <div  class="card p-3">
+                            <input class="form-check-input" type="radio" name="price_range" value="lower_15" onclick=showSelectedPrice()>
+                                <label class="form-check-label" for="price_range">
+                                    Nhỏ hơn 15 Triệu
+                                </label>
+                        </div>
+                        <div  class="card p-3">
+                            <input class="form-check-input" type="radio" name="price_range" value="greater_15" onclick=showSelectedPrice()>
+                                <label class="form-check-label" for="price_range">
+                                    Lớn hơn 15 Triệu
+                                </label> <br>
+                        </div>
+                        <div  class="card p-3">
+                            <input class="form-check-input" type="radio" name="price_range" value="casual" onclick=showSelectedPrice()>
+                                <label class="form-check-label" for="price_range">
+                                    Bất kì giá nào
+                                </label> <br>
+                        </div>
+                    </div>
 
 
                     <!-- <div class="sidebar__item">
@@ -117,7 +139,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="sidebar__item sidebar__item__color--option">
+                    <!-- <div class="sidebar__item sidebar__item__color--option">
                         <h4>Màu sắc</h4>
                         <div class="sidebar__item__color sidebar__item__color--silver">
                             <label for="silver">
@@ -131,7 +153,7 @@
                                 <input type="radio" id="gray">
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="sidebar__item">
                         <div class="latest-product__text">
                             <h4>Latest Products</h4>
@@ -338,15 +360,17 @@
                         </div>
                     </div>
                 </div>
+                <!-- <p id="myParagraph">something</p> -->
                 <div class="row">
                     @foreach ($products as $product)
-
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 18790000)
+                            id="lower_20"
+                         @else 
+                            id="greater_20"
+                         @endif>
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
                                 <ul class="product__item__pic__hover">
-
-
                                     <li>
                                         <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
                                             <i class="fa fa-shopping-cart"></i>
@@ -409,6 +433,54 @@
 </script> -->
 
 <script>
+    function showSelectedPrice() {
+    const radios = document.getElementsByName('price_range');
+    let products;
+    for (let i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+        // document.getElementById('result').textContent = radios[i].value;
+            // console.log(radios[i].value);
+            if(radios[i].value == "greater_15"){
+                console.log(10);
+                products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'inline';
+                    });
+                    products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'none';
+                    });
+                break;
+            }
+            else if(radios[i].value == "lower_15"){
+                console.log(20);
+                products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'block';
+                    });
+                products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'none';
+                    });
+                break;
+            }
+            else{
+                products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'block';
+                    });
+                products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'inline';
+                    });
+            }
+            break;
+
+        }
+
+    }
+    }
+
     $(document).on('click', '.add-to-cart', function(e) {
         e.preventDefault();
         var productId = $(this).data('id');
@@ -430,6 +502,8 @@
             }
         });
     });
+
+
 </script>
 
 @endsection

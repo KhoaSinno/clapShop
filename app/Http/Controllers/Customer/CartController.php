@@ -13,6 +13,9 @@ class CartController extends Controller
     {
         $cart = session()->get('cart');
         $cartTotal = 0;
+        if (!$cart) {
+            $cart = [];
+        }
         foreach ($cart as $item) {
             $cartTotal += $item['price'] * $item['quantity'];
         }
@@ -146,6 +149,8 @@ class CartController extends Controller
             foreach ($cart as $item) {
                 $cartTotal += $item['price'] * $item['quantity'];
             }
+            $cartTotal = format_currencyVNĐ($cartTotal);
+            $productTotal = format_currencyVNĐ($productTotal);
 
             // Trả về kết quả
             return response()->json([
