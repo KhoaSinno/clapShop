@@ -103,6 +103,8 @@ Route::prefix('customer')->group(function () {
 
         // Customer checkout
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
+        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
+
 
         // Customer order
         Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
