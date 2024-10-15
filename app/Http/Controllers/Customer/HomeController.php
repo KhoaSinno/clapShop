@@ -22,11 +22,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        $products = Product::latest()->take(8)->get();
-        return view('customer.home', [
-            'title' => 'Trang chủ',
-            'products' => $products,
-        ]);
+        $categories = Category::all();
+        $latestProducts = Product::orderBy('created_at', 'desc')->take(8)->get();
+        // $blogPosts = BlogPost::orderBy('created_at', 'desc')->take(3)->get();
+        $title = 'Trang chủ';
+    
+        return view('customer.home', compact('categories',  'latestProducts', 'title'));
     }
 
 }

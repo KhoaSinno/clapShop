@@ -106,7 +106,7 @@ php artisan db:seed --class=*(name of seed)Seeder
 ### `Load file auto in lavarel`
 
 ```bash
-composer dump-autoload
+  composer dump-autoload
 
 ## Kế sách cuối cùng - `Đạt`
 
