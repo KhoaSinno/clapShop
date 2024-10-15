@@ -40,6 +40,8 @@ class Product extends Model
     // Nếu chỉ muốn lấy một ảnh (ví dụ ảnh đại diện)
     public function mainImage()
     {
-        return $this->hasOne(Product_Image::class, 'productID');
+        $mainImage = $this->hasOne(Product_Image::class, 'productID')->first();
+        return $mainImage ? $mainImage->url : '/e_customerSN/img/CLAPSHOP2.png';
     }
+    
 }

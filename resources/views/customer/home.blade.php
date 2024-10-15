@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @section('background_home')
-<div class="hero__item set-bg" data-setbg="/e_customerSN/img/hero/banner.jpg">
+<div class="hero__item set-bg" data-setbg="/e_customerSN/img/hero/banner2.png">
     <div class="hero__text">
         <span>LAPTOP SALE</span>
         <h2>High Performance <br />Laptops</h2>
@@ -22,7 +22,7 @@
             <div class="categories__slider owl-carousel">
                 @foreach($categories as $category)
                 <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ $category->image }}">
+                    <div class="categories__item set-bg" data-setbg="{{ $category->mainImage() }}">
                         <h5><a href="#">{{ $category->name }}</a></h5>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
             @foreach($latestProducts as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mix {{ strtolower($product->category->name) }}">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->image }}">
+                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->mainImage() }}">
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
