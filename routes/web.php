@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PosController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\Users\LoginController;
+use App\Http\Controllers\Admin\Users\RegisterController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\CategoryController as CustomerCategoryController;
 use App\Http\Controllers\Customer\OrderController as CustomerOrderController;
@@ -21,10 +22,11 @@ Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-    Route::get('/register', [LoginController::class, 'index'])->name('register');
-    Route::post('/register', [LoginController::class, 'store'])->name('register.store');
+
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     // Logout
-    // Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    // Route::post('/logout', [RisigterController::class, 'logout'])->name('logout');
 });
 
 // Routes cho Admin
