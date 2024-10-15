@@ -211,9 +211,8 @@ class ProductController extends Controller
 
         if ($product) {
             // Xóa tất cả hình ảnh liên quan đến sản phẩm
-            Product_Image::where('productID', $id)->delete(); // Xóa hình ảnh theo ID sản phẩm
-
-            $product->delete();
+            $product->active = 0;
+            $product->save();
             return redirect()->route('admin.product')->with('success', 'Sản phẩm đã được xóa thành công.');
         } else {
             return redirect()->route('admin.product')->with('error', 'Không thể tìm thấy sản phẩm để xóa.');
