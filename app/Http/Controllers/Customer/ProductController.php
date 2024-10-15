@@ -16,7 +16,7 @@ class ProductController extends Controller
         $sort = $request->input('sort', 'default');
 
         // Khởi tạo truy vấn sản phẩm
-        $productsQuery = Product::query()->with(['category', 'mainImages']);
+        $productsQuery = Product::query()->with(['category', 'mainImage']);
 
         // Thêm điều kiện sắp xếp dựa trên giá trị của $sort
         switch ($sort) {
