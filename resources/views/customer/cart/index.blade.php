@@ -30,6 +30,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>Ảnh</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
@@ -41,11 +42,13 @@
                             @if(session('cart'))
                             @foreach($cart as $id => $details)
                             <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="{{ $details['image'] ?? null }}" alt="">
+                                <td class="shoping__cart__item" style="width: 200px;">
+                                    <img src="{{ $details['image'] ?? asset('storage/images/default.jpg') }}" alt="{{ $details['name'] }}" style="width: 100px; height: auto;">
+                                </td>
+                                <td class="shoping__cart__item" style="width: 300px;">
                                     <h5>{{ $details['name'] }}</h5>
                                 </td>
-                                <td class="shoping__cart__price">
+                                <td class="shoping__cart__price" style="width: 135px;">
                                     {{ format_currencyVNĐ($details['price']) }}
                                 </td>
                                 <td class="product__details__quantity h-20">
@@ -55,7 +58,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="shoping__cart__total" id="product-total-{{ $id }}">
+                                <td class="shoping__cart__total" id="product-total-{{ $id }}" style="width: 135px;">
                                     {{ format_currencyVNĐ($details['price'] * $details['quantity']) }}
                                 </td>
                                 <td>

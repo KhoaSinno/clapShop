@@ -23,49 +23,6 @@ class CartController extends Controller
         ]);
     }
 
-    // public function addToCart($id, Request $request)
-    // {
-    //     // Tìm sản phẩm trong cơ sở dữ liệu
-    //     $product = Product::find($id);
-
-    //     // Kiểm tra xem sản phẩm có tồn tại hay không
-    //     if (!$product) {
-    //         return response()->json(['error' => 'Sản phẩm không tồn tại.'], 404);
-    //     }
-
-    //     // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo một mảng rỗng
-    //     $cart = Session::get('cart', []);
-
-    //     // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-    //     if (isset($cart[$id])) {
-    //         // Nếu có, tăng số lượng sản phẩm
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         // Nếu chưa có, thêm sản phẩm vào giỏ hàng
-    //         $cart[$id] = [
-    //             'name' => $product->name,
-    //             'price' => $product->price,
-    //             'quantity' => 1,
-    //             'image' => $product->image // Nếu có trường hình ảnh
-    //         ];
-    //     }
-
-    //     // Cập nhật giỏ hàng vào session
-    //     Session::put('cart', $cart);
-
-    //     // Tính tổng tiền
-    //     $total = 0;
-    //     foreach ($cart as $item) {
-    //         $total += $item['price'] * $item['quantity'];
-    //     }
-
-    //     // Cập nhật tổng tiền vào session
-    //     session()->put('total', $total);
-
-    //     // Trả về phản hồi thành công
-    //     return response()->json(['success' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
-    // }
-
     public function addToCart(Request $request, $id)
     {
         $product = Product::find($id);
@@ -80,8 +37,7 @@ class CartController extends Controller
                 "name" => $product->name,
                 "price" => $product->price,
                 "quantity" => 1,
-                'image' => $product->image // Nếu có trường hình ảnh
-
+                'image' => $product->mainImage->image_url
 
             ];
         }
