@@ -23,7 +23,7 @@
 @section('content')
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
-    <div class="container">
+    <div class="container"> 
         <div class="row">
             <div class="col-lg-12">
                 <h6><span class="icon_tag_alt"></span> Mày có phiếu giảm giá không? <a href="#">Bấm vào đây</a>
