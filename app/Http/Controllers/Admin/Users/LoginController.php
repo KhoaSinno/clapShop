@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Mail\ForgotPassword;
+// use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client;
 
-class LoginController extends Controller
+
+class LoginController extends Controller 
 {
     public function index()
     {
@@ -14,6 +18,52 @@ class LoginController extends Controller
             'title' => 'Đăng nhập hệ thống',
         ]);
     }
+
+    ///////////////////
+    public function show()
+    {
+        return view('forget', [
+            'title' => 'Quên mật khẩu',
+        ]);
+    }
+    public function forget(Request $request){
+        $client = new Client();
+        $url = "https://sandbox.api.mailtrap.io/api/send/3212526";
+        $payload = [
+            "from" => [
+                "email" => "hello@example.com",
+                "name" => "Mailtrap Test"
+            ],
+            "to" => [
+                [
+                    "email" => "vonguyen040704@gmail.com"
+                ]
+            ],
+            "subject" => "You are awesome!",
+            "text" => "Này là OTP của bạn:",
+            "category" => "Integration Test"
+        ];
+
+        $headers = [
+            "Authorization" => "Bearer ", // Thay thế YOUR_API_KEY bằng token của bạn
+            "Content-Type" => "application/json"
+        ];
+
+        $response = $client->post($url, [
+            'headers' => $headers,
+            'json' => $payload
+        ]);
+
+        // Xử lý phản hồi
+        $responseData = json_decode($response->getBody(), true);
+
+
+        return view('login', [
+            'title' => '$responseData',
+        ]);
+    }
+    /////////////////////////////////
+
     // public function store(Request $request)
     // {
     //     // dd($request->input());
@@ -97,4 +147,5 @@ class LoginController extends Controller
 
         return redirect('/')->with('success', 'Đăng xuất thành công!'); // Chuyển hướng về trang đăng nhập
     }
+
 }

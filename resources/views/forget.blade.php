@@ -20,34 +20,33 @@
                     <span class="login100-form-title">
                         <b>{{$title}}</b>
                     </span>
-                    <form action="{{ route('login.store') }}" method="post">
+                    <form action="{{ route('forget.forget') }}" method="post">
                         @include('admin.alert')
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
+                            <input class="input100" type="text" placeholder="Nhập email bạn đăng ký" name="email"
                                 id="username">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
                         </div>
-                        <div class="wrap-input100 validate-input">
+                        <!-- <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
                                 name="password" id="password-field">
-                            <!-- <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span> -->
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-key'></i>
                             </span>
-                        </div>
-                        <div class="wrap-input100 form-check validate-input d-flex justify-center align-items-center">
+                        </div> -->
+                        <!-- <div class="wrap-input100 form-check validate-input d-flex justify-center align-items-center">
                             <input class="form-check-input mt-2" type="checkbox" name="remember" id="remember"
                                 style="width: 20px;">
                             <label class="form-check-label pl-3" for="remember">
                                 Remember me
                             </label>
-                        </div>
+                        </div> -->
                         <div class="container-login100-form-btn">
-                            <button type="submit" class="btn btn-info w-100">Đăng nhập</button>
+                            <button type="submit" class="btn btn-info w-100">Gửi email</button>
                         </div>
                         <div class="text-right p-t-12">
                             <a class="txt2" href="{{route('forget')}}">
