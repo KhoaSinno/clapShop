@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"> 
 
 <head>
     @include('admin.head')
