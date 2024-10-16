@@ -10,7 +10,8 @@
                     <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
                         <a href="{{ route('customer.home') }}">Home</a>
-                        <span>ClapShop</span>
+                        <a href="{{ route('customer.order') }}">Đơn hàng</a>
+                        <span>Detail #{{$order->id}}</span>
                     </div>
                 </div>
             </div>
@@ -30,36 +31,23 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="shoping__product">Đơn hàng</th>
-                                <th>Tổng</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th></th>
+                                <th>Ảnh</th>
+                                <th>Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($order->details as $detail)
                             <tr>
-                                <td class="shoping__cart__item">
-                                    <!-- <img src="img/cart/cart-1.jpg" alt=""> -->
-                                    <h5>Vegetable’s Package</h5>
+                                <td>
+                                    <img src="{{ $detail->product->mainImage ? asset($detail->product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="" style="width: 80px; ">
                                 </td>
-                                <td class="shoping__cart__price">
-                                    $55.00
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    $110.00
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <button class="btn btn-link ">Chi tiết</button>
-                                </td>
+                                <td>{{ $detail->product->name }}</td> <!-- Nếu có quan hệ với Product -->
+                                <td>{{ $detail->quantity }}</td>
+                                <td>{{ format_currencyVNĐ($detail->price) }}</td>
                             </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
@@ -69,12 +57,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
 
                 </div>
             </div>
 
-    </div>
+        </div>
 </section>
 <!-- Shoping Cart Section End -->
 
