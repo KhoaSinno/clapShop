@@ -10,7 +10,7 @@
                     <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
                         <a href="{{ route('customer.home') }}">Home</a>
-                        <span>ClapShop</span>
+                        <span>Đơn hàng</span>
                     </div>
                 </div>
             </div>
@@ -30,28 +30,27 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="shoping__product">Đơn hàng</th>
-                                <th>Số lượng</th>
-                                <th>Tổng giá</th>
+                                <th class="shoping__product">Mã ĐH</th>
+                                <th>Ngày đặt</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($orders as $order)
                             <tr>
-                                <td class="shoping__cart__item" style="width: 200px;">
-                                    <!-- <img src="img/cart/cart-1.jpg" alt=""> -->
-                                    <h5>Vegetable’s Package</h5>
-                                </td>
-                                <td class="shoping__cart__quantity" style="width: 100px;">
-
-                                </td>
-                                <td class="shoping__cart__total" style="width: 240px;">
-                                    $110.00
-                                </td>
+                                <td>#{{ $order->id }}</td>
+                                <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                <!-- <td>{{ $order->totalQuantity }}</td> -->
+                                <td>{{ format_currencyVNĐ($order->totalPrice) }}</td>
+                                <td>{{ $order->status }}</td>
                                 <td class="shoping__cart__item__close d-flex justify-content-center align-items-center">
-                                    <button class="btn btn-info">Chi tiết</button>
+                                    <a class="btn btn-info" href="{{ route('customer.order.show', $order->id) }}">Chi tiết</a>
                                 </td>
                             </tr>
+                            @endforeach
+
 
                         </tbody>
                     </table>
@@ -61,12 +60,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-
+                    <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
                 </div>
             </div>
 
-    </div>
+        </div>
 </section>
 <!-- Shoping Cart Section End -->
 

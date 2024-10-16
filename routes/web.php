@@ -110,6 +110,7 @@ Route::prefix('customer')->group(function () {
 
         // Customer order
         Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
+        Route::get('/order/{id}', [CustomerOrderController::class, 'show'])->name('customer.order.show');
     });
 });
 

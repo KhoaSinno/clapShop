@@ -42,17 +42,18 @@
             <ul>
                 <li class="active"><a href="{{ route('customer.home') }}">Trang chủ</a></li>
                 <li><a href="{{ route('customer.products') }}">Sản phẩm</a></li>
+                <li><a href="{{ route('customer.order') }}">Đơn hàng</a></li>
                 <li><a href="{{ route('customer.products') }}">Danh mục</a>
-                    <ul class="header__menu__dropdown">
-                        <!-- SN: Load Categories -->
-                        <li><a href="{{ route('login.store') }}">Lenovo</a></li>
-                        <li><a href="{{ route('login.store') }}">Acer</a></li>
-                        <li><a href="{{ route('login.store') }}"></a>Dell</a></li>
-                        <li><a href="{{ route('login.store') }}">HP</a></li>
+                    <ul class="header__menu__dropdown pl-3 ">
+                        @foreach ($categories as $category )
+                        <li>
+                            <a class="font-weight-light" href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                        </li>
+                        @endforeach
                     </ul>
                 </li>
                 <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="{{ route('customer.contact') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -137,6 +138,9 @@
                             <li class="{{ request()->is('customer/products') ? 'active' : '' }}">
                                 <a href="{{ route(name: 'customer.products') }}">Sản phẩm</a>
                             </li>
+                            <li class="{{ request()->is('customer/order') ? 'active' : '' }}">
+                                <a href="{{ route(name: 'customer.order') }}">Đơn hàng</a>
+                            </li>
                             <li class="{{ request()->is('customer/contact') ? 'active' : '' }}"><a href="{{ route(name: 'customer.contact') }}">Liên hệ</a></li>
                         </ul>
                     </nav>
@@ -182,7 +186,7 @@
                         <div class="hero__search__form">
                             <form action="{{ route('customer.product.search') }}" method="GET"> <!-- Route đến hàm xử lý tìm kiếm -->
                                 <input type="text" name="query" placeholder="Bạn muốn tìm gì?" value="{{ request()->input('query') }}">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <button type="submit" class="site-btn">Tìm</button>
                             </form>
 
                         </div>
