@@ -32,6 +32,7 @@ Route::middleware('guest')->group(function () {
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
     Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
@@ -41,6 +42,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
+    Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
 
     // Category Routes
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
