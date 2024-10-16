@@ -32,8 +32,11 @@
         </div>
         <div class="checkout__form">
             <h4>Chi tiết thanh toán</h4>
-            <form action="#">
+            <form action="{{ route('customer.checkout.payment') }}" method="POST">
+                @csrf
                 <div class="row">
+
+
                     <div class="col-lg-7 col-md-12">
                         <div class="row">
                             <div class="col-lg-6">
@@ -67,46 +70,41 @@
                         </div> -->
                     </div>
                     <div class="col-lg-5 col-md-12">
-                        <form action="{{ route('customer.checkout.payment') }}" method="POST">
-                            @csrf
-                            <div class="checkout__order">
-                                <h4>Đơn hàng của bạn:</h4>
-                                <ul>
-                                    @if(session('cart'))
-                                    @foreach(session('cart') as $item)
-                                    <li class="d-flex justify-content-between align-items-start">
-                                        <span>{{ $item['name'] }}</span>
-                                        <span class="text-danger">(x{{ $item['quantity'] }})</span>
-                                        <span>{{ format_currencyVNĐ($item['price'] * $item['quantity']) }}</span>
-                                    </li>
-                                    @endforeach
-                                    @else
-                                    <li>Không có sản phẩm nào trong giỏ hàng.</li>
-                                    @endif
-                                </ul>
+                        <div class="checkout__order">
+                            <h4>Đơn hàng của bạn:</h4>
+                            <ul>
+                                @if(session('cart'))
+                                @foreach(session('cart') as $item)
+                                <li class="d-flex justify-content-between align-items-start">
+                                    <span>{{ $item['name'] }}</span>
+                                    <span class="text-danger">(x{{ $item['quantity'] }})</span>
+                                    <span>{{ format_currencyVNĐ($item['price'] * $item['quantity']) }}</span>
+                                </li>
+                                @endforeach
+                                @else
+                                <li>Không có sản phẩm nào trong giỏ hàng.</li>
+                                @endif
+                            </ul>
 
-                                <div class="checkout__order__total">
-                                    Tổng tiền: <span>{{ $cartTotal }}</span>
-                                </div>
-
-                                <div class="form-group d-flex flex-col">
-                                    <label for="paymentMethod">Phương thức thanh toán <span>*</span></label>
-                                    <select class="form-control" name="paymentMethod" required>
-                                        <option value="cod">Thanh toán khi nhận hàng (COD)</option>
-                                        <option value="bank_transfer">Chuyển khoản ngân hàng</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="note">Ghi chú</label>
-                                    <textarea class="form-control" name="note" placeholder="Ghi chú về đơn hàng hoặc vận chuyển..." ></textarea>
-                                </div>
-
-                                <button type="submit" class="site-btn">Đặt hàng</button>
+                            <div class="checkout__order__total">
+                                Tổng tiền: <span>{{ $cartTotal }}</span>
                             </div>
-                        </form>
 
+                            <div class="form-group d-flex flex-col">
+                                <label for="paymentMethod">Phương thức thanh toán <span>*</span></label>
+                                <select class="form-control" name="paymentMethod" required>
+                                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                                    <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+                                </select>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="note">Ghi chú</label>
+                                <textarea class="form-control" name="note" placeholder="Ghi chú về đơn hàng hoặc vận chuyển..."></textarea>
+                            </div>
+
+                            <button type="submit" class="site-btn">Đặt hàng</button>
+                        </div>
                     </div>
                 </div>
             </form>

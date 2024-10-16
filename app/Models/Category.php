@@ -16,4 +16,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'categoryID');
     }
+
+    public function mainImage()
+    {
+        return $this->imgURL;
+    }
 }
