@@ -15,7 +15,7 @@ use App\Http\Controllers\Customer\ProductController as CustomerProductController
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -27,11 +27,23 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     // Logout
     // Route::post('/logout', [RisigterController::class, 'logout'])->name('logout');
+
+    //forget - nguyen
+    Route::get('/forget', [LoginController::class, 'show'])->name('forget');
+    Route::post('/forget', [LoginController::class, 'forget'])->name('forget.forget');
+
+    Route::get('/checkotp', [LoginController::class, 'showOTP'])->name('checkotp');
+    Route::post('/checkotp', [LoginController::class, 'checkOTP'])->name('checkotp.checkotp');
+
+    Route::post('/changepass', [LoginController::class, 'changePassword'])->name('checkotp.changepassword');
+
+
 });
 
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
     Route::get('/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
@@ -41,6 +53,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
+    Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
+    Route::post('pos/add-product', [CartController::class, 'addToCart'])->name('cart.add');
 
     // Category Routes
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
@@ -54,7 +68,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
-    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
 
     // nguyen
     Route::post('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -105,11 +118,12 @@ Route::prefix('customer')->group(function () {
 
         // Customer checkout
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
-        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
+        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment'); 
 
 
         // Customer order
         Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
+        Route::get('/order/{id}', [CustomerOrderController::class, 'show'])->name('customer.order.show');
     });
 });
 
@@ -119,4 +133,10 @@ Route::middleware('auth')->group(function () {
     // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
     // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
     // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
+});
+
+
+// Route fallback cho 404 - phải để cuối cùng trong file
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404); // Hiển thị view 404
 });

@@ -28,31 +28,32 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
-                <div>Vietnamese</div>
+                <div>Tiếng Việt</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Vietnamese</a></li>
+                    <li><a href="#">Tiếng Việt</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="{{ route('customer.home') }}">Trang chủ</a></li>
                 <li><a href="{{ route('customer.products') }}">Sản phẩm</a></li>
+                <li><a href="{{ route('customer.order') }}">Đơn hàng</a></li>
                 <li><a href="{{ route('customer.products') }}">Danh mục</a>
-                    <ul class="header__menu__dropdown">
-                        <!-- SN: Load Categories -->
-                        <li><a href="{{ route('login.store') }}">Lenovo</a></li>
-                        <li><a href="{{ route('login.store') }}">Acer</a></li>
-                        <li><a href="{{ route('login.store') }}"></a>Dell</a></li>
-                        <li><a href="{{ route('login.store') }}">HP</a></li>
+                    <ul class="header__menu__dropdown pl-3 ">
+                        @foreach ($categories as $category )
+                        <li>
+                            <a class="font-weight-light" href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                        </li>
+                        @endforeach
                     </ul>
                 </li>
                 <!-- <li><a href="./blog.html">Blog</a></li> -->
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="{{ route('customer.contact') }}">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -64,8 +65,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> sinoo@ctuet.edu.vn</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                <li>Giao hàng miễn phí đơn từ 2.000.000</li>
             </ul>
         </div>
     </div>
@@ -79,8 +80,8 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                                <li>Giao hàng miễn phí đơn từ 2.000.000</li>
                             </ul>
                         </div>
                     </div>
@@ -94,7 +95,7 @@
                             </div>
                             <div class="header__top__right__language">
                                 <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
-                                <div>Vietnamese</div>
+                                <div>Tiếng Việt</div>
                             </div>
 
                             <div class="header__top__right__auth">
@@ -104,7 +105,7 @@
                                 <a class="d-inline-block border-right" href="#"><i class="fa fa-user"></i> {{ auth()->user()->username }}</a>
                                 <a class="d-inline-block " href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    Đăng xuất
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -112,7 +113,7 @@
                                 @endif
                                 @else
                                 <!-- Nếu người dùng chưa đăng nhập -->
-                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
                                 @endauth
                             </div>
 
@@ -136,6 +137,9 @@
                             <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route(name: 'customer.home') }}">Trang chủ</a></li>
                             <li class="{{ request()->is('customer/products') ? 'active' : '' }}">
                                 <a href="{{ route(name: 'customer.products') }}">Sản phẩm</a>
+                            </li>
+                            <li class="{{ request()->is('customer/order') ? 'active' : '' }}">
+                                <a href="{{ route(name: 'customer.order') }}">Đơn hàng</a>
                             </li>
                             <li class="{{ request()->is('customer/contact') ? 'active' : '' }}"><a href="{{ route(name: 'customer.contact') }}">Liên hệ</a></li>
                         </ul>
@@ -182,7 +186,7 @@
                         <div class="hero__search__form">
                             <form action="{{ route('customer.product.search') }}" method="GET"> <!-- Route đến hàm xử lý tìm kiếm -->
                                 <input type="text" name="query" placeholder="Bạn muốn tìm gì?" value="{{ request()->input('query') }}">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <button type="submit" class="site-btn">Tìm</button>
                             </form>
 
                         </div>
@@ -191,8 +195,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>+84 30 04 1975</h5>
+                                <span>Hỗ trợ 24/7</span>
                             </div>
                         </div>
                     </div>
@@ -217,9 +221,9 @@
                             <a href="{{route('customer.home')}}"><img src="/e_customerSN/img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Address: 256 Nguyễn Văn Cừ, An Hòa, Ninh Kiều, Cần Thơ</li>
+                            <li>Phone: +84 30 04 1975</li>
+                            <li>Email: test@ctuet.edu.vn</li>
                         </ul>
                     </div>
                 </div>
@@ -269,8 +273,8 @@
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script> |
-                                SINOO <i class="fa fa-heart" aria-hidden="true"></i> YOU giữ bản quyền trên website.
+                                </script>
+                                <!-- SINOO <i class="fa fa-heart" aria-hidden="true"></i> YOU giữ bản quyền trên website. -->
                             </p>
                         </div>
                         <div class="footer__copyright__payment"><img src="/e_customerSN/img/payment-item.png" alt=""></div>
