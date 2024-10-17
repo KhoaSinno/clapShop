@@ -13,7 +13,6 @@ class Password_Reset extends Model
 
     // Các cột có thể được gán giá trị (Mass Assignable)
     protected $fillable = [
-        'userID',
         'email',
         'token',
         'created_at',
