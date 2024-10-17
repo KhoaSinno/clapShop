@@ -31,6 +31,7 @@ class LoginController extends Controller
 
         $email = $request->input("email"); //email của người dùng
         
+        
         // // Tạo mã OTP
         $otp = Str::random(60);
 
@@ -65,13 +66,16 @@ class LoginController extends Controller
         // Xử lý phản hồi
         $responseData = json_decode($response->getBody(), true);
 
-
         return view('otp', [
             'title' => 'Lấy lại mật khẩu',
         ]);
     }
     public function checkOTP(Request $request){
+        $otp = $request->input("otp"); //otp trong email của người dùng
         
+        return view('resetpassword', [
+            'title' => 'Đặt lại mật khẩu' . $otp,
+        ]);
     }
     /////////////////////////////////
 
