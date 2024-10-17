@@ -32,6 +32,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/forget', [LoginController::class, 'show'])->name('forget');
     Route::post('/forget', [LoginController::class, 'forget'])->name('forget.forget');
 
+    Route::get('/checkotp', [LoginController::class, 'showOTP'])->name('checkotp');
+    Route::post('/checkotp', [LoginController::class, 'checkOTP'])->name('checkotp.checkotp');
+
 
 });
 

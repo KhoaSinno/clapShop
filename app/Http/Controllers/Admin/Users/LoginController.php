@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Mail\ForgotPassword;
 // use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Client;
+use Illuminate\Support\Str;
 
 
 class LoginController extends Controller 
@@ -27,25 +28,32 @@ class LoginController extends Controller
         ]);
     }
     public function forget(Request $request){
+
+        $email = $request->input("email"); //email của người dùng
+        
+        // // Tạo mã OTP
+        $otp = Str::random(60);
+
         $client = new Client();
-        $url = "https://sandbox.api.mailtrap.io/api/send/3212526";
+        $url = "https://send.api.mailtrap.io/api/send";
         $payload = [
             "from" => [
-                "email" => "hello@example.com",
-                "name" => "Mailtrap Test"
+                "email" => "hello@demomailtrap.com",
+                "name" => "ClapShop Support"
             ],
             "to" => [
                 [
-                    "email" => "vonguyen040704@gmail.com"
+                    "email" => $email
+                    // "email" => "vonguyen040704@gmail.com"
                 ]
             ],
-            "subject" => "You are awesome!",
-            "text" => "Này là OTP của bạn:",
+            "subject" => "Mã OTP cho tài khoản tại ClapShop của bạn tại đây!",
+            "text" => "Này là OTP của bạn:" . $otp,
             "category" => "Integration Test"
         ];
 
         $headers = [
-            "Authorization" => "Bearer ", // Thay thế YOUR_API_KEY bằng token của bạn
+            "Authorization" => "Bearer 393dcd50ffb049818151069cf633e3ff",
             "Content-Type" => "application/json"
         ];
 
@@ -58,9 +66,12 @@ class LoginController extends Controller
         $responseData = json_decode($response->getBody(), true);
 
 
-        return view('login', [
-            'title' => '$responseData',
+        return view('otp', [
+            'title' => 'Lấy lại mật khẩu',
         ]);
+    }
+    public function checkOTP(Request $request){
+        
     }
     /////////////////////////////////
 
