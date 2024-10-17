@@ -79,10 +79,17 @@ class LoginController extends Controller
         $otp = $request->input("otp"); //otp trong email của người dùng
         $resetPassword = Password_Reset::where('token', $otp)->first();       
         
-        return view('resetpassword', [
-            'title' => 'Đặt lại mật khẩu'.$resetPassword->email ,
-            'email' => $resetPassword->email,
-        ]);
+        try {
+            return view('resetpassword', [
+                'title' => 'Đặt lại mật khẩu' ,
+                'email' => $resetPassword->email,
+            ]);
+        } catch (\Throwable $th) {
+            return view('otp', [
+                'title' => 'Mã OTP chưa đúng',
+            ]);
+        }
+
     }
     public function changePassword(Request $request){
 
