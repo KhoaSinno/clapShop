@@ -28,14 +28,14 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
-                <div>Vietnamese</div>
+                <div>Tiếng Việt</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Vietnamese</a></li>
+                    <li><a href="#">Tiếng Việt</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -65,8 +65,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> sinoo@ctuet.edu.vn</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                <li>Giao hàng miễn phí đơn từ 2.000.000</li>
             </ul>
         </div>
     </div>
@@ -80,8 +80,8 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                                <li>Giao hàng miễn phí đơn từ 2.000.000</li>
                             </ul>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="header__top__right__language">
                                 <img src="/e_customerSN/img/vietnamese.jpg" style="width: 27px; height: 14px;" alt="Vietnamese">
-                                <div>Vietnamese</div>
+                                <div>Tiếng Việt</div>
                             </div>
 
                             <div class="header__top__right__auth">
@@ -105,7 +105,7 @@
                                 <a class="d-inline-block border-right" href="#"><i class="fa fa-user"></i> {{ auth()->user()->username }}</a>
                                 <a class="d-inline-block " href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Logout
+                                    Đăng xuất
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -113,7 +113,7 @@
                                 @endif
                                 @else
                                 <!-- Nếu người dùng chưa đăng nhập -->
-                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
                                 @endauth
                             </div>
 
@@ -195,8 +195,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>+84 30 04 1975</h5>
+                                <span>Hỗ trợ 24/7</span>
                             </div>
                         </div>
                     </div>
@@ -221,9 +221,9 @@
                             <a href="{{route('customer.home')}}"><img src="/e_customerSN/img/logo.png" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Address: 256 Nguyễn Văn Cừ, An Hòa, Ninh Kiều, Cần Thơ</li>
+                            <li>Phone: +84 30 04 1975</li>
+                            <li>Email: test@ctuet.edu.vn</li>
                         </ul>
                     </div>
                 </div>
@@ -273,8 +273,8 @@
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script> |
-                                SINOO <i class="fa fa-heart" aria-hidden="true"></i> YOU giữ bản quyền trên website.
+                                </script>
+                                <!-- SINOO <i class="fa fa-heart" aria-hidden="true"></i> YOU giữ bản quyền trên website. -->
                             </p>
                         </div>
                         <div class="footer__copyright__payment"><img src="/e_customerSN/img/payment-item.png" alt=""></div>

@@ -6,7 +6,7 @@
 <div class="hero__item set-bg" data-setbg="/e_customerSN/img/hero/banner2.png">
     <div class="hero__text">
         <span>LAPTOP SALE</span>
-        <h2>High Performance <br />Laptops</h2>
+        <h2>Hiệu năng đỉnh cao  <br />Giá cả hợp lý</h2>
         <p>Free Pickup and Delivery Available</p>
         <a href="#" class="primary-btn">SHOP NOW</a>
     </div>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>Latest Products</h2>
+                    <h2>Mới nhất</h2>
                 </div>
                 <div class="featured__controls">
                     <ul>
@@ -75,12 +75,12 @@
 <!-- Featured Section End -->
 
 <!-- Latest Product Section Begin -->
-<!-- <section class="latest-product spad">
+<section class="latest-product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Latest Products</h4>
+                    <h4>Xem thêm</h4>
                     <div class="latest-product__slider owl-carousel">
                         @foreach($latestProducts->chunk(3) as $chunk)
                         <div class="latest-prdouct__slider__item">
@@ -102,11 +102,11 @@
             </div>
         </div>
     </div>
-</section> -->
+</section>
 <!-- Latest Product Section End -->
 
 <!-- Blog Section Begin -->
-<section class="from-blog spad">
+<!-- <section class="from-blog spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -159,6 +159,6 @@
             @endforeach
         </div>
     </div>
-</section>
+</section> -->
 <!-- Blog Section End -->
 @endsection
