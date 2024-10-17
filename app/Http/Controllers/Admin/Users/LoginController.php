@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
+use App\Models\Password_Reset;
 
 
 class LoginController extends Controller 
@@ -29,12 +30,11 @@ class LoginController extends Controller
     }
     public function forget(Request $request){
 
-        $email = $request->input("email"); //email của người dùng
+        $resetPassword = new Password_Reset();
+        $email = $request->input("email"); //email của người dùng       
         
-        
-        // // Tạo mã OTP
+        // Tạo mã OTP
         $otp = Str::random(60);
-
         $client = new Client();
         $url = "https://send.api.mailtrap.io/api/send";
         $payload = [
@@ -66,6 +66,7 @@ class LoginController extends Controller
         // Xử lý phản hồi
         $responseData = json_decode($response->getBody(), true);
 
+        $resetPassword->
         return view('otp', [
             'title' => 'Lấy lại mật khẩu',
         ]);
@@ -73,6 +74,7 @@ class LoginController extends Controller
     public function checkOTP(Request $request){
         $otp = $request->input("otp"); //otp trong email của người dùng
         
+
         return view('resetpassword', [
             'title' => 'Đặt lại mật khẩu' . $otp,
         ]);
