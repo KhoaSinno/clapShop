@@ -54,10 +54,10 @@
                                 <th class="text-center"></th>
                             </tr>
                         </thead>
-                        <tbody id="productList"> <!-- Phần này sẽ được điền bằng AJAX -->
+                        <tbody class="table table-hover table-bordered" id="productList">
+                            <!-- Phần này sẽ được điền bằng AJAX -->
                         </tbody>
                     </table>
-
 
                     <div class="alert">
                         <i class="fas fa-exclamation-triangle"></i> Gõ mã hoặc tên sản phẩm vào thanh tìm kiếm để thêm hàng vào đơn
@@ -76,24 +76,28 @@
                                     <th class="so--luong text-center" style="text-align: center; vertical-align: middle;"></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table table-hover table-bordered" id="productListResult">
+                                @if(!empty($cart))
+                                @foreach($cart as $id => $product)
                                 <tr>
-                                    <td>71309005</td>
-                                    <td>Bàn ăn gỗ Theresa</td>
-                                    <td><img src="/e_adminSN/assets/img-sanpham/reno.jpg" alt="" width="50px;"></td>
-                                    <td><input class="so--luong1" type="number" value="2"></td>
-                                    <td>5.600.000 </td>
-
+                                    <td>{{ $id }}</td>
+                                    <td>{{ $product['name'] }}</td>
+                                    <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" width="50px"></td>
+                                    <td><input class="so--luong1" type="number" disabled value="{{ $product['quantity'] }}" min="1"></td>
+                                    <td>{{ number_format($product['price'], 0, ',', '.') }}₫</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i
-                                                class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
-
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="6" style="text-align: center;">Giỏ hàng trống</td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-4">
@@ -157,6 +161,13 @@
     @include('admin.footer')
 
     <script>
+        function format_currencyVNĐ(price) {
+            return price.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
+        }
+
         $(document).ready(function() {
             let timer;
 
@@ -186,23 +197,87 @@
         });
 
         $(document).on('click', '.add-to-cart', function(e) {
-            e.preventDefault();
-            var productId = $(this).data('id');
+            e.preventDefault(); // Ngăn hành vi mặc định của thẻ
+
+            var productId = $(this).data('id'); // Lấy ID sản phẩm từ data-id
 
             $.ajax({
-                url: `/customer/cart/add/${productId}`,
-                method: 'POST',
+                url: `/admin/pos/session/${productId}`, // Đảm bảo URL đúng
+                method: 'POST', // Phương thức POST
                 data: {
-                    _token: '{{ csrf_token() }}'
+                    _token: '{{ csrf_token() }}' // Token CSRF để bảo mật
                 },
                 success: function(response) {
-                    alert('Sản phẩm đã được thêm vào giỏ hàng!');
-                    // Cập nhật tổng tiền ngay lập tức
-                    $('.header__cart__price span').text('$' + response.total.toFixed(2));
-                    $('.span__quantity_cart').text(response.totalQuantity);
+                    if (response.cart) {
+                        // Cập nhật danh sách sản phẩm
+                        $('#productListResult').empty();
+
+                        $.each(response.cart, function(id, product) {
+                            $('#productListResult').append(`
+                        <tr>
+                            <td>${id}</td>
+                            <td>${product.name}</td>
+                            <td><img src="${product.image}" alt="${product.name}" width="50px"></td>
+                            <td><input class="so--luong1" type="text" disabled value="${product.quantity}" min="1"></td>
+                            <td>${format_currencyVNĐ(product.price)}</td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <button class="btn btn-primary btn-sm deleteProSession" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    `);
+                        });
+                    }
+
+                    // Cập nhật tổng tiền và số lượng
+                    $('#totalPrice').text(response.total);
+                    $('#totalQuantity').text(response.totalQuantity);
                 },
                 error: function(xhr) {
                     alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                }
+            });
+        });
+
+        // Xử lý sự kiện khi bấm nút "Xóa"
+        $(document).on('click', '.deleteProSession', function(e) {
+            e.preventDefault();
+
+            var productId = $(this).closest('tr').find('td:first').text(); // Lấy ID sản phẩm từ hàng đầu tiên của bảng
+
+            $.ajax({
+                url: `/admin/pos/session/remove/${productId}`, // Đường dẫn API để xóa sản phẩm khỏi session
+                method: 'POST', // Phương thức POST
+                data: {
+                    _token: '{{ csrf_token() }}' // Token CSRF để bảo mật
+                },
+                success: function(response) {
+                    if (response.cart) {
+                        // Xóa dòng sản phẩm từ bảng
+                        $('#productListResult').empty();
+
+                        // Cập nhật danh sách sản phẩm mới
+                        $.each(response.cart, function(id, product) {
+                            $('#productListResult').append(`
+                        <tr>
+                            <td>${id}</td>
+                            <td>${product.name}</td>
+                            <td><img src="${product.image}" alt="${product.name}" width="50px"></td>
+                            <td><input class="so--luong1" type="text" disabled value="${product.quantity}" min="1"></td>
+                            <td>${format_currencyVNĐ(product.price)}</td>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <button class="btn btn-primary btn-sm deleteProSession" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    `);
+                        });
+                    }
+
+                    // Cập nhật tổng tiền và số lượng
+                    $('#totalPrice').text(response.total);
+                    $('#totalQuantity').text(response.totalQuantity);
+                },
+                error: function(xhr) {
+                    alert('Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại!');
                 }
             });
         });

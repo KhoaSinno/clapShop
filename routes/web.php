@@ -43,7 +43,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
-    Route::post('pos/add-product', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/pos/session/{id}', [PosController::class, 'addProductSession'])->name('pos.add.productSession');
+    Route::post('/pos/session/remove/{id}', [PosController::class, 'removeProductFromSession']);
+
 
     // Category Routes
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
