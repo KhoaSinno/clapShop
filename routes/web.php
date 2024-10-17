@@ -15,7 +15,7 @@ use App\Http\Controllers\Customer\ProductController as CustomerProductController
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
-use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -55,7 +55,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
     Route::post('/pos/session/{id}', [PosController::class, 'addProductSession'])->name('pos.add.productSession');
-    Route::post('/pos/session/remove/{id}', [PosController::class, 'removeProductFromSession']);
+    Route::post('/pos/session/remove/{id}', [PosController::class, 'removeProductFromSession'])->name('pos.remove.productSession');
+    Route::post('/check-customer', [PosController::class, 'checkCustomer'])->name('pos.checkCustomer');
+    Route::post('/create-customer', [PosController::class, 'addNewCustomer'])->name('pos.addNewCustomer');
 
 
     // Category Routes
@@ -120,7 +122,7 @@ Route::prefix('customer')->group(function () {
 
         // Customer checkout
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
-        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment'); 
+        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
 
 
         // Customer order

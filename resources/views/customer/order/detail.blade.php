@@ -41,7 +41,7 @@
                             @foreach($order->details as $detail)
                             <tr>
                                 <td>
-                                    <img src="{{ $detail->product->mainImage ? asset($detail->product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="" style="width: 80px; ">
+                                    <img src="{{ $detail->product->mainImage ? asset($detail->product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="{{$detail->product->name}}" style="width: 80px; ">
                                 </td>
                                 <td>{{ $detail->product->name }}</td> <!-- Nếu có quan hệ với Product -->
                                 <td>{{ $detail->quantity }}</td>

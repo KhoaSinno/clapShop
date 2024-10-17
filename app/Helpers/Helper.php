@@ -7,6 +7,6 @@ if (!function_exists('format_currencyVNĐ')) {
         $number = is_numeric($number) ? (float)$number : 0;
 
         // Định dạng số thành tiền Việt Nam Đồng (VNĐ)
-        return number_format($number, 0, ',', '.') . ' VNĐ';
+        return number_format($number, 0, ',', '.') . 'đ';
     }
 }

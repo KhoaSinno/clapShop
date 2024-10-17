@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PosController extends Controller
 {
@@ -136,5 +138,41 @@ class PosController extends Controller
         }
 
         return response()->json(['error' => 'Sản phẩm không tồn tại trong giỏ hàng'], 404);
+    }
+
+    public function checkCustomer(Request $request)
+    {
+        $phone = strval($request->input('phone'));
+        // Tìm kiếm khách hàng có vai trò là 'customer' với số điện thoại đã nhập
+        $customer = User::where('role', 'customer')->where('phone', $phone)->first();
+
+        if ($customer) {
+            return response()->json(['exists' => true]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
+    }
+    public function addNewCustomer(Request $request)
+    {
+        // Xác thực dữ liệu
+        $request->validate([
+            'fullname' => 'required|string|max:150',
+            'phone' => 'required|string|max:20|unique:users,phone',
+        ]);
+
+        // Tạo khách hàng mới
+        $customer = User::create([
+            'fullname' => $request->fullname,
+            'phone' => $request->phone,
+            'role' => 'customer',
+            'email' => '',
+            'address' => '',
+            'gender' => '',
+            'username' => $request->phone, // Lưu trường username
+            'password' => Hash::make($request->phone), // Có thể thiết lập mật khẩu mặc định hoặc yêu cầu nhập
+        ]);
+
+        // Trả về phản hồi
+        return response()->json(['success' => true, 'customer' => $customer]);
     }
 }

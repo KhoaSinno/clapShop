@@ -84,9 +84,9 @@
                                     <td>{{ $product['name'] }}</td>
                                     <td><img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" width="50px"></td>
                                     <td><input class="so--luong1" type="number" disabled value="{{ $product['quantity'] }}" min="1"></td>
-                                    <td>{{ number_format($product['price'], 0, ',', '.') }}₫</td>
+                                    <td>{{ number_format($product['price'], 0, ',', '.') }} VND</td>
                                     <td style="text-align: center; vertical-align: middle;">
-                                        <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-primary btn-sm deleteProSession" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -104,14 +104,15 @@
                 <div class="tile">
                     <h3 class="tile-title">Thông tin thanh toán</h3>
                     <div class="row">
-                        <div class="form-group  col-md-10">
-                            <label class="control-label">Họ tên khách hàng</label>
-                            <input class="form-control" type="text" placeholder="Tìm kiếm khách hàng">
+                        <div class="form-group col-md-10">
+                            <label class="control-label">SĐT khách hàng</label>
+                            <input class="form-control" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT">
+                            <small id="phoneMessage" class="form-text text-muted"></small> <!-- Hiển thị thông báo -->
                         </div>
-                        <div class="form-group  col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
-                            <!-- <label style="text-align: center;" class="control-label">Tạo mới</label> -->
-                            <button class="btn btn-primary btn-them" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                    class="fas fa-user-plus"></i>
+
+                        <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
+                            <button class="btn btn-primary btn-them cursor-pointer text-white" id="checkCustomerPhone">
+                                KT
                             </button>
                         </div>
                         <div class="form-group  col-md-12">
@@ -126,17 +127,16 @@
 
                     </div>
                     <div class="row">
-
                         <div class="form-group  col-md-12">
                             <label class="control-label">Hình thức thanh toán</label>
-                            <select class="form-control" id="exampleSelect2" required>
-                                <option>Trả tiền mặt tại quầy</option>
-                                <option>Thanh toán chuyển khoản</option>
+                            <select class="form-control" id="paymentMethod" required>
+                                <option value="cash">Thanh toán tại quầy</option>
+                                <option value="bank_transfer">Chuyển khoản ngân hàng</option>
                             </select>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tổng cộng thanh toán: </label>
-                            <p class="control-all-money">= 290.000 VNĐ</p>
+                            <p class="control-all-money" id="totalPrice">0đ</p>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Khách hàng đưa tiền: </label>
@@ -145,6 +145,10 @@
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tiền thừa: </label>
                             <p class="control-all-money-total"> 10.000 VNĐ</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label"></label>
+                            <button class="btn btn-success mt-3 cursor-pointer">Tính</button>
                         </div>
                         <div class="tile-footer col-md-12">
                             <button class="btn btn-primary luu-san-pham" type="button">Lưu đơn hàng</button>
@@ -158,7 +162,52 @@
         </div>
     </main>
 
+    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <span class="thong-tin-thanh-toan">
+                                <h5>Thêm khách hàng mới</h5>
+                            </span>
+                        </div>
+                    </div>
+                    <form id="AddCustomerForm">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Họ và tên</label>
+                                <input class="form-control" type="text" id="fullname" name="fullname">
+                                <div class="text-danger" id="fullnameError"></div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Số điện thoại</label>
+                                <input class="form-control" type="number" id="phone" name="phone">
+                                <div class="text-danger" id="phoneError"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-save">Lưu lại</button>
+                        <a class="btn btn-cancel" data-dismiss="modal" id="btnCloseFm">Hủy bỏ</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('admin.footer')
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
         function format_currencyVNĐ(price) {
@@ -219,7 +268,7 @@
                             <td>${product.name}</td>
                             <td><img src="${product.image}" alt="${product.name}" width="50px"></td>
                             <td><input class="so--luong1" type="text" disabled value="${product.quantity}" min="1"></td>
-                            <td>${format_currencyVNĐ(product.price)}</td>
+                            <td>${format_currencyVNĐ(product.price * product.quantity)}</td>
                             <td style="text-align: center; vertical-align: middle;">
                                 <button class="btn btn-primary btn-sm deleteProSession" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
                             </td>
@@ -273,12 +322,93 @@
                     }
 
                     // Cập nhật tổng tiền và số lượng
-                    $('#totalPrice').text(response.total);
+                    $('#totalPrice').text(format_currencyVNĐ(response.totalPrice));
                     $('#totalQuantity').text(response.totalQuantity);
                 },
                 error: function(xhr) {
                     alert('Đã xảy ra lỗi khi xóa sản phẩm. Vui lòng thử lại!');
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#checkCustomerPhone').on('click', function(e) {
+                e.preventDefault();
+
+                var phone = $('#customerPhone').val(); // Lấy giá trị số điện thoại từ input
+                var _token = '{{ csrf_token() }}'; // CSRF token cho AJAX
+
+                $.ajax({
+                    url: '/admin/check-customer', // URL kiểm tra số điện thoại
+                    method: 'POST',
+                    data: {
+                        phone: phone,
+                        _token: _token
+                    },
+                    success: function(response) {
+                        if (response.exists) {
+                            // Nếu khách hàng đã tồn tại
+                            $('#phoneMessage').text('Khách hàng đã có tài khoản').css('color', 'green');
+                        } else {
+                            // Nếu khách hàng không tồn tại, hiển thị cảnh báo yêu cầu tạo khách hàng
+                            swal({
+                                title: "Tạo khách hàng mới",
+                                text: "Khách hàng chưa có tài khoản, bạn muốn tạo mới không?",
+                                buttons: ["Hủy", "Đồng ý"],
+                            }).then((willCreate) => {
+                                if (willCreate) {
+                                    // Mở modal bằng cách sử dụng data-toggle
+                                    $('#ModalUP').modal('show');
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        $('#phoneMessage').text('Có lỗi xảy ra. Vui lòng thử lại.').css('color', 'red');
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $('#AddCustomerForm').on('submit', function(e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+                // Lấy dữ liệu từ form
+                var formData = {
+                    fullname: $('#fullname').val(),
+                    phone: $('#phone').val(),
+                    // username: $('#phone').val(), // Thêm trường username
+                    _token: $('input[name="_token"]').val()
+                };
+
+
+                // Gửi yêu cầu AJAX
+                $.ajax({
+                    url: '/admin/create-customer', // Đường dẫn tới route xử lý
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Hiển thị thông báo thành công
+                        swal("Thành công!", "Khách hàng đã được tạo thành công!", "success");
+
+                        // Đóng modal
+                        $('#ModalUP').modal('hide');
+
+                        // Thực hiện các hành động khác như làm mới danh sách khách hàng nếu cần
+                        // location.reload(); // Ví dụ, làm mới trang để thấy danh sách khách hàng mới
+                    },
+                    error: function(xhr) {
+                        // Xử lý lỗi từ server
+                        if (xhr.status === 422) { // Kiểm tra lỗi validate
+                            var errors = xhr.responseJSON.errors;
+                            $('#fullnameError').text(errors.fullname ? errors.fullname[0] : '');
+                            $('#phoneError').text(errors.phone ? errors.phone[0] : '');
+                        } else {
+                            swal("Có lỗi!", "Đã xảy ra lỗi. Vui lòng thử lại.", "error");
+                        }
+                    }
+                });
             });
         });
     </script>
