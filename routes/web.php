@@ -35,6 +35,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/checkotp', [LoginController::class, 'showOTP'])->name('checkotp');
     Route::post('/checkotp', [LoginController::class, 'checkOTP'])->name('checkotp.checkotp');
 
+    Route::post('/changepass', [LoginController::class, 'changePassword'])->name('checkotp.changepassword');
+
 
 });
 

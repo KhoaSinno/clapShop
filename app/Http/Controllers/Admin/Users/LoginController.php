@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
 use App\Models\Password_Reset;
+use App\Models\User;
 
 
 class LoginController extends Controller 
@@ -66,18 +67,47 @@ class LoginController extends Controller
         // Xử lý phản hồi
         $responseData = json_decode($response->getBody(), true);
 
-        $resetPassword->
+        $resetPassword->email = $email;
+        $resetPassword->token = $otp;
+        $resetPassword->save();
+
         return view('otp', [
             'title' => 'Lấy lại mật khẩu',
         ]);
     }
     public function checkOTP(Request $request){
         $otp = $request->input("otp"); //otp trong email của người dùng
+        $resetPassword = Password_Reset::where('token', $otp)->first();       
         
-
         return view('resetpassword', [
-            'title' => 'Đặt lại mật khẩu' . $otp,
+            'title' => 'Đặt lại mật khẩu'.$resetPassword->email ,
+            'email' => $resetPassword->email,
         ]);
+    }
+    public function changePassword(Request $request){
+
+        $email = $request->input("email"); // email của người dùng
+        $password = $request->input("password"); // password mới của người dùng ()
+
+                //Đổi mật khẩu
+            $user = User::where('email', $email)->first();
+            if ($user) {
+                $user->password = bcrypt($password);
+                $user->save();                
+                return view('login', [
+                    'title' => 'Đăng nhập' ,
+                    //. $resetPassword->email,
+                ]);
+            } else {
+                return view('login', [
+                    'title' => 'User not found' ,
+                    //. $resetPassword->email,
+                ]);
+            }
+
+
+
+
     }
     /////////////////////////////////
 

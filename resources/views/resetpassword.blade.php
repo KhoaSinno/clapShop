@@ -20,16 +20,17 @@
                     <span class="login100-form-title">
                         <b>{{$title}}</b>
                     </span>
-                    <form action="{{ route('forget.forget') }}" method="post">
+                    <form action="{{ route('checkotp.changepassword') }}" method="post">
                         @include('admin.alert')
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Nhập email bạn đăng ký" name="email"
+                            <input class="input100" type="password" placeholder="Nhập mật khẩu mới" name="password"
                                 id="username">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
                         </div>
+                        <input type="text" id="myInput" style="display: none;" name="email" value={{$email}}>
                         <!-- <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
                                 name="password" id="password-field">
@@ -46,7 +47,7 @@
                             </label>
                         </div> -->
                         <div class="container-login100-form-btn">
-                            <button type="submit" class="btn btn-info w-100">Gửi email</button>
+                            <button type="submit" class="btn btn-info w-100">Đổi mật khẩu</button>
                         </div>
                         <div class="text-right p-t-12">
                             <a class="txt2" href="{{route('forget')}}">

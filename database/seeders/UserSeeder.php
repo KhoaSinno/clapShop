@@ -42,11 +42,11 @@ class UserSeeder extends Seeder
             'role' => 'customer',
             'fullname' => 'Anh Tủn',
             'password' => Hash::make('cus123'),
-            'email' => 'tun@gmail.com',
+            'email' => 'vonguyen040704@gmail.com',
             'phone' => '0987654321',
             'address' => '456 Elm St, City',
             'gender' => 'Nữ',
-            'dateOfBirth' => now()->subYears(30),
+            'dateOfBirth' => now()->subYears(30), 
         ]);
     }
 }
