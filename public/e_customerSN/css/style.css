@@ -211,7 +211,7 @@ ol {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
-        border: 4px solid #f44336;
+        border: 4px solid #f44336;  
         border-left-color: transparent;
     }
 

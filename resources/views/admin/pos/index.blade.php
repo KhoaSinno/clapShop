@@ -157,32 +157,56 @@
     @include('admin.footer')
 
     <script>
-    $(document).ready(function() {
-        let timer;
+        $(document).ready(function() {
+            let timer;
 
-        // Bắt sự kiện keyup và delay để tránh gửi request liên tục
-        $('#myInput').on('keyup', function() {
-            clearTimeout(timer);  // Xóa timer trước đó nếu có
-            let query = $(this).val();  // Lấy giá trị tìm kiếm
+            // Bắt sự kiện keyup và delay để tránh gửi request liên tục
+            $('#myInput').on('keyup', function() {
+                clearTimeout(timer); // Xóa timer trước đó nếu có
+                let query = $(this).val(); // Lấy giá trị tìm kiếm
 
-            // Đặt delay trước khi gửi request
-            timer = setTimeout(function() {
-                if (query.length > 0) {
-                    $.ajax({
-                        url: "{{ route('admin.search.product') }}",  // Gọi route tìm kiếm
-                        method: "GET",
-                        data: { query: query },  // Gửi từ khóa tìm kiếm
-                        success: function(response) {
-                            $('#productList').html(response);  // Hiển thị dữ liệu tìm kiếm trong tbody
-                        }
-                    });
-                } else {
-                    $('#productList').html('<tr><td colspan="6">Vui lòng nhập để tìm kiếm</td></tr>');
-                }
-            }, 300);  // 300ms delay
+                // Đặt delay trước khi gửi request
+                timer = setTimeout(function() {
+                    if (query.length > 0) {
+                        $.ajax({
+                            url: "{{ route('admin.search.product') }}", // Gọi route tìm kiếm
+                            method: "GET",
+                            data: {
+                                query: query
+                            }, // Gửi từ khóa tìm kiếm
+                            success: function(response) {
+                                $('#productList').html(response); // Hiển thị dữ liệu tìm kiếm trong tbody
+                            }
+                        });
+                    } else {
+                        $('#productList').html('<tr><td colspan="6">Vui lòng nhập để tìm kiếm</td></tr>');
+                    }
+                }, 300); // 300ms delay
+            });
         });
-    });
-</script>
+
+        $(document).on('click', '.add-to-cart', function(e) {
+            e.preventDefault();
+            var productId = $(this).data('id');
+
+            $.ajax({
+                url: `/customer/cart/add/${productId}`,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                    // Cập nhật tổng tiền ngay lập tức
+                    $('.header__cart__price span').text('$' + response.total.toFixed(2));
+                    $('.span__quantity_cart').text(response.totalQuantity);
+                },
+                error: function(xhr) {
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                }
+            });
+        });
+    </script>
 
 
 
