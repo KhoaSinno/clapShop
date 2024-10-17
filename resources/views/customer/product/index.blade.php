@@ -67,7 +67,7 @@
                             </label>
                         </div>
                     </div> -->
-<!-- 
+                    <!--
                     <div class="sidebar__item">
                         <h4>Giá</h4>
                         <form method="GET" action="{{ route('products.filter') }}">
@@ -98,26 +98,26 @@
                         </form>
                     </div> -->
 
-                    
+
                     <div class="sidebar__item">
                         <h4>Giá</h4>
-                        <div  class="card p-3">
+                        <div class="card p-3">
                             <input class="form-check-input" type="radio" name="price_range" value="lower_15" onclick=showSelectedPrice()>
-                                <label class="form-check-label" for="price_range">
-                                    Nhỏ hơn 15 Triệu
-                                </label>
+                            <label class="form-check-label" for="price_range">
+                                Nhỏ hơn 15 Triệu
+                            </label>
                         </div>
-                        <div  class="card p-3">
+                        <div class="card p-3">
                             <input class="form-check-input" type="radio" name="price_range" value="greater_15" onclick=showSelectedPrice()>
-                                <label class="form-check-label" for="price_range">
-                                    Lớn hơn 15 Triệu
-                                </label> <br>
+                            <label class="form-check-label" for="price_range">
+                                Lớn hơn 15 Triệu
+                            </label> <br>
                         </div>
-                        <div  class="card p-3">
+                        <div class="card p-3">
                             <input class="form-check-input" type="radio" name="price_range" value="casual" onclick=showSelectedPrice()>
-                                <label class="form-check-label" for="price_range">
-                                    Bất kì giá nào
-                                </label> <br>
+                            <label class="form-check-label" for="price_range">
+                                Bất kì giá nào
+                            </label> <br>
                         </div>
                     </div>
 
@@ -365,26 +365,26 @@
                     @foreach ($products as $product)
                     <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 18790000)
                             id="lower_20"
-                         @else 
+                            @else
                             id="greater_20"
-                         @endif>
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
-                                <ul class="product__item__pic__hover">
-                                    <li>
-                                        <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                            @endif>
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
+                                    <ul class="product__item__pic__hover">
+                                        <li>
+                                            <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6>
+                                        <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
+                                    </h6>
+                                    <h5>{{$product->price}}</h5>
+                                </div>
                             </div>
-                            <div class="product__item__text">
-                                <h6>
-                                    <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
-                                </h6>
-                                <h5>{{$product->price}}</h5>
-                            </div>
-                        </div>
                     </div>
                     @endforeach
 
@@ -404,45 +404,17 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-    $(document).on('click', '.add-to-cart', function(e) {
-        e.preventDefault();
-        var productId = $(this).data('id'); // Lấy productId từ thuộc tính data-id của nút
-
-        // Kiểm tra xem productId có tồn tại không
-        if (!productId) {
-            alert('Sản phẩm không hợp lệ.');
-            return;
-        }
-
-        $.ajax({
-            url: '/customer/cart/add/' + productId,
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}' // Bao gồm token CSRF
-            },
-            success: function(response) {
-                alert('Sản phẩm đã được thêm vào giỏ hàng!');
-                // Bạn có thể cập nhật biểu tượng giỏ hàng hoặc số lượng sản phẩm ở đây
-            },
-            error: function(xhr) {
-                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
-            }
-        });
-    });
-</script> -->
-
 <script>
     function showSelectedPrice() {
-    const radios = document.getElementsByName('price_range');
-    let products;
-    for (let i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-        // document.getElementById('result').textContent = radios[i].value;
-            // console.log(radios[i].value);
-            if(radios[i].value == "greater_15"){
-                console.log(10);
-                products = document.querySelectorAll('#greater_20');
+        const radios = document.getElementsByName('price_range');
+        let products;
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                // document.getElementById('result').textContent = radios[i].value;
+                // console.log(radios[i].value);
+                if (radios[i].value == "greater_15") {
+                    console.log(10);
+                    products = document.querySelectorAll('#greater_20');
                     products.forEach(product => {
                         product.style.display = 'inline';
                     });
@@ -450,35 +422,32 @@
                     products.forEach(product => {
                         product.style.display = 'none';
                     });
-                break;
-            }
-            else if(radios[i].value == "lower_15"){
-                console.log(20);
-                products = document.querySelectorAll('#lower_20');
+                    break;
+                } else if (radios[i].value == "lower_15") {
+                    console.log(20);
+                    products = document.querySelectorAll('#lower_20');
                     products.forEach(product => {
                         product.style.display = 'block';
                     });
-                products = document.querySelectorAll('#greater_20');
+                    products = document.querySelectorAll('#greater_20');
                     products.forEach(product => {
                         product.style.display = 'none';
                     });
-                break;
-            }
-            else{
-                products = document.querySelectorAll('#lower_20');
+                    break;
+                } else {
+                    products = document.querySelectorAll('#lower_20');
                     products.forEach(product => {
                         product.style.display = 'block';
                     });
-                products = document.querySelectorAll('#greater_20');
+                    products = document.querySelectorAll('#greater_20');
                     products.forEach(product => {
                         product.style.display = 'inline';
                     });
+                }
+                break;
+
             }
-            break;
-
         }
-
-    }
     }
 
     $(document).on('click', '.add-to-cart', function(e) {
@@ -502,8 +471,6 @@
             }
         });
     });
-
-
 </script>
 
 @endsection
