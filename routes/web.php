@@ -54,6 +54,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
+    Route::post('pos/add-product', [CartController::class, 'addToCart'])->name('cart.add');
 
     // Category Routes
     Route::get('/category', [CategoryController::class, 'index'])->name('admin.category');
@@ -67,7 +68,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
-    // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
 
     // nguyen
     Route::post('/product/create', [ProductController::class, 'create'])->name('admin.product.create');
@@ -133,4 +133,10 @@ Route::middleware('auth')->group(function () {
     // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
     // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
     // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
+});
+
+
+// Route fallback cho 404 - phải để cuối cùng trong file
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404); // Hiển thị view 404
 });
