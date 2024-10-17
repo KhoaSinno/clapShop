@@ -15,7 +15,7 @@ use App\Http\Controllers\Customer\ProductController as CustomerProductController
 use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route; 
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -27,6 +27,17 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     // Logout
     // Route::post('/logout', [RisigterController::class, 'logout'])->name('logout');
+
+    //forget - nguyen
+    Route::get('/forget', [LoginController::class, 'show'])->name('forget');
+    Route::post('/forget', [LoginController::class, 'forget'])->name('forget.forget');
+
+    Route::get('/checkotp', [LoginController::class, 'showOTP'])->name('checkotp');
+    Route::post('/checkotp', [LoginController::class, 'checkOTP'])->name('checkotp.checkotp');
+
+    Route::post('/changepass', [LoginController::class, 'changePassword'])->name('checkotp.changepassword');
+
+
 });
 
 // Routes cho Admin
@@ -109,7 +120,7 @@ Route::prefix('customer')->group(function () {
 
         // Customer checkout
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
-        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
+        Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment'); 
 
 
         // Customer order

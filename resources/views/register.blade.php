@@ -23,11 +23,10 @@
 
                     <form action="{{ route('register.store') }}" method="post">
                         <div class="wrap-input100 validate-input">
-                            <label for="username" class="lable-input100">Họ tên:</label>
+                            <label for="username" class="lable-input100">Tên người dùng:</label>
                             <input class="input100" type="text" placeholder="Nhập tên tài khoản" name="username"
                                 id="username">
                             <span class="focus-input100"></span>
-
                         </div>
 
                         <div class="wrap-input100 validate-input">
@@ -65,7 +64,8 @@
                             <span class="focus-input100"></span>
                         </div>
 
-                        <select class="input100" name="gender" id="gender-field" required>
+                        <label for="gender">Giới tính</label>
+                        <select class="input100" name="gender" id="gender-field" required style="opacity: 0.6;">
                             <option value="" disabled selected>Chọn giới tính</option>
                             <option value="Nam">Nam</option>
                             <option value="Nữ">Nữ</option>
@@ -73,11 +73,10 @@
 
                         <div class="wrap-input100 validate-input">
                             <label for="dateOfBirth">Ngày sinh:</label>
-                            <input autocomplete="off" class="input100" type="date" placeholder="Chọn ngày sinh"
-                                name="dateOfBirth" id="dateOfBirth">
+                            <input autocomplete="off" class="input100" type="date" style="opacity: 0.6;"
+                                placeholder="Chọn ngày sinh" name="dateOfBirth" id="dateOfBirth">
                             <span class="focus-input100"></span>
                         </div>
-
 
                         <!-- Hiển thị lỗi nếu có -->
                         @if ($errors->any())
@@ -91,7 +90,11 @@
                                 </ul>
                             </div>
                         @endif
-
+                        <style>
+                            .input100::placeholder {
+                                color: rgba(0, 0, 0, 0.5);
+                            }
+                        </style>
 
                         <div class="container-login100-form-btn">
                             <button type="submit" class="btn btn-info w-100">Đăng kí</button>
