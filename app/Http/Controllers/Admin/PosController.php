@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Order_Detail;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class PosController extends Controller
@@ -20,6 +23,58 @@ class PosController extends Controller
             'cart' => $cart
         ]);
     }
+
+    // public function addProductSession($id)
+    // {
+    //     // Tìm sản phẩm theo ID
+    //     $product = Product::find($id);
+
+    //     if (!$product) {
+    //         return response()->json([
+    //             'message' => 'Sản phẩm không tồn tại!'
+    //         ], 404); // Trả về lỗi nếu sản phẩm không tồn tại
+    //     }
+
+    //     // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo mảng rỗng
+    //     $cart = session()->get('cart', []);
+
+    //     // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
+    //     if (isset($cart[$id])) {
+    //         $cart[$id]['quantity']++;
+    //     } else {
+    //         // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
+    //         $cart[$id] = [
+    //             "name" => $product->name,
+    //             "price" => $product->price,
+    //             "quantity" => 1,
+    //             "image" => $product->mainImage ? $product->mainImage->image_url : asset('storage/images/default.jpg')
+    //         ];
+    //     }
+
+    //     // Lưu giỏ hàng vào session
+    //     session()->put('cart', $cart);
+
+    //     // Tính tổng tiền và tổng số lượng
+    //     $total = 0;
+    //     $totalQuantity = 0;
+    //     foreach ($cart as $item) {
+    //         $total += $item['price'] * $item['quantity'];
+    //         $totalQuantity += $item['quantity'];
+    //     }
+
+    //     // Cập nhật tổng tiền và tổng số lượng vào session
+    //     session()->put('total', $total);
+    //     session()->put('totalQuantity', $totalQuantity);
+
+    //     // Trả về dữ liệu JSON để cập nhật giao diện
+    //     return response()->json([
+    //         'message' => 'Sản phẩm đã được thêm vào giỏ hàng!',
+    //         'cart' => $cart, // Gửi lại giỏ hàng để hiển thị
+    //         'total' => $total,
+    //         'totalQuantity' => $totalQuantity
+    //     ]);
+    // }
+
 
     public function addProductSession($id)
     {
@@ -41,6 +96,7 @@ class PosController extends Controller
         } else {
             // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
             $cart[$id] = [
+                "productID" => $product->id, // Thêm productID vào giỏ hàng
                 "name" => $product->name,
                 "price" => $product->price,
                 "quantity" => 1,
@@ -71,7 +127,6 @@ class PosController extends Controller
             'totalQuantity' => $totalQuantity
         ]);
     }
-
 
     public function searchProduct(Request $request)
     {
@@ -174,5 +229,83 @@ class PosController extends Controller
 
         // Trả về phản hồi
         return response()->json(['success' => true, 'customer' => $customer]);
+    }
+
+    public function createOrder(Request $request)
+    {
+        // Xác thực dữ liệu đầu vào
+        $validated = $request->validate([
+            'customerPhone' => 'required',
+            'address' => 'required',
+            'paymentMethod' => 'required',
+            'note' => 'nullable|string',
+        ]);
+
+        // Tìm khách hàng theo số điện thoại
+        $customer = User::where('phone', $validated['customerPhone'])
+            ->where('role', 'customer')
+            ->first();
+
+        if (!$customer) {
+            return response()->json(['error' => 'Khách hàng không tồn tại'], 400);
+        }
+
+        // Lấy sản phẩm từ session (giỏ hàng)
+        $cartItems = session('cart', []); // Mặc định là mảng rỗng nếu giỏ hàng trống
+
+        // Nếu giỏ hàng trống, không tạo đơn hàng
+        if (empty($cartItems)) {
+            return response()->json(['error' => 'Giỏ hàng rỗng'], 400);
+        }
+
+        // Tính tổng số lượng và tổng giá trị của giỏ hàng
+        $totalQuantity = array_sum(array_column($cartItems, 'quantity'));
+        $totalPrice = array_sum(array_map(function ($item) {
+            return $item['quantity'] * $item['price'];
+        }, $cartItems));
+
+        // Tạo đơn hàng trong một transaction để đảm bảo tính toàn vẹn
+        DB::beginTransaction();
+
+        try {
+            // Tạo đơn hàng
+            $order = Order::create([
+                'customerID' => $customer->id,
+                'adminID' => auth()->user()->id, // ID của admin tạo đơn
+                'address' => $validated['address'],
+                'totalQuantity' => $totalQuantity,
+                'totalPrice' => $totalPrice,
+                'note' => $validated['note'] ?? null, // Ghi chú có thể rỗng
+                'paymentMethod' => $validated['paymentMethod'],
+                'status' => 'pending', // Trạng thái mặc định
+            ]);
+
+            // Lưu chi tiết đơn hàng
+            foreach ($cartItems as $item) {
+                // Kiểm tra xem khóa 'productID' có tồn tại không
+                if (!isset($item['productID'])) {
+                    return response()->json(['error' => 'Thiếu productID trong giỏ hàng'], 400);
+                }
+
+                Order_Detail::create([
+                    'orderID' => $order->id,
+                    'productID' => $item['productID'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['price'],
+                ]);
+            }
+
+            // Xóa giỏ hàng sau khi lưu đơn hàng thành công
+            session()->forget('cart');
+
+            // Commit transaction
+            DB::commit();
+
+            return response()->json(['success' => true, 'orderID' => $order->id]);
+        } catch (\Exception $e) {
+            // Rollback nếu có lỗi
+            DB::rollBack();
+            return response()->json(['error' => 'Đã xảy ra lỗi khi tạo đơn hàng'], 500);
+        }
     }
 }

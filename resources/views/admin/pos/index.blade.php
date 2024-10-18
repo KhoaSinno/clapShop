@@ -117,11 +117,11 @@
                         </div>
                         <div class="form-group  col-md-12">
                             <label class="control-label">Địa chỉ đơn hàng</label>
-                            <textarea class="form-control" rows="4" placeholder="Địa chỉ đơn hàng"></textarea>
+                            <textarea name="address" class="form-control" rows="4" placeholder="Địa chỉ đơn hàng"></textarea>
                         </div>
                         <div class="form-group  col-md-12">
                             <label class="control-label">Ghi chú đơn hàng</label>
-                            <textarea class="form-control" rows="4" placeholder="Ghi chú thêm đơn hàng"></textarea>
+                            <textarea name="note" class="form-control" rows="4" placeholder="Ghi chú thêm đơn hàng"></textarea>
                         </div>
 
 
@@ -152,7 +152,7 @@
                         </div>
                         <div class="tile-footer col-md-12">
                             <button class="btn btn-primary luu-san-pham" type="button">Lưu đơn hàng</button>
-                            <button class="btn btn-primary luu-va-in" type="button">Lưu và in hóa đơn</button>
+                            <!-- <button class="btn btn-primary luu-va-in" type="button">Lưu và in hóa đơn</button> -->
                             <a class="btn btn-secondary luu-va-in" href="{{ route('admin.customer') }}">Quay về</a>
                         </div>
                     </div>
@@ -162,6 +162,7 @@
         </div>
     </main>
 
+    <!-- Modal 'Add new customer' -->
     <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -198,24 +199,28 @@
 
     @include('admin.footer')
 
-    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Popper.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
         function format_currencyVNĐ(price) {
-            return price.toLocaleString('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            });
+            // Kiểm tra giá trị price không phải undefined, null, và là một số
+            if (price !== undefined && price !== null && !isNaN(price)) {
+                return price.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+            } else {
+                // Nếu giá trị không hợp lệ, trả về chuỗi mặc định '0đ'
+                return '0đ';
+            }
         }
+
 
         $(document).ready(function() {
             let timer;
@@ -409,6 +414,45 @@
                         }
                     }
                 });
+            });
+        });
+
+        $('.luu-san-pham').click(function() {
+            var formData = {
+                customerPhone: $('#customerPhone').val(),
+                address: $('textarea[name="address"]').val(),
+                note: $('textarea[name="note"]').val(),
+                paymentMethod: $('#paymentMethod').val(),
+                _token: $('meta[name="csrf-token"]').attr('content')
+            };
+
+            $.ajax({
+                url: '/admin/order/create',
+                method: 'POST',
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        swal({
+                            title: "Thành công!",
+                            text: "Đơn hàng đã được tạo thành công!",
+                            icon: "success",
+                            button: "OK",
+                        }).then(() => {
+                            // Xử lý sau khi lưu đơn hàng thành công
+                            window.location.reload();
+                        });
+                    } else {
+                        swal({
+                            title: "Lỗi",
+                            text: "Có lỗi xảy ra, vui lòng thử lại!",
+                            icon: "error",
+                            button: "OK",
+                        });
+                    }
+                },
+                error: function(response) {
+                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                }
             });
         });
     </script>
