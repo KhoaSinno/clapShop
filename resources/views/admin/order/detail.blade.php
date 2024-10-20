@@ -1,10 +1,10 @@
 @extends('admin.main_layout')
 
 @section('function_nav')
-<!-- <div class="col-sm-2">
+<div class="col-sm-2">
     <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
         Tạo mới đơn hàng</a>
-</div> -->
+</div>
 @endsection
 
 @section('content')
@@ -12,75 +12,24 @@
     id="sampleTable">
     <thead>
         <tr>
-            <th width="20">Mã ĐH</th>
-            <th width="150">Khách hàng</th>
-            <th width="250">Địa chỉ</th>
-            <th width="10">Tổng SL</th>
-            <th>Thời gian</th>
-            <th width="100">Tổng giá</th>
-            <th>Trạng thái</th>
-            <th width="200">Tính năng</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($pendingOrders as $od)
+        @foreach($order->details as $detail)
         <tr>
-            <td>#{{ $od->id }}</td>
-            <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
-            <td width="300">{{ $od->address }}</td>
-            <td>{{ $od->totalQuantity }}</td>
-            <td>{{ $od->created_at }}</td>
-            <td>{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
-            <td class="table-td-center d-flex justify-content-center align-items-stretch gap-x-2">
-                <button class="btn btn-primary btn-sm edit mr-1" type="button" title="Sửa" data-id="{{ $od->id }}" data-toggle="modal" data-target="#ModalUP">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                <a class="btn btn-success btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-check" aria-hidden="true"></i></a>
-                <a class="btn btn-danger btn-sm ml-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-            </td>
+            <td>{{ $detail->product->name }}</td>
+            <td>{{ $detail->quantity }}</td>
+            <td>{{ format_currencyVNĐ($detail->price) }}</td>
+            <td>{{ format_currencyVNĐ($detail->price * $detail->quantity) }}</td>
         </tr>
         @endforeach
-
-
     </tbody>
 </table>
-<h2 class="text-center bg-success py-2 mt-3">Đơn hàng đã duyệt</h2>
 
-<table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-    id="sampleTable">
-    <thead>
-        <tr class="text-center">
-            <th width="10">Mã ĐH</th>
-            <th width="150">Khách hàng</th>
-            <th width="250">Địa chỉ</th>
-            <th width="10">Tổng SL</th>
-            <th>Thời gian</th>
-            <th>Tổng giá</th>
-            <th>Trạng thái</th>
-            <th width="150">Tính năng</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($successOrders as $od)
-        <tr>
-            <td>#{{ $od->id }}</td>
-            <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
-            <td width="300">{{ $od->address }}</td>
-            <td>{{ $od->totalQuantity }}</td>
-            <td>{{ $od->created_at }}</td>
-            <td width="100">{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
-            <td class="table-td-center">
-                <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-        @endforeach
-
-
-    </tbody>
-</table>
 @endsection
 
 <!-- jQuery CDN -->

@@ -10,13 +10,42 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     public function index()
+{
+    // Truy vấn đơn hàng có trạng thái "pending"
+    $pendingOrders = Order::with(['user', 'details.product'])
+                          ->where('status', 'pending')
+                          ->get();
+
+    // Truy vấn đơn hàng có trạng thái "success"
+    $successOrders = Order::with(['user', 'details.product'])
+                          ->where('status', 'success')
+                          ->get();
+
+    // Trả về view kèm theo hai danh sách đơn hàng
+    return view('admin.order.index', [
+        'title' => 'Danh sách đơn hàng',
+        'pendingOrders' => $pendingOrders,
+        'successOrders' => $successOrders,
+    ]);
+}
+
+
+    public function view($id)
     {
-        $orders = Order::get();
-        return view('admin.order.index', [
-            'title' => 'Danh sách đơn hàng',
-            'orders' => $orders,
+        // Truy vấn đơn hàng theo ID, kèm theo thông tin khách hàng và chi tiết đơn hàng
+        $order = Order::with(['user', 'details.product'])->find($id);
+
+        // Kiểm tra nếu không tìm thấy đơn hàng
+        if (!$order) {
+            return redirect()->route('admin.order.index')->with('error', 'Đơn hàng không tồn tại.');
+        }
+
+        return view('admin.order.detail', [
+            'title' => 'Chi tiết đơn hàng',
+            'order' => $order,
         ]);
     }
+
 
     public function placeOrder(Request $request)
     {

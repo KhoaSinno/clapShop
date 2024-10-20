@@ -23,7 +23,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-        return $this->role === $role; // So sánh vai trò
+        return $this->role === $role;
     }
     public function cart()
     {
@@ -32,6 +32,6 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany(Order::class, 'usersID');
+        return $this->hasMany(Order::class, 'customerID');
     }
 }
