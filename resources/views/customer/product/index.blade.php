@@ -9,7 +9,7 @@
                 <div class="breadcrumb__text">
                     <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
-                        <a href="{{ route('customer.home') }}">Home</a>
+                        <a href="{{ route('customer.home') }}">Trang chủ</a>
                         <span>Shop</span>
                     </div>
                 </div>
@@ -101,25 +101,25 @@
 
                     <div class="sidebar__item">
                         <h4>Giá</h4>
-                        <div class="card p-3">
-                            <input class="form-check-input" type="radio" name="price_range" value="lower_15" onclick=showSelectedPrice()>
-                            <label class="form-check-label" for="price_range">
+
+                        <div class="list-group ">
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="lower_15" onclick="showSelectedPrice()">
                                 Nhỏ hơn 15 Triệu
                             </label>
-                        </div>
-                        <div class="card p-3">
-                            <input class="form-check-input" type="radio" name="price_range" value="greater_15" onclick=showSelectedPrice()>
-                            <label class="form-check-label" for="price_range">
+
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="greater_15" onclick="showSelectedPrice()">
                                 Lớn hơn 15 Triệu
-                            </label> <br>
-                        </div>
-                        <div class="card p-3">
-                            <input class="form-check-input" type="radio" name="price_range" value="casual" onclick=showSelectedPrice()>
-                            <label class="form-check-label" for="price_range">
+                            </label>
+
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="casual" onclick="showSelectedPrice()">
                                 Bất kì giá nào
-                            </label> <br>
+                            </label>
                         </div>
                     </div>
+
 
 
                     <!-- <div class="sidebar__item">
@@ -156,67 +156,26 @@
                     </div> -->
                     <div class="sidebar__item">
                         <div class="latest-product__text">
-                            <h4>Latest Products</h4>
+                            <h4>Mới nhất</h4>
                             <div class="latest-product__slider owl-carousel">
+                                <!-- Slider Item -->
+                                @foreach($latestProducts->chunk(3) as $productChunk) <!-- Chia 6 sản phẩm thành 2 nhóm, mỗi nhóm 3 sản phẩm -->
                                 <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
+                                    @foreach($productChunk as $product)
+                                    <a href="{{ route('customer.product.detail', ['id' => $product->id]) }}" class="latest-product__item">
                                         <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-1.jpg" alt="">
+                                            <img src="{{ $product->mainImage ? asset( $product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="{{ $product->name }}">
                                         </div>
                                         <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
+                                            <h6>{{ $product->name }}</h6>
+                                            <span class="fs-10">{{ format_currencyVNĐ($product->price) }}</span>
                                         </div>
                                     </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
+                                    @endforeach
                                 </div>
-                                <div class="latest-prdouct__slider__item">
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-1.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-2.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="latest-product__item">
-                                        <div class="latest-product__item__pic">
-                                            <img src="/e_customerSN/img/latest-product/lp-3.jpg" alt="">
-                                        </div>
-                                        <div class="latest-product__item__text">
-                                            <h6>Crab Pool Security</h6>
-                                            <span>$30.00</span>
-                                        </div>
-                                    </a>
-                                </div>
+                                @endforeach
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -382,7 +341,7 @@
                                     <h6>
                                         <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
                                     </h6>
-                                    <h5>{{$product->price}}</h5>
+                                    <h5>{{format_currencyVNĐ($product->price) }}</h5>
                                 </div>
                             </div>
                     </div>
@@ -449,28 +408,5 @@
             }
         }
     }
-
-    $(document).on('click', '.add-to-cart', function(e) {
-        e.preventDefault();
-        var productId = $(this).data('id');
-
-        $.ajax({
-            url: `/customer/cart/add/${productId}`,
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                alert('Sản phẩm đã được thêm vào giỏ hàng!');
-                // Cập nhật tổng tiền ngay lập tức
-                $('.header__cart__price span').text('$' + response.total.toFixed(2));
-                $('.span__quantity_cart').text(response.totalQuantity);
-            },
-            error: function(xhr) {
-                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
-            }
-        });
-    });
 </script>
-
 @endsection

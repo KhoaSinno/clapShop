@@ -18,7 +18,11 @@ class OrderController extends Controller
         $customerID = Auth::id();
 
         // Truy vấn lấy ra các đơn hàng thuộc về customer này
-        $orders = Order::where('customerID', $customerID)->with('details')->get();
+        $orders = Order::where('customerID', $customerID)
+            ->with('details')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
 
         // Trả về view và truyền các đơn hàng vào
         return view('customer.order.index', [
