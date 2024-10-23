@@ -68,6 +68,7 @@ class ProductController extends Controller
 
         // Tìm danh mục dựa theo slug
         $category = Category::where('slug', $slug)->first();
+        $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
 
         // Nếu không tìm thấy category, có thể xử lý lỗi
         if (!$category) {
@@ -85,7 +86,8 @@ class ProductController extends Controller
             'category' => $category,
             'categories' => $categories,
             'sort' => 'default',
-            'count' => $productCount
+            'count' => $productCount,
+            'latestProducts' => $latestProducts
 
         ]);
     }

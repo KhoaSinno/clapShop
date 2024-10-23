@@ -1,17 +1,11 @@
 @extends('admin.main_layout')
 
 @section('function_nav')
-<!-- <div class="col-sm-2">
-    <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
-        Tạo mới đơn hàng</a>
-</div> -->
-<div class="col-sm-2">
-    <a class="btn btn-sm btn-danger" href="{{route('admin.order.ordersDelete')}}" title="Xem đơn đã hủy"><i class="fa fa-trash"></i>
-        Xem các đơn đã hủy</a>
-</div>
+
 @endsection
 
 @section('content')
+<h2 class="text-center bg-danger py-2">Đơn hàng đã hủy</h2>
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
     <thead>
@@ -27,7 +21,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($pendingOrders as $od)
+        @foreach($orders as $od)
         <tr>
             <td id="orderId">#{{ $od->id }}</td>
             <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
@@ -37,61 +31,14 @@
             <td>{{ format_currencyVNĐ($od->totalPrice)  }}</td>
             <td>{{ $od->status}}</td>
             <td class="table-td-center d-flex justify-content-center align-items-stretch gap-x-2">
-                <button class="btn btn-primary btn-sm edit mr-1" type="button" title="Sửa" data-id="{{ $od->id }}" data-toggle="modal" data-target="#ModalUP">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                <a class="btn btn-success btn-sm mx-1" data-id="{{ $od->id }}">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </a>
-                <a class="btn btn-danger text-white btn-sm ml-1 deleteOrder" data-id="{{ $od->id }}">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
-
-            </td>
-        </tr>
-        @endforeach
-
-
-    </tbody>
-</table>
-<h2 class="text-center bg-success py-2 mt-5">Đơn hàng đã duyệt</h2>
-
-<table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
-    id="sampleTableSub">
-    <thead>
-        <tr class="text-center">
-            <th width="20">Mã ĐH</th>
-            <th width="190">Khách hàng</th>
-            <th width="250">Địa chỉ</th>
-            <th width="10">Tổng SL</th>
-            <th width="220">Thời gian</th>
-            <th width="100">Tổng giá</th>
-            <th width="180">Trạng thái</th>
-            <th width="200">Tính năng</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($successOrders as $od)
-        <tr>
-            <td>#{{ $od->id }}</td>
-            <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
-            <td width="300">{{ $od->address }}</td>
-            <td>{{ $od->totalQuantity }}</td>
-            <td>{{ $od->created_at }}</td>
-            <td width="100">{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
-            <td class="table-td-center">
                 <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>
         @endforeach
-
-
     </tbody>
 </table>
+
 @endsection
-
 
 
 @section('modal')
@@ -178,26 +125,6 @@
             });
         });
 
-    });
-    $(document).on("click", ".deleteOrder", function() {
-        var orderId = $(this).data('id'); // Lấy ID của đơn hàng
-
-        // if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
-        $.ajax({
-            url: '/admin/order/cancel/' + orderId,
-            type: 'PUT',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-            },
-            success: function(response) {
-                alert('Đơn hàng đã được xóa thành công!');
-                location.reload(); // Reload trang sau khi xóa thành công
-            },
-            error: function(xhr) {
-                alert('Xóa thất bại: ' + xhr.responseText);
-            }
-        });
-        // }
     });
 </script>
 @endsection

@@ -27,6 +27,11 @@ $('#all').click(function (e) {
     e.stopImmediatePropagation();
 });
 
+oTable = $('#sampleTableSub').dataTable();
+$('#all').click(function (e) {
+    $('#sampleTableSub tbody :checkbox').prop('checked', $(this).is(':checked'));
+    e.stopImmediatePropagation();
+});
 //Thời Gian
 function time() {
     var today = new Date();
