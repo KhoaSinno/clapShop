@@ -7,3 +7,5 @@
 <script src="/e_customerSN/js/mixitup.min.js"></script>
 <script src="/e_customerSN/js/owl.carousel.min.js"></script>
 <script src="/e_customerSN/js/main.js"></script>
+<script src="/e_customerSN/js/helper.js"></script>
+<script src="/e_customerSN/js/addToCart.js"></script>

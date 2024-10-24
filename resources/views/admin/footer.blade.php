@@ -17,3 +17,4 @@
   </script>
 
   <script src="/e_adminSN/js/helper.js"></script>
+  <script src="/e_adminSN/js/plugins/chart.js"></script>

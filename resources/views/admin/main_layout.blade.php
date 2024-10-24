@@ -15,7 +15,7 @@
         <ul class="app-nav">
             <!-- User Menu-->
             <!-- <li>
-                <a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <a class="app-nav__item" href="{{route('customer.home')}}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
             </li> -->
             <form action="{{ route('logout') }}" method="POST" class="cursor-pointer m-0">
                 @csrf

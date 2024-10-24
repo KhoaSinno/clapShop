@@ -21,10 +21,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('categories', $categories);
         });
 
-        View::composer('customer.main_layout', function ($view) {
-            $cartController = new CartController();
-            $itemCount = $cartController->getCartItemCount();
-            $view->with('cartItemCount', $itemCount); // Chia sẻ biến với view
-        });
+        // View::composer('customer.main_layout', function ($view) {
+        //     $cartController = new CartController();
+        //     $itemCount = $cartController->getCartItemCount();
+        //     $view->with('cartItemCount', $itemCount); // Chia sẻ biến với view
+        // });
     }
 }

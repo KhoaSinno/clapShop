@@ -11,7 +11,19 @@ class Product extends Model
 
     protected $table = 'products';
     protected $fillable = [
-        'categoryID', 'name', 'brand', 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description', 'price', 'stock', 'active'
+        'categoryID',
+        'name',
+        'cpu',
+        'ram',
+        'storage',
+        'screen',
+        'battery',
+        'warranty',
+        'os',
+        'description',
+        'price',
+        'stock',
+        'active'
     ];
 
     public function category()
@@ -19,8 +31,20 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'categoryID');
     }
 
+    // Mối quan hệ với bảng product_images (lấy tất cả các ảnh)
     public function images()
     {
-        return $this->hasMany(Product_Image::class, 'id');
+        return $this->hasMany(Product_Image::class, 'productID');
+    }
+
+    // Nếu chỉ muốn lấy một ảnh (ví dụ ảnh đại diện)
+    public function mainImage()
+    {
+        return $this->hasOne(Product_Image::class, 'productID');
+    }
+    public function thumnail()
+    {
+        $mainImage = $this->hasOne(Product_Image::class, 'productID')->first();
+        return $mainImage ? $mainImage->url : '/e_customerSN/img/CLAPSHOP2.png';
     }
 }

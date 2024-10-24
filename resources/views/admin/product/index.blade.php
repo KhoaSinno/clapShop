@@ -1,4 +1,3 @@
-
 @extends('admin.main_layout')
 
 @section('function_nav')
@@ -15,15 +14,15 @@
 
 @section('content')
 @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }} 
-    </div>
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
 @endif
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
@@ -31,6 +30,7 @@
         <tr>
             <th>Mã SP</th>
             <th width="150">Tên SP</th>
+            <th width="150">Ảnh SP</th>
             <th width="150">Thương hiệu</th>
             <th>Giá</th>
             <th>Tồn kho</th>
@@ -41,31 +41,40 @@
     <tbody>
 
         @foreach($products as $p)
-            <tr>
-                <td>{{ $p->id }}</td>
-                <td>{{ $p->name }}</td>
-                <td>{{ $p->category->name }}</td>
-                <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
-                <td>{{ $p->price }}</td>
-                <td>{{ $p->stock }}</td>
-                <td>{{ $p->active ? 'Còn bán' : 'Ngừng bán'}}</td>
-                <td class="table-td-center">
+        <tr>
+            <td>{{ $p->id }}</td>
+            <td>{{ $p->name }}</td>
+            <td>
+                @if($p->mainImage)
+                <img src="{{ asset($p->mainImage->image_url) }}" alt="Product Image" weight="100" height="100">
+                @else
+                <!-- <img src="{{ asset('storage/images/default.jpg') }}" alt="No Image Available" weight="100" height="100"> -->
+                @endif
+            </td>
+            <td>{{ $p->category->name }}</td>
+            <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
+            <td>{{ $p->price }}</td>
+            <td>{{ $p->stock }}</td>
+            @if ($p->active)
+                <td>Còn bán</td>
+            @else
+                <td class="text-danger">Ngừng bán</td>
+            @endif
+            <td class="table-td-center">
 
-                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal"
-                        data-target="#ModalUP" data-id="{{ $p->id }}">
-                        <i class="fas fa-edit"></i>
+                <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail.edit', ['id' => $p->id]) }}">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="btn btn-danger btn-sm" title="Xóa">
+                        <i class="fas fa-trash-alt"></i>
                     </button>
+                </form>
 
-                    <form action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="btn btn-danger btn-sm" title="Xóa">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </form>
-
-                </td>
-            </tr>
+            </td>
+        </tr>
         @endforeach
 
 
@@ -76,13 +85,8 @@
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!--MODAL Update customer-->
-@section('modal')
 
-
-@endsection
-
-<script>
+<!-- <script>
     $(document).ready(function() {
         // Khi click vào nút sửa, hiển thị modal với thông tin của khách hàng
         $(".edit").on("click", function() {
@@ -144,5 +148,4 @@
         });
 
     });
-</script>
-
+</script> -->

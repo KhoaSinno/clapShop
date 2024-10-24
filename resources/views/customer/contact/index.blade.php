@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Organi Shop</h2>
+                    <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
                         <a href="{{ route('customer.home') }}">Home</a>
                         <span>Contact</span>
