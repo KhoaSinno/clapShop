@@ -20,7 +20,7 @@
 
                         </ul>
                     </div>
-
+                    <!--
                     <div class="sidebar__item">
                         <h4>Giá</h4>
                         <form method="GET" action="{{ route('products.filter') }}">
@@ -49,6 +49,26 @@
                                 </label>
                             </div>
                         </form>
+                    </div> -->
+                    <div class="sidebar__item">
+                        <h4>Giá</h4>
+
+                        <div class="list-group ">
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="lower_15" onclick="showSelectedPrice()">
+                                Nhỏ hơn 15 Triệu
+                            </label>
+
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="greater_15" onclick="showSelectedPrice()">
+                                Lớn hơn 15 Triệu
+                            </label>
+
+                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                                <input class="form-check-input me-2" type="radio" name="price_range" value="casual" onclick="showSelectedPrice()">
+                                Bất kì giá nào
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +109,7 @@
                                 <h6>
                                     <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
                                 </h6>
-                                <h5>{{$product->price}}</h5>
+                                <h5>{{format_currencyVNĐ( $product->price)}}</h5>
                             </div>
                         </div>
                     </div>
@@ -113,6 +133,51 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    function showSelectedPrice() {
+        const radios = document.getElementsByName('price_range');
+        let products;
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                // document.getElementById('result').textContent = radios[i].value;
+                // console.log(radios[i].value);
+                if (radios[i].value == "greater_15") {
+                    console.log(10);
+                    products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'inline';
+                    });
+                    products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'none';
+                    });
+                    break;
+                } else if (radios[i].value == "lower_15") {
+                    console.log(20);
+                    products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'block';
+                    });
+                    products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'none';
+                    });
+                    break;
+                } else {
+                    products = document.querySelectorAll('#lower_20');
+                    products.forEach(product => {
+                        product.style.display = 'block';
+                    });
+                    products = document.querySelectorAll('#greater_20');
+                    products.forEach(product => {
+                        product.style.display = 'inline';
+                    });
+                }
+                break;
+
+            }
+        }
+    }
+
     $(document).on('click', '.add-to-cart', function(e) {
         e.preventDefault();
         var productId = $(this).data('id');

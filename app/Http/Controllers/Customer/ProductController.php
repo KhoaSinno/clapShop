@@ -42,7 +42,7 @@ class ProductController extends Controller
 
         // $products = Product::with(['category', 'mainImage'])->get(); // Lấy category và mainImage
 
-
+        $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
         // Gọi hàm applySort để lấy giá trị sort và danh sách sản phẩm
         list($sort, $products) = $this->applySort($request, 3);
         $categories = Category::all();
@@ -56,7 +56,8 @@ class ProductController extends Controller
             'products' => $products,
             'categories' => $categories,
             'sort' => $sort,
-            'count' => $productCount
+            'count' => $productCount,
+            'latestProducts' => $latestProducts
         ]);
     }
 
@@ -67,6 +68,7 @@ class ProductController extends Controller
 
         // Tìm danh mục dựa theo slug
         $category = Category::where('slug', $slug)->first();
+        $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
 
         // Nếu không tìm thấy category, có thể xử lý lỗi
         if (!$category) {
@@ -84,7 +86,8 @@ class ProductController extends Controller
             'category' => $category,
             'categories' => $categories,
             'sort' => 'default',
-            'count' => $productCount
+            'count' => $productCount,
+            'latestProducts' => $latestProducts
 
         ]);
     }

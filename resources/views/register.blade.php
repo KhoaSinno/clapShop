@@ -99,6 +99,13 @@
                         <div class="container-login100-form-btn">
                             <button type="submit" class="btn btn-info w-100">Đăng kí</button>
                         </div>
+
+                        <div class="container-login100-form-btn" style="margin-top: 10px;">
+                            <button class="btn btn-secondary w-100" onclick="window.history.back();"
+                                style="background-color: #808080 ; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">Trở
+                                lại</button>
+                        </div>
+
                         @csrf
                     </form>
 

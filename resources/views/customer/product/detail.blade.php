@@ -10,7 +10,7 @@
                 <div class="breadcrumb__text">
                     <h2>{{$category->name}}</h2>
                     <div class="breadcrumb__option">
-                        <a href="{{route('customer.home')}}">Home</a>
+                        <a href="{{route('customer.home')}}">Trang chủ</a>
                         <a href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
                         <span>{{$product->name}}</span>
                     </div>
@@ -71,7 +71,7 @@
                         <li><b>Bộ vi xử lý (CPU):</b> <span class="d-block pl-3">{{ $product->cpu }}</span></li>
                         <li><b>Bộ nhớ (RAM):</b> <span class="d-block pl-3">{{ $product->ram }}</span></li>
                         <li><b>Ổ cứng (Storage):</b> <span class="d-block pl-3">{{ $product->storage }}</span></li>
-                        <li><b>Kích thước màn hình:</b> <span class="d-block pl-3">{{ $product->screen }}</span></li>
+                        <li><b class="d-inline">Kích thước màn hình:</b> <span class="d-block pl-3">{{ $product->screen }}</span></li>
                         <li><b>Dung lượng pin:</b> <span class="d-block pl-3">{{ $product->battery }}</span></li>
                         <li><b>Bảo hành:</b> <span class="d-block pl-3">{{ $product->warranty }}</span></li>
                         <li><b>Hệ điều hành:</b> <span class="d-block pl-3">{{ $product->os }}</span></li>
@@ -80,9 +80,9 @@
                         <li><b>Chia sẻ</b>
                             <div class="share">
                                 <a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-                                <a  href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-                                <a  href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
-                                <a  href="https://pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
+                                <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="https://instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="https://pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -149,32 +149,4 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).on('click', '.add-to-cart', function(e) {
-        e.preventDefault();
-        var productId = $(this).data('id'); // Lấy productId từ thuộc tính data-id của nút
-
-        // Kiểm tra xem productId có tồn tại không
-        if (!productId) {
-            alert('Sản phẩm không hợp lệ.');
-            return;
-        }
-
-        $.ajax({
-            url: '/customer/cart/add/' + productId,
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}' // Bao gồm token CSRF
-            },
-            success: function(response) {
-                alert('Sản phẩm đã được thêm vào giỏ hàng!');
-                // Bạn có thể cập nhật biểu tượng giỏ hàng hoặc số lượng sản phẩm ở đây
-            },
-            error: function(xhr) {
-                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
-            }
-        });
-    });
-</script>
-
 @endsection

@@ -6,7 +6,7 @@
 <div class="hero__item set-bg" data-setbg="/e_customerSN/img/hero/banner2.png">
     <div class="hero__text">
         <span>LAPTOP SALE</span>
-        <h2>Hiệu năng đỉnh cao  <br />Giá cả hợp lý</h2>
+        <h2>Hiệu năng đỉnh cao <br />Giá cả hợp lý</h2>
         <p>Free Pickup and Delivery Available</p>
         <a href="#" class="primary-btn">SHOP NOW</a>
     </div>
@@ -55,16 +55,16 @@
             @foreach($latestProducts as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mix {{ strtolower($product->category->name) }}">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->thumnail() }}">
+                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
                         <ul class="featured__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+                            <li><a href="#" class="add-to-cart" data-id="{{ $product->id }}"><i class=" fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                     <div class="featured__item__text">
-                        <h6><a href="#">{{ $product->name }}</a></h6>
-                        <h5>${{ $product->price }}</h5>
+                        <h6><a href="{{route('customer.product.detail', $product->id) }}">{{ $product->name }}</a></h6>
+                        <h5>{{ format_currencyVNĐ( $product->price)}}</h5>
                     </div>
                 </div>
             </div>
@@ -87,11 +87,11 @@
                             @foreach($chunk as $product)
                             <a href="#" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{ $product->image }}" alt="">
+                                    <img src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>{{ $product->name }}</h6>
-                                    <span>${{ $product->price }}</span>
+                                    <span>{{ format_currencyVNĐ( $product->price) }}</span>
                                 </div>
                             </a>
                             @endforeach
@@ -139,7 +139,7 @@
                     ],
                 ];
             @endphp
-            
+
             @foreach($sampleBlogPosts as $post)
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
@@ -161,4 +161,7 @@
     </div>
 </section> -->
 <!-- Blog Section End -->
+@endsection
+
+@section('footer')
 @endsection

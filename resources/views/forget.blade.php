@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi"> 
+<html lang="vi">
 
 <head>
     @include('admin.head')
@@ -48,6 +48,12 @@
                         <div class="container-login100-form-btn">
                             <button type="submit" class="btn btn-info w-100">Gửi email</button>
                         </div>
+
+                        <div class="container-login100-form-btn mt-2">
+                            <a href="javascript:history.back()" class="btn btn-secondary w-100"
+                                style="background-color: gray;">Trở lại</a>
+                        </div>
+
                         <div class="text-right p-t-12">
                             <a class="txt2" href="{{route('forget')}}">
                                 Bạn quên mật khẩu?
@@ -55,12 +61,14 @@
                         </div>
                         @csrf
                     </form>
+
                     <div class="text-center p-t-12">
                         Bạn chưa có tài khoản?
                         <a class="txt2" href="{{route('register')}}">
                             Đăng ký ngay!
                         </a>
                     </div>
+
                     <div class="text-center p-t-70 txt2 d-flex flex-col">
                         <span>Phần mềm quản lý bán hàng ClapShop</span>
                         <div>
