@@ -16,6 +16,7 @@ use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -24,6 +25,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
+    // Register - nhu y
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     // Logout
@@ -67,10 +69,13 @@ Route::prefix('customer')->group(function () {
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
         Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
 
-
         // Customer order
         Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
         Route::get('/order/{id}', [CustomerOrderController::class, 'show'])->name('customer.order.show');
+
+        // Customer profile Nhu Y
+        Route::get('/profile', [ProfileController::class, 'index'])->name('customer.profile');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('customer.profile.update');
     });
 });
 
