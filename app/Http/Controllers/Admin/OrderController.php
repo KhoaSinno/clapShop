@@ -94,23 +94,30 @@ class OrderController extends Controller
     }
     // app/Http/Controllers/OrderController.php
 
-    public function orderSuccess($id)
+    public function orderSuccess(Request $request, $id)
     {
         // Truy vấn đơn hàng theo ID
         $order = Order::find($id);
 
         // Kiểm tra nếu đơn hàng không tồn tại
         if (!$order) {
-            return redirect()->route('admin.order')->with('error', 'Đơn hàng không tồn tại.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Đơn hàng không tồn tại.'
+            ], 404);
         }
 
         // Cập nhật trạng thái đơn hàng thành 'success'
         $order->status = 'success';
         $order->save();
 
-        // Trả về danh sách đơn hàng kèm thông báo thành công
-        return redirect()->route('admin.order')->with('success', 'Đơn hàng đã được cập nhật thành công.');
+        // Trả về thông báo thành công
+        return response()->json([
+            'success' => true,
+            'message' => 'Đơn hàng đã được cập nhật thành công.'
+        ]);
     }
+
     public function cancel($id)
     {
         // Truy vấn đơn hàng theo ID
@@ -118,16 +125,17 @@ class OrderController extends Controller
 
         // Kiểm tra nếu đơn hàng không tồn tại
         if (!$order) {
-            return redirect()->route('admin.order')->with('error', 'Đơn hàng không tồn tại.');
+            return response()->json(['success' => false, 'message' => 'Đơn hàng không tồn tại.'], 404);
         }
 
-        // Cập nhật trạng thái đơn hàng thành 'success'
+        // Cập nhật trạng thái đơn hàng thành 'cancel'
         $order->status = 'cancel';
         $order->save();
 
-        // Trả về danh sách đơn hàng kèm thông báo thành công
-        return redirect()->route('admin.order')->with('success', 'Đơn hàng đã được hủy.');
+        // Trả về thông báo thành công
+        return response()->json(['success' => true, 'message' => 'Đơn hàng đã được hủy.']);
     }
+
     public function edit($id)
     {
         // Tìm đơn hàng theo ID

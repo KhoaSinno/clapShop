@@ -29,7 +29,7 @@
             <td>{{ $od->totalQuantity }}</td>
             <td>{{ $od->created_at }}</td>
             <td>{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
+            <td class="font-weight-bold  {{returnCssStatus($od->status)}}">{{ returnStatus($od->status) }}</td>
             <td class="table-td-center d-flex justify-content-center align-items-stretch gap-x-2">
                 <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>

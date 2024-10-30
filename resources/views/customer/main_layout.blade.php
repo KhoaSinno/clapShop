@@ -65,7 +65,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                <li><i class="fa fa-envelope"></i> clapshop@ctuet.edu.vn</li>
                 <li>Giao hàng miễn phí đơn từ 2.000.000</li>
             </ul>
         </div>
@@ -80,7 +80,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> test@ctuet.edu.vn</li>
+                                <li><i class="fa fa-envelope"></i> clapshop@ctuet.edu.vn</li>
                                 <li>Giao hàng miễn phí đơn từ 2.000.000</li>
                             </ul>
                         </div>
@@ -223,7 +223,7 @@
                         <ul>
                             <li>Address: 256 Nguyễn Văn Cừ, An Hòa, Ninh Kiều, Cần Thơ</li>
                             <li>Phone: +84 30 04 1975</li>
-                            <li>Email: test@ctuet.edu.vn</li>
+                            <li>Email: clapshop@ctuet.edu.vn</li>
                         </ul>
                     </div>
                 </div>

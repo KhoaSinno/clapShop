@@ -9,8 +9,8 @@
                 <div class="breadcrumb__text">
                     <h2>ClapShop</h2>
                     <div class="breadcrumb__option">
-                        <a href="{{ route('customer.home') }}">Home</a>
-                        <span>Contact</span>
+                        <a href="{{ route('customer.home') }}">Trang chủ</a>
+                        <span>Liên hệ</span>
                     </div>
                 </div>
             </div>

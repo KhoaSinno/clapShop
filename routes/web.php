@@ -137,7 +137,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
     Route::put('/order/cancel/{id}', [OrderController::class, 'cancel'])->name('admin.order.cancel');
     Route::get('/order/ordersDelete', [OrderController::class, 'ordersDelete'])->name('admin.order.ordersDelete');
-    Route::get('/order/success/{id}', [OrderController::class, 'orderSuccess'])->name('admin.order.success');
+    Route::post('/order/success/{id}', [OrderController::class, 'orderSuccess'])->name('admin.order.success');
 });
 
 // Route fallback cho 404 - phải để cuối cùng trong file

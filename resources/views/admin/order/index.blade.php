@@ -35,13 +35,13 @@
             <td>{{ $od->totalQuantity }}</td>
             <td>{{ $od->created_at }}</td>
             <td>{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
+            <td class="font-weight-bold  {{returnCssStatus($od->status)}}">{{ returnStatus($od->status) }}</td>
             <td class="table-td-center d-flex justify-content-center align-items-stretch gap-x-2">
                 <button class="btn btn-primary btn-sm edit mr-1" type="button" title="Sửa" data-id="{{ $od->id }}" data-toggle="modal" data-target="#ModalUP">
                     <i class="fas fa-edit"></i>
                 </button>
                 <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                <a class="btn btn-success btn-sm mx-1" data-id="{{ $od->id }}">
+                <a class="btn btn-success btn-sm mx-1 orderSuccess" data-id="{{ $od->id }}">
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn-danger text-white btn-sm ml-1 deleteOrder" data-id="{{ $od->id }}">
@@ -80,7 +80,7 @@
             <td>{{ $od->totalQuantity }}</td>
             <td>{{ $od->created_at }}</td>
             <td width="100">{{ format_currencyVNĐ($od->totalPrice)  }}</td>
-            <td>{{ $od->status}}</td>
+            <td class="font-weight-bold  {{returnCssStatus($od->status)}}">{{ returnStatus($od->status) }}</td>
             <td class="table-td-center">
                 <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
@@ -177,27 +177,54 @@
                 }
             });
         });
+        $('.orderSuccess').on('click', function() {
+            var orderId = $(this).data('id');
 
-    });
-    $(document).on("click", ".deleteOrder", function() {
-        var orderId = $(this).data('id'); // Lấy ID của đơn hàng
+            $.ajax({
+                url: '/admin/order/success/' + orderId,
+                type: 'POST', // Đảm bảo sử dụng phương thức POST
+                data: {
+                    _token: '{{ csrf_token() }}', // Thêm CSRF token vào dữ liệu
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Đơn hàng đã được cập nhật thành công.');
+                        location.reload(); // Tải lại trang nếu cần
+                    } else {
+                        alert('Cập nhật thất bại: ' + response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Đã xảy ra lỗi: ' + xhr.responseJSON.message || 'Lỗi không xác định');
+                }
+            });
+        });
 
-        // if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
-        $.ajax({
-            url: '/admin/order/cancel/' + orderId,
-            type: 'PUT',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-            },
-            success: function(response) {
-                alert('Đơn hàng đã được xóa thành công!');
-                location.reload(); // Reload trang sau khi xóa thành công
-            },
-            error: function(xhr) {
-                alert('Xóa thất bại: ' + xhr.responseText);
+        $('.deleteOrder').on("click", function() {
+            var orderId = $(this).data('id'); // Lấy ID của đơn hàng
+
+            if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+                $.ajax({
+                    url: '/admin/order/cancel/' + orderId,
+                    type: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Đơn hàng đã được hủy thành công!');
+                            location.reload(); // Reload trang sau khi hủy thành công
+                        } else {
+                            alert('Hủy đơn hàng thất bại: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Hủy đơn hàng thất bại: ' + xhr.responseJSON.message || 'Lỗi không xác định');
+                    }
+                });
             }
         });
-        // }
+
     });
 </script>
 @endsection

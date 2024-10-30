@@ -40,8 +40,7 @@ class CartController extends Controller
                 "name" => $product->name,
                 "price" => $product->price,
                 "quantity" => 1,
-                'image' => $product->mainImage->image_url
-
+                'image' => $product->mainImage->image_url ?? asset('storage/images/default.jpg')
             ];
         }
 
@@ -55,7 +54,7 @@ class CartController extends Controller
             // Tính tổng số lượng sản phẩm
             $totalQuantity += $item['quantity'];
         }
-
+        $total = format_currencyVNĐ($total);
         // Cập nhật tổng tiền vào session
         session()->put('total', $total);
         session()->put('totalQuantity', $totalQuantity);
