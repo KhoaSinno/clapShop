@@ -10,15 +10,10 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để xem hồ sơ.');
-        }
-
         return view('customer.profile.index', [
             'title' => 'Thông tin tài khoản',
         ]);
     }
-
 
     public function update(Request $request)
     {
@@ -30,24 +25,22 @@ class ProfileController extends Controller
             return redirect()->route('login')->with('error', 'Bạn cần đăng nhập để cập nhật thông tin.');
         }
 
-        // Kiểm tra giá trị của đối tượng người dùng
-        // dd($user); // In ra thông tin người dùng để kiểm tra (xóa sau khi kiểm tra xong)
-
         // Kiểm tra xem $user có phải là 1 đối tượng User không
         if (!$user instanceof User) {
             return redirect()->back()->withErrors(['error' => 'Không tìm thấy người dùng.']);
         }
 
         // Xác thực dữ liệu
-        $request->validate([
-            'fullname' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id, // Kiem tra email duy nhat, tranh trung lap
-            'phone' => 'nullable|string|max:15',
-            'address' => 'nullable|string|max:255',
-            'gender' => 'nullable|string|in:Nam,Nữ',
-            'dateOfBirth' => 'nullable|date',
-            'password' => 'nullable|string|min:8|confirmed', // Bổ sung xác thực mật khẩu nếu có thay đổi
-        ]);
+        // $request->validate([
+        //     'fullname' => 'required|string|max:255',
+        //     'email' => 'required|email|max:255|unique:users,email,' . $user->id, // Kiem tra email duy nhat, tranh trung lap
+        //     'phone' => 'nullable|string|max:15',
+        //     'address' => 'nullable|string|max:255',
+        //     'gender' => 'nullable|string|in:Nam,Nữ',
+        //     'dateOfBirth' => 'nullable|date',
+        //     'password' => 'nullable|string|min:8|confirmed', // Bổ sung xác thực mật khẩu nếu có thay đổi
+        // ]);
+
 
         // Cập nhật các trường thông tin
         $user->fullname = $request->input('fullname');
@@ -58,9 +51,9 @@ class ProfileController extends Controller
         $user->dateOfBirth = $request->input('dateOfBirth');
 
         // Kiểm tra xem người dùng có thay đổi mật khẩu không
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->input('password')); // Mã hóa mật khẩu trước khi lưu
-        }
+        // if ($request->filled('password')) {
+        //     $user->password = bcrypt($request->input('password')); // Mã hóa mật khẩu trước khi lưu
+        // }
 
         // Lưu lại thông tin
         try {
@@ -70,4 +63,5 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors(['error' => 'Không thể cập nhật thông tin: ' . $e->getMessage()]);
         }
     }
+
 }
