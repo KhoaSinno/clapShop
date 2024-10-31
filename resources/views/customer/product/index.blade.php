@@ -34,7 +34,7 @@
                             <li>
                                 <a
                                     href="{{ route('customer.products.by_slug', $category->slug) }}"
-                                    class="{{ request()->is('customer/products/' . $category->slug) ? 'text-primary text-bold' : '' }}">{{$category->name}}</a>
+                                    class="{{ request()->is('customer/products/' . $category->slug) ? 'text-redCate text-bold'  : '' }}">{{$category->name}}</a>
                             </li>
                             @endforeach
 

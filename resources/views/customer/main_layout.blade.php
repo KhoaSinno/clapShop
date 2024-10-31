@@ -7,11 +7,19 @@
     <style>
     /* CSS tùy chỉnh cho hiệu ứng hover màu đỏ */
     .footer__widget ul li a:hover {
-      color: red; /* Đổi màu chữ sang đỏ khi hover */
+      color:  #EB473D; /* Đổi màu chữ sang đỏ khi hover */
       transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
     }
     .footer__widget ul li a {
         padding: 5px 0;
+    }
+    .category li a:hover {
+        color: #EB473D; /* Đổi màu chữ sang đỏ khi hover */
+        transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    }
+    .category li a:active {
+        color:  #EB473D; /* Đổi màu chữ sang đỏ khi hover */
+        transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
     }
   </style>
 </head>
@@ -194,7 +202,7 @@
                             <i class="fa fa-bars"></i>
                             <span>Danh mục</span>
                         </div>
-                        <ul>
+                        <ul class="category">
                             @foreach ($categories as $category)
 
                             <li><a

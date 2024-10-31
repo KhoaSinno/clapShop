@@ -1087,6 +1087,11 @@ ol {
     margin-bottom: 35px;
 }
 
+/* .sidebar__item  ul  li  a:active, .sidebar__item ul li a:hover {
+    color:  #EB473D !important; 
+    transition: color 0.3s ease; 
+} */
+
 .sidebar__item.sidebar__item__color--option {
     overflow: hidden;
 }
@@ -3613,4 +3618,8 @@ ol {
 
 .price_active:hover {
     background: #000;
+}
+
+.text-redCate{
+    color: #EB473D !important;
 }
