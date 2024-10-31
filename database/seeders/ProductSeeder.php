@@ -155,7 +155,7 @@ class ProductSeeder extends Seeder
                 'os' => 'Windows 11 bản quyền',
                 'description' => '',
                 'price' => 16990000,
-                'stock' => '',
+                'stock' => '1',
                 'active' => true,
             ],
             [
