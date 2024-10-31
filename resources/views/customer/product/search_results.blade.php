@@ -94,7 +94,11 @@
                 </div>
                 <div class="row">
                     @foreach ($products as $product)
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 18790000)
+                            id="lower_20"
+                            @else
+                            id="greater_20"
+                            @endif>
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
                                 <ul class="product__item__pic__hover">
