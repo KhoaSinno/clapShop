@@ -4,6 +4,16 @@
 <head>
     @include('customer.head')
     @yield('header')
+    <style>
+    /* CSS tùy chỉnh cho hiệu ứng hover màu đỏ */
+    .footer__widget ul li a:hover {
+      color: red; /* Đổi màu chữ sang đỏ khi hover */
+      transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    }
+    .footer__widget ul li a {
+        padding: 5px 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,7 +34,7 @@
                 <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span
                             class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
             </ul>
-            <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span>
+            <div class="header__cart__price">Tổng tiền: <span>{{session('total', 0) }}</span>
             </div>
         </div>
         <div class="humberger__menu__widget">
@@ -48,10 +58,10 @@
                 <li><a href="{{ route('customer.products') }}">Danh mục</a>
                     <ul class="header__menu__dropdown pl-3 ">
                         @foreach ($categories as $category)
-                            <li>
-                                <a class="font-weight-light"
-                                    href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
-                            </li>
+                        <li>
+                            <a class="font-weight-light"
+                                href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                        </li>
                         @endforeach
                     </ul>
                 </li>
@@ -104,24 +114,24 @@
 
                             <div class="header__top__right__auth">
                                 @auth
-                                    <!-- Kiểm tra nếu người dùng là khách hàng -->
-                                    @if(auth()->user()->role == 'customer')
-                                        <!-- Gắn đường dẫn ở đây -->
-                                        <a class="d-inline-block border-right" href="{{ route('customer.profile') }}"><i
-                                                class="fa fa-user"></i>
-                                            {{ auth()->user()->username }}</a>
-                                        <a class="d-inline-block " href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Đăng xuất
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-                                    @endif
+                                <!-- Kiểm tra nếu người dùng là khách hàng -->
+                                @if(auth()->user()->role == 'customer')
+                                <!-- Gắn đường dẫn ở đây -->
+                                <a class="d-inline-block border-right" href="{{ route('customer.profile') }}"><i
+                                        class="fa fa-user"></i>
+                                    {{ auth()->user()->username }}</a>
+                                <a class="d-inline-block " href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Đăng xuất
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                                @endif
                                 @else
-                                    <!-- Nếu người dùng chưa đăng nhập -->
-                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <!-- Nếu người dùng chưa đăng nhập -->
+                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
                                 @endauth
                             </div>
 
@@ -162,7 +172,7 @@
                                         class="span__quantity_cart">{{ session('totalQuantity', 0)}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Tổng tiền:
-                            <span>{{ format_currencyVNĐ(session('total', 0))  }}</span>
+                            <span>{{session('total', 0) }}</span>
                         </div>
                     </div>
                 </div>
@@ -187,9 +197,9 @@
                         <ul>
                             @foreach ($categories as $category)
 
-                                <li><a
-                                        href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
-                                </li>
+                            <li><a
+                                    href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                            </li>
 
                             @endforeach
 
@@ -246,29 +256,27 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
-                        <h6>Useful Links</h6>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
+                        <h6>Chính sách</h6>
+                        <ul class="w-100" >
+                        <li><a href="#">Hướng Dẫn Mua Hàng</a></li>
+                            <li><a href="#">Chính sách bảo mật dữ liệu</a></li>
+                            <li><a href="#">Chính sách xử lý dữ liệu cá nhân</a></li>
+                            <li><a href="#">Chính sách bảo hành</a></li>
+                            <li><a href="#">Chính sách bán hàng</a></li>
+                            <li><a href="#">Chính sách kiểm hàng</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                            <li><a href="#">Chính sách hoàn tiền</a></li>
+                            <li><a href="#">Quy chế hoạt động</a></li>
+                            <li><a href="#">Chính sách vận chuyển</a></li>
+                            <li><a href="#">Chính sách giao hàng và thanh toán</a>
+                        </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h6>Liên hệ</h6>
+                        <p>Nhận thông tin cập nhật qua Email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
                         <form action="#">
                             <input type="text" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>

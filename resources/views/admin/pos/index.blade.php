@@ -136,20 +136,20 @@
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tổng cộng thanh toán: </label>
-                            <p class="control-all-money" id="totalPrice">0đ</p>
+                            <p class="control-all-money" id="totalPrice"></p>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Khách hàng đưa tiền: </label>
-                            <input class="form-control" type="number" value="300000">
+                            <input class="form-control" type="number" id="totalInUser" value=0>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tiền thừa: </label>
-                            <p class="control-all-money-total"> 10.000 VNĐ</p>
+                            <p class="control-all-money-total" id="change"></p>
                         </div>
-                        <div class="form-group col-md-6">
+                        <!-- <div class="form-group col-md-6">
                             <label class="control-label"></label>
                             <button class="btn btn-success mt-3 cursor-pointer">Tính</button>
-                        </div>
+                        </div> -->
                         <div class="tile-footer col-md-12">
                             <button class="btn btn-primary luu-san-pham" type="button">Lưu đơn hàng</button>
                             <!-- <button class="btn btn-primary luu-va-in" type="button">Lưu và in hóa đơn</button> -->
@@ -456,7 +456,25 @@
             });
         });
     </script>
+    <!-- tính tiền thừa -->
+    <script>
+    function calculateChange() {
+        // Lấy giá trị tổng cộng thanh toán
+        const totalPrice = parseFloat(document.getElementById('totalPrice').textContent) || 0;
+        // Lấy giá trị tiền khách hàng đưa
+        const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
+        // Tính tiền thừa
+        const change = totalInUser - totalPrice;
+        // Hiển thị tiền thừa
+        document.getElementById('change').textContent = change >= 0 ? change : 'Không đủ tiền';
+    }
 
+    // Gán sự kiện khi người dùng thay đổi giá trị trong input
+    document.getElementById('totalInUser').addEventListener('input', calculateChange);
+
+    // Gọi hàm tính toán khi trang được tải để hiển thị kết quả ban đầu
+    calculateChange();
+</script>
 
 
 </body>

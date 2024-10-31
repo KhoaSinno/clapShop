@@ -34,7 +34,7 @@
                         <img class="product__details__pic__item--large"
                             src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="">
                     </div>
-                    <div class="product__details__pic__slider owl-carousel">
+                    <!-- <div class="product__details__pic__slider owl-carousel">
                         <img data-imgbigurl="/e_customerSN/img/product/details/product-details-2.jpg"
                             src="/e_customerSN/img/product/details/thumb-1.jpg" alt="">
                         <img data-imgbigurl="/e_customerSN/img/product/details/product-details-3.jpg"
@@ -43,7 +43,7 @@
                             src="/e_customerSN/img/product/details/thumb-3.jpg" alt="">
                         <img data-imgbigurl="/e_customerSN/img/product/details/product-details-4.jpg"
                             src="/e_customerSN/img/product/details/thumb-4.jpg" alt="">
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -59,10 +59,10 @@
                     </div> -->
                     <div class="product__details__price">{{format_currencyVNĐ($product->price) }}</div>
                     <div class="product__details__quantity">
+                        <div class="pro-qty">
+                            <input type="text" value="1">
+                        </div>
                         <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
                         </div>
                     </div>
                     <a href="#" class="primary-btn add-to-cart" data-id="{{ $product->id }}">Thêm vào giỏ</a>
@@ -149,4 +149,5 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @endsection
