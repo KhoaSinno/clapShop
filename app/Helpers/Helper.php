@@ -19,6 +19,8 @@ function returnCssStatus($status)
         return 'text-warning';
     } elseif ($status == 'success') {
         return 'text-success';
+    } else {
+        return 'text-danger';
     }
 }
 
@@ -32,6 +34,9 @@ function returnStatus($status)
             break;
         case 'success':
             $statusText = 'Đã giao hàng';
+            break;
+        case 'cancel':
+            $statusText = 'Đã hủy đơn';
             break;
         default:
             $statusText = 'Không xác định';
