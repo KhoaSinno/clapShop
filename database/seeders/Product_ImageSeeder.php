@@ -19,7 +19,7 @@ class Product_ImageSeeder extends Seeder
             [
                 [
                     'productID' => 1,
-                    'image_url' => '/storage/images/1728712541Lenovo16G6+2024.jpg',
+                    'image_url' => '/storage/images/1728712541Lenovo16G6plus2024.jpg',
                     'desc' => 'Lenovo Thinkbook 16 G6+ 2024',
                     'type' => 'main',
                 ],

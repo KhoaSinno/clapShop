@@ -92,7 +92,8 @@ class CategoryController extends Controller
 
             // Delete the associated image if it exists
             if ($category->imgURL) {
-                Storage::disk('public')->delete($category->imgURL);
+                $oldPath = str_replace('storage/', '', $category->imgURL);
+                Storage::disk('public')->delete($oldPath);
             }
 
             // Delete the category
