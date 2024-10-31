@@ -24,7 +24,7 @@
                 <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-bag"></i> <span
                             class="span__quantity_cart">{{ session('totalQuantity', 0) }}</span></a></li>
             </ul>
-            <div class="header__cart__price">Tổng tiền: <span>{{ format_currencyVNĐ(session('total', 0))  }}</span>
+            <div class="header__cart__price">Tổng tiền: <span>{{session('total', 0) }}</span>
             </div>
         </div>
         <div class="humberger__menu__widget">
@@ -48,10 +48,10 @@
                 <li><a href="{{ route('customer.products') }}">Danh mục</a>
                     <ul class="header__menu__dropdown pl-3 ">
                         @foreach ($categories as $category)
-                            <li>
-                                <a class="font-weight-light"
-                                    href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
-                            </li>
+                        <li>
+                            <a class="font-weight-light"
+                                href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                        </li>
                         @endforeach
                     </ul>
                 </li>
@@ -104,24 +104,24 @@
 
                             <div class="header__top__right__auth">
                                 @auth
-                                    <!-- Kiểm tra nếu người dùng là khách hàng -->
-                                    @if(auth()->user()->role == 'customer')
-                                        <!-- Gắn đường dẫn ở đây -->
-                                        <a class="d-inline-block border-right" href="{{ route('customer.profile') }}"><i
-                                                class="fa fa-user"></i>
-                                            {{ auth()->user()->username }}</a>
-                                        <a class="d-inline-block " href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Đăng xuất
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            style="display: none;">
-                                            @csrf
-                                        </form>
-                                    @endif
+                                <!-- Kiểm tra nếu người dùng là khách hàng -->
+                                @if(auth()->user()->role == 'customer')
+                                <!-- Gắn đường dẫn ở đây -->
+                                <a class="d-inline-block border-right" href="{{ route('customer.profile') }}"><i
+                                        class="fa fa-user"></i>
+                                    {{ auth()->user()->username }}</a>
+                                <a class="d-inline-block " href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Đăng xuất
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                                @endif
                                 @else
-                                    <!-- Nếu người dùng chưa đăng nhập -->
-                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+                                <!-- Nếu người dùng chưa đăng nhập -->
+                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
                                 @endauth
                             </div>
 
@@ -162,7 +162,7 @@
                                         class="span__quantity_cart">{{ session('totalQuantity', 0)}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Tổng tiền:
-                            <span>{{ format_currencyVNĐ(session('total', 0))  }}</span>
+                            <span>{{session('total', 0) }}</span>
                         </div>
                     </div>
                 </div>
@@ -187,9 +187,9 @@
                         <ul>
                             @foreach ($categories as $category)
 
-                                <li><a
-                                        href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
-                                </li>
+                            <li><a
+                                    href="{{ route('customer.products.by_slug', $category->slug) }}">{{$category->name}}</a>
+                            </li>
 
                             @endforeach
 

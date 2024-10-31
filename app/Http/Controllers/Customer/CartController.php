@@ -20,7 +20,7 @@ class CartController extends Controller
             $cartTotal += $item['price'] * $item['quantity'];
         }
         $cartTotal = format_currencyVNĐ($cartTotal);
-        return view('customer.cart.index', [
+        return view('customer.cart.index', data: [
             'cart' => $cart,
             'cartTotal' => $cartTotal
         ]);
