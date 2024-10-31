@@ -44,7 +44,7 @@ class ProductController extends Controller
 
         $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
         // Gọi hàm applySort để lấy giá trị sort và danh sách sản phẩm
-        list($sort, $products) = $this->applySort($request, 3);
+        list($sort, $products) = $this->applySort($request, 9);
         $categories = Category::all();
 
         $productCount = Product::all()->count();
