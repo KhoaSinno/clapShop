@@ -1,10 +1,9 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-
 use App\Models\Product_Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -37,8 +36,11 @@ class ProductController extends Controller
             ]
         );
     }
+
+    
     public function edit($id)
     {
+
         $categories = Category::all();
         $product = Product::find($id);
         $product_images = Product_Image::where('productID', $id)->get();
@@ -49,6 +51,19 @@ class ProductController extends Controller
             'product' => $product,
             'product_images' => $product_images,
         ]);
+    }
+
+    //hàm xóa ảnh trong phần sửa
+    public function destroyImage(Product $product, $imageId)
+    {
+        $image = $product->images()->findOrFail($imageId);
+    
+        // // Xóa ảnh khỏi thư mục (thay thế 'public/images' bằng đường dẫn thực tế)
+        // Storage::delete('public/images/' . $image->filename);
+    
+        $image->delete();
+    
+        return back()->with('success', 'Ảnh đã được xóa thành công');
     }
 
     //done
@@ -146,10 +161,36 @@ class ProductController extends Controller
                 $product->description = $request->input('description');
 
                 $product->save();
+                try {
+                    //code...
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+                if ($product->save()) {
+                    try {
+                        //code...
+                    // tim product them name
+                    $updatedProduct = Product::where('name', $product->name)->first();        
+                    $fileName = time() . $request->file('ImageUpload')->getClientOriginalName();
+                    $path = $request->file('ImageUpload')->storeAs('images', $fileName, 'public');        
+                    $productImage = new Product_Image();
+                    $productImage->productID = $updatedProduct->id; // ID của sản phẩm
+                    $productImage->image_url = '/storage/' . $path;; // Đường dẫn hình ảnh
+                    $productImage->desc = "";
+                    $productImage->type = "";
+                    $productImage->save();
+                    
+                    return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Thêm ảnh thành công.');
+                    } catch (\Throwable $th) {
+                        return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Không có ảnh nào được cập nhật.');
+                    }
+                } else {
+                    return redirect()->route('admin.product')->with('error', 'Cập nhật sản phẩm thất bại.');
+                }
 
-                return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công');
+                return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Không có hình ảnh nào được cập nhật.');
             }
-            return redirect()->route('admin.product')->with('error', 'Cập nhật khong sản phẩm thành công');
+            return redirect()->route('admin.product')->with('error', 'Cập nhật sản phẩm thất bại!');
 
 
             if ($product) {
@@ -170,9 +211,8 @@ class ProductController extends Controller
 
         if ($product) {
             // Xóa tất cả hình ảnh liên quan đến sản phẩm
-            Product_Image::where('productID', $id)->delete(); // Xóa hình ảnh theo ID sản phẩm
-
-            $product->delete();
+            $product->active = 0;
+            $product->save();
             return redirect()->route('admin.product')->with('success', 'Sản phẩm đã được xóa thành công.');
         } else {
             return redirect()->route('admin.product')->with('error', 'Không thể tìm thấy sản phẩm để xóa.');

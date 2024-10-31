@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"> 
 
 <head>
     @include('admin.head')
@@ -50,12 +50,18 @@
                             <button type="submit" class="btn btn-info w-100">Đăng nhập</button>
                         </div>
                         <div class="text-right p-t-12">
-                            <a class="txt2" href="/admin_UI/forgot.html">
+                            <a class="txt2" href="{{route('forget')}}">
                                 Bạn quên mật khẩu?
                             </a>
                         </div>
                         @csrf
                     </form>
+                    <div class="text-center p-t-12">
+                        Bạn chưa có tài khoản?
+                        <a class="txt2" href="{{route('register')}}">
+                            Đăng ký ngay!
+                        </a>
+                    </div>
                     <div class="text-center p-t-70 txt2 d-flex flex-col">
                         <span>Phần mềm quản lý bán hàng ClapShop</span>
                         <div>
@@ -71,9 +77,15 @@
         </div>
     </div>
     @include('admin.footer')
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

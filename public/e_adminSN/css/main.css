@@ -14580,7 +14580,7 @@ be a descendant of the grid when it is being dragged.
         visibility: hidden;
     }
 }
-
+/* My config: max-width: 767px */
 @media (max-width: 767px) {
     .app {
         overflow-x: hidden;

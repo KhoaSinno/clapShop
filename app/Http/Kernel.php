@@ -25,6 +25,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class, // Đăng ký middleware role ở đây
+        'ensureCustomer' => \App\Http\Middleware\EnsureCustomerRole::class,
     ];
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,

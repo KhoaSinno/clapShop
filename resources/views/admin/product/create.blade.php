@@ -142,10 +142,10 @@
     <div class="form-group col-md-12">
         <label class="control-label">Ảnh sản phẩm</label>
         <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);"/>
         </div>
         <div id="thumbbox">
-            <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
+            <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none"/>
             <a class="removeimg" href="javascript:"></a>
         </div>
         <div id="boxchoice">

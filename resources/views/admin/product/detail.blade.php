@@ -100,12 +100,12 @@
         @csrf
     <div class="form-group col-md-3">
         <label class="control-label">Tên sản phẩm</label>
-        <input class="form-control" type="text" name="name" value="ten san pham 1">
+        <input class="form-control" type="text" name="name" >
     </div>
 
     <div class="form-group col-md-3">
         <label class="control-label">Số lượng</label>
-        <input class="form-control" type="number" name="stock" value=12>
+        <input class="form-control" type="number" name="stock">
     </div>
 
 
@@ -133,83 +133,83 @@
 
     <div class="form-group col-md-3">
         <label class="control-label">Giá bán</label>
-        <input class="form-control" type="number" name="price" value="12">
+        <input class="form-control" type="number" name="price">
     </div>
     <!-- cpu -->
     <div class="form-group col-md-3">
         <label class="control-label">CPU</label>
-        <input class="form-control" type="text" name="cpu" value="cpu 1">
+        <input class="form-control" type="text" name="cpu">
     </div>
         <!-- ram -->
         <div class="form-group col-md-3">
-        <label class="control-label">ram</label>
-        <input class="form-control" type="text" name="ram" value="ram 1">
+        <label class="control-label">RAM</label>
+        <input class="form-control" type="text" name="ram">
     </div>
         <!-- storage -->
         <div class="form-group col-md-3">
-        <label class="control-label">storage</label>
-        <input class="form-control" type="text" name="storage" value="storage 1">
+        <label class="control-label">Lưu trữ</label>
+        <input class="form-control" type="text" name="storage" >
     </div>
         <!-- screen -->
         <div class="form-group col-md-3">
-        <label class="control-label">screen</label>
-        <input class="form-control" type="text" name="screen" value="screen 1">
+        <label class="control-label">Màn hình</label>
+        <input class="form-control" type="text" name="screen">
     </div>
             <!-- card -->
             <div class="form-group col-md-3">
-        <label class="control-label">card</label>
-        <input class="form-control" type="text" name="card" value="screen 1">
+        <label class="control-label">Card</label>
+        <input class="form-control" type="text" name="card">
     </div>
             <!-- connector -->
             <div class="form-group col-md-3">
-        <label class="control-label">connector</label>
-        <input class="form-control" type="text" name="connector" value="screen 1">
+        <label class="control-label">Cổng kết nối</label>
+        <input class="form-control" type="text" name="connector">
     </div>
             <!-- weight -->
             <div class="form-group col-md-3">
-        <label class="control-label">weight</label>
-        <input class="form-control" type="text" name="weight" value="screen 1">
+        <label class="control-label">Khối lượng</label>
+        <input class="form-control" type="text" name="weight">
     </div>
             <!-- keyboard -->
             <div class="form-group col-md-3">
-        <label class="control-label">keyboard</label>
-        <input class="form-control" type="text" name="keyboard" value="screen 1">
+        <label class="control-label">Bàn phím</label>
+        <input class="form-control" type="text" name="keyboard">
     </div>
             <!-- battery -->
             <div class="form-group col-md-3">
-        <label class="control-label">battery</label>
-        <input class="form-control" type="text" name="battery" value="screen 1">
+        <label class="control-label">Pin</label>
+        <input class="form-control" type="text" name="battery">
     </div>
             <!-- os -->
             <div class="form-group col-md-3">
-        <label class="control-label">os</label>
-        <input class="form-control" type="text" name="os" value="screen 1">
+        <label class="control-label">Hệ điều hành</label>
+        <input class="form-control" type="text" name="os">
     </div>
             <!-- warranty -->
             <div class="form-group col-md-3">
-        <label class="control-label">warranty</label>
-        <input class="form-control" type="text" name="warranty" value="screen 1">
+        <label class="control-label">Bảo hành</label>
+        <input class="form-control" type="text" name="warranty">
     </div>
             <!-- color -->
             <div class="form-group col-md-3">
-        <label class="control-label">color</label>
-        <input class="form-control" type="text" name="color" value="screen 1">
+        <label class="control-label">Màu sắc</label>
+        <input class="form-control" type="text" name="color">
     </div>
             <!-- material -->
             <div class="form-group col-md-3">
-        <label class="control-label">material</label>
-        <input class="form-control" type="text" name="material" value="screen 1">
+        <label class="control-label">Chất liệu</label>
+        <input class="form-control" type="text" name="material">
     </div>
 
     <div class="custom-control custom-checkbox form-group col-md-3">
         <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">Active</label>
+        <label class="custom-control-label" for="customCheck1">Còn hàng</label>
     </div>
 
     <div class="form-group col-md-12">
         <label class="control-label">Ảnh sản phẩm</label>
         <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" multiple/>
         </div>
         <div id="thumbbox">
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -223,7 +223,7 @@
 
     <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
-        <textarea class="form-control" name="description" id="mota" value="screen 1"></textarea>
+        <textarea class="form-control" name="description" id="mota" value="..."></textarea>
         <script>
             CKEDITOR.replace('mota');
         </script>

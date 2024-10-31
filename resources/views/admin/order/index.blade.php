@@ -1,9 +1,13 @@
 @extends('admin.main_layout')
 
 @section('function_nav')
-<div class="col-sm-2">
+<!-- <div class="col-sm-2">
     <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
         Tạo mới đơn hàng</a>
+</div> -->
+<div class="col-sm-2">
+    <a class="btn btn-sm btn-danger" href="{{route('admin.order.ordersDelete')}}" title="Xem đơn đã hủy"><i class="fa fa-trash"></i>
+        Xem các đơn đã hủy</a>
 </div>
 @endsection
 
@@ -12,31 +16,73 @@
     id="sampleTable">
     <thead>
         <tr>
-            <th>Mã ĐH</th>
-            <th width="150">Khách hàng</th>
-            <th width="150">Địa chỉ</th>
-            <th>Tổng số lượng</th>
-            <th>Thời gian</th>
-            <th>Tổng giá</th>
-            <th>Trạng thái</th>
-            <th width="100">Tính năng</th>
+            <th width="20">Mã ĐH</th>
+            <th width="190">Khách hàng</th>
+            <th width="250">Địa chỉ</th>
+            <th width="10">Tổng SL</th>
+            <th width="220">Thời gian</th>
+            <th width="100">Tổng giá</th>
+            <th width="180">Trạng thái</th>
+            <th width="200">Tính năng</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($orders as $od)
+        @foreach($pendingOrders as $od)
         <tr>
-            <td>{{ $od->id }}</td>
-            <td>{{ $od->fullname }}</td> <!-- Tên  khách hàng -->
-            <td>{{ $od->address }}</td>
+            <td id="orderId">#{{ $od->id }}</td>
+            <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
+            <td width="300">{{ $od->address }}</td>
             <td>{{ $od->totalQuantity }}</td>
-            <td>{{ $od->orderDate }}</td>
-            <td>{{ $od->totalPrice }}</td>
-            <td>{{ $od->status}}</td>
-            <td class="table-td-center">
-                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-id="{{ $od->id }}" data-toggle="modal" data-target="#ModalUP">
+            <td>{{ $od->created_at }}</td>
+            <td>{{ format_currencyVNĐ($od->totalPrice)  }}</td>
+            <td class="font-weight-bold  {{returnCssStatus($od->status)}}">{{ returnStatus($od->status) }}</td>
+            <td class="table-td-center d-flex justify-content-center align-items-stretch gap-x-2">
+                <button class="btn btn-primary btn-sm edit mr-1" type="button" title="Sửa" data-id="{{ $od->id }}" data-toggle="modal" data-target="#ModalUP">
                     <i class="fas fa-edit"></i>
                 </button>
+                <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                <a class="btn btn-success btn-sm mx-1 orderSuccess" data-id="{{ $od->id }}">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-danger text-white btn-sm ml-1 deleteOrder" data-id="{{ $od->id }}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
 
+            </td>
+        </tr>
+        @endforeach
+
+
+    </tbody>
+</table>
+<h2 class="text-center bg-success py-2 mt-5">Đơn hàng đã duyệt</h2>
+
+<table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
+    id="sampleTableSub">
+    <thead>
+        <tr class="text-center">
+            <th width="20">Mã ĐH</th>
+            <th width="190">Khách hàng</th>
+            <th width="250">Địa chỉ</th>
+            <th width="10">Tổng SL</th>
+            <th width="220">Thời gian</th>
+            <th width="100">Tổng giá</th>
+            <th width="180">Trạng thái</th>
+            <th width="200">Tính năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($successOrders as $od)
+        <tr>
+            <td>#{{ $od->id }}</td>
+            <td>{{ $od->user ? $od->user->fullname : 'Khách không đăng ký' }}</td>
+            <td width="300">{{ $od->address }}</td>
+            <td>{{ $od->totalQuantity }}</td>
+            <td>{{ $od->created_at }}</td>
+            <td width="100">{{ format_currencyVNĐ($od->totalPrice)  }}</td>
+            <td class="font-weight-bold  {{returnCssStatus($od->status)}}">{{ returnStatus($od->status) }}</td>
+            <td class="table-td-center">
+                <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
             </td>
         </tr>
         @endforeach
@@ -46,12 +92,9 @@
 </table>
 @endsection
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!--MODAL Update customer-->
+
 @section('modal')
-<!-- MODAL Update customer -->
 <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -59,47 +102,18 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <span class="thong-tin-thanh-toan">
-                            <h5>Chỉnh sửa thông tin khách hàng</h5>
+                            <h5>Chỉnh sửa địa chỉ khách hàng</h5>
                         </span>
                     </div>
                 </div>
-                <!-- Form cập nhật khách hàng -->
-                <form id="updateCustomerForm">
+                <!-- Form cập nhật địa chỉ -->
+                <form id="updateOrderForm" method="POST">
                     @csrf
-                    <!-- <input type="hidden" id="customerId" name="id"> -->
+                    <input type="hidden" id="orderId" name="orderId">
                     <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Mã KH</label>
-                            <input class="form-control" type="text" id="customerId" disabled>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Họ và tên</label>
-                            <input class="form-control" type="text" id="fullname" name="fullname" required>
-                        </div>
                         <div class="form-group col-12">
                             <label class="control-label">Địa chỉ</label>
                             <textarea class="form-control" id="address" name="address" required></textarea>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="number" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Ngày sinh</label>
-                            <input class="form-control" type="date" id="dateOfBirth" name="dateOfBirth" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Giới tính</label>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Bí mật</option>
-                            </select>
                         </div>
                     </div>
                     <br>
@@ -110,58 +124,44 @@
         </div>
     </div>
 </div>
-
-
 @endsection
 
 
+@section('footer')
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        // Khi click vào nút sửa, hiển thị modal với thông tin của khách hàng
         $(".edit").on("click", function() {
-            var customerId = $(this).data('id'); // Lấy ID của khách hàng
+            var orderId = $(this).data('id'); // Lấy ID của đơn hàng
 
-            // Gọi AJAX để lấy dữ liệu khách hàng theo ID
+            // Gọi AJAX để lấy dữ liệu đơn hàng theo ID
             $.ajax({
-                url: '/admin/customers/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
-                url: '/admin/customer/' + customerId + '/edit', // Route để lấy dữ liệu khách hàng
+                url: '/admin/order/edit/' + orderId, // Route để lấy thông tin đơn hàng
                 type: 'GET',
                 success: function(response) {
-                    $('#customerId').val(response.id);
-                    $('#fullname').val(response.fullname);
-                    $('#address').val(response.address);
-                    $('#phone').val(response.phone);
-                    $('#email').val(response.email);
+                    $('#address').val(response.address); // Gán địa chỉ vào form
+                    $('#orderId').val(orderId); // Gán orderId vào hidden input
+                    // $('#orderId').val(response.id);
 
-
-                    // Lấy ngày sinh và chuyển đổi sang định dạng yyyy-MM-dd
-                    var dob = response.dateOfBirth; // lấy ngày từ server
-                    var dateParts = dob.split(" ")[0].split("-"); // chia theo dấu cách để lấy phần ngày, sau đó chia theo "-"
-
-                    // Kiểm tra độ dài mảng
-                    if (dateParts.length === 3) {
-                        var formattedDate = dateParts[0] + '-' + dateParts[1] + '-' + dateParts[2]; // định dạng lại thành yyyy-MM-dd
-                        $('#dateOfBirth').val(formattedDate); // gán giá trị cho input
-                    }
-
-                    $('#gender').val(response.gender);
-                    // $('#ModalUP').modal('show'); // Hiển thị modal
+                    $('#ModalUP').modal('show'); // Hiển thị modal
                 },
                 error: function(xhr) {
-                    alert('Lỗi khi lấy thông tin khách hàng');
+                    alert('Lỗi khi lấy thông tin địa chỉ đơn hàng');
                     console.log(xhr.responseText); // Xem phản hồi từ server
                 }
             });
         });
 
-        $("#updateCustomerForm").on("submit", function(e) {
+
+        $("#updateOrderForm").on("submit", function(e) {
             e.preventDefault(); // Ngăn chặn việc gửi form mặc định
-            var customerId = $('#customerId').val(); // Lấy ID từ hidden input
+            var orderId = $('#orderId').val(); // Lấy ID từ hidden input
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
             $.ajax({
-                url: '/admin/customers/' + customerId, // Gọi đúng URL với ID
-                url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
+                url: '/admin/order/update/' + orderId, // Gọi đúng URL với ID
                 type: 'PUT',
                 data: formData, // Dữ liệu từ form
                 headers: {
@@ -177,6 +177,54 @@
                 }
             });
         });
+        $('.orderSuccess').on('click', function() {
+            var orderId = $(this).data('id');
+
+            $.ajax({
+                url: '/admin/order/success/' + orderId,
+                type: 'POST', // Đảm bảo sử dụng phương thức POST
+                data: {
+                    _token: '{{ csrf_token() }}', // Thêm CSRF token vào dữ liệu
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Đơn hàng đã được cập nhật thành công.');
+                        location.reload(); // Tải lại trang nếu cần
+                    } else {
+                        alert('Cập nhật thất bại: ' + response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Đã xảy ra lỗi: ' + xhr.responseJSON.message || 'Lỗi không xác định');
+                }
+            });
+        });
+
+        $('.deleteOrder').on("click", function() {
+            var orderId = $(this).data('id'); // Lấy ID của đơn hàng
+
+            if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+                $.ajax({
+                    url: '/admin/order/cancel/' + orderId,
+                    type: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Đơn hàng đã được hủy thành công!');
+                            location.reload(); // Reload trang sau khi hủy thành công
+                        } else {
+                            alert('Hủy đơn hàng thất bại: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Hủy đơn hàng thất bại: ' + xhr.responseJSON.message || 'Lỗi không xác định');
+                    }
+                });
+            }
+        });
 
     });
 </script>
+@endsection

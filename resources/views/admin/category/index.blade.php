@@ -11,6 +11,13 @@
     </div>
 @endsection
 
+<style>
+    .category-image {
+        max-height: 32px; /* Adjust the max-height as needed */
+        object-fit: cover; /* Ensure the image covers the area without distortion */
+    }
+</style>
+
 @section('content')
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,12 +37,12 @@
         </div>
     @endif
 
-    <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0">
+    <table class="table table-hover table-bordered js-copytextarea" id="sampleTable" cellpadding="0" cellspacing="0" border="0">
         <thead>
             <tr>
                 <th>ID</th>
                 <th width="150">Tên</th>
-                <th width="20">Logo</th>
+                <th width="20" class="text-center">Logo</th>
                 <th width="100">Tính năng</th>
             </tr>
         </thead>
@@ -44,11 +51,11 @@
                 <tr>
                     <td class="col-1">{{ $category->id }}</td>
                     <td class="col-5">{{ $category->name }}</td>
-                    <td class="col-3"><img class="img-card-person" src="/e_adminSN/assets/img-anhthe/2.jpg" alt=""></td>
+                    <td class="col-3 text-center"><img src="../{{ $category->imgURL}}" alt="" class="category-image"></td>
                     <td class="col table-td-center">
                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" data-toggle="modal" data-target="#editCategoryModal{{ $category->id }}">
                             <i class="fas fa-edit"></i>
-                        </button> 
+                        </button>
                         <button class="btn btn-primary btn-sm btn-danger" type="button" title="Xóa" data-toggle="modal" data-target="#deleteCategoryModal{{ $category->id }}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
@@ -71,11 +78,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.category.store') }}" method="POST">
+                    <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="name">Tên danh mục</label>
                             <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Ảnh danh mục</label>
+                            <div id="myfileupload">
+                                <input type="file" id="uploadfile" name="imgURL" onchange="readURL(this);" />
+                            </div>
+                            <div id="thumbbox">
+                                <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
+                                <a class="removeimg" href="javascript:"></a>
+                            </div>
+                            <div id="boxchoice">
+                                <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                                <p style="clear:both"></p>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -99,12 +120,26 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
+                        <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name{{ $category->id }}">Tên danh mục</label>
                                 <input type="text" class="form-control" id="name{{ $category->id }}" name="name" value="{{ $category->name }}" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Ảnh danh mục</label>
+                                <div id="myfileupload">
+                                    <input type="file" id="uploadfile" name="imgURL" onchange="readURL(this);" />
+                                </div>
+                                <div id="thumbbox">
+                                    <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
+                                    <a class="removeimg" href="javascript:"></a>
+                                </div>
+                                <div id="boxchoice">
+                                    <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                                    <p style="clear:both"></p>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>

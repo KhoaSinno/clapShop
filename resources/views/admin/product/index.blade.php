@@ -55,7 +55,11 @@
             <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
             <td>{{ $p->price }}</td>
             <td>{{ $p->stock }}</td>
-            <td>{{ $p->active ? 'Còn bán' : 'Ngừng bán'}}</td>
+            @if ($p->active)
+                <td>Còn bán</td>
+            @else
+                <td class="text-danger">Ngừng bán</td>
+            @endif
             <td class="table-td-center">
 
                 <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail.edit', ['id' => $p->id]) }}">

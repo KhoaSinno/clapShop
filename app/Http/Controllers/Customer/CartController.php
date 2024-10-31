@@ -12,52 +12,19 @@ class CartController extends Controller
     public function index()
     {
         $cart = session()->get('cart');
-
-        return view('customer.cart.index', compact('cart'));
+        $cartTotal = 0;
+        if (!$cart) {
+            $cart = [];
+        }
+        foreach ($cart as $item) {
+            $cartTotal += $item['price'] * $item['quantity'];
+        }
+        $cartTotal = format_currencyVNĐ($cartTotal);
+        return view('customer.cart.index', data: [
+            'cart' => $cart,
+            'cartTotal' => $cartTotal
+        ]);
     }
-
-    // public function addToCart($id, Request $request)
-    // {
-    //     // Tìm sản phẩm trong cơ sở dữ liệu
-    //     $product = Product::find($id);
-
-    //     // Kiểm tra xem sản phẩm có tồn tại hay không
-    //     if (!$product) {
-    //         return response()->json(['error' => 'Sản phẩm không tồn tại.'], 404);
-    //     }
-
-    //     // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo một mảng rỗng
-    //     $cart = Session::get('cart', []);
-
-    //     // Kiểm tra xem sản phẩm đã có trong giỏ hàng chưa
-    //     if (isset($cart[$id])) {
-    //         // Nếu có, tăng số lượng sản phẩm
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         // Nếu chưa có, thêm sản phẩm vào giỏ hàng
-    //         $cart[$id] = [
-    //             'name' => $product->name,
-    //             'price' => $product->price,
-    //             'quantity' => 1,
-    //             'image' => $product->image // Nếu có trường hình ảnh
-    //         ];
-    //     }
-
-    //     // Cập nhật giỏ hàng vào session
-    //     Session::put('cart', $cart);
-
-    //     // Tính tổng tiền
-    //     $total = 0;
-    //     foreach ($cart as $item) {
-    //         $total += $item['price'] * $item['quantity'];
-    //     }
-
-    //     // Cập nhật tổng tiền vào session
-    //     session()->put('total', $total);
-
-    //     // Trả về phản hồi thành công
-    //     return response()->json(['success' => 'Sản phẩm đã được thêm vào giỏ hàng!']);
-    // }
 
     public function addToCart(Request $request, $id)
     {
@@ -73,9 +40,7 @@ class CartController extends Controller
                 "name" => $product->name,
                 "price" => $product->price,
                 "quantity" => 1,
-                'image' => $product->image // Nếu có trường hình ảnh
-
-
+                'image' => $product->mainImage->image_url ?? asset('storage/images/default.jpg')
             ];
         }
 
@@ -89,7 +54,7 @@ class CartController extends Controller
             // Tính tổng số lượng sản phẩm
             $totalQuantity += $item['quantity'];
         }
-
+        $total = format_currencyVNĐ($total);
         // Cập nhật tổng tiền vào session
         session()->put('total', $total);
         session()->put('totalQuantity', $totalQuantity);
@@ -161,5 +126,38 @@ class CartController extends Controller
         }
 
         return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
+    }
+
+    public function update(Request $request)
+    {
+        // Lấy giỏ hàng từ session
+        $cart = session()->get('cart');
+
+        if (isset($cart[$request->id])) {
+            // Cập nhật số lượng sản phẩm trong giỏ hàng
+            $cart[$request->id]['quantity'] = $request->quantity;
+
+            // Cập nhật lại session giỏ hàng
+            session()->put('cart', $cart);
+
+            // Tính lại tổng giá sản phẩm
+            $productTotal = $cart[$request->id]['price'] * $cart[$request->id]['quantity'];
+
+            // Tính lại tổng giá của toàn bộ giỏ hàng
+            $cartTotal = 0;
+            foreach ($cart as $item) {
+                $cartTotal += $item['price'] * $item['quantity'];
+            }
+            $cartTotal = format_currencyVNĐ($cartTotal);
+            $productTotal = format_currencyVNĐ($productTotal);
+
+            // Trả về kết quả
+            return response()->json([
+                'productTotal' => $productTotal,
+                'cartTotal' => $cartTotal
+            ]);
+        }
+
+        return response()->json(['error' => 'Sản phẩm không tồn tại trong giỏ hàng'], 404);
     }
 }
