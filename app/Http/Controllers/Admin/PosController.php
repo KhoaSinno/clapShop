@@ -268,7 +268,7 @@ class PosController extends Controller
         DB::beginTransaction();
 
         try {
-            // Tạo đơn hàng
+            // Tạo đơn hàng 
             $order = Order::create([
                 'customerID' => $customer->id,
                 'adminID' => auth()->user()->id, // ID của admin tạo đơn
@@ -295,12 +295,15 @@ class PosController extends Controller
                 ]);
             }
 
+            $order->status = 'success';
+            $order->save();
             // Xóa giỏ hàng sau khi lưu đơn hàng thành công
             session()->forget('cart');
 
             // Commit transaction
             DB::commit();
-
+            
+            
             return response()->json(['success' => true, 'orderID' => $order->id]);
         } catch (\Exception $e) {
             // Rollback nếu có lỗi
