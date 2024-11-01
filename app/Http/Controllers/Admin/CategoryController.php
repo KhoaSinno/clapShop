@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $category->imgURL = $path ? 'storage/' . $path : null;
         $category->save();
 
-        return redirect()->route('admin.category')->with('success', 'Category created successfully.');
+        return redirect()->route('admin.category')->with('success', 'Tạo danh mục thành công.');
     }
 
     public function edit($id)
@@ -82,7 +82,7 @@ class CategoryController extends Controller
         // Save the category
         $category->save();
 
-        return redirect()->route('admin.category')->with('success', 'Category updated successfully.');
+        return redirect()->route('admin.category')->with('success', 'Cập nhật danh mục thành công.');
     }
 
     public function destroy($id)
@@ -99,9 +99,9 @@ class CategoryController extends Controller
             // Delete the category
             $category->delete();
 
-            return redirect()->route('admin.category')->with('success', 'Category deleted successfully.');
+            return redirect()->route('admin.category')->with('success', 'Danh mục đã được xóa thành công.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.category')->with('error', 'Failed to delete category.');
+            return redirect()->route('admin.category')->with('error', 'Đã xảy ra lỗi khi xóa danh mục.');
         }
     }
 }
