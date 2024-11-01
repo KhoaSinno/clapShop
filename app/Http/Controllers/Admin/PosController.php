@@ -268,7 +268,7 @@ class PosController extends Controller
         DB::beginTransaction();
 
         try {
-            // Tạo đơn hàng 
+            // Tạo đơn hàng
             $order = Order::create([
                 'customerID' => $customer->id,
                 'adminID' => auth()->user()->id, // ID của admin tạo đơn
@@ -277,7 +277,7 @@ class PosController extends Controller
                 'totalPrice' => $totalPrice,
                 'note' => $validated['note'] ?? null, // Ghi chú có thể rỗng
                 'paymentMethod' => $validated['paymentMethod'],
-                'status' => 'pending', // Trạng thái mặc định
+                'status' => 'success', // Trạng thái mặc định
             ]);
 
             // Lưu chi tiết đơn hàng
@@ -302,8 +302,8 @@ class PosController extends Controller
 
             // Commit transaction
             DB::commit();
-            
-            
+
+
             return response()->json(['success' => true, 'orderID' => $order->id]);
         } catch (\Exception $e) {
             // Rollback nếu có lỗi

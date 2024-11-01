@@ -5,22 +5,25 @@
     @include('customer.head')
     @yield('header')
     <style>
-    /* CSS tùy chỉnh cho hiệu ứng hover màu đỏ */
-    .footer__widget ul li a:hover {
-      color: red; /* Đổi màu chữ sang đỏ khi hover */
-      transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
-    }
-    .footer__widget ul li a {
-        padding: 5px 0;
-    }
-  </style>
+        /* CSS tùy chỉnh cho hiệu ứng hover màu đỏ */
+        .footer__widget ul li a:hover {
+            color: red;
+            /* Đổi màu chữ sang đỏ khi hover */
+            transition: color 0.3s ease;
+            /* Hiệu ứng chuyển màu mượt mà */
+        }
+
+        .footer__widget ul li a {
+            padding: 5px 0;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    <!-- <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div> -->
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -257,8 +260,8 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
                         <h6>Chính sách</h6>
-                        <ul class="w-100" >
-                        <li><a href="#">Hướng Dẫn Mua Hàng</a></li>
+                        <ul class="w-100">
+                            <li><a href="#">Hướng Dẫn Mua Hàng</a></li>
                             <li><a href="#">Chính sách bảo mật dữ liệu</a></li>
                             <li><a href="#">Chính sách xử lý dữ liệu cá nhân</a></li>
                             <li><a href="#">Chính sách bảo hành</a></li>
@@ -269,7 +272,7 @@
                             <li><a href="#">Quy chế hoạt động</a></li>
                             <li><a href="#">Chính sách vận chuyển</a></li>
                             <li><a href="#">Chính sách giao hàng và thanh toán</a>
-                        </li>
+                            </li>
                         </ul>
                     </div>
                 </div>

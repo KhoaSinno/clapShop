@@ -22,7 +22,7 @@
     <main class="app app-ban-hang">
         <div>
             <a class="btn btn-warning py-1 px-4 text-danger mb-3" href="{{ route('admin.customer') }}">
-                <<< Quay về</a>
+                < Quay về</a>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -458,23 +458,23 @@
     </script>
     <!-- tính tiền thừa -->
     <script>
-    function calculateChange() {
-        // Lấy giá trị tổng cộng thanh toán
-        const totalPrice = parseFloat(document.getElementById('totalPrice').textContent) || 0;
-        // Lấy giá trị tiền khách hàng đưa
-        const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
-        // Tính tiền thừa
-        const change = totalInUser - totalPrice;
-        // Hiển thị tiền thừa
-        document.getElementById('change').textContent = change >= 0 ? change : 'Không đủ tiền';
-    }
+        function calculateChange() {
+            // Lấy giá trị tổng cộng thanh toán
+            const totalPrice = parseFloat(document.getElementById('totalPrice').textContent) || 0;
+            // Lấy giá trị tiền khách hàng đưa
+            const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
+            // Tính tiền thừa
+            const change = totalInUser - totalPrice;
+            // Hiển thị tiền thừa
+            document.getElementById('change').textContent = change >= 0 ? change : 'Không đủ tiền';
+        }
 
-    // Gán sự kiện khi người dùng thay đổi giá trị trong input
-    document.getElementById('totalInUser').addEventListener('input', calculateChange);
+        // Gán sự kiện khi người dùng thay đổi giá trị trong input
+        document.getElementById('totalInUser').addEventListener('input', calculateChange);
 
-    // Gọi hàm tính toán khi trang được tải để hiển thị kết quả ban đầu
-    calculateChange();
-</script>
+        // Gọi hàm tính toán khi trang được tải để hiển thị kết quả ban đầu
+        calculateChange();
+    </script>
 
 
 </body>

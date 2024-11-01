@@ -31,15 +31,19 @@ class CartController extends Controller
         $product = Product::find($id);
         $cart = session()->get('cart', []);
 
+        // Lấy số lượng từ request, nếu không có thì đặt mặc định là 1
+        $quantity = $request->input('quantity', 1);
+
         // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            // $cart[$id]['quantity']++;
+            $cart[$id]['quantity'] += $quantity;
         } else {
             // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
             $cart[$id] = [
                 "name" => $product->name,
                 "price" => $product->price,
-                "quantity" => 1,
+                "quantity" => $quantity, // cập nhật số lượng ở đây
                 'image' => $product->mainImage->image_url ?? asset('storage/images/default.jpg')
             ];
         }
@@ -80,23 +84,6 @@ class CartController extends Controller
 
         return $itemCount; // Trả về số lượng sản phẩm
     }
-    // public function removeFromCart($id)
-    // {
-    //     // Lấy giỏ hàng từ session
-    //     $cart = session()->get('cart', []);
-
-    //     // Kiểm tra xem sản phẩm có trong giỏ hàng không
-    //     if (isset($cart[$id])) {
-    //         // Xóa sản phẩm khỏi giỏ hàng
-    //         unset($cart[$id]);
-    //         // Cập nhật giỏ hàng trong session
-    //         session()->put('cart', $cart);
-    //     }
-
-    //     return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng.');
-    // }
-
-
 
     public function removeFromCart($id)
     {
@@ -144,17 +131,22 @@ class CartController extends Controller
             $productTotal = $cart[$request->id]['price'] * $cart[$request->id]['quantity'];
 
             // Tính lại tổng giá của toàn bộ giỏ hàng
-            $cartTotal = 0;
+            $total = 0;
+            $totalQuantity = 0;
             foreach ($cart as $item) {
-                $cartTotal += $item['price'] * $item['quantity'];
+                $total += $item['price'] * $item['quantity'];
+                $totalQuantity += $item['quantity'];
             }
-            $cartTotal = format_currencyVNĐ($cartTotal);
+            $total = format_currencyVNĐ($total);
             $productTotal = format_currencyVNĐ($productTotal);
 
+            session()->put('total', $total);
+            session()->put('totalQuantity', $totalQuantity);
             // Trả về kết quả
             return response()->json([
                 'productTotal' => $productTotal,
-                'cartTotal' => $cartTotal
+                'total' => $total,
+                'totalQuantity' => $totalQuantity,
             ]);
         }
 
