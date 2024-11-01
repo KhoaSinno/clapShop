@@ -142,8 +142,12 @@
                 $('.header__cart__price').html("Tổng tiền: <span>" + response.total + "</span>");
 
             },
-            error: function() {
-                alert('Đã xảy ra lỗi khi cập nhật giỏ hàng.');
+            error: function(xhr) {
+                if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
+                    alert(xhr.responseJSON.error);
+                } else {
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                }
             }
         });
     });

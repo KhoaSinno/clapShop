@@ -119,6 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+    Route::get('/product/listDelete', [ProductController::class, 'listDelete'])->name('admin.product.listDelete');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
 
     // nguyen

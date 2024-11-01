@@ -79,7 +79,7 @@ class CheckoutController extends Controller
             // Đặt lại tổng số lượng và tổng tiền
             session()->forget('totalQuantity');
             session()->forget('total');
-            
+
             DB::commit(); // Commit transaction
             return redirect()->route('customer.order')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
         } catch (\Exception $e) {
