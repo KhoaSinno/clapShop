@@ -27,29 +27,29 @@
             <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                 <div class="contact__widget">
                     <span class="icon_phone"></span>
-                    <h4>Phone</h4>
-                    <p>+01-3-8888-6868</p>
+                    <h4>Điện thoại</h4>
+                    <p>+84 30 04 1975</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                 <div class="contact__widget">
                     <span class="icon_pin_alt"></span>
-                    <h4>Address</h4>
-                    <p>60-49 Road 11378 New York</p>
+                    <h4>Địa chỉ</h4>
+                    <p>256 Nguyễn Văn Cừ, An Hòa, Ninh Kiều, Cần Thơ</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                 <div class="contact__widget">
                     <span class="icon_clock_alt"></span>
-                    <h4>Open time</h4>
-                    <p>10:00 am to 23:00 pm</p>
+                    <h4>Mở cửa</h4>
+                    <p>8:00 am đến 21:00 pm</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                 <div class="contact__widget">
                     <span class="icon_mail_alt"></span>
                     <h4>Email</h4>
-                    <p>hello@colorlib.com</p>
+                    <p>clapshop@ctuet.edu.vn</p>
                 </div>
             </div>
         </div>
@@ -59,18 +59,16 @@
 
 <!-- Map Begin -->
 <div class="map">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
-        height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2474.8870341393285!2d105.76738447747269!3d10.046679888916087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0880f08006ffb%3A0x9a745510330faf4e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBL4bu5IHRodeG6rXQgLSBDw7RuZyBuZ2jhu4cgQ-G6p24gVGjGoQ!5e0!3m2!1svi!2s!4v1730646805318!5m2!1svi!2s" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false" tabindex="0"></iframe>
     <div class="map-inside">
-        <i class="icon_pin"></i>
-        <div class="inside-widget">
-            <h4>New York</h4>
+        <!-- <i class="icon_pin"></i> -->
+        <!-- <div class="inside-widget">
+            <h4>Trường đại học Kỹ thuật - Công nghệ Cần Thơ</h4>
             <ul>
-                <li>Phone: +12-345-6789</li>
-                <li>Add: 16 Creek Ave. Farmingdale, NY</li>
+                <li>SĐT: +84 30 04 1975</li>
+                <li>Địa chỉ: 256 Nguyễn Văn Cừ, An Hòa, Ninh Kiều, Cần Thơ</li>
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- Map End -->
@@ -81,21 +79,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="contact__form__title">
-                    <h2>Leave Message</h2>
+                    <h2>Bạn cần hỗ trợ! Hãy để lại thông tin và câu hỏi</h2>
                 </div>
             </div>
         </div>
         <form action="#">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Your name">
+                    <input type="text" placeholder="Tên bạn là gì?">
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <input type="text" placeholder="Your Email">
+                    <input type="text" placeholder="Email của bạn">
                 </div>
                 <div class="col-lg-12 text-center">
-                    <textarea placeholder="Your message"></textarea>
-                    <button type="submit" class="site-btn">SEND MESSAGE</button>
+                    <textarea placeholder="Câu hỏi của bạn"></textarea>
+                    <button type="submit" class="site-btn">GỬI</button>
                 </div>
             </div>
         </form>

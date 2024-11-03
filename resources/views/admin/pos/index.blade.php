@@ -107,7 +107,7 @@
                         <div class="form-group col-md-10">
                             <label class="control-label">SĐT khách hàng</label>
                             <input class="form-control" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT">
-                            <small id="phoneMessage" class="form-text text-muted"></small> <!-- Hiển thị thông báo -->
+                            <small id="phoneMessage" class="form-text text-muted text-success "></small> <!-- Hiển thị thông báo -->
                         </div>
 
                         <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
@@ -136,7 +136,7 @@
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tổng cộng thanh toán: </label>
-                            <p class="control-all-money" id="totalPrice"></p>
+                            <p class="control-all-money" id="totalPrice">0</p>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Khách hàng đưa tiền: </label>
@@ -284,6 +284,7 @@
 
                     // Cập nhật tổng tiền và số lượng
                     $('#totalPrice').text(response.total);
+                    // $('#totalPrice').text(format_currencyVNĐ(response.total));
                     $('#totalQuantity').text(response.totalQuantity);
                 },
                 error: function(xhr) {
