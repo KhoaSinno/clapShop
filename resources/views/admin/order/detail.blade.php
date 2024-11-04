@@ -2,12 +2,40 @@
 
 @section('function_nav')
 <div class="col-sm-2">
-    <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
+    <a class="btn btn-add btn-sm" href="{{route('admin.order')}}" title="Thêm"><i class="fas fa-plus"></i>
         Tạo mới đơn hàng</a>
 </div>
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="form-group col-md-3">
+        <label class="control-label">Admin</label>
+        <input class="form-control" type="text" value="{{ $order->admin->fullname }}" disabled>
+    </div>
+    <!-- Khách hàng -->
+    <div class="form-group  col-md-3">
+        <label class="control-label">Khách hàng</label>
+        <input class="form-control" type="text" value="{{ $order->user->fullname }}" disabled>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group  col-md-2">
+        <label class="control-label">Mã đơn hàng</label>
+        <input class="form-control" type="text" value="#{{$order->id}}" disabled>
+    </div>
+    <div class="form-group  col-md-3">
+        <label class="control-label">Ngày tạo</label>
+        <input class="form-control" type="text" value="{{ $order->created_at }}" disabled>
+    </div>
+
+    <div class="form-group  col-md-2">
+        <label class="control-label">Tổng tiền</label>
+        <input class="form-control" type="text" value="{{ format_currencyVNĐ($order->totalPrice) }}" disabled>
+    </div>
+
+</div>
+
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
     <thead>

@@ -467,17 +467,6 @@
     </script>
     <!-- tính tiền thừa -->
     <script>
-        // function calculateChange() {
-        //     // Lấy giá trị tổng cộng thanh toán
-        //     const totalPrice = parseFloat(document.getElementById('totalPrice').textContent) || 0;
-        //     // Lấy giá trị tiền khách hàng đưa
-        //     const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
-        //     // Tính tiền thừa
-        //     const change = totalInUser - totalPrice;
-        //     // Hiển thị tiền thừa
-        //     document.getElementById('change').textContent = change >= 0 ? change : 'Không đủ tiền';
-        // }
-
         // Hàm tính tiền thừa
         function calculateChange() {
             // Lấy giá trị tổng cộng thanh toán từ data attribute (không định dạng)

@@ -48,7 +48,7 @@ class OrderController extends Controller
     public function view($id)
     {
         // Truy vấn đơn hàng theo ID, kèm theo thông tin khách hàng và chi tiết đơn hàng
-        $order = Order::with(['user', 'details.product'])->find($id);
+        $order = Order::with(['user', 'admin', 'details.product'])->find($id);
 
         // Kiểm tra nếu không tìm thấy đơn hàng
         if (!$order) {
