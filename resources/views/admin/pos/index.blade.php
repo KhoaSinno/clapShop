@@ -104,17 +104,21 @@
                 <div class="tile">
                     <h3 class="tile-title">Thông tin thanh toán</h3>
                     <div class="row">
+
                         <div class="form-group col-md-10">
                             <label class="control-label ">SĐT khách hàng <span class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT" required>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <input class="form-control mr-3" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT" required>
+                                <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 ">
+                                    <button class="btn btn-primary btn-them cursor-pointer text-white m-0" id="checkCustomerPhone">
+                                        Kiểm tra
+                                    </button>
+                                </div>
+                            </div>
                             <h5 id="phoneMessage" class="form-text text-success "></h5> <!-- Hiển thị thông báo -->
+
                         </div>
 
-                        <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
-                            <button class="btn btn-primary btn-them cursor-pointer text-white" id="checkCustomerPhone">
-                                KT
-                            </button>
-                        </div>
                         <div class="form-group  col-md-12">
                             <label class="control-label">Địa chỉ đơn hàng <span class="text-danger">*</span></label>
                             <textarea name="address" class="form-control" rows="3" placeholder="Địa chỉ đơn hàng" required></textarea>
@@ -363,6 +367,7 @@
                         if (response.exists) {
                             // Nếu khách hàng đã tồn tại
                             $('#phoneMessage').text('Khách hàng đã có tài khoản').css('color', 'green');
+                            $('#customerPhone').css('border', '2px solid red');
                         } else {
                             // Nếu khách hàng không tồn tại, hiển thị cảnh báo yêu cầu tạo khách hàng
                             swal({
