@@ -94,7 +94,7 @@
                 </div>
                 <div class="row">
                     @foreach ($products as $product)
-                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 18790000)
+                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 15000000)
                             id="lower_20"
                             @else
                             id="greater_20"
