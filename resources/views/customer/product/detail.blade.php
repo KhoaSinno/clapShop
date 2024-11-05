@@ -62,9 +62,10 @@
                         <div class="pro-qty">
                             <input type="text" value="1">
                         </div>
-                        <div class="quantity">
-                        </div>
                     </div>
+                    <!-- <div class="quantity">
+
+                    </div> -->
                     <a href="#" class="primary-btn add-to-cart" data-id="{{ $product->id }}">Thêm vào giỏ</a>
                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                     <ul>
@@ -149,5 +150,5 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="/e_customerSN/js/incQuantitySession.js"></script>
 @endsection

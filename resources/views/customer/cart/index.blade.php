@@ -54,7 +54,7 @@
                                 <td class=" h-20">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
+                                            <input disabled type="number" class="quantity-input" data-id="{{ $id }}" value="{{ $details['quantity'] }}" min="1">
                                         </div>
                                     </div>
                                 </td>
@@ -119,59 +119,36 @@
 
 
 @section('footer')
+<script src="/e_customerSN/js/incQuantitySession.js"></script>
+
 <script>
-    $(document).ready(function() {
-        // Khi số lượng thay đổi
-        $('.quantity-input').on('change', function() {
-            var id = $(this).data('id');
-            var quantity = $(this).val();
+    $('.pro-qty input').on('change', function() {
+        var id = $(this).data('id'); // Giả sử mỗi input có data-id để xác định sản phẩm
+        var quantity = $(this).val();
 
-            $.ajax({
-                url: `{{ route('customer.cart.update') }}`, // Route để cập nhật giỏ hàng
-                method: "post",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: id,
-                    quantity: quantity
-                },
-                success: function(response) {
-                    // Cập nhật lại tổng giá sản phẩm
-                    $('#product-total-' + id).text(response.productTotal);
+        $.ajax({
+            url: `{{ route('customer.cart.update') }}`, // Đường dẫn cập nhật giỏ hàng
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: id,
+                quantity: quantity
+            },
+            success: function(response) {
+                // Cập nhật tổng giá của sản phẩm và giỏ hàng
+                $('#product-total-' + id).text(response.productTotal);
+                $('#cart-total').text(response.cartTotal);
+                $('.span__quantity_cart').text(response.totalQuantity);
+                $('.header__cart__price').html("Tổng tiền: <span>" + response.total + "</span>");
 
-                    // Cập nhật lại tổng giá của toàn bộ giỏ hàng
-                    $('#cart-total').text(response.cartTotal);
+            },
+            error: function(xhr) {
+                if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
+                    alert(xhr.responseJSON.error);
+                } else {
+                    alert('Đã xảy ra lỗi. Vui lòng thử lại!');
                 }
-            });
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Xử lý click vào nút trừ
-        document.querySelectorAll('.dec').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Ngăn chặn hành vi mặc định
-                const input = this.nextElementSibling; // input ở ngay sau span .dec
-                let currentValue = parseInt(input.value);
-
-                // Nếu giá trị lớn hơn 1 thì giảm
-                if (currentValue > 1) {
-                    input.value = --currentValue; // Giảm giá trị trước khi gán
-                    input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
-                }
-            });
-        });
-
-        // Xử lý click vào nút cộng
-        document.querySelectorAll('.inc').forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                event.preventDefault(); // Ngăn chặn hành vi mặc định
-                const input = this.previousElementSibling; // input ở ngay trước span .inc
-                let currentValue = parseInt(input.value);
-
-                input.value = ++currentValue; // Tăng giá trị trước khi gán
-                input.dispatchEvent(new Event('change')); // Gửi sự kiện change cho input
-            });
+            }
         });
     });
 </script>

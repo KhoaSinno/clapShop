@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Product Section Begin -->
-<section class="product spad">
+<section class="product spad p-0">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5">
@@ -10,6 +10,7 @@
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
                         <ul>
+                            <li><a href="{{route('customer.products')}}">Tất cả sản phẩm</a></li>
                             @foreach ($categories as $category)
                             <li>
                                 <a
@@ -99,23 +100,23 @@
                             @else
                             id="greater_20"
                             @endif>
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
-                                <ul class="product__item__pic__hover">
-                                    <li>
-                                        <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
+                                    <ul class="product__item__pic__hover">
+                                        <li>
+                                            <a href="#" class="add-to-cart" data-id="{{ $product->id }}">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6>
+                                        <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
+                                    </h6>
+                                    <h5>{{format_currencyVNĐ( $product->price)}}</h5>
+                                </div>
                             </div>
-                            <div class="product__item__text">
-                                <h6>
-                                    <a href="{{route('customer.product.detail', $product->id) }}">{{$product->name}}</a>
-                                </h6>
-                                <h5>{{format_currencyVNĐ( $product->price)}}</h5>
-                            </div>
-                        </div>
                     </div>
                     @endforeach
 
