@@ -25,4 +25,9 @@ class Order extends Model
     {
         return $this->hasMany(Order_Detail::class, 'orderID');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customerID')->where('role', 'customer');
+    }
 }

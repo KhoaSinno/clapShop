@@ -75,13 +75,13 @@
                 <tbody>
                     @foreach($orders as $order)
                         <tr>
-                            <td>{{ $order->order_code }}</td>
-                            <td>{{ $order->user->name }}</td>
-                            <td>{{ number_format($order->total_amount, 0, ',', '.') }} đ</td>
+                            <td>{{ $order->id }}</td>
+                            <td>{{ $order->customer ? $order->customer->fullname : 'N/A' }}</td>
+                            <td>{{ number_format($order->totalPrice, 0, ',', '.') }} đ</td>
                             <td>
-                                @if($order->status == 'completed')
+                                @if($order->status == 'success')
                                     <span class="badge bg-success">Đã hoàn thành</span>
-                                @elseif($order->status == 'cancelled')
+                                @elseif($order->status == 'failed')
                                     <span class="badge bg-danger">Đã hủy</span>
                                 @else
                                     <span class="badge bg-warning">Đang xử lý</span>
