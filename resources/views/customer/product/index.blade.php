@@ -185,10 +185,10 @@
                 <!-- <p id="myParagraph">something</p> -->
                 <div class="row">
                     @foreach ($products as $product)
-                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 18790000)
-                            id="lower_20"
+                    <div class="col-lg-4 col-md-6 col-sm-6" @if ($product->price < 15000000)
+                            id="lower_15"
                             @else
-                            id="greater_20"
+                            id="greater_15"
                             @endif>
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}">
@@ -236,32 +236,32 @@
                 // console.log(radios[i].value);
                 if (radios[i].value == "greater_15") {
                     console.log(10);
-                    products = document.querySelectorAll('#greater_20');
+                    products = document.querySelectorAll('#greater_15');
                     products.forEach(product => {
                         product.style.display = 'inline';
                     });
-                    products = document.querySelectorAll('#lower_20');
+                    products = document.querySelectorAll('#lower_15');
                     products.forEach(product => {
                         product.style.display = 'none';
                     });
                     break;
                 } else if (radios[i].value == "lower_15") {
                     console.log(20);
-                    products = document.querySelectorAll('#lower_20');
+                    products = document.querySelectorAll('#lower_15');
                     products.forEach(product => {
                         product.style.display = 'block';
                     });
-                    products = document.querySelectorAll('#greater_20');
+                    products = document.querySelectorAll('#greater_15');
                     products.forEach(product => {
                         product.style.display = 'none';
                     });
                     break;
                 } else {
-                    products = document.querySelectorAll('#lower_20');
+                    products = document.querySelectorAll('#lower_15');
                     products.forEach(product => {
                         product.style.display = 'block';
                     });
-                    products = document.querySelectorAll('#greater_20');
+                    products = document.querySelectorAll('#greater_15');
                     products.forEach(product => {
                         product.style.display = 'inline';
                     });
