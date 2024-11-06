@@ -2,7 +2,7 @@
 
 @section('function_nav')
 <div class="col-sm-2">
-    <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.create') }}">
+    <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail') }}">
         <i class="fas fa-plus"></i>
         Tạo mới sản phẩm
     </a>

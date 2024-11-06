@@ -36,7 +36,7 @@ class ProductController extends Controller
             'categories' => $categories,
         ]);
     }
-
+ 
     //done - show form tạo sản phẩm
     public function show()
     {

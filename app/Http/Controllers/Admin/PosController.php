@@ -281,7 +281,7 @@ class PosController extends Controller
                 'paymentMethod' => $validated['paymentMethod'],
                 'status' => 'success', // Trạng thái mặc định
             ]);
-
+ 
             // Lưu chi tiết đơn hàng
             foreach ($cartItems as $item) {
                 // Kiểm tra xem khóa 'productID' có tồn tại không
@@ -295,6 +295,14 @@ class PosController extends Controller
                     'quantity' => $item['quantity'],
                     'price' => $item['price'],
                 ]);
+
+                //điều chỉnh số lượng
+                $product = Product::find($item['productID']);
+                if ($product) {
+                    $product->stock =  $product->stock - (int)$item['quantity'];
+                    $product->save();
+                }
+
             }
 
             $order->status = 'success';
