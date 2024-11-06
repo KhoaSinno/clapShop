@@ -38,7 +38,7 @@ class CheckoutController extends Controller
 
             // Lấy thông tin user hiện tại
             $customerID = Auth::id(); // ID của người dùng đang đăng nhập (khách hàng)
-            $adminID = null;
+            $adminID = 1; // Hard code ID của admin đặt hàng thay
 
             // Nếu là admin đặt hàng thay
             if (Auth::user()->role === 'admin') {
@@ -79,7 +79,7 @@ class CheckoutController extends Controller
             // Đặt lại tổng số lượng và tổng tiền
             session()->forget('totalQuantity');
             session()->forget('total');
-            
+
             DB::commit(); // Commit transaction
             return redirect()->route('customer.order')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
         } catch (\Exception $e) {

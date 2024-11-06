@@ -19,10 +19,10 @@
     </header>
     <!-- Sidebar menu-->
 
-    <main class="app app-ban-hang">
+    <main class="app app-ban-hang mt-2">
         <div>
             <a class="btn btn-warning py-1 px-4 text-danger mb-3" href="{{ route('admin.customer') }}">
-                <<< Quay về</a>
+                < Quay về</a>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -104,24 +104,28 @@
                 <div class="tile">
                     <h3 class="tile-title">Thông tin thanh toán</h3>
                     <div class="row">
+
                         <div class="form-group col-md-10">
-                            <label class="control-label">SĐT khách hàng</label>
-                            <input class="form-control" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT">
-                            <small id="phoneMessage" class="form-text text-muted"></small> <!-- Hiển thị thông báo -->
+                            <label class="control-label ">SĐT khách hàng <span class="text-danger">*</span></label>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <input class="form-control mr-3" type="text" id="customerPhone" name="customerPhone" placeholder="Tìm kiếm khách hàng bằng SĐT" required>
+                                <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 ">
+                                    <button class="btn btn-primary btn-them cursor-pointer text-white m-0" id="checkCustomerPhone">
+                                        Kiểm tra
+                                    </button>
+                                </div>
+                            </div>
+                            <h5 id="phoneMessage" class="form-text text-success "></h5> <!-- Hiển thị thông báo -->
+
                         </div>
 
-                        <div class="form-group col-md-2 d-flex justify-content-center align-items-center m-0 mt-3">
-                            <button class="btn btn-primary btn-them cursor-pointer text-white" id="checkCustomerPhone">
-                                KT
-                            </button>
-                        </div>
                         <div class="form-group  col-md-12">
-                            <label class="control-label">Địa chỉ đơn hàng</label>
-                            <textarea name="address" class="form-control" rows="4" placeholder="Địa chỉ đơn hàng"></textarea>
+                            <label class="control-label">Địa chỉ đơn hàng <span class="text-danger">*</span></label>
+                            <textarea name="address" class="form-control" rows="3" placeholder="Địa chỉ đơn hàng" required></textarea>
                         </div>
                         <div class="form-group  col-md-12">
                             <label class="control-label">Ghi chú đơn hàng</label>
-                            <textarea name="note" class="form-control" rows="4" placeholder="Ghi chú thêm đơn hàng"></textarea>
+                            <textarea name="note" class="form-control" rows="2" placeholder="Ghi chú thêm đơn hàng"></textarea>
                         </div>
 
 
@@ -136,7 +140,7 @@
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Tổng cộng thanh toán: </label>
-                            <p class="control-all-money" id="totalPrice"></p>
+                            <p class="control-all-money" id="totalPrice">0đ</p>
                         </div>
                         <div class="form-group  col-md-6">
                             <label class="control-label">Khách hàng đưa tiền: </label>
@@ -146,15 +150,19 @@
                             <label class="control-label">Tiền thừa: </label>
                             <p class="control-all-money-total" id="change"></p>
                         </div>
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-primary luu-san-pham" type="button">Lưu đơn hàng</button>
+                        </div>
                         <!-- <div class="form-group col-md-6">
                             <label class="control-label"></label>
                             <button class="btn btn-success mt-3 cursor-pointer">Tính</button>
                         </div> -->
-                        <div class="tile-footer col-md-12">
-                            <button class="btn btn-primary luu-san-pham" type="button">Lưu đơn hàng</button>
-                            <!-- <button class="btn btn-primary luu-va-in" type="button">Lưu và in hóa đơn</button> -->
-                            <a class="btn btn-secondary luu-va-in" href="{{ route('admin.customer') }}">Quay về</a>
-                        </div>
+                        <!--
+                        <div class="tile-footer col-md-12 d-flex gap-2">
+                            <button class="btn btn-primary luu-san-pham w-50" type="button">Lưu đơn hàng</button>
+                            <button class="btn btn-primary luu-va-in" type="button">Lưu và in hóa đơn</button>
+                            <a class="btn btn-secondary luu-va-in w-50" href="{{ route('admin.customer') }}">Quay về</a>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -254,12 +262,13 @@
             e.preventDefault(); // Ngăn hành vi mặc định của thẻ
 
             var productId = $(this).data('id'); // Lấy ID sản phẩm từ data-id
-
+            var productListQuantity = $(`.productList-quantity[data-id="${productId}"]`).val();
             $.ajax({
                 url: `/admin/pos/session/${productId}`, // Đảm bảo URL đúng
                 method: 'POST', // Phương thức POST
                 data: {
-                    _token: '{{ csrf_token() }}' // Token CSRF để bảo mật
+                    _token: '{{ csrf_token() }}', // Token CSRF để bảo mật
+                    productListQuantity: productListQuantity
                 },
                 success: function(response) {
                     if (response.cart) {
@@ -283,7 +292,11 @@
                     }
 
                     // Cập nhật tổng tiền và số lượng
-                    $('#totalPrice').text(response.total);
+                    // $('#totalPrice').text(response.total);
+                    // $('#totalPrice').text(format_currencyVNĐ(response.total));
+                    $('#totalPrice')
+                        .text(format_currencyVNĐ(response.total)) // Hiển thị với định dạng
+                        .data('total', response.total); // Lưu giá trị gốc không định dạng
                     $('#totalQuantity').text(response.totalQuantity);
                 },
                 error: function(xhr) {
@@ -354,6 +367,7 @@
                         if (response.exists) {
                             // Nếu khách hàng đã tồn tại
                             $('#phoneMessage').text('Khách hàng đã có tài khoản').css('color', 'green');
+                            $('#customerPhone').css('border', '2px solid red');
                         } else {
                             // Nếu khách hàng không tồn tại, hiển thị cảnh báo yêu cầu tạo khách hàng
                             swal({
@@ -458,23 +472,27 @@
     </script>
     <!-- tính tiền thừa -->
     <script>
-    function calculateChange() {
-        // Lấy giá trị tổng cộng thanh toán
-        const totalPrice = parseFloat(document.getElementById('totalPrice').textContent) || 0;
-        // Lấy giá trị tiền khách hàng đưa
-        const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
-        // Tính tiền thừa
-        const change = totalInUser - totalPrice;
-        // Hiển thị tiền thừa
-        document.getElementById('change').textContent = change >= 0 ? change : 'Không đủ tiền';
-    }
+        // Hàm tính tiền thừa
+        function calculateChange() {
+            // Lấy giá trị tổng cộng thanh toán từ data attribute (không định dạng)
+            const totalPrice = parseFloat($('#totalPrice').data('total')) || 0;
 
-    // Gán sự kiện khi người dùng thay đổi giá trị trong input
-    document.getElementById('totalInUser').addEventListener('input', calculateChange);
+            // Lấy giá trị tiền khách hàng đưa
+            const totalInUser = parseFloat(document.getElementById('totalInUser').value) || 0;
 
-    // Gọi hàm tính toán khi trang được tải để hiển thị kết quả ban đầu
-    calculateChange();
-</script>
+            // Tính tiền thừa
+            const change = totalInUser - totalPrice;
+
+            // Hiển thị tiền thừa với định dạng VNĐ
+            document.getElementById('change').textContent = change >= 0 ? format_currencyVNĐ(change) : 'Không đủ tiền';
+        }
+
+        // Gán sự kiện khi người dùng thay đổi giá trị trong input
+        document.getElementById('totalInUser').addEventListener('input', calculateChange);
+
+        // Gọi hàm tính toán khi trang được tải để hiển thị kết quả ban đầu
+        calculateChange();
+    </script>
 
 
 </body>

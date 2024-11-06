@@ -48,12 +48,12 @@
 
         <!-- Ngày sinh -->
         <div class="form-group">
-            <label for="birthdate">Ngày sinh:</label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate"
-                value="{{ auth()->user()->birthdate }}">
+            <label for="dateOfBirth">Ngày sinh:</label>
+            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                value="{{ auth()->user()->dateOfBirth }}">
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="password">Mật khẩu mới:</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu mới">
         </div>
@@ -61,7 +61,7 @@
             <label for="password_confirmation">Xác nhận mật khẩu:</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
                 placeholder="Xác nhận mật khẩu mới">
-        </div>
+        </div> -->
 
         <!-- Nút cập nhật -->
         <button type="submit" class="btn btn-primary">Cập nhật</button>

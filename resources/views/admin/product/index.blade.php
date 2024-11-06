@@ -6,10 +6,13 @@
         <i class="fas fa-plus"></i>
         Tạo mới sản phẩm
     </a>
-
-
 </div>
-
+<div class="col-sm-2">
+    <a class="btn btn-warning text-black btn-sm" title="Thêm" href="{{ route('admin.product.listDelete') }}">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        Sản phẩm ngừng bán
+    </a>
+</div>
 @endsection
 
 @section('content')
@@ -28,12 +31,12 @@
     id="sampleTable">
     <thead>
         <tr>
-            <th>Mã SP</th>
-            <th width="150">Tên SP</th>
-            <th width="150">Ảnh SP</th>
+            <th width="10">Mã SP</th>
+            <th width="300">Tên SP</th>
+            <th width="100">Ảnh SP</th>
             <th width="150">Thương hiệu</th>
             <th>Giá</th>
-            <th>Tồn kho</th>
+            <th width="50">Tồn kho</th>
             <th>Hoạt động</th>
             <th width="100">Tính năng</th>
         </tr>
@@ -51,25 +54,25 @@
                 <!-- <img src="{{ asset('storage/images/default.jpg') }}" alt="No Image Available" weight="100" height="100"> -->
                 @endif
             </td>
-            <td>{{ $p->category->name }}</td>
+            <td class="d-flex justify-content-center align-items-center">{{ $p->category->name }}</td>
             <!-- 'cpu', 'ram', 'storage', 'screen_size', 'battery', 'warranty', 'os', 'description' -->
-            <td>{{ $p->price }}</td>
-            <td>{{ $p->stock }}</td>
+            <td class="text-center">{{ format_currencyVNĐ( $p->price) }}</td>
+            <td class="d-flex justify-content-center align-items-center">{{ $p->stock }}</td>
             @if ($p->active)
-                <td>Còn bán</td>
+            <td class="text-center">Còn bán</td>
             @else
-                <td class="text-danger">Ngừng bán</td>
+            <td class="text-danger text-center">Ngừng bán</td>
             @endif
             <td class="table-td-center">
 
                 <a class="btn btn-add btn-sm" title="Thêm" href="{{ route('admin.product.detail.edit', ['id' => $p->id]) }}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <form action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
+                <form class="d-inline" action="{{ route('admin.product.delete', ['id' => $p->id]) }}" method="POST">
                     @csrf
                     @method('POST')
-                    <button type="submit" class="btn btn-danger btn-sm" title="Xóa">
-                        <i class="fas fa-trash-alt"></i>
+                    <button type="submit" class="btn btn-warning btn-sm" title="Xóa">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
                     </button>
                 </form>
 

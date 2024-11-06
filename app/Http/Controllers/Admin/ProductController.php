@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         // Lấy tất cả sản phẩm cùng với hình ảnh chính
-        $products = Product::with(['category', 'mainImage'])->get(); // Lấy category và mainImage
+        $products = Product::where('active', true)->with(['category', 'mainImage'])->get(); // Lấy category và mainImage
 
         $categories = Category::all();
 
@@ -23,7 +23,20 @@ class ProductController extends Controller
             'categories' => $categories,
         ]);
     }
+    public function listDelete()
+    {
+        // Lấy tất cả sản phẩm cùng với hình ảnh chính
+        $products = Product::where('active', false)->with(['category', 'mainImage'])->get(); // Lấy category và mainImage
 
+        $categories = Category::all();
+
+        return view('admin.product.listDelete', [
+            'title' => 'Danh sách sản phẩm',
+            'products' => $products,
+            'categories' => $categories,
+        ]);
+    }
+ 
     //done - show form tạo sản phẩm
     public function show()
     {
@@ -37,7 +50,7 @@ class ProductController extends Controller
         );
     }
 
-    
+
     public function edit($id)
     {
 
@@ -57,12 +70,12 @@ class ProductController extends Controller
     public function destroyImage(Product $product, $imageId)
     {
         $image = $product->images()->findOrFail($imageId);
-    
+
         // // Xóa ảnh khỏi thư mục (thay thế 'public/images' bằng đường dẫn thực tế)
         // Storage::delete('public/images/' . $image->filename);
-    
+
         $image->delete();
-    
+
         return back()->with('success', 'Ảnh đã được xóa thành công');
     }
 
@@ -169,18 +182,18 @@ class ProductController extends Controller
                 if ($product->save()) {
                     try {
                         //code...
-                    // tim product them name
-                    $updatedProduct = Product::where('name', $product->name)->first();        
-                    $fileName = time() . $request->file('ImageUpload')->getClientOriginalName();
-                    $path = $request->file('ImageUpload')->storeAs('images', $fileName, 'public');        
-                    $productImage = new Product_Image();
-                    $productImage->productID = $updatedProduct->id; // ID của sản phẩm
-                    $productImage->image_url = '/storage/' . $path;; // Đường dẫn hình ảnh
-                    $productImage->desc = "";
-                    $productImage->type = "";
-                    $productImage->save();
-                    
-                    return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Thêm ảnh thành công.');
+                        // tim product them name
+                        $updatedProduct = Product::where('name', $product->name)->first();
+                        $fileName = time() . $request->file('ImageUpload')->getClientOriginalName();
+                        $path = $request->file('ImageUpload')->storeAs('images', $fileName, 'public');
+                        $productImage = new Product_Image();
+                        $productImage->productID = $updatedProduct->id; // ID của sản phẩm
+                        $productImage->image_url = '/storage/' . $path;; // Đường dẫn hình ảnh
+                        $productImage->desc = "";
+                        $productImage->type = "";
+                        $productImage->save();
+
+                        return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Thêm ảnh thành công.');
                     } catch (\Throwable $th) {
                         return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công. Không có ảnh nào được cập nhật.');
                     }

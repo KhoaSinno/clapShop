@@ -23,7 +23,7 @@
                 @foreach($categories as $category)
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="{{ $category->mainImage() }}">
-                        <h5><a href="#">{{ $category->name }}</a></h5>
+                        <h5><a href="{{ route('customer.products.by_slug', $category->slug) }}">{{ $category->name }}</a></h5>
                     </div>
                 </div>
                 @endforeach
