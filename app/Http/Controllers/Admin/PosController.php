@@ -24,58 +24,6 @@ class PosController extends Controller
         ]);
     }
 
-    // public function addProductSession($id)
-    // {
-    //     // Tìm sản phẩm theo ID
-    //     $product = Product::find($id);
-
-    //     if (!$product) {
-    //         return response()->json([
-    //             'message' => 'Sản phẩm không tồn tại!'
-    //         ], 404); // Trả về lỗi nếu sản phẩm không tồn tại
-    //     }
-
-    //     // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo mảng rỗng
-    //     $cart = session()->get('cart', []);
-
-    //     // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
-    //     if (isset($cart[$id])) {
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
-    //         $cart[$id] = [
-    //             "name" => $product->name,
-    //             "price" => $product->price,
-    //             "quantity" => 1,
-    //             "image" => $product->mainImage ? $product->mainImage->image_url : asset('storage/images/default.jpg')
-    //         ];
-    //     }
-
-    //     // Lưu giỏ hàng vào session
-    //     session()->put('cart', $cart);
-
-    //     // Tính tổng tiền và tổng số lượng
-    //     $total = 0;
-    //     $totalQuantity = 0;
-    //     foreach ($cart as $item) {
-    //         $total += $item['price'] * $item['quantity'];
-    //         $totalQuantity += $item['quantity'];
-    //     }
-
-    //     // Cập nhật tổng tiền và tổng số lượng vào session
-    //     session()->put('total', $total);
-    //     session()->put('totalQuantity', $totalQuantity);
-
-    //     // Trả về dữ liệu JSON để cập nhật giao diện
-    //     return response()->json([
-    //         'message' => 'Sản phẩm đã được thêm vào giỏ hàng!',
-    //         'cart' => $cart, // Gửi lại giỏ hàng để hiển thị
-    //         'total' => $total,
-    //         'totalQuantity' => $totalQuantity
-    //     ]);
-    // }
-
-
     public function addProductSession(Request $request, $id)
     {
         // Tìm sản phẩm theo ID
@@ -94,7 +42,7 @@ class PosController extends Controller
 
         // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']+= $productListQuantity;
+            $cart[$id]['quantity'] += $productListQuantity;
         } else {
             // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
             $cart[$id] = [
