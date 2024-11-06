@@ -38,7 +38,7 @@ class CheckoutController extends Controller
 
             // Lấy thông tin user hiện tại
             $customerID = Auth::id(); // ID của người dùng đang đăng nhập (khách hàng)
-            $adminID = null;
+            $adminID = 1; // Hard code ID của admin đặt hàng thay
 
             // Nếu là admin đặt hàng thay
             if (Auth::user()->role === 'admin') {
