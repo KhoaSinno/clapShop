@@ -36,7 +36,7 @@ class ProductController extends Controller
             'categories' => $categories,
         ]);
     }
- 
+
     //done - show form tạo sản phẩm
     public function show()
     {
@@ -169,7 +169,8 @@ class ProductController extends Controller
                 $product->keyboard = $request->input('keyboard');
                 $product->os = $request->input('os');
                 $product->material = $request->input('material');
-                $product->stock = $request->input('stock');
+                $product->stock += $request->input('stock');
+                $product->price = $request->input('price');
 
                 $product->description = $request->input('description');
 

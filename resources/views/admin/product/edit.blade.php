@@ -108,8 +108,8 @@
     </div>
 
     <div class="form-group col-md-3">
-        <label class="control-label">Số lượng</label>
-        <input class="form-control" type="number" name="stock" min="0" value="{{$product ->stock}}">
+        <label class="control-label text-warning">Số lượng bạn muốn nhập kho</label>
+        <input class="form-control border border-warning" type="number" name="stock" min="0" value="0">
     </div>
 
 

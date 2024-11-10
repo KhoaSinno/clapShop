@@ -152,8 +152,6 @@
                                 @endauth
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
@@ -295,8 +293,8 @@
                         <h6>Liên hệ</h6>
                         <p>Nhận thông tin cập nhật qua Email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                            <input type="text" placeholder="Địa chỉ mail của bạn">
+                            <button type="submit" class="site-btn">Đăng ký</button>
                         </form>
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
