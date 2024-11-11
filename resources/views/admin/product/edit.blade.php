@@ -108,8 +108,8 @@
     </div>
 
     <div class="form-group col-md-3">
-        <label class="control-label">Số lượng</label>
-        <input class="form-control" type="number" name="stock" value="{{$product ->stock}}">
+        <label class="control-label text-warning">Số lượng bạn muốn nhập kho</label>
+        <input class="form-control border border-warning" type="number" name="stock" min="0" value="0">
     </div>
 
 
@@ -209,38 +209,38 @@
     </div>
 
     <div class="form-group col-md-3">
-                @if ($product ->stock > 0)
-                <label class="control-label text-success" for="customCheck1">
-                    Còn hàng
-                </label>
-            @else
-            <label class="control-label text-danger" for="customCheck1">
-                    Hết hàng
-                </label>
-            @endif
+        @if ($product ->stock > 0)
+        <label class="control-label text-success" for="customCheck1">
+            Còn hàng
+        </label>
+        @else
+        <label class="control-label text-danger" for="customCheck1">
+            Hết hàng
+        </label>
+        @endif
 
     </div>
 
     <div class="form-group col-md-12">
-    <label class="control-label">Ảnh hiện có</label>
+        <label class="control-label">Ảnh hiện có</label>
         <div id="uploaded">
             @foreach($product_images as $image)
-                <div class="image-item">
-                    <img src="{{$image->image_url}}" height="300" width="350">
-                    <div>
+            <div class="image-item">
+                <img src="{{$image->image_url}}" height="300" width="350">
+                <div>
                     <a class="btn btn-add btn-sm" title="Xóa" href="{{ route('admin.product.image.destroy', ['product' => $product->id, 'image' => $image->id]) }}">
                         <i class="fas fa-alt"></i>
                         Xóa ảnh
                     </a>
-                    </div>
                 </div>
+            </div>
             @endforeach
         </div>
         <br>
 
-    <label class="control-label">Ảnh mới</label>
+        <label class="control-label">Ảnh mới</label>
         <div id="myfileupload">
-            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" multiple/>
+            <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" multiple />
         </div>
         <div id="thumbbox">
             <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -253,7 +253,7 @@
     </div>
 
 
-        <div class="form-group col-md-12">
+    <div class="form-group col-md-12">
         <label class="control-label">Mô tả sản phẩm</label>
         <textarea class="form-control" name="description" id="mota" value="screen 1">{{$product->description}}</textarea>
         <script>

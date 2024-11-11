@@ -30,6 +30,14 @@
                                 <i class='bx bx-user'></i>
                             </span>
                         </div>
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="password" placeholder="Xác nhận mật khẩu" name="re_password"
+                                id="username">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class='bx bx-user'></i>
+                            </span>
+                        </div>
                         <input type="text" id="myInput" style="display: none;" name="email" value={{$email}}>
                         <!-- <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\MainController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PosController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\Customer\ContactController;
 use App\Http\Controllers\Customer\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('customer.home');
 
@@ -24,6 +26,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
+    // Register - nhu y
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     // Logout
@@ -67,10 +70,13 @@ Route::prefix('customer')->group(function () {
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('customer.checkout');
         Route::post('/payment', [CheckoutController::class, 'checkout'])->name('customer.checkout.payment');
 
-
         // Customer order
         Route::get('/order', [CustomerOrderController::class, 'index'])->name('customer.order');
         Route::get('/order/{id}', [CustomerOrderController::class, 'show'])->name('customer.order.show');
+
+        // Customer profile Nhu Y
+        Route::get('/profile', [ProfileController::class, 'index'])->name('customer.profile');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('customer.profile.update');
     });
 });
 
@@ -84,7 +90,7 @@ Route::middleware('auth')->group(function () {
 
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
@@ -92,7 +98,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
     Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
-
+ 
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
@@ -113,6 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+    Route::get('/product/listDelete', [ProductController::class, 'listDelete'])->name('admin.product.listDelete');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
 
     // nguyen
@@ -137,7 +144,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
     Route::put('/order/cancel/{id}', [OrderController::class, 'cancel'])->name('admin.order.cancel');
     Route::get('/order/ordersDelete', [OrderController::class, 'ordersDelete'])->name('admin.order.ordersDelete');
-    Route::get('/order/success/{id}', [OrderController::class, 'orderSuccess'])->name('admin.order.success');
+    Route::post('/order/success/{id}', [OrderController::class, 'orderSuccess'])->name('admin.order.success');
 });
 
 // Route fallback cho 404 - phải để cuối cùng trong file

@@ -16,7 +16,7 @@ class ProductController extends Controller
         $sort = $request->input('sort', 'default');
 
         // Khởi tạo truy vấn sản phẩm
-        $productsQuery = Product::query()->with(['category', 'mainImage']);
+        $productsQuery = Product::where('active', true)->with(['category', 'mainImage']);
 
         // Thêm điều kiện sắp xếp dựa trên giá trị của $sort
         switch ($sort) {
@@ -42,12 +42,12 @@ class ProductController extends Controller
 
         // $products = Product::with(['category', 'mainImage'])->get(); // Lấy category và mainImage
 
-        $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
+        $latestProducts = Product::where('active', true)->orderBy('created_at', 'desc')->take(6)->get();
         // Gọi hàm applySort để lấy giá trị sort và danh sách sản phẩm
-        list($sort, $products) = $this->applySort($request, 3);
+        list($sort, $products) = $this->applySort($request, 9);
         $categories = Category::all();
 
-        $productCount = Product::all()->count();
+        $productCount = Product::where('active', true)->count();
 
 
         // Trả về view với biến $sort được truyền đi
@@ -68,7 +68,7 @@ class ProductController extends Controller
 
         // Tìm danh mục dựa theo slug
         $category = Category::where('slug', $slug)->first();
-        $latestProducts = Product::orderBy('created_at', 'desc')->take(6)->get();
+        $latestProducts = Product::where('active', true)->orderBy('created_at', 'desc')->take(6)->get();
 
         // Nếu không tìm thấy category, có thể xử lý lỗi
         if (!$category) {
@@ -76,8 +76,14 @@ class ProductController extends Controller
         }
 
         // Lấy tất cả sản phẩm theo categoryID và phân trang
-        $products = Product::where('categoryID', $category->id)->paginate(3);
-        $productCount = Product::where('categoryID', $category->id)->count();
+        $products = Product::where('categoryID', $category->id)
+            ->where('active', true)
+            ->paginate(9);
+
+        $productCount = Product::where('categoryID', $category->id)
+            ->where('active', true)
+            ->count();
+
 
         // Trả về view index và truyền dữ liệu category và products
         return view('customer.product.index', [
@@ -95,7 +101,7 @@ class ProductController extends Controller
     public function show($id)
     {
         // Tìm sản phẩm theo ID và lấy thông tin category
-        $product = Product::with('category')->find($id);
+        $product = Product::where('active', true)->with('category')->find($id);
 
         // Kiểm tra nếu không tìm thấy sản phẩm
         if (!$product) {
@@ -105,6 +111,7 @@ class ProductController extends Controller
         // Lấy danh sách sản phẩm liên quan cùng category, loại trừ sản phẩm hiện tại
         $relatedProducts = Product::where('categoryID', $product->categoryID)
             ->where('id', '!=', $product->id) // Loại trừ sản phẩm hiện tại
+            ->where('active', true)
             ->limit(4) // Giới hạn số lượng sản phẩm liên quan, ví dụ 4 sản phẩm
             ->get();
 
@@ -161,9 +168,12 @@ class ProductController extends Controller
         // Lấy từ khóa từ request
         $query = $request->input('query');
         // Tìm kiếm sản phẩm theo từ khóa trong tên sản phẩm hoặc mô tả
-        $products = Product::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('description', 'LIKE', "%{$query}%")
-            ->paginate(30); // Phân trang kết quả tìm kiếm
+        $products = Product::where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('name', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%");
+        })
+            ->where('active', true)
+            ->paginate(30);
 
         $productCount = $products->count();
 

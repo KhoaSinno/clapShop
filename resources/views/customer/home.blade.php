@@ -7,8 +7,8 @@
     <div class="hero__text">
         <span>LAPTOP SALE</span>
         <h2>Hiệu năng đỉnh cao <br />Giá cả hợp lý</h2>
-        <p>Free Pickup and Delivery Available</p>
-        <a href="#" class="primary-btn">SHOP NOW</a>
+        <p>Giao hàng miễn phí toàn quốc</p>
+        <a href="{{route('customer.products')}}" class="primary-btn">SHOP NOW</a>
     </div>
 </div>
 @endsection
@@ -23,7 +23,7 @@
                 @foreach($categories as $category)
                 <div class="col-lg-3">
                     <div class="categories__item set-bg" data-setbg="{{ $category->mainImage() }}">
-                        <h5><a href="#">{{ $category->name }}</a></h5>
+                        <h5><a href="{{ route('customer.products.by_slug', $category->slug) }}">{{ $category->name }}</a></h5>
                     </div>
                 </div>
                 @endforeach
@@ -43,7 +43,7 @@
                 </div>
                 <div class="featured__controls">
                     <ul>
-                        <li class="active" data-filter="*">All</li>
+                        <li class="active" data-filter="*">Tất cả</li>
                         @foreach($categories as $category)
                         <li data-filter=".{{ strtolower($category->name) }}">{{ $category->name }}</li>
                         @endforeach
