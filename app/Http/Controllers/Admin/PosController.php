@@ -24,82 +24,46 @@ class PosController extends Controller
         ]);
     }
 
-    // public function addProductSession($id)
-    // {
-    //     // Tìm sản phẩm theo ID
-    //     $product = Product::find($id);
-
-    //     if (!$product) {
-    //         return response()->json([
-    //             'message' => 'Sản phẩm không tồn tại!'
-    //         ], 404); // Trả về lỗi nếu sản phẩm không tồn tại
-    //     }
-
-    //     // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo mảng rỗng
-    //     $cart = session()->get('cart', []);
-
-    //     // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
-    //     if (isset($cart[$id])) {
-    //         $cart[$id]['quantity']++;
-    //     } else {
-    //         // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
-    //         $cart[$id] = [
-    //             "name" => $product->name,
-    //             "price" => $product->price,
-    //             "quantity" => 1,
-    //             "image" => $product->mainImage ? $product->mainImage->image_url : asset('storage/images/default.jpg')
-    //         ];
-    //     }
-
-    //     // Lưu giỏ hàng vào session
-    //     session()->put('cart', $cart);
-
-    //     // Tính tổng tiền và tổng số lượng
-    //     $total = 0;
-    //     $totalQuantity = 0;
-    //     foreach ($cart as $item) {
-    //         $total += $item['price'] * $item['quantity'];
-    //         $totalQuantity += $item['quantity'];
-    //     }
-
-    //     // Cập nhật tổng tiền và tổng số lượng vào session
-    //     session()->put('total', $total);
-    //     session()->put('totalQuantity', $totalQuantity);
-
-    //     // Trả về dữ liệu JSON để cập nhật giao diện
-    //     return response()->json([
-    //         'message' => 'Sản phẩm đã được thêm vào giỏ hàng!',
-    //         'cart' => $cart, // Gửi lại giỏ hàng để hiển thị
-    //         'total' => $total,
-    //         'totalQuantity' => $totalQuantity
-    //     ]);
-    // }
-
-
-    public function addProductSession($id)
+    public function addProductSession(Request $request, $id)
     {
         // Tìm sản phẩm theo ID
         $product = Product::find($id);
 
         if (!$product) {
             return response()->json([
-                'message' => 'Sản phẩm không tồn tại!'
+                'error' => 'Sản phẩm không tồn tại!'
             ], 404); // Trả về lỗi nếu sản phẩm không tồn tại
         }
+
+        $productListQuantity = $request->input('productListQuantity', 1);
 
         // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo mảng rỗng
         $cart = session()->get('cart', []);
 
+        ///////////////////////////////////////////////////////////////
+        // Kiểm tra tồn kho
+        // Nếu sản phẩm đã có trong giỏ, lấy số lượng hiện tại trong giỏ hàng
+        $currentQuantityInCart = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+
+        // Nếu số lượng yêu cầu cộng số lượng trong giỏ hàng vượt quá tồn kho, trả về lỗi
+        if ($product->stock < ($productListQuantity + $currentQuantityInCart)) {
+            return response()->json([
+                'error' => 'Số lượng yêu cầu vượt quá số lượng tồn kho!'
+            ], 400); // Trả về lỗi nếu số lượng yêu cầu vượt quá tồn kho
+        }
+        //////////////////////////////////////////////////////////////
+
+
         // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            $cart[$id]['quantity'] += $productListQuantity;
         } else {
             // Nếu chưa có trong giỏ hàng, thêm sản phẩm vào giỏ
             $cart[$id] = [
                 "productID" => $product->id, // Thêm productID vào giỏ hàng
                 "name" => $product->name,
                 "price" => $product->price,
-                "quantity" => 1,
+                "quantity" => $productListQuantity,
                 "image" => $product->mainImage ? $product->mainImage->image_url : asset('storage/images/default.jpg')
             ];
         }
@@ -149,9 +113,9 @@ class PosController extends Controller
                  <td>
                 <img src="' . ($product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg')) . '" alt="' . $product->name . '" width="50px">
                  </td>
-                  <td><input class="so--luong1" type="number" value="1" min="1" disabled>
+                  <td><input class="so--luong1 productList-quantity" type="number" value="1" min="1" data-id="' . $product->id . '">
                   </td>
-                <td>' . number_format($product->price) . ' VND</td>
+                <td >' . number_format($product->price) . 'đ</td>
                 <td class="text-center">
                     <a class="btn btn-success btn-sm add-to-cart text-white" data-id="' . $product->id . '">Thêm</a>
                 </td>
@@ -268,7 +232,7 @@ class PosController extends Controller
         DB::beginTransaction();
 
         try {
-            // Tạo đơn hàng 
+            // Tạo đơn hàng
             $order = Order::create([
                 'customerID' => $customer->id,
                 'adminID' => auth()->user()->id, // ID của admin tạo đơn
@@ -277,7 +241,7 @@ class PosController extends Controller
                 'totalPrice' => $totalPrice,
                 'note' => $validated['note'] ?? null, // Ghi chú có thể rỗng
                 'paymentMethod' => $validated['paymentMethod'],
-                'status' => 'pending', // Trạng thái mặc định
+                'status' => 'success', // Trạng thái mặc định
             ]);
 
             // Lưu chi tiết đơn hàng
@@ -293,6 +257,13 @@ class PosController extends Controller
                     'quantity' => $item['quantity'],
                     'price' => $item['price'],
                 ]);
+
+                //điều chỉnh số lượng
+                $product = Product::find($item['productID']);
+                if ($product) {
+                    $product->stock =  $product->stock - (int)$item['quantity'];
+                    $product->save();
+                }
             }
 
             $order->status = 'success';
@@ -302,8 +273,8 @@ class PosController extends Controller
 
             // Commit transaction
             DB::commit();
-            
-            
+
+
             return response()->json(['success' => true, 'orderID' => $order->id]);
         } catch (\Exception $e) {
             // Rollback nếu có lỗi

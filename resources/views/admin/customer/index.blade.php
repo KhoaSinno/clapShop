@@ -1,10 +1,10 @@
 @extends('admin.main_layout')
 
 @section('function_nav')
-<div class="col-sm-2">
-    <a class="btn btn-add btn-sm" href="form-add-nhan-vien.html" title="Thêm"><i class="fas fa-plus"></i>
+<!-- <div class="col-sm-2">
+    <a class="btn btn-add btn-sm" href="{{route('admin.customer')}}" title="Thêm"><i class="fas fa-plus"></i>
         Tạo mới khách hàng</a>
-</div>
+</div> -->
 @endsection
 
 @section('content')

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\MainController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PosController;
@@ -89,7 +90,7 @@ Route::middleware('auth')->group(function () {
 
 // Routes cho Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/dashboard', [MainController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Customer Routes
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
@@ -97,7 +98,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
     Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
-
+ 
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');
@@ -118,6 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     // Product Routes
     Route::get('/product', [ProductController::class, 'index'])->name('admin.product');
+    Route::get('/product/listDelete', [ProductController::class, 'listDelete'])->name('admin.product.listDelete');
     Route::post('/product/store', [ProductController::class, 'store'])->name('admin.product.store');
 
     // nguyen

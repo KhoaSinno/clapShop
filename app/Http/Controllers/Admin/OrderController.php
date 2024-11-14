@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,7 +49,7 @@ class OrderController extends Controller
     public function view($id)
     {
         // Truy vấn đơn hàng theo ID, kèm theo thông tin khách hàng và chi tiết đơn hàng
-        $order = Order::with(['user', 'details.product'])->find($id);
+        $order = Order::with(['user', 'admin', 'details.product'])->find($id);
 
         // Kiểm tra nếu không tìm thấy đơn hàng
         if (!$order) {
@@ -127,6 +128,18 @@ class OrderController extends Controller
         if (!$order) {
             return response()->json(['success' => false, 'message' => 'Đơn hàng không tồn tại.'], 404);
         }
+
+        $orderDetails = $order->details;
+        foreach($orderDetails as $detail){
+
+            //điều chỉnh số lượng - hủy
+            $product = Product::find($detail->productID);
+                if ($product) {
+                    $product->stock =  $product->stock + (int)$detail->quantity;
+                    $product->save();
+                }
+        }
+
 
         // Cập nhật trạng thái đơn hàng thành 'cancel'
         $order->status = 'cancel';

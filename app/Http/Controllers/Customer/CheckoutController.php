@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Order_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,7 @@ class CheckoutController extends Controller
 
             // Lấy thông tin user hiện tại
             $customerID = Auth::id(); // ID của người dùng đang đăng nhập (khách hàng)
-            $adminID = null;
+            $adminID = 1; // Hard code ID của admin đặt hàng thay
 
             // Nếu là admin đặt hàng thay
             if (Auth::user()->role === 'admin') {
@@ -72,6 +73,13 @@ class CheckoutController extends Controller
                 $orderDetail->quantity = $item['quantity'];
                 $orderDetail->price = $item['price'];
                 $orderDetail->save();
+                
+                //điều chỉnh số lượng
+                $product = Product::find($id);
+                if ($product) {
+                    $product->stock =  $product->stock - (int)$item['quantity'];
+                    $product->save();
+                }
             }
 
             // Xóa giỏ hàng sau khi hoàn thành đặt hàng
@@ -79,7 +87,7 @@ class CheckoutController extends Controller
             // Đặt lại tổng số lượng và tổng tiền
             session()->forget('totalQuantity');
             session()->forget('total');
-            
+
             DB::commit(); // Commit transaction
             return redirect()->route('customer.order')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
         } catch (\Exception $e) {

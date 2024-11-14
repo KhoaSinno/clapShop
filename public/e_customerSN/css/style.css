@@ -1088,8 +1088,8 @@ ol {
 }
 
 /* .sidebar__item  ul  li  a:active, .sidebar__item ul li a:hover {
-    color:  #EB473D !important; 
-    transition: color 0.3s ease; 
+    color:  #EB473D !important;
+    transition: color 0.3s ease;
 } */
 
 .sidebar__item.sidebar__item__color--option {
@@ -3620,6 +3620,6 @@ ol {
     background: #000;
 }
 
-.text-redCate{
+.text-redCate {
     color: #EB473D !important;
 }
