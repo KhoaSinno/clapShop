@@ -322,6 +322,11 @@
                     </div>
                 </div>
             </div>
+            <div class="floating-facebook">
+    <a href="#" target="_blank">
+        <i class="fa fa-facebook"></i>
+    </a>
+</div>
         </div>
     </footer>
     <!-- Footer Section End -->
