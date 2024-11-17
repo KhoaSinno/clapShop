@@ -64,7 +64,7 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -322,6 +322,11 @@
                     </div>
                 </div>
             </div>
+            <div class="floating-facebook">
+    <a href="#" target="_blank">
+        <i class="fa fa-facebook"></i>
+    </a>
+</div>
         </div>
     </footer>
     <!-- Footer Section End -->
