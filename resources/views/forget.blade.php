@@ -47,7 +47,9 @@
                         </div> -->
                         <div class="container-login100-form-btn">
                             <button type="submit" class="btn btn-info w-100"
-                                style="padding: 10px 20px; border-radius: 5px; font-size: 15px;">Gửi email</button>
+
+                                style="padding: 10px 20px; border-radius: 5px; font-size: 16px;">Gửi email</button>
+
                         </div>
 
                         <div class="container-login100-form-btn mt-2">
