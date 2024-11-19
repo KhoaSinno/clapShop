@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Order_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,13 @@ class CheckoutController extends Controller
                 $orderDetail->quantity = $item['quantity'];
                 $orderDetail->price = $item['price'];
                 $orderDetail->save();
+                
+                //điều chỉnh số lượng
+                $product = Product::find($id);
+                if ($product) {
+                    $product->stock =  $product->stock - (int)$item['quantity'];
+                    $product->save();
+                }
             }
 
             // Xóa giỏ hàng sau khi hoàn thành đặt hàng

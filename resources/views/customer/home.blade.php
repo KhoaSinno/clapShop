@@ -77,8 +77,30 @@
 <!-- Latest Product Section Begin -->
 <section class="latest-product spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
+        <div class="row ">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="latest-product__text">
+                    <h4>Laptop bán chạy nhất</h4>
+                    <div class="latest-product__slider owl-carousel">
+                        @foreach($bestSellingProducts->chunk(2) as $chunk)
+                        <div class="latest-prdouct__slider__item">
+                            @foreach($chunk as $product)
+                            <a href="#" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>{{ $product->name }}</h6>
+                                    <span>{{ format_currencyVNĐ( $product->price) }}</span>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="latest-product__text">
                     <h4>Xem thêm</h4>
                     <div class="latest-product__slider owl-carousel">
@@ -100,6 +122,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

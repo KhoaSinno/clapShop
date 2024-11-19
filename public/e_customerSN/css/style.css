@@ -136,8 +136,8 @@ ol {
 
 .set-bg {
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
+    background-size: contain;
+    background-position: center center;
 }
 
 .spad {
@@ -762,8 +762,10 @@ ol {
 -----------------------*/
 
 .categories__item {
-    height: 270px;
+    height: 200px;
     position: relative;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .categories__item h5 {
@@ -776,13 +778,13 @@ ol {
 }
 
 .categories__item h5 a {
-    font-size: 18px;
+    font-size: 15px;
     color: #1c1c1c;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 12px 0 10px;
-    background: #ffffff;
+    letter-spacing: 1px;
+    padding: 12px 0 3px;
+    /* background: #ffffff; */
     display: block;
 }
 
@@ -3622,4 +3624,30 @@ ol {
 
 .text-redCate {
     color: #EB473D !important;
+}
+.floating-facebook {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1877F2;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.floating-facebook i {
+    color: #fff;
+    font-size: 24px;
+}
+
+.floating-facebook:hover {
+    transform: scale(1.1);
+    background-color: #145DB2;
 }

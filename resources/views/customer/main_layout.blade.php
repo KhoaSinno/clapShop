@@ -64,7 +64,7 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Đăng nhập</a>
+                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -151,8 +151,6 @@
                                 <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
                                 @endauth
                             </div>
-
-
 
                         </div>
                     </div>
@@ -295,8 +293,8 @@
                         <h6>Liên hệ</h6>
                         <p>Nhận thông tin cập nhật qua Email về cửa hàng mới nhất của chúng tôi và các ưu đãi đặc biệt.</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                            <input type="text" placeholder="Địa chỉ mail của bạn">
+                            <button type="submit" class="site-btn">Đăng ký</button>
                         </form>
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -324,6 +322,11 @@
                     </div>
                 </div>
             </div>
+            <div class="floating-facebook">
+    <a href="#" target="_blank">
+        <i class="fa fa-facebook"></i>
+    </a>
+</div>
         </div>
     </footer>
     <!-- Footer Section End -->

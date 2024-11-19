@@ -31,7 +31,7 @@ class PosController extends Controller
 
         if (!$product) {
             return response()->json([
-                'message' => 'Sản phẩm không tồn tại!'
+                'error' => 'Sản phẩm không tồn tại!'
             ], 404); // Trả về lỗi nếu sản phẩm không tồn tại
         }
 
@@ -39,6 +39,20 @@ class PosController extends Controller
 
         // Lấy giỏ hàng từ session, nếu chưa có thì khởi tạo mảng rỗng
         $cart = session()->get('cart', []);
+
+        ///////////////////////////////////////////////////////////////
+        // Kiểm tra tồn kho
+        // Nếu sản phẩm đã có trong giỏ, lấy số lượng hiện tại trong giỏ hàng
+        $currentQuantityInCart = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+
+        // Nếu số lượng yêu cầu cộng số lượng trong giỏ hàng vượt quá tồn kho, trả về lỗi
+        if ($product->stock < ($productListQuantity + $currentQuantityInCart)) {
+            return response()->json([
+                'error' => 'Số lượng yêu cầu vượt quá số lượng tồn kho!'
+            ], 400); // Trả về lỗi nếu số lượng yêu cầu vượt quá tồn kho
+        }
+        //////////////////////////////////////////////////////////////
+
 
         // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng
         if (isset($cart[$id])) {
@@ -229,7 +243,7 @@ class PosController extends Controller
                 'paymentMethod' => $validated['paymentMethod'],
                 'status' => 'success', // Trạng thái mặc định
             ]);
- 
+
             // Lưu chi tiết đơn hàng
             foreach ($cartItems as $item) {
                 // Kiểm tra xem khóa 'productID' có tồn tại không
@@ -250,7 +264,6 @@ class PosController extends Controller
                     $product->stock =  $product->stock - (int)$item['quantity'];
                     $product->save();
                 }
-
             }
 
             $order->status = 'success';

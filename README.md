@@ -17,49 +17,79 @@ php artisan migrate:fresh --seed
 
 # Công việc các thành viên
 
-### `1. Anh Khoa - HTTT2211026`
+### `1. Anh Khoa - HTTT2211026`###
+- Setup dự án, khởi tạo và thiết lập môi trường
+- Chọn template: Admin và Customer
+- Phân chia route cho: Admin và Customer
+- Hiển thị/ Update khách hàng với ajax
+- Thiết kế database
+- Tiếp tục: Tối ưu các routes
+- Merge code vào branch main
+- Dùng "booted" trong service hiển thị thông tin khi vào website UI: Customer
+- Base session để thêm/ xóa item trong giỏ hàng
+- Lọc sản phẩm khi bấm vào Category
+- Phần giao diện cart: Làm mịn lại để đẹp mắt hơn
+- Cập nhật số lượng bằng cách bấm nút Update và lưu số lượng vào session, sau đó phần tổng giá sẽ tăng theo
+- Chỉnh nội dung trang contact
+- Code phần thanh toán
+- Phần Order ở customer và admin
+- Viết chức năng sửa, xóa, xem Admin: Order
+- Lên content cho slide
+### `1. Anh Khoa - HTTT2211026`###
 
-- Thành lập dự án, khởi tạo và thiết lập môi trường
-- Chọn `template` Admin và Customer
-- Phân `chia route` cho Admin và Customer
-- `Hiển thị/ Update khách hàng` với ajax
-- `Thiết kế database`
-- Train và hỗ trợ cho mọi người
-- Tối ưu lại Routes
-
-### `2. Thành Đạt - HTTT2211003`
-
-- Thành lập dự án, khởi tạo và thiết lập môi trường
-- Chọn `template` Admin và Customer
-- Phân `chia route` cho Admin và Customer
-- `Hiển thị/ Update khách hàng` với ajax
-- `Thiết kế database`
-
-  #### `>>>To do:`
-
-- Train và hỗ trợ cho mọi người
-- Tối ưu lại Routes
-- Admin: code Đơn hàng: Thêm/ Sửa/ Xác nhận/ Hủy
+### `2. Thành Đạt - HTTT2211003`###
 - Admin: code Danh mục: Thêm/ Sửa/ Xóa
+- Nảy ra idea về phân bố bố cục (Trang chủ, sản phẩm, liên hệ)
+- Lead: Chỉnh sửa template (Trang chủ, sản phẩm, liên hệ)
+- Đưa ra màu chủ đạo
+- Logo: ClapShop (Chữ hay Ảnh hay Vector)
+- Nảy ra idea
+- Lead: Chỉnh sửa template (Cart, thanh toán)
+- Thêm cột hình ảnh ở Cart
+- Vietsub lại phần header và footer
+- Admin: Thêm/ xoá hình ảnh Category và duyệt hình ảnh ra
+- 1 Banner to chính ở trang chủ: 870 x 431
+- 2 Banner nhỏ: 570 x 270
+- 1 breadcrum: 1950 x 20
+- 1 icon title web
+- Đưa ra idea 
+- Làm phần Dashboard báo cáo ở phần admin
+- Thiết kế slide
+### `2. Thành Đạt - HTTT2211003`###
 
-### `3. Như Ý - HTTT2211015`
+### `3. Như Ý - HTTT2211015`###
+- Thiết kế database
+- Hiển thị danh mục trang chủ
+- Làm phần seeder product
+- Làm trang register
+- Chỉnh sửa UI 
+- Customer: Profile user
+- Thuyết trình, báo cáo với cô
+### `3. Như Ý - HTTT2211015`###
 
-- `Thiết kế database`
-- Note các bước đã thực hiện ở bên dưới này t có viết sẵn rồi đó
-
-- Train cho Phát: Cách chạy khi có src và khi mới pull code về
-
-### `4. Thành Phát - HTTT2211004`
-
-- Lấy Hình ảnh + Nội dung
+### `4. Thành Phát - HTTT2211004`###
 - Làm ProductSeeder
+- Lấy Hình ảnh + Nội dung
+- Xử lý và tạo UI 404 not found ở route ngoài những route được định nghĩa trong web.php
+- Sửa lại tên hình ảnh (Bị lỗi khi truy xuất thông qua tên hình ảnh nên cần Phát sửa lại
+ sửa lại hình trong git ấy, ròi push lên lại)
+ - VietSub lại phần footer giống thương  mại đt
+### `4. Thành Phát - HTTT2211004`###
 
 ### `5. Trường Nguyên - HTTT2211025`
-
-- `Thiết kế database`
+- Thiết kế database
 - Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
-- Suy nghĩ cách nếu như nhập hàng thì sửa phần sổ lượng sản phẩm hay cách nào khác mà đỡ phức tạp
-
+- Dùng seeder import data vào
+- Hoàn thiện chức năng lọc sản phẩm theo giá
+- Forgot password
+- Change password
+- Đưa ra idea làm phần POS bán hàng
+- Train cho mọi người và tự tìm hiểu để cover:
++ Luồng hoạt động
++ Cách thức áp dụng công nghệ ntn
+- Test phần order Customer và Admin
+- Test thanh toán ở customer
+- Pos admin
 ### `5. Trường Nguyên - HTTT2211025`
 
 - Admin: code Sản phẩm: Thêm/ Sửa/ Xóa

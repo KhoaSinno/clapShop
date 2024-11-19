@@ -300,7 +300,11 @@
                     $('#totalQuantity').text(response.totalQuantity);
                 },
                 error: function(xhr) {
-                    alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                    if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
+                        alert(xhr.responseJSON.error);
+                    } else {
+                        alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                    }
                 }
             });
         });
@@ -367,8 +371,11 @@
                         if (response.exists) {
                             // Nếu khách hàng đã tồn tại
                             $('#phoneMessage').text('Khách hàng đã có tài khoản').css('color', 'green');
-                            $('#customerPhone').css('border', '2px solid red');
+                            $('#customerPhone').css('border', '2px solid green');
                         } else {
+                            $('#customerPhone').css('border', '2px solid red');
+                            $('#phoneMessage').text('Khách hàng cần tạo tài khoản').css('color', 'red !important');
+
                             // Nếu khách hàng không tồn tại, hiển thị cảnh báo yêu cầu tạo khách hàng
                             swal({
                                 title: "Tạo khách hàng mới",
