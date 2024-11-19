@@ -83,9 +83,6 @@ Route::prefix('customer')->group(function () {
 // Routes cho hành động cần đăng nhập
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
-    // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
-    // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 });
 
 // Routes cho Admin
@@ -98,7 +95,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
     Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
- 
+
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');

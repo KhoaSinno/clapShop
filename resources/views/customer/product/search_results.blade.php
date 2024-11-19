@@ -194,7 +194,12 @@
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
-                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                // alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                swal({
+                    title: "Sản phẩm đã được thêm vào giỏ hàng!",
+                    icon: "success",
+                    button: "OK",
+                });
                 // Cập nhật tổng tiền ngay lập tức
                 $('.header__cart__price span').text('$' + response.total.toFixed(2));
                 $('.span__quantity_cart').text(response.totalQuantity);

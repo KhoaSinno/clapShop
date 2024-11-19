@@ -12,6 +12,8 @@
 @endsection
 
 @section('content')
+<h2 class="text-center bg-warning py-2 mt-5">Đơn hàng chờ duyệt</h2>
+
 <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
     id="sampleTable">
     <thead>
@@ -41,7 +43,7 @@
                     <i class="fas fa-edit"></i>
                 </button>
                 <a class="btn btn-info btn-sm mx-1" href="{{route('admin.order.view', $od->id)}}"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                <a class="btn btn-success btn-sm mx-1 orderSuccess" data-id="{{ $od->id }}">
+                <a class="btn btn-success btn-sm mx-1 text-white orderSuccess" data-id="{{ $od->id }}">
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </a>
                 <a class="btn btn-danger text-white btn-sm ml-1 deleteOrder" data-id="{{ $od->id }}">
@@ -148,8 +150,14 @@
                     $('#ModalUP').modal('show'); // Hiển thị modal
                 },
                 error: function(xhr) {
-                    alert('Lỗi khi lấy thông tin địa chỉ đơn hàng');
-                    console.log(xhr.responseText); // Xem phản hồi từ server
+                    swal({
+                        title: "Lỗi khi lấy thông tin địa chỉ đơn hàng",
+                        text: xhr.responseText,
+                        icon: "error",
+                        button: "OK",
+                    });
+                    // alert('Lỗi khi lấy thông tin địa chỉ đơn hàng');
+                    // console.log(xhr.responseText); // Xem phản hồi từ server
                 }
             });
         });
@@ -169,11 +177,24 @@
                 },
                 success: function(response) {
                     // $('#ModalUP').modal('hide');
-                    alert('Cập nhật thành công');
-                    location.reload(); // Reload trang sau khi cập nhật thành công
+                    // alert('Cập nhật thành công');
+                    swal({
+                        title: "Cập nhật thành công",
+                        icon: "success",
+                        button: "OK",
+                    });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 },
                 error: function(xhr) {
-                    alert('Cập nhật thất bại');
+                    // alert('Cập nhật thất bại');
+                    swal({
+                        title: "Cập nhật thất bại",
+                        text: xhr.responseText,
+                        icon: "error",
+                        button: "OK",
+                    });
                 }
             });
         });
@@ -188,8 +209,15 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert('Đơn hàng đã được cập nhật thành công.');
-                        location.reload(); // Tải lại trang nếu cần
+                        // alert('Đơn hàng đã được cập nhật thành công.');
+                        swal({
+                            title: "Đơn hàng đã được cập nhật thành công.",
+                            icon: "success",
+                            button: "OK",
+                        });
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
                     } else {
                         alert('Cập nhật thất bại: ' + response.message);
                     }
@@ -213,7 +241,14 @@
                     success: function(response) {
                         if (response.success) {
                             alert('Đơn hàng đã được hủy thành công!');
-                            location.reload(); // Reload trang sau khi hủy thành công
+                            swal({
+                                title: "Đơn hàng đã được hủy thành công!",
+                                icon: "success",
+                                button: "OK",
+                            });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
                         } else {
                             alert('Hủy đơn hàng thất bại: ' + response.message);
                         }

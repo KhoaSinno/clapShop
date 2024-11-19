@@ -4,21 +4,30 @@
 <div class="row">
     <!--Left-->
     <div class="col-md-12 col-lg-6">
-        <div class="row widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+        <div class="row widget-small primary coloured-icon">
+            <a href="{{route('admin.customer')}}">
+                <i class='icon bx bxs-user-account fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng khách hàng</h4>
                 <p><b>{{ $totalCustomers }} khách hàng</b></p>
                 <p class="info-tong">Tổng số khách hàng được quản lý.</p>
             </div>
         </div>
-        <div class="row widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+        <div class="row widget-small info coloured-icon">
+            <a href="{{route('admin.product')}}">
+                <i class='icon bx bxs-data fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng sản phẩm</h4>
                 <p><b>{{ $totalProducts }} sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
             </div>
         </div>
-        <div class="row widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
+        <div class="row widget-small warning coloured-icon">
+            <a href="{{route('admin.order')}}">
+                <i class='icon bx bxs-shopping-bags fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng đơn hàng</h4>
                 <p><b>{{ $totalOrders }} đơn hàng</b></p>
@@ -74,20 +83,20 @@
                 </thead>
                 <tbody>
                     @foreach($orders as $order)
-                        <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->customer ? $order->customer->fullname : 'N/A' }}</td>
-                            <td>{{ number_format($order->totalPrice, 0, ',', '.') }} đ</td>
-                            <td>
-                                @if($order->status == 'success')
-                                    <span class="badge bg-success">Đã hoàn thành</span>
-                                @elseif($order->status == 'failed')
-                                    <span class="badge bg-danger">Đã hủy</span>
-                                @else
-                                    <span class="badge bg-warning">Đang xử lý</span>
-                                @endif
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->customer ? $order->customer->fullname : 'N/A' }}</td>
+                        <td>{{ number_format($order->totalPrice, 0, ',', '.') }} đ</td>
+                        <td>
+                            @if($order->status == 'success')
+                            <span class="badge bg-success">Đã hoàn thành</span>
+                            @elseif($order->status == 'failed')
+                            <span class="badge bg-danger">Đã hủy</span>
+                            @else
+                            <span class="badge bg-warning">Đang xử lý</span>
+                            @endif
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -112,12 +121,12 @@
                 </thead>
                 <tbody>
                     @foreach($customers as $customer)
-                        <tr>
-                            <td>{{ $customer->id }}</td>
-                            <td>{{ $customer->fullname }}</td>
-                            <td>{{ $customer->dob ? $customer->dob->format('d/m/Y') : 'N/A' }}</td>
-                            <td>{{ $customer->phone }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $customer->id }}</td>
+                        <td>{{ $customer->fullname }}</td>
+                        <td>{{ $customer->dob ? $customer->dob->format('d/m/Y') : 'N/A' }}</td>
+                        <td>{{ $customer->phone }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -138,25 +147,25 @@
     var data = {
         labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
         datasets: [{
-            label: "Dữ liệu đầu tiên",
-            fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
-            strokeColor: "rgb(255, 212, 59)",
-            pointColor: "rgb(255, 212, 59)",
-            pointStrokeColor: "rgb(255, 212, 59)",
-            pointHighlightFill: "rgb(255, 212, 59)",
-            pointHighlightStroke: "rgb(255, 212, 59)",
-            data: [20, 59, 90, 51, 56, 100]
-        },
-        {
-            label: "Dữ liệu kế tiếp",
-            fillColor: "rgba(9, 109, 239, 0.651)  ",
-            pointColor: "rgb(9, 109, 239)",
-            strokeColor: "rgb(9, 109, 239)",
-            pointStrokeColor: "rgb(9, 109, 239)",
-            pointHighlightFill: "rgb(9, 109, 239)",
-            pointHighlightStroke: "rgb(9, 109, 239)",
-            data: [48, 48, 49, 39, 86, 10]
-        }
+                label: "Dữ liệu đầu tiên",
+                fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
+                strokeColor: "rgb(255, 212, 59)",
+                pointColor: "rgb(255, 212, 59)",
+                pointStrokeColor: "rgb(255, 212, 59)",
+                pointHighlightFill: "rgb(255, 212, 59)",
+                pointHighlightStroke: "rgb(255, 212, 59)",
+                data: [20, 59, 90, 51, 56, 100]
+            },
+            {
+                label: "Dữ liệu kế tiếp",
+                fillColor: "rgba(9, 109, 239, 0.651)  ",
+                pointColor: "rgb(9, 109, 239)",
+                strokeColor: "rgb(9, 109, 239)",
+                pointStrokeColor: "rgb(9, 109, 239)",
+                pointHighlightFill: "rgb(9, 109, 239)",
+                pointHighlightStroke: "rgb(9, 109, 239)",
+                data: [48, 48, 49, 39, 86, 10]
+            }
         ]
     };
     var ctxl = $("#lineChartDemo").get(0).getContext("2d");
