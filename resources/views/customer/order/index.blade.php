@@ -39,16 +39,19 @@
                             </thead>
                             <tbody>
                                 @foreach($orders as $order)
-                                <tr>
-                                    <td>#{{ $order->id }}</td>
-                                    <td>{{ $order->created_at->format('d/m/Y') }}</td>
-                                    <!-- <td>{{ $order->totalQuantity }}</td> -->
-                                    <td>{{ format_currencyVNĐ($order->totalPrice) }}</td>
-                                    <td class="font-weight-bold  {{returnCssStatus($order->status)}}">{{ returnStatus($order->status) }}</td>
-                                    <td class="shoping__cart__item__close d-flex justify-content-center align-items-center">
-                                        <a class="btn btn-info" href="{{ route('customer.order.show', $order->id) }}">Chi tiết</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>#{{ $order->id }}</td>
+                                        <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                        <!-- <td>{{ $order->totalQuantity }}</td> -->
+                                        <td>{{ format_currencyVNĐ($order->totalPrice) }}</td>
+                                        <td class="font-weight-bold  {{returnCssStatus($order->status)}}">
+                                            {{ returnStatus($order->status) }}</td>
+                                        <td
+                                            class="shoping__cart__item__close d-flex justify-content-center align-items-center">
+                                            <a class="btn btn-info"
+                                                href="{{ route('customer.order.show', $order->id) }}">Chi tiết</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
 
 
@@ -63,7 +66,6 @@
                         <a href="{{route('customer.products')}}" class="primary-btn cart-btn">Tiếp tục mua sắm</a>
                     </div>
                 </div>
-
             </div>
     </section>
 </div>

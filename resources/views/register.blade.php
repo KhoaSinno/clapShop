@@ -96,14 +96,21 @@
                         </style>
 
                         <div class="container-login100-form-btn">
-                            <button type="submit" class="btn btn-info w-100">Đăng kí</button>
+                            <button type="submit" class="btn btn-info w-100"
+                                style="padding: 10px 20px; border-radius: 5px; font-size: 15px;">Đăng kí</button>
                         </div>
 
                         <div class="container-login100-form-btn" style="margin-top: 10px;">
                             <button class="btn btn-secondary w-100" onclick="window.history.back();"
-                                style="background-color: #808080 ; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">Trở
-                                lại</button>
+                                style="background-color: #808080; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 15px; transition: background-color 0.3s ease, color 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#6c757d';"
+                                onmouseout="this.style.backgroundColor='#808080';"
+                                onmousedown="this.style.backgroundColor='#5a6268';"
+                                onmouseup="this.style.backgroundColor='#6c757d';">
+                                Trở lại
+                            </button>
                         </div>
+
 
                         @csrf
                     </form>
