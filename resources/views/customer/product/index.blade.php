@@ -21,6 +21,8 @@
 <!-- Breadcrumb Section End -->
 
 @section('content')
+
+                        <!-- ///////////////////////////////////// -->
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
@@ -71,7 +73,7 @@
                     <!--
                     <div class="sidebar__item">
                         <h4>Giá</h4>
-                        <form method="GET" action="{{ route('products.filter') }}">
+                        <form method="GET" action="">
                             <div class="sidebar__item__size">
                                 <label for="large">
                                     <input type="radio" id="large" name="price_range" value="0" onchange="this.form.submit()" {{ request('price_range') == '0' ? 'checked' : '' }}>
@@ -102,23 +104,38 @@
 
                     <div class="sidebar__item">
                         <h4>Giá</h4>
+                        <form id="priceFilterForm" action="{{ route('customer.product.filter') }}" method="get">
+    <div class="list-group">
+        <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+            <input class="form-check-input me-2" type="radio" name="price_range" value="lower_15" 
+                onclick="submitPriceFilter()"
+                {{ request('price_range') == 'lower_15' ? 'checked' : '' }}>
+            Nhỏ hơn 15 Triệu
+        </label>
 
-                        <div class="list-group ">
-                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
-                                <input class="form-check-input me-2" type="radio" name="price_range" value="lower_15" onclick="showSelectedPrice()">
-                                Nhỏ hơn 15 Triệu
-                            </label>
+        <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+            <input class="form-check-input me-2" type="radio" name="price_range" value="greater_15" 
+                onclick="submitPriceFilter()"
+                {{ request('price_range') == 'greater_15' ? 'checked' : '' }}>
+            Lớn hơn 15 Triệu
+        </label>
 
-                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
-                                <input class="form-check-input me-2" type="radio" name="price_range" value="greater_15" onclick="showSelectedPrice()">
-                                Lớn hơn 15 Triệu
-                            </label>
+        <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
+            <input class="form-check-input me-2" type="radio" name="price_range" value="casual" 
+                onclick="submitPriceFilter()"
+                {{ request('price_range') == 'casual' ? 'checked' : '' }}>
+            Bất kì giá nào
+        </label>
+    </div>
+</form>
 
-                            <label class="border-0 list-group-item d-flex justify-content-between align-items-center">
-                                <input class="form-check-input me-2" type="radio" name="price_range" value="casual" onclick="showSelectedPrice()">
-                                Bất kì giá nào
-                            </label>
-                        </div>
+<script>
+    function submitPriceFilter() {
+        document.getElementById('priceFilterForm').submit();
+    }
+</script>
+
+
                     </div>
                     <!-- <div class="sidebar__item sidebar__item__color--option">
                         <h4>Màu sắc</h4>
@@ -272,4 +289,5 @@
         }
     }
 </script>
-@endsection
+
+@endsection 
