@@ -16,6 +16,7 @@ class CustomerController extends Controller
             'customers' => $cus
         ]);
     }
+    
     public function edit($id)
     {
         $customer = User::findOrFail($id);
@@ -23,29 +24,17 @@ class CustomerController extends Controller
         return response()->json($customer);
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $customer = User::findOrFail($id);
-
-    //     $customer->update($request->all());
-
-    //     return response()->json([
-    //         'message' => 'Cập nhật thành công!'
-    //     ])->with('success', 'Category created successfully.');
-    // }
-
     public function update(Request $request, $id)
-{
-    $customer = User::findOrFail($id);
+    {
+        $customer = User::findOrFail($id);
 
-    $customer->update($request->all());
+        $customer->update($request->all());
 
-    // Trả về thông tin cập nhật mới nhất
-    return response()->json([
-        'success' => true,
-        'message' => 'Cập nhật thành công!',
-        'data' => $customer // Trả về đối tượng customer đã được cập nhật
-    ]);
-}
-
+        // Trả về thông tin cập nhật mới nhất
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật thành công!',
+            'data' => $customer // Trả về đối tượng customer đã được cập nhật
+        ]);
+    }
 }

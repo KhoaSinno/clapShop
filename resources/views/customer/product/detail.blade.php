@@ -32,7 +32,8 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                            src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}" alt="">
+                            src="{{ $product->mainImage ? asset($product->mainImage->image_url) : asset('storage/images/default.jpg') }}"
+                            alt="">
                     </div>
                     <!-- <div class="product__details__pic__slider owl-carousel">
                         <img data-imgbigurl="/e_customerSN/img/product/details/product-details-2.jpg"
@@ -68,15 +69,20 @@
                     </div> -->
                     <a href="#" class="primary-btn add-to-cart" data-id="{{ $product->id }}">Thêm vào giỏ</a>
                     <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
+                    @if($product->stock <= 0)
+                        <h5 style="color: red;">Sản phẩm hết hàng.</h5>
+                    @endif
                     <ul>
                         <li><b>Bộ vi xử lý (CPU):</b> <span class="d-block pl-3">{{ $product->cpu }}</span></li>
                         <li><b>Bộ nhớ (RAM):</b> <span class="d-block pl-3">{{ $product->ram }}</span></li>
                         <li><b>Ổ cứng (Storage):</b> <span class="d-block pl-3">{{ $product->storage }}</span></li>
-                        <li><b class="d-inline">Kích thước màn hình:</b> <span class="d-block pl-3">{{ $product->screen }}</span></li>
+                        <li><b class="d-inline">Kích thước màn hình:</b> <span
+                                class="d-block pl-3">{{ $product->screen }}</span></li>
                         <li><b>Dung lượng pin:</b> <span class="d-block pl-3">{{ $product->battery }}</span></li>
                         <li><b>Bảo hành:</b> <span class="d-block pl-3">{{ $product->warranty }}</span></li>
                         <li><b>Hệ điều hành:</b> <span class="d-block pl-3">{{ $product->os }}</span></li>
-                        <li><b>Tình trạng:</b> <span class="d-block pl-3">{{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></li>
+                        <li><b>Tình trạng:</b> <span
+                                class="d-block pl-3">{{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></li>
 
                         <li><b>Chia sẻ</b>
                             <div class="share">
@@ -123,21 +129,24 @@
         </div>
         <div class="row">
             @foreach ($relatedProducts as $relatedProduct)
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{ $relatedProduct->mainImage ? asset($relatedProduct->mainImage->image_url) : asset('storage/images/default.jpg') }}">
-                        <ul class="product__item__pic__hover">
-                            <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                            <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="{{route('customer.product.detail', $relatedProduct->id) }}">{{$relatedProduct->name}}</a></h6>
-                        <h5>{{$relatedProduct->price}}</h5>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg"
+                            data-setbg="{{ $relatedProduct->mainImage ? asset($relatedProduct->mainImage->image_url) : asset('storage/images/default.jpg') }}">
+                            <ul class="product__item__pic__hover">
+                                <!-- <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                                                                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li> -->
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a
+                                    href="{{route('customer.product.detail', $relatedProduct->id) }}">{{$relatedProduct->name}}</a>
+                            </h6>
+                            <h5>{{$relatedProduct->price}}</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
         </div>

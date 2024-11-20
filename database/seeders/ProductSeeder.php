@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                 'description' => '',
                 'price' => 27590000,
                 'stock' => 1,
-                'active' => true,
+                'active' => false,
             ],
             [
                 'categoryID' => 1,
@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
                 'warranty' => '2 năm',
                 'os' => 'Windows 11 bản quyền',
                 'description' => '<h2>Đặc điểm nổi bật</h2>
-                
+
             <p><em><strong>Lenovo Thinkbook 14P Gen 2</strong>&nbsp;- Thiết bị l&agrave;m việc hiệu năng cao, thiết kế gọn nhẹ cực kỳ ph&ugrave; hợp với những nh&agrave; s&aacute;ng tạo nội dung hoặc những người d&ugrave;ng c&oacute; c&ocirc;ng việc đ&ograve;i hỏi phải di chuyển giữa nhiều địa điểm. Nếu bạn cũng đang t&igrave;m kiếm cho m&igrave;nh một thiết bị l&agrave;m việc sở hữu những ưu điểm n&agrave;y th&igrave; h&atilde;y xem ngay b&agrave;i viết dưới đ&acirc;y của&nbsp;<strong>T&amp;T Center</strong>, để đưa ra quyết định nh&eacute;!</em></p>
 
             <h2><strong>Đ&aacute;nh gi&aacute; Lenovo Thinkbook 14P Gen 2 -&nbsp; Thiết kế đơn giản v&agrave; tinh tế</strong></h2>
@@ -150,12 +150,12 @@ class ProductSeeder extends Seeder
                 'ram' => '8GB DDR5 5200MHz',
                 'storage' => '512GB M.2 PCIe NVMe SSD',
                 'screen' => '14.0inch FHD+ (1920 x 1200) 60Hz,250 nits',
-                'battery' => '4Cell ',
+                'battery' => '4Cell',
                 'warranty' => '2 năm',
                 'os' => 'Windows 11 bản quyền',
                 'description' => '',
                 'price' => 16990000,
-                'stock' => '1',
+                'stock' => 1,
                 'active' => true,
             ],
             [

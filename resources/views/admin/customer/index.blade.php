@@ -164,65 +164,17 @@
                     $('#gender').val(response.gender);
                 },
                 error: function(xhr) {
-                    alert('Lỗi khi lấy thông tin khách hàng');
-                    console.log(xhr.responseText); // Xem phản hồi từ server
+                    swal({
+                            title: "Lỗi khi lấy thông tin khách hàng",
+                            text: xhr.responseText,
+                            icon: "error",
+                            button: "OK",
+                        });
+                    // alert('Lỗi khi lấy thông tin khách hàng');
+                    // console.log(xhr.responseText);
                 }
             });
         });
-
-        // $("#updateCustomerForm").on("submit", function(e) {
-        //     e.preventDefault(); // Ngăn chặn việc gửi form mặc định
-        //     var customerId = $('#customerId').val(); // Lấy ID từ hidden input
-        //     var formData = $(this).serialize(); // Lấy dữ liệu từ form
-
-        //     $.ajax({
-        //         url: '/admin/customer/' + customerId, // Gọi đúng URL với ID
-        //         type: 'PUT',
-        //         data: formData, // Dữ liệu từ form
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-        //         },
-        //         success: function(response) {
-        //             if (response.success) {
-        //                 // Cập nhật trực tiếp thông tin trên bảng
-        //                 const row = $(`button[data-id="${customerId}"]`).closest('tr');
-        //                 row.find('td:nth-child(2)').text(response.data.fullname); // Cập nhật Họ và tên
-        //                 row.find('td:nth-child(3)').text(response.data.address); // Cập nhật Địa chỉ
-        //                 row.find('td:nth-child(4)').text(response.data.phone); // Cập nhật SĐT
-        //                 row.find('td:nth-child(5)').text(response.data.email); // Cập nhật Email
-        //                 row.find('td:nth-child(6)').text(response.data.dateOfBirth); // Cập nhật Ngày sinh
-        //                 row.find('td:nth-child(7)').text(response.data.gender); // Cập nhật Giới tính
-
-        //                 // Hiển thị thông báo thành công
-        //                 $('#alert-container').html(`
-        //                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        //                         ${response.message}
-        //                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        //                             <span aria-hidden="true">&times;</span>
-        //                         </button>
-        //                     </div>
-        //                 `);
-
-        //                 // Đóng modal -- bug
-        //                 jQuery('#ModalUP').modal('hide');
-        //                 $('.modal-backdrop.fade.show').remove();
-
-        //             } else {
-        //                 $('#alert-container').html(`
-        //             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        //                 ${response.message}
-        //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        //                     <span aria-hidden="true">&times;</span>
-        //                 </button>
-        //             </div>
-        //         `);
-        //             }
-        //         },
-        //         error: function(xhr) {
-        //             alert('Cập nhật thất bại');
-        //         }
-        //     });
-        // });
 
         $("#updateCustomerForm").on("submit", function(e) {
             e.preventDefault(); // Ngăn chặn việc gửi form mặc định

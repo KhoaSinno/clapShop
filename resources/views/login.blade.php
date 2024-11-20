@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi"> 
+<html lang="vi">
 
 <head>
     @include('admin.head')
@@ -46,9 +46,12 @@
                                 Remember me
                             </label>
                         </div>
+
                         <div class="container-login100-form-btn">
-                            <button type="submit" class="btn btn-info w-100">Đăng nhập</button>
+                            <button type="submit" class="btn btn-info w-100"
+                                style="padding: 10px 20px; border-radius: 5px; font-size: 15px;">Đăng nhập</button>
                         </div>
+
                         <div class="text-right p-t-12">
                             <a class="txt2" href="{{route('forget')}}">
                                 Bạn quên mật khẩu?

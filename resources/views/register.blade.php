@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="/e_adminSN/css/style.css">
     <link rel="stylesheet" type="text/css" href="/e_adminSN/css/util.css">
     <link rel="stylesheet" type="text/css" href="/e_adminSN/css/index.css">
-
 </head>
 
 <body>
@@ -23,7 +22,7 @@
 
                     <form action="{{ route('register.store') }}" method="post">
                         <div class="wrap-input100 validate-input">
-                            <label for="username" class="lable-input100">Tên người dùng:</label>
+                            <label for="username" class="lable-input100">Tên đăng nhập:</label>
                             <input class="input100" type="text" placeholder="Nhập tên tài khoản" name="username"
                                 id="username">
                             <span class="focus-input100"></span>
@@ -42,13 +41,13 @@
                                 name="fullname" id="fullname-field">
                             <span class="focus-input100"></span>
                         </div>
-
+                        <!--
                         <div class="wrap-input100 validate-input">
                             <label for="email">Gmail:</label>
                             <input autocomplete="off" class="input100" type="email" placeholder="Nhập gmail"
                                 name="email" id="email-field">
                             <span class="focus-input100"></span>
-                        </div>
+                        </div> -->
 
                         <div class="wrap-input100 validate-input">
                             <label for="phone">Số điện thoại:</label>
@@ -57,7 +56,7 @@
                             <span class="focus-input100"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input">
+                        <!-- <div class="wrap-input100 validate-input">
                             <label for="address">Địa chỉ:</label>
                             <input autocomplete="off" class="input100" type="text" placeholder="Nhập địa chỉ"
                                 name="address" id="address-field" required>
@@ -76,19 +75,19 @@
                             <input autocomplete="off" class="input100" type="date" style="opacity: 0.6;"
                                 placeholder="Chọn ngày sinh" name="dateOfBirth" id="dateOfBirth">
                             <span class="focus-input100"></span>
-                        </div>
+                        </div> -->
 
                         <!-- Hiển thị lỗi nếu có -->
                         @if ($errors->any())
-                            <div class="alert"
-                                style="background-color: red; color: black; padding: 10px; border-radius: 5px; margin-top: 15px;">
-                                <strong>Errors:</strong>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                        <div class="alert"
+                            style="background-color: red; color: black; padding: 10px; border-radius: 5px; margin-top: 15px;">
+                            <strong>Errors:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @endif
                         <style>
                             .input100::placeholder {
@@ -97,14 +96,21 @@
                         </style>
 
                         <div class="container-login100-form-btn">
-                            <button type="submit" class="btn btn-info w-100">Đăng kí</button>
+                            <button type="submit" class="btn btn-info w-100"
+                                style="padding: 10px 20px; border-radius: 5px; font-size: 15px;">Đăng kí</button>
                         </div>
 
                         <div class="container-login100-form-btn" style="margin-top: 10px;">
                             <button class="btn btn-secondary w-100" onclick="window.history.back();"
-                                style="background-color: #808080 ; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">Trở
-                                lại</button>
+                                style="background-color: #808080; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 15px; transition: background-color 0.3s ease, color 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#6c757d';"
+                                onmouseout="this.style.backgroundColor='#808080';"
+                                onmousedown="this.style.backgroundColor='#5a6268';"
+                                onmouseup="this.style.backgroundColor='#6c757d';">
+                                Trở lại
+                            </button>
                         </div>
+
 
                         @csrf
                     </form>
@@ -116,7 +122,7 @@
                             <script type="text/javascript">
                                 document.write(new Date().getFullYear());
                             </script>
-                            <a class="txt2" href="#"> Five Hero Team </a>
+                            <a class="txt2" href="#"> ClapShop Team </a>
                         </div>
                     </div>
                 </div>

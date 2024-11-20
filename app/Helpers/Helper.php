@@ -44,3 +44,15 @@ function returnStatus($status)
     }
     return $statusText;
 }
+
+function getPaymentMethodText(string $paymentMethod)
+
+{
+    if ($paymentMethod === 'cod') {
+        return 'Thanh toán khi nhận hàng';
+    } elseif ($paymentMethod === 'bank_transfer') {
+        return 'Chuyển khoản';
+    } else {
+        return 'Phương thức không xác định';
+    }
+}
