@@ -155,8 +155,6 @@ class CartController extends Controller
                 return response()->json(['error' => 'Số lượng vượt quá tồn kho'], 400);
             }
 
-
-
             // Cập nhật lại session giỏ hàng
             session()->put('cart', $cart);
 

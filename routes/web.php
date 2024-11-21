@@ -41,14 +41,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/changepass', [LoginController::class, 'changePassword'])->name('checkotp.changepassword');
 });
-
+ 
 // Routes cho Customer
 Route::prefix('customer')->group(function () {
 
     // Customer product
     Route::get('/products', [CustomerProductController::class, 'index'])->name('customer.products');
     Route::get('/products/{slug}', [CustomerProductController::class, 'showProductsBySlug'])->name('customer.products.by_slug');
-    Route::get('/products/filter', [CustomerProductController::class, 'filter'])->name('products.filter');
+    Route::get('/product/filter', [CustomerProductController::class, 'filter'])->name('customer.product.filter');
 
     Route::get('/products/detail/{id}', [CustomerProductController::class, 'show'])->name('customer.product.detail');
     Route::get('product/search', [CustomerProductController::class, 'search'])->name('customer.product.search');
@@ -83,9 +83,6 @@ Route::prefix('customer')->group(function () {
 // Routes cho hành động cần đăng nhập
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    // Hành động cần xác thực (thanh toán, thêm vào giỏ hàng, v.v.)
-    // Route::post('/cart/add', [ProductController::class, 'addToCart'])->name('cart.add');
-    // Route::get('/checkout', [ProductController::class, 'checkout'])->name('checkout');
 });
 
 // Routes cho Admin
@@ -98,7 +95,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/customer/store', [CustomerController::class, 'store'])->name('admin.customer.store');
     Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
- 
+
     // POS bán hàng: nơi cho quản lý lên đơn cho KH
     Route::get('/pos', [PosController::class, 'index'])->name('admin.pos');
     Route::get('/search-product', [PosController::class, 'searchProduct'])->name('admin.search.product');

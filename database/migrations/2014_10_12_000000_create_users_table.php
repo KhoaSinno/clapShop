@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('password', 255);
             $table->string('role', 100);
             $table->string('fullname', 150);
-            $table->string('email', 100)->unique();
-            $table->string('phone', 20);
+            $table->string('email', 100)->unique()->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('address', 255)->nullable();
             $table->string('gender', 10)->nullable();
             $table->date('dateOfBirth')->nullable();
@@ -36,4 +36,3 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
-

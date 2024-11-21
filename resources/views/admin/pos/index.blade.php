@@ -438,6 +438,45 @@
             });
         });
 
+        // $('.luu-san-pham').click(function() {
+        //     var formData = {
+        //         customerPhone: $('#customerPhone').val(),
+        //         address: $('textarea[name="address"]').val(),
+        //         note: $('textarea[name="note"]').val(),
+        //         paymentMethod: $('#paymentMethod').val(),
+        //         _token: $('meta[name="csrf-token"]').attr('content')
+        //     };
+
+        //     $.ajax({
+        //         url: '/admin/order/create',
+        //         method: 'POST',
+        //         data: formData,
+        //         success: function(response) {
+        //             if (response.success) {
+        //                 swal({
+        //                     title: "Thành công!",
+        //                     text: "Đơn hàng đã được tạo thành công!",
+        //                     icon: "success",
+        //                     button: "OK",
+        //                 }).then(() => {
+        //                     // Xử lý sau khi lưu đơn hàng thành công
+        //                     window.location.reload();
+        //                 });
+        //             } else {
+        //                 swal({
+        //                     title: "Lỗi",
+        //                     text: "Có lỗi xảy ra, vui lòng thử lại!",
+        //                     icon: "error",
+        //                     button: "OK",
+        //                 });
+        //             }
+        //         },
+        //         error: function(response) {
+        //             alert('Có lỗi xảy ra, vui lòng thử lại!');
+        //         }
+        //     });
+        // });
+
         $('.luu-san-pham').click(function() {
             var formData = {
                 customerPhone: $('#customerPhone').val(),
@@ -455,12 +494,14 @@
                     if (response.success) {
                         swal({
                             title: "Thành công!",
-                            text: "Đơn hàng đã được tạo thành công!",
+                            text: response.message,
                             icon: "success",
                             button: "OK",
                         }).then(() => {
-                            // Xử lý sau khi lưu đơn hàng thành công
-                            window.location.reload();
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1500);
+
                         });
                     } else {
                         swal({
@@ -472,7 +513,27 @@
                     }
                 },
                 error: function(response) {
-                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                    if (response.status === 422) { // Lỗi xác thực
+                        let errors = response.responseJSON.errors; // Lấy lỗi từ response
+                        let errorMessages = '';
+                        for (let field in errors) {
+                            errorMessages += errors[field].join('\n') + '\n'; // Gộp các lỗi
+                        }
+
+                        swal({
+                            title: "Lỗi xác thực",
+                            text: errorMessages.trim(), // Hiển thị tất cả lỗi
+                            icon: "error",
+                            button: "OK",
+                        });
+                    } else {
+                        swal({
+                            title: "Lỗi",
+                            text: "Có lỗi xảy ra, vui lòng thử lại!",
+                            icon: "error",
+                            button: "OK",
+                        });
+                    }
                 }
             });
         });

@@ -12,8 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\Password_Reset;
 use App\Models\User;
 
-
-class LoginController extends Controller 
+class LoginController extends Controller
 {
     public function index()
     {
@@ -29,11 +28,12 @@ class LoginController extends Controller
             'title' => 'Quên mật khẩu',
         ]);
     }
-    public function forget(Request $request){
+    public function forget(Request $request)
+    {
 
         $resetPassword = new Password_Reset();
-        $email = $request->input("email"); //email của người dùng       
-        
+        $email = $request->input("email"); //email của người dùng
+
         // Tạo mã OTP
         $otp = Str::random(60);
         $client = new Client();
@@ -75,13 +75,14 @@ class LoginController extends Controller
             'title' => 'Lấy lại mật khẩu',
         ]);
     }
-    public function checkOTP(Request $request){
+    public function checkOTP(Request $request)
+    {
         $otp = $request->input("otp"); //otp trong email của người dùng
-        $resetPassword = Password_Reset::where('token', $otp)->first();       
-        
+        $resetPassword = Password_Reset::where('token', $otp)->first();
+
         try {
             return view('resetpassword', [
-                'title' => 'Đặt lại mật khẩu' ,
+                'title' => 'Đặt lại mật khẩu',
                 'email' => $resetPassword->email,
             ]);
         } catch (\Throwable $th) {
@@ -89,83 +90,32 @@ class LoginController extends Controller
                 'title' => 'Mã OTP chưa đúng',
             ]);
         }
-
     }
-    public function changePassword(Request $request){
+    public function changePassword(Request $request)
+    {
 
         $email = $request->input("email"); // email của người dùng
         $password = $request->input("password"); // password mới của người dùng ()
 
-                //Đổi mật khẩu
-            $user = User::where('email', $email)->first();
-            if ($user) {
-                $user->password = bcrypt($password);
-                $user->save();                
-                return view('login', [
-                    'title' => 'Đăng nhập' ,
-                    //. $resetPassword->email,
-                ]);
-            } else {
-                return view('login', [
-                    'title' => 'User not found' ,
-                    //. $resetPassword->email,
-                ]);
-            }
-
-
-
-
+        //Đổi mật khẩu
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $user->password = bcrypt($password);
+            $user->save();
+            return view('login', [
+                'title' => 'Đăng nhập',
+                //. $resetPassword->email,
+            ]);
+        } else {
+            return view('login', [
+                'title' => 'User not found',
+                //. $resetPassword->email,
+            ]);
+        }
     }
-    /////////////////////////////////
 
-    // public function store(Request $request)
-    // {
-    //     // dd($request->input());
-    //     $this->validate($request, [
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
-
-    //     if (Auth::attempt([
-    //         'email' => $request->input('email'),
-    //         'password' => $request->input('password'),
-    //         // role = 1 is admin check hear
-    //     ], $request->input('remember'))) {
-
-    //         return redirect()->route('admin');
-    //     };
-
-    //     return redirect()->back();
-    // }
-
-    // public function store(Request $request)
-    // {
-
-    //     // dd($request->input());
-
-    //     // Validate dữ liệu nhập vào
-    //     $this->validate($request, [
-    //         'username' => 'required',
-    //         'password' => 'required',
-    //     ]);
-
-    //     // Xác thực đăng nhập với username và password
-    //     if (Auth::attempt([
-    //         'username' => $request->input('username'),
-    //         'password' => $request->input('password')
-    //     ], $request->filled('remember'))) {
-    //         // Nếu đăng nhập thành công, chuyển hướng về trang admin
-    //         return redirect()->route('admin');
-    //     }
-
-    //     // Nếu đăng nhập không thành công, quay lại trang trước đó
-    //     return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không đúng');
-    // }
-
-
-    // Check role
-
-    public function store(Request $request) 
+    // Xác thực đăng nhập
+    public function store(Request $request)
     {
         $this->validate($request, rules: [
             'username' => 'required|string',
@@ -179,15 +129,13 @@ class LoginController extends Controller
 
             // Kiểm tra vai trò
             if (Auth::user()->role === 'admin') {
-                // return redirect()->route('admin.dashboard'); // Giao diện admin
-                return redirect()->route('admin.customer'); // Giao diện admin
-
+                return redirect()->route('admin.dashboard'); // Giao diện admin
             }
             // Giao diện customer
             return redirect('/'); // Giao diện khách hàng
         }
 
-        return redirect()->back()->withErrors(['login' => 'Invalid credentials']);
+        return redirect()->back()->withErrors(['login' => 'Tài khoản hoặc mật khẩu không đúng']);
     }
 
     // Logout
@@ -201,5 +149,4 @@ class LoginController extends Controller
 
         return redirect('/')->with('success', 'Đăng xuất thành công!'); // Chuyển hướng về trang đăng nhập
     }
-
 }

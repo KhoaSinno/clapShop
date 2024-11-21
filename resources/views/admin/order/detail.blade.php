@@ -18,6 +18,10 @@
         <label class="control-label">Khách hàng</label>
         <input class="form-control" type="text" value="{{ $order->user->fullname }}" disabled>
     </div>
+    <div class="form-group  col-md-3">
+        <label class="control-label">SĐT Khách hàng</label>
+        <input class="form-control" type="text" value="{{ $order->user->phone }}" disabled>
+    </div>
 </div>
 <div class="row">
     <div class="form-group  col-md-2">
@@ -29,10 +33,26 @@
         <input class="form-control" type="text" value="{{ $order->created_at }}" disabled>
     </div>
 
+    <div class="form-group  col-3">
+        <label class="control-label">Phương thức thanh toán</label>
+        <input class="form-control" type="text" value="{{getPaymentMethodText($order->paymentMethod) }}" disabled>
+    </div>
+
     <div class="form-group  col-md-2">
         <label class="control-label">Tổng tiền</label>
         <input class="form-control" type="text" value="{{ format_currencyVNĐ($order->totalPrice) }}" disabled>
     </div>
+
+    <div class="form-group col-12">
+        <label class="control-label">Ghi chú đơn hàng</label>
+        <input class="form-control" type="text" disabled>{{ $order->note }}</input>
+    </div>
+
+    <div class="form-group col-12">
+        <label class="control-label">Địa chỉ nhận hàng</label>
+        <textarea class="form-control" disabled>{{ $order->address }}</textarea>
+    </div>
+
 
 </div>
 
@@ -162,8 +182,14 @@
                     // $('#ModalUP').modal('show'); // Hiển thị modal
                 },
                 error: function(xhr) {
-                    alert('Lỗi khi lấy thông tin khách hàng');
-                    console.log(xhr.responseText); // Xem phản hồi từ server
+                    swal({
+                        title: "Lỗi khi lấy thông tin khách hàng",
+                        text: xhr.responseText, // Hiển thị tất cả lỗi
+                        icon: "error",
+                        button: "OK",
+                    });
+                    // alert('Lỗi khi lấy thông tin khách hàng');
+                    // console.log(xhr.responseText); // Xem phản hồi từ server
                 }
             });
         });
@@ -183,11 +209,24 @@
                 },
                 success: function(response) {
                     // $('#ModalUP').modal('hide');
-                    alert('Cập nhật thành công');
-                    location.reload(); // Reload trang sau khi cập nhật thành công
+                    // alert('Cập nhật thành công');
+                    swal({
+                        title: "Cập nhật thành công",
+                        icon: "success",
+                        button: "OK",
+                    });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 },
                 error: function(xhr) {
-                    alert('Cập nhật thất bại');
+                    // alert('Cập nhật thất bại');
+                    swal({
+                        title: "Cập nhật thất bại",
+                        text: xhr.responseText,
+                        icon: "error",
+                        button: "OK",
+                    });
                 }
             });
         });

@@ -121,6 +121,8 @@
 @section('footer')
 <script src="/e_customerSN/js/incQuantitySession.js"></script>
 
+
+
 <script>
     $('.pro-qty input').on('change', function() {
         var id = $(this).data('id'); // Giả sử mỗi input có data-id để xác định sản phẩm
@@ -143,10 +145,27 @@
 
             },
             error: function(xhr) {
+                // if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
+                //     alert(xhr.responseJSON.error);
+                // } else {
+                //     alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                // }
                 if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
-                    alert(xhr.responseJSON.error);
+                    // Hiển thị thông báo lỗi nếu có lỗi từ server
+                    swal({
+                        title: xhr.responseJSON.error,
+                        text: "Lỗi khi tăng số lượng sản phẩm",
+                        icon: "error",
+                        button: "OK",
+                    });
                 } else {
-                    alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                    // Hiển thị thông báo lỗi chung
+                    swal({
+                        title: "Đã xảy ra lỗi!",
+                        text: "Vui lòng thử lại.",
+                        icon: "error",
+                        button: "OK",
+                    });
                 }
             }
         });
