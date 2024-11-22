@@ -17,87 +17,107 @@ php artisan migrate:fresh --seed
 
 # Công việc các thành viên
 
-### `1. Anh Khoa - HTTT2211026`###
-- Setup dự án, khởi tạo và thiết lập môi trường
-- Chọn template: Admin và Customer
-- Phân chia route cho: Admin và Customer
-- Hiển thị/ Update khách hàng với ajax
-- Thiết kế database
-- Tiếp tục: Tối ưu các routes
-- Merge code vào branch main
-- Dùng "booted" trong service hiển thị thông tin khi vào website UI: Customer
-- Base session để thêm/ xóa item trong giỏ hàng
-- Lọc sản phẩm khi bấm vào Category
-- Phần giao diện cart: Làm mịn lại để đẹp mắt hơn
-- Cập nhật số lượng bằng cách bấm nút Update và lưu số lượng vào session, sau đó phần tổng giá sẽ tăng theo
-- Chỉnh nội dung trang contact
-- Code phần thanh toán
-- Phần Order ở customer và admin
-- Viết chức năng sửa, xóa, xem Admin: Order
-- Lên content cho slide
-### `1. Anh Khoa - HTTT2211026`###
+## `1. Leader: Anh Khoa - HTTT2211026`
 
-### `2. Thành Đạt - HTTT2211003`###
-- Admin: code Danh mục: Thêm/ Sửa/ Xóa
-- Nảy ra idea về phân bố bố cục (Trang chủ, sản phẩm, liên hệ)
-- Lead: Chỉnh sửa template (Trang chủ, sản phẩm, liên hệ)
-- Đưa ra màu chủ đạo
-- Logo: ClapShop (Chữ hay Ảnh hay Vector)
-- Nảy ra idea
-- Lead: Chỉnh sửa template (Cart, thanh toán)
-- Thêm cột hình ảnh ở Cart
-- Vietsub lại phần header và footer
-- Admin: Thêm/ xoá hình ảnh Category và duyệt hình ảnh ra
-- 1 Banner to chính ở trang chủ: 870 x 431
-- 2 Banner nhỏ: 570 x 270
-- 1 breadcrum: 1950 x 20
-- 1 icon title web
-- Đưa ra idea 
-- Làm phần Dashboard báo cáo ở phần admin
-- Thiết kế slide
-### `2. Thành Đạt - HTTT2211003`###
+### `---Thiết lập dự án---`
 
-### `3. Như Ý - HTTT2211015`###
 - Thiết kế database
+- Setup, khởi tạo dự án và môi trường chạy dự án
+- Tìm source template: Admin và Customer
+- Quy định route: Admin và Customer
+- Cài đặt Middleware: Chặn xác thực User trước khi thực hiện chức năng
+- `Quản lý` source code với `Github`
+- Quản lý `Plan` và `Deadline`
+- Lên nội dung cho thuyết trình
+
+### `---Code Admin side---`
+
+- `Module`: Thanh toán POS, Đơn hàng, khách hàng có kết hợp ajax
+
+### `---Code Customer side---`
+
+- `Module`: Thanh toán, Giỏ hàng, Đơn hàng
+- Cài đặt `session` để CRUD: Giỏ hàng
+- Lọc sản phẩm bằng slug Category
+
+## `2. Trường Nguyên - HTTT2211025`
+
+### `---Nghiên cứu và triển khai công nghệ---`
+
+- `Thiết kế database`
+- Đưa ra giả pháp nhập hàng, bán hàng
+- Logic luồng hoạt động
+- Đổi mật khẩu
+- Quên mật khẩu
+
+### `---Code Admin side---`
+
+- `Module`: Sản phẩm (CRUD có hình ảnh)
+
+### `---Code Customer side---`
+
+- Hoàn thiện chức năng lọc sản phẩm theo giá
+
+### `---Kiểm thử---`
+
+- Test toàn bộ chức năng website
+
+### `---Hỗ trợ kỹ thuật cho việc báo cáo---`
+
+## `3. Thành Đạt - HTTT2211003`
+
+### `---Tối ưu source code---`
+
+- Dọn tài nguyên rác
+- Điều khiển merge luồng code
+
+### `---Thiết kế và làm mịn UI---`
+
+- Thiết kế logo, Banner, Icon website
+- Chọn màu chủ đạo cho website
+- Thiết kế Slide báo cáo
+
+### `---Code Admin side---`
+
+- `Module`: Danh mục (CRUD có hình ảnh), Dashboard
+
+### `---Code Customer side---`
+
+- Đưa ra giải pháp và chỉnh sửa: Trang chủ, sản phẩm,
+- Chỉnh sửa UI tĩnh: Liên hệ
+
+## `4. Như Ý - HTTT2211015`
+
+### `---Thiết lập dự án---`
+
+- `Thiết kế database`
+- Nhập và tạo Seeder (dữ liệu mẫu): Sản phẩm, danh mục, hình ảnh
 - Hiển thị danh mục trang chủ
 - Làm phần seeder product
-- Làm trang register
-- Chỉnh sửa UI 
-- Customer: Profile user
-- Thuyết trình, báo cáo với cô
-### `3. Như Ý - HTTT2211015`###
 
-### `4. Thành Phát - HTTT2211004`###
-- Làm ProductSeeder
+### `---Code Customer side---`
+
+- `Module`: Đăng ký, Profile khách hàng
+
+### `---Kiểm thử---`
+
+- Test toàn bộ chức năng website
+
+## `5. Thành Phát - HTTT2211004`
+
+### `---Tìm kiếm tài nguyên cho dự án---`
+
 - Lấy Hình ảnh + Nội dung
-- Xử lý và tạo UI 404 not found ở route ngoài những route được định nghĩa trong web.php
-- Sửa lại tên hình ảnh (Bị lỗi khi truy xuất thông qua tên hình ảnh nên cần Phát sửa lại
- sửa lại hình trong git ấy, ròi push lên lại)
- - VietSub lại phần footer giống thương  mại đt
-### `4. Thành Phát - HTTT2211004`###
+- Nhập và tạo Seeder (dữ liệu mẫu): Sản phẩm, danh mục
 
-### `5. Trường Nguyên - HTTT2211025`
-- Thiết kế database
-- Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
-- Dùng seeder import data vào
-- Hoàn thiện chức năng lọc sản phẩm theo giá
-- Forgot password
-- Change password
-- Đưa ra idea làm phần POS bán hàng
-- Train cho mọi người và tự tìm hiểu để cover:
-+ Luồng hoạt động
-+ Cách thức áp dụng công nghệ ntn
-- Test phần order Customer và Admin
-- Test thanh toán ở customer
-- Pos admin
-### `5. Trường Nguyên - HTTT2211025`
+### `---Thiết kế và làm mịn UI---`
 
-- Admin: code Sản phẩm: Thêm/ Sửa/ Xóa
-- `Thiết kế database`
-
-## Bước chạy dự án (NhuY)
-
-## Bước chạy dự án Ý note lại đi
+- Cài đặt và tạo UI 404 not found: Khi truy cập ngoài route
+- Duyệt và cài đặt modal slider trang chủ
+- Hiện ra các sản phẩm liên quan và sản phẩm được bán chạy nhất
+- Cài đặt phần duyệt sản phẩm bằng tag không load lại trang
+- Thêm nút facebook
+- Fix lỗi: Active và Hover của danh mục
 
 ## Như Ý note
 
@@ -151,17 +171,6 @@ php artisan migrate:fresh --seed
 
 - BS4 - V4.1.1
 
-### `Create dummy data`
-
-```bash
-
-php artisan db:seed
-
-php artisan make:seeder *(name of seed)Seeder
-
-php artisan db:seed --class=*(name of seed)Seeder
-```
-
 ### `Load file auto in lavarel`
 
 ```bash
@@ -169,11 +178,11 @@ php artisan db:seed --class=*(name of seed)Seeder
 
 ## Kế sách cuối cùng - `Đạt`
 
-Bước 1
+## Bước 1
 composer update
 composer install
 
-Bước 2
+## Bước 2
 php artisan config:clear
 
 php artisan cache:clear
