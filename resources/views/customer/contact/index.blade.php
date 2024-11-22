@@ -102,7 +102,3 @@
 <!-- Contact Form End -->
 
 @endsection
-
-
-
-@include('customer.footer')

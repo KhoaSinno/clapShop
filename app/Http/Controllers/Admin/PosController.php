@@ -129,8 +129,6 @@ class PosController extends Controller
         return $output;
     }
 
-    // PosController.php
-
     public function removeProductFromSession($id)
     {
         // Lấy giỏ hàng từ session

@@ -63,9 +63,32 @@
                     <li><a href="#">Tiếng Việt</a></li>
                 </ul>
             </div>
-            <div class="header__top__right__auth">
+            <!-- <div class="header__top__right__auth">
                 <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+            </div> -->
+            <div class="header__top__right__auth">
+                @auth
+                <!-- Kiểm tra nếu người dùng là khách hàng -->
+                @if(auth()->user()->role == 'customer')
+                <!-- Gắn đường dẫn ở đây -->
+                <a class="d-inline-block border-right pr-1" href="{{ route('customer.profile') }}"><i
+                        class="fa fa-user"></i>
+                    {{ auth()->user()->username }}</a>
+                <a class="d-inline-block " href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Đăng xuất
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                    style="display: none;">
+                    @csrf
+                </form>
+                @endif
+                @else
+                <!-- Nếu người dùng chưa đăng nhập -->
+                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+                @endauth
             </div>
+
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -134,7 +157,7 @@
                                 <!-- Kiểm tra nếu người dùng là khách hàng -->
                                 @if(auth()->user()->role == 'customer')
                                 <!-- Gắn đường dẫn ở đây -->
-                                <a class="d-inline-block border-right" href="{{ route('customer.profile') }}"><i
+                                <a class="d-inline-block border-right pr-1" href="{{ route('customer.profile') }}"><i
                                         class="fa fa-user"></i>
                                     {{ auth()->user()->username }}</a>
                                 <a class="d-inline-block " href="{{ route('logout') }}"
@@ -323,10 +346,10 @@
                 </div>
             </div>
             <div class="floating-facebook">
-    <a href="#" target="_blank">
-        <i class="fa fa-facebook"></i>
-    </a>
-</div>
+                <a href="#" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </div>
         </div>
     </footer>
     <!-- Footer Section End -->

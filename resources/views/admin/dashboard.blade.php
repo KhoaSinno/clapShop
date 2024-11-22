@@ -4,21 +4,30 @@
 <div class="row">
     <!--Left-->
     <div class="col-md-12 col-lg-6">
-        <div class="row widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+        <div class="row widget-small primary coloured-icon">
+            <a href="{{route('admin.customer')}}">
+                <i class='icon bx bxs-user-account fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng khách hàng</h4>
                 <p><b>{{ $totalCustomers }} khách hàng</b></p>
                 <p class="info-tong">Tổng số khách hàng được quản lý.</p>
             </div>
         </div>
-        <div class="row widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+        <div class="row widget-small info coloured-icon">
+            <a href="{{route('admin.product')}}">
+                <i class='icon bx bxs-data fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng sản phẩm</h4>
                 <p><b>{{ $totalProducts }} sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
             </div>
         </div>
-        <div class="row widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
+        <div class="row widget-small warning coloured-icon">
+            <a href="{{route('admin.order')}}">
+                <i class='icon bx bxs-shopping-bags fa-3x'></i>
+            </a>
             <div class="info">
                 <h4>Tổng đơn hàng</h4>
                 <p><b>{{ $totalOrders }} đơn hàng</b></p>
@@ -37,17 +46,17 @@
     <!--Right-->
     <div class="col-md-12 col-lg-6">
         <div class="row">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Dữ liệu 6 tháng đầu vào Sample</h3>
+                    <h3 class="tile-title">Thống kê 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
+            </div> -->
+            <div class="col-lg-12">
                 <div class="tile">
-                    <h3 class="tile-title">Thống kê 6 tháng doanh thu Sample</h3>
+                    <h3 class="tile-title">Doanh thu 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
                     </div>
@@ -74,20 +83,20 @@
                 </thead>
                 <tbody>
                     @foreach($orders as $order)
-                        <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->customer ? $order->customer->fullname : 'N/A' }}</td>
-                            <td>{{ number_format($order->totalPrice, 0, ',', '.') }} đ</td>
-                            <td>
-                                @if($order->status == 'success')
-                                    <span class="badge bg-success">Đã hoàn thành</span>
-                                @elseif($order->status == 'failed')
-                                    <span class="badge bg-danger">Đã hủy</span>
-                                @else
-                                    <span class="badge bg-warning">Đang xử lý</span>
-                                @endif
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->customer ? $order->customer->fullname : 'N/A' }}</td>
+                        <td>{{ number_format($order->totalPrice, 0, ',', '.') }} đ</td>
+                        <td>
+                            @if($order->status == 'success')
+                            <span class="badge bg-success">Đã hoàn thành</span>
+                            @elseif($order->status == 'failed')
+                            <span class="badge bg-danger">Đã hủy</span>
+                            @else
+                            <span class="badge bg-warning">Đang xử lý</span>
+                            @endif
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -112,12 +121,12 @@
                 </thead>
                 <tbody>
                     @foreach($customers as $customer)
-                        <tr>
-                            <td>{{ $customer->id }}</td>
-                            <td>{{ $customer->fullname }}</td>
-                            <td>{{ $customer->dob ? $customer->dob->format('d/m/Y') : 'N/A' }}</td>
-                            <td>{{ $customer->phone }}</td>
-                        </tr>
+                    <tr>
+                        <td>{{ $customer->id }}</td>
+                        <td>{{ $customer->fullname }}</td>
+                        <td>{{ $customer->dob ? $customer->dob->format('d/m/Y') : 'N/A' }}</td>
+                        <td>{{ $customer->phone }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -130,39 +139,97 @@
 </div>
 @endsection
 
-<!-- jQuery CDN -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @section('footer')
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
-    var data = {
-        labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
-        datasets: [{
-            label: "Dữ liệu đầu tiên",
-            fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
-            strokeColor: "rgb(255, 212, 59)",
-            pointColor: "rgb(255, 212, 59)",
-            pointStrokeColor: "rgb(255, 212, 59)",
-            pointHighlightFill: "rgb(255, 212, 59)",
-            pointHighlightStroke: "rgb(255, 212, 59)",
-            data: [20, 59, 90, 51, 56, 100]
-        },
-        {
-            label: "Dữ liệu kế tiếp",
-            fillColor: "rgba(9, 109, 239, 0.651)  ",
-            pointColor: "rgb(9, 109, 239)",
-            strokeColor: "rgb(9, 109, 239)",
-            pointStrokeColor: "rgb(9, 109, 239)",
-            pointHighlightFill: "rgb(9, 109, 239)",
-            pointHighlightStroke: "rgb(9, 109, 239)",
-            data: [48, 48, 49, 39, 86, 10]
-        }
+
+    var salesData = @json($salesData);
+    var customerData = @json($customerData);
+    var odersData = @json($ordersData);
+
+    var months = [];
+    var sales = [];
+    var customers = [];
+
+    salesData.forEach(function(data) {
+        months.push('Tháng ' + data.month);
+        sales.push(data.total);
+    });
+
+    customerData.forEach(function(data) {
+        customers.push(data.total);
+    });
+
+    odersData.forEach(function(data) {
+        odersData.push(data.total);
+    });
+
+    var chartDataBar = {
+        labels: months,
+        datasets: [
+            {
+                label: 'Doanh thu',
+                data: sales,
+                fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
+                strokeColor: "rgb(255, 212, 59)",
+                pointColor: "rgb(255, 212, 59)",
+                pointStrokeColor: "rgb(255, 212, 59)",
+
+            }
         ]
     };
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
 
-    var ctxb = $("#barChartDemo").get(0).getContext("2d");
-    var barChart = new Chart(ctxb).Bar(data);
+    // var chartDataLine = {
+    //     labels: months,
+    //     datasets: [
+    //         {
+    //             label: 'Số khách hàng',
+    //             data: customers,
+    //             fillColor: "rgba(9, 109, 239, 0.651)  ",
+    //             pointColor: "rgb(9, 109, 239)",
+    //             strokeColor: "rgb(9, 109, 239)",
+    //             pointStrokeColor: "rgb(9, 109, 239)",
+    //         },
+    //         {
+    //             label: 'Số đơn hàng',
+    //             data: odersData,
+    //             fillColor: "rgba(255, 99, 132, 0.2)",
+    //             strokeColor: "rgb(255, 99, 132)",
+    //             pointColor: "rgb(255, 99, 132)",
+    //             pointStrokeColor: "rgb(255, 99, 132)",
+    //         }
+    //     ]
+    // };
+
+    // var lineChartCtx = document.getElementById('lineChartDemo').getContext('2d');
+    // var lineChart = new Chart(lineChartCtx, {
+    //     type: 'line',
+    //     data: chartDataLine,
+    //     options: {
+    //         responsive: true,
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // });
+
+    var barChartCtx = document.getElementById('barChartDemo').getContext('2d');
+    var barChart = new Chart(barChartCtx, {
+        type: 'bar',
+        data: chartDataBar,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>
 @endsection

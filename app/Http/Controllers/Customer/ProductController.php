@@ -12,30 +12,41 @@ class ProductController extends Controller
 {
     private function applySort($request, $proPerPage = 10)
     {
-        // Lấy giá trị của 'sort' từ request, mặc định là 'default' nếu không có giá trị
+        // Lấy giá trị của 'sort' từ request, mặc định là 'default'
         $sort = $request->input('sort', 'default');
-
+    
+        // Lấy giá trị lọc giá 'price_range'
+        $priceRange = $request->input('price_range', 'casual');
+    
         // Khởi tạo truy vấn sản phẩm
         $productsQuery = Product::where('active', true)->with(['category', 'mainImage']);
-
+    
+        // Lọc theo khoảng giá
+        if ($priceRange === 'lower_15') {
+            $productsQuery->where('price', '<', 15000000);
+        } elseif ($priceRange === 'greater_15') {
+            $productsQuery->where('price', '>=', 15000000);
+        }
+    
         // Thêm điều kiện sắp xếp dựa trên giá trị của $sort
         switch ($sort) {
             case 'asc':
-                $productsQuery->orderBy('price', 'asc'); // Sắp xếp giá tăng dần
+                $productsQuery->orderBy('price', 'asc');
                 break;
             case 'desc':
-                $productsQuery->orderBy('price', 'desc'); // Sắp xếp giá giảm dần
+                $productsQuery->orderBy('price', 'desc');
                 break;
             default:
-                $productsQuery->orderBy('created_at', 'desc'); // Mặc định: sắp xếp theo sản phẩm mới nhất
+                $productsQuery->orderBy('created_at', 'desc');
                 break;
         }
-
-        // Sau khi đã thêm điều kiện sắp xếp, tiến hành phân trang
+    
+        // Phân trang sản phẩm
         $products = $productsQuery->paginate($proPerPage);
-
+    
         return [$sort, $products];
     }
+    
 
     public function index(Request $request)
     {
@@ -125,39 +136,6 @@ class ProductController extends Controller
     }
 
 
-    public function filter(Request $request)
-    {
-        $priceRange = $request->input('price_range');
-
-        $productsQuery = Product::query();
-
-        switch ($priceRange) {
-            case '0': // < 10tr
-                $productsQuery->where('price', '<', 10000000);
-                break;
-            case '1': // 10tr - 20tr
-                $productsQuery->whereBetween('price', [10000000, 20000000]);
-                break;
-            case '2': // 20tr - 30tr
-                $productsQuery->whereBetween('price', [20000000, 30000000]);
-                break;
-            case '3': // > 30tr
-                $productsQuery->where('price', '>', 30000000);
-                break;
-            default:
-                break;
-        }
-
-        // Lấy danh sách sản phẩm và phân trang
-        $products = $productsQuery->paginate(10); // Bạn có thể điều chỉnh số lượng sản phẩm trên mỗi trang
-        $categories = Category::all();
-
-        return view('customer.product.index', [
-            'title' => 'Danh sách sản phẩm',
-            'products' => $products,
-            'categories' => $categories,
-        ]);
-    }
 
     public function search(Request $request)
     {
@@ -185,6 +163,40 @@ class ProductController extends Controller
             'categories' => $categories,
             'sort' => $sort,
             'count' => $productCount
+        ]); 
+    }
+
+    public function filter(Request $request)
+    {
+        // Gọi applySort để lấy giá trị 'sort' và danh sách sản phẩm được phân trang
+        list($sort, $products) = $this->applySort($request, 9);
+    
+        // Lấy 6 sản phẩm mới nhất
+        $latestProducts = Product::where('active', true)
+            ->orderBy('created_at', 'desc')
+            ->take(6)
+            ->get();
+    
+        // Danh sách danh mục
+        $categories = Category::all();
+    
+        // Tổng số sản phẩm
+        $productCount = $products->count();
+    
+        // Trả về view với các biến cần thiết
+        return view('customer.product.index', [
+            'title' => 'Lọc sản phẩm',
+            'products' => $products,
+            'categories' => $categories,
+            'sort' => $sort,
+            'count' => $productCount,
+            'latestProducts' => $latestProducts,
         ]);
     }
+    
+    
+    
+    
+
+    
 }

@@ -23,7 +23,41 @@ class ProductSeeder extends Seeder
             'battery' => '4 cell',
             'warranty' => '2 năm',
             'os' => 'Windows 11 bản quyền',
-            'description' => '',
+            'description' => '<p>Sở hữu những ưu điểm nổi bật về ngoại h&igrave;nh, hiệu năng, cũng như khả năng hiển thị, laptop&nbsp;<strong>Lenovo Thinkbook 16&nbsp;G6+&nbsp;2024</strong>&nbsp;l&agrave; một gợi &yacute; ho&agrave;n hảo d&agrave;nh cho c&aacute;c nh&agrave; s&aacute;ng tạo nội dung, d&acirc;n đồ họa, lập tr&igrave;nh vi&ecirc;n.</p>
+
+            <h3><strong>Thiết kế hiện đại, sang trọng</strong></h3>
+
+            <p><strong>Lenovo Thinkbook 16&nbsp;G6+ 2024&nbsp;</strong>mang đến cho người d&ugrave;ng những trải nghiệm mới mẻ với thiết kế sang trọng v&agrave; hiện đại. Bề mặt m&aacute;y được phủ lớp sơn bạc tinh tế, c&aacute;ch điệu với 2 tone m&agrave;u đậm nhạt, logo được đặt ở vị tr&iacute; nổi bật gi&uacute;p n&acirc;ng tầm đẳng cấp.</p>
+
+            <p><img alt="Thiết kế hiện đại, sang trọng" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Thinkbook%2016%20G6%2B%202024/lenovo-thinkbook-16-G6%2B-2024-ttcenter-1.jpg" /></p>
+
+            <p><strong>Thinkbook 16 G6+&nbsp;2024 Ultra 7&nbsp;155H</strong>&nbsp;c&oacute; trọng lượng 1.7kg, tuy kh&ocirc;ng phải l&agrave; d&ograve;ng sản phẩm mỏng nhẹ nhất đến từ thương hiệu Lenovo nhưng vẫn đảm bảo được t&iacute;nh linh động, người d&ugrave;ng&nbsp;dễ d&agrave;ng mang theo trong những cuộc họp hay những chuyến c&ocirc;ng t&aacute;c xa m&agrave; kh&ocirc;ng gặp qu&aacute; nhiều kh&oacute; khăn.</p>
+
+            <h3><strong>Hiệu năng cải tiến</strong></h3>
+
+            <p><strong>Lenovo Thinkbook 16 G6+&nbsp;2024</strong>&nbsp;được trang bị con chip Intel Core Ultra 7&nbsp;155H mới t&iacute;ch hợp với card đồ họa Intel Arc Graphics, mang đến hiệu năng mạnh mẽ, khả năng xử l&yacute; đồ họa vượt trội, m&aacute;y c&oacute; thể chỉnh sửa h&igrave;nh ảnh, render video hoặc chơi game một c&aacute;ch mượt m&agrave;, kh&ocirc;ng độ trễ.</p>
+
+            <p><img alt="Hiệu năng cải tiến" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Thinkbook%2016%20G6%2B%202024/lenovo-thinkbook-16-G6%2B-2024-ttcenter-6.jpg" /></p>
+
+            <p>Với bộ nhớ RAM 32GB DDR5 đảm bảo khả năng đa nhiệm, cho ph&eacute;p người d&ugrave;ng mở nhiều t&aacute;c vụ đồng thời m&agrave; kh&ocirc;ng xảy ra hiện tượng đơ, lag. SSD 1TB vừa cung cấp bộ nhớ lớn thoải m&aacute;i lưu trữ dữ liệu vừa gi&uacute;p m&aacute;y khởi động nhanh, đọc ghi dữ liệu trong nh&aacute;y mắt.</p>
+
+            <p><a href="https://ttcenter.com.vn/lenovo-legion"><em><strong>&gt;&gt; Xem th&ecirc;m:</strong>&nbsp;C&aacute;c d&ograve;ng laptop gaming&nbsp;<strong>Lenovo Legion</strong>&nbsp;ngoại h&igrave;nh chất, cấu h&igrave;nh khủng</em></a></p>
+
+            <h3><strong>M&agrave;n h&igrave;nh 2.5K sắc n&eacute;t</strong></h3>
+
+            <p><strong>Thinkbook 16 G6+&nbsp;</strong>được trang bị m&agrave;n h&igrave;nh 16 inch với độ ph&acirc;n giải 2.5K c&ugrave;ng dải m&agrave;u 100% sRGB mang đến cho người d&ugrave;ng trải nghiệm xem ho&agrave;n hảo, mọi h&igrave;nh ảnh đều được hiển thị sắc n&eacute;t, m&agrave;u sắc sống động như thật. Ngo&agrave;i ra, chiếc laptop Thinkpad n&agrave;y c&ograve;n sở hữu tần số qu&eacute;t 120Hz, gi&uacute;p c&aacute;c chuyển động trong c&aacute;c trận game &nbsp;trở n&ecirc;n mượt m&agrave; v&agrave; cực th&iacute;ch mắt.</p>
+
+            <p><img alt="Màn hình 2.5K sắc nét" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Thinkbook%2016%20G6%2B%202024/lenovo-thinkbook-16-G6%2B-2024-ttcenter-2.jpg" /></p>
+
+            <h3><strong>Thời lượng pin 85Whr thoải m&aacute;i sử dụng</strong></h3>
+
+            <p><strong>Thinkbook G6+&nbsp;2024 Intel Ultra 7&nbsp;155H</strong>&nbsp;sở hữu vi&ecirc;n pin c&oacute; dung lượng 85Whr, một con số ấn tượng ở d&ograve;ng ultrabook. Với dung lượng n&agrave;y, người d&ugrave;ng thoải m&aacute;i sử dụng laptop để l&agrave;m việc, giải tr&iacute; cơ bản trong thời gian d&agrave;i m&agrave; kh&ocirc;ng cần phải sạc pin li&ecirc;n tục.</p>
+
+            <p><img alt="Thời lượng pin 85Whr, thoải mái sử dụng" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Thinkbook%2016%20G6%2B%202024/lenovo-thinkbook-16-G6%2B-2024-ttcenter-4.jpg" /></p>
+
+            <h3><strong>Tản nhiệt tối t&acirc;n</strong></h3>
+
+            <p>Để đảm bảo thiết bị lu&ocirc;n hoạt động một c&aacute;ch hiệu quả,&nbsp;<strong>Lenovo Thinkbook 16 G6+&nbsp;2024</strong>&nbsp;được trang bị hệ thống tản nhiệt th&ocirc;ng minh v&agrave; hiện đại. Với c&ocirc;ng nghệ Smart Power 3.0 cho ph&eacute;p hệ thống tự động điều chỉnh c&ocirc;ng suất v&agrave; quạt l&agrave;m m&aacute;t dựa tr&ecirc;n nhu cầu của m&aacute;y, nhờ đ&oacute; m&aacute;y lu&ocirc;n được duy tr&igrave; nhiệt độ ph&ugrave; hợp kể cả khi l&agrave;m việc, giải tr&iacute; với c&aacute;c t&aacute;c vụ nặng.</p>',
             'price' => 27590000,
             'stock' => 1,
             'active' => true,
@@ -106,7 +140,41 @@ class ProductSeeder extends Seeder
                 'battery' => '80Whr, 3-Cell',
                 'warranty' => '2 năm',
                 'os' => 'Windows 11 bản quyền',
-                'description' => '',
+                'description' => '<p><em><strong>Lenovo Legion Y7000P 2024 Core i7 - 14650HX</strong>&nbsp;- Si&ecirc;u phẩm Gaming được cộng đồng game thủ đ&oacute;n chờ nhất 2024. Với sức mạnh vượt trội từ con chip Core i7 - 14650HX c&ugrave;ng card đồ họa RTX 4060, hứa hẹn mang đến cho anh em game thủ trải nghiệm chiến game đỉnh cao. Để kh&aacute;m ph&aacute; hết sức mạnh của &ldquo;cỗ m&aacute;y&rdquo; chiến game n&agrave;y h&atilde;y tham khảo ngay b&agrave;i viết m&agrave;&nbsp;<strong>T&amp;T Center</strong>&nbsp;đ&atilde; tổng hợp dưới đ&acirc;y nh&eacute;!</em></p>
+
+                <h2><strong>Đ&aacute;nh gi&aacute; Lenovo Legion Y7000P 2024 Core i7 - 14650HX &ndash; Ấn tượng, cuốn h&uacute;t, hiệu năng mạnh mẽ</strong></h2>
+
+                <h3><strong>Qu&aacute;i vật hiệu năng</strong></h3>
+
+                <p><strong>Lenovo Legion Y7000P 2024 Core i7 - 14650HX&nbsp;</strong>được trang bị bộ xử l&yacute; Core i7-14650HX mới, với 16 l&otilde;i v&agrave; 24 luồng, tần số turbo l&otilde;i đơn c&oacute; thể đạt tới 5,2 GHz. Với th&ocirc;ng số ấn tượng, chiếc laptop n&agrave;y c&oacute; khả năng xử l&yacute; mạnh mẽ, mọi t&aacute;c vụ nặng như đồ họa, render video,...đến những tựa game hot đều được vận h&agrave;nh một c&aacute;ch trơn tru mượt m&agrave;.</p>
+
+                <p><img alt="Quái vật hiệu năng" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Legion%20Y7000P%202024%20Core%20i7%20-%2014650HX/lg24%20(1).jpg" /></p>
+
+                <p>Ngo&agrave;i ra,&nbsp;<strong>Lenovo Legion Y7000P 16IRX9 2024 Core i7 - 14650HX</strong>&nbsp;c&ograve;n sở hữu RAM 16GB v&agrave; SSD 512GB mang đến khả năng đa nhiệm mạnh mẽ, khởi động m&aacute;y, hay truy xuất v&agrave;o c&aacute;c ứng dụng đều v&ocirc; c&ugrave;ng nhanh ch&oacute;ng. Chưa hết, m&aacute;y c&ograve;n được trang bị Card RTX 4060 hiệu suất đồ họa đỉnh cao, bạn thỏa sức l&agrave;m đồ họa, chiến game m&agrave; kh&ocirc;ng phải lo lắng bất k&igrave; điều g&igrave;.</p>
+
+                <h3><strong>Thiết kế mạnh mẽ, cuốn h&uacute;t</strong></h3>
+
+                <p>Cũng như c&aacute;c phi&ecirc;n bản tiền nhiệm,&nbsp;<strong>Lenovo Legion 5 2024</strong>&nbsp;sở hữu ngoại h&igrave;nh cứng c&aacute;p, mạnh mẽ chuẩn gaming với m&agrave;u đen sang trọng, cuốn h&uacute;t. Tuy nhi&ecirc;n, điều kh&aacute;c biệt ở phi&ecirc;n bản n&agrave;y l&agrave; lỗ tho&aacute;t kh&iacute; được nh&agrave; sản xuất bố tr&iacute; về ph&iacute;a sau thay v&igrave; hai b&ecirc;n m&aacute;y như c&aacute;c phi&ecirc;n bản trước, điều n&agrave;y gi&uacute;p cho kiểu d&aacute;ng của m&aacute;y trở n&ecirc;n độc đ&aacute;o v&agrave; hiện đại hơn.</p>
+
+                <p><img alt="Thiết kế mạnh mẽ, cuốn hút" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Legion%20Y7000P%202024%20Core%20i7%20-%2014650HX/5.jpg" /></p>
+
+                <h3><strong>M&agrave;n h&igrave;nh hiển thị đẹp mắt</strong></h3>
+
+                <p><strong>Lenovo Legion Y7000P 2024 Core i7 - 14650HX</strong>&nbsp;được trang bị m&agrave;n h&igrave;nh 16 inch chất lượng cao với độ ph&acirc;n giải ấn tượng 2560&times;1600, tốc độ l&agrave;m mới l&ecirc;n đến 165Hz, độ s&aacute;ng 500 nits mang đến trải nghiệm xem ho&agrave;n hảo, mọi h&igrave;nh ảnh đều được hiển thị sắc n&eacute;t v&agrave; v&ocirc; c&ugrave;ng đẹp mắt.</p>
+
+                <p><em><strong>&gt;&gt; Xem th&ecirc;m:&nbsp;</strong>C&aacute;c mẫu&nbsp;<strong><a href="https://ttcenter.com.vn/laptop-do-hoa-ky-thuat">Laptop đồ họa&nbsp;</a></strong>gi&aacute; rẻ, cấu h&igrave;nh cao tại T&amp;T Center&nbsp;</em></p>
+
+                <p><img alt="Màn hình hiển thị đẹp mắt" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Legion%20Y7000P%202024%20Core%20i7%20-%2014650HX/1.jpg" /></p>
+
+                <h3><strong>Tản nhiệt mạnh mẽ</strong></h3>
+
+                <p>Về khả năng tản nhiệt của&nbsp;<strong>Lenovo Legion 5 2024&nbsp;</strong>cũng v&ocirc; c&ugrave;ng vượt trội. M&aacute;y sở hữu kiến tr&uacute;c tản nhiệt Savior Qiankun, loại bỏ cửa tho&aacute;t kh&iacute; ở hai b&ecirc;n thay v&agrave;o đ&oacute; l&agrave; cửa tho&aacute;t kh&iacute; ở ph&iacute;a sau, đồng thời tối ưu cửa tho&aacute;t kh&iacute; v&agrave; ống dẫn kh&iacute; b&ecirc;n trong, nhờ đ&oacute; hiệu suất giải ph&oacute;ng nhiệt vượt xa c&aacute;c phương ph&aacute;p truyền thống, vừa hạn chế tiếng ồn một c&aacute;ch tối đa.</p>
+
+                <p><img alt="Tản nhiệt mạnh mẽ" src="https://www.ttcenter.com.vn/uploads/images/S%E1%BA%A2N%20PH%E1%BA%A8M/Lenovo%20Legion%20Y7000P%202024%20Core%20i7%20-%2014650HX/7.jpg" /></p>
+
+                <h2><strong>V&igrave; sao n&ecirc;n sở hữu&nbsp;Lenovo Legion Y7000P 2024 Core i7 - 14650HX ngay l&uacute;c n&agrave;y&nbsp;?</strong></h2>
+
+                <p>Với những th&ocirc;ng số ấn tượng như tr&ecirc;n th&igrave; chẳng c&oacute; g&igrave; phải b&agrave;n cải về hiệu năng của chiếc laptop Gaming&nbsp;<strong>Lenovo Legion Y7000P 2024 Core i7 - 14650HX</strong>. Nếu bạn đang t&igrave;m kiếm cho m&igrave;nh chiếc laptop mạnh mẽ, m&agrave;n h&igrave;nh chất lượng, tản nhiệt hiệu quả th&igrave; đ&acirc;y l&agrave; một gợi &yacute; tuyệt vời.</p>',
                 'price' => 16990000,
                 'stock' => 1,
                 'active' => true,

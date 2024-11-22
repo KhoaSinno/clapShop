@@ -116,8 +116,15 @@
                 },
                 success: function(response) {
                     // $('#ModalUP').modal('hide');
-                    alert('Cập nhật thành công');
-                    location.reload(); // Reload trang sau khi cập nhật thành công
+                    // alert('Cập nhật thành công');
+                    swal({
+                        title: "Cập nhật thành công.",
+                        icon: "success",
+                        button: "OK",
+                    });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 },
                 error: function(xhr) {
                     alert('Cập nhật thất bại');

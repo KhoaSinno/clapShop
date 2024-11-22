@@ -21,10 +21,7 @@
 <!-- Breadcrumb Section End -->
 
 @section('content')
-
 <div class="col">
-
-
     <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
@@ -71,9 +68,6 @@
                 </div>
             </div>
     </section>
-
-
-
 </div>
 
 @endsection
