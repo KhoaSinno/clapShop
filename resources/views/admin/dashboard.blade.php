@@ -48,20 +48,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Dữ liệu 6 tháng gần nhất</h3>
+                    <h3 class="tile-title">Doanh thu 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
+                    <h3 class="tile-title">Thống kê 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
     <!--END right-->
@@ -163,7 +163,7 @@
         customers.push(data.total);
     });
 
-    var chartData = {
+    var chartDataLine = {
         labels: months,
         datasets: [
             {
@@ -173,10 +173,14 @@
                 strokeColor: "rgb(255, 212, 59)",
                 pointColor: "rgb(255, 212, 59)",
                 pointStrokeColor: "rgb(255, 212, 59)",
-                // pointHighlightFill: "rgb(255, 212, 59)",
-                // pointHighlightStroke: "rgb(255, 212, 59)",
 
-            },
+            }
+        ]
+    };
+
+    var chartDataBar = {
+        labels: months,
+        datasets: [
             {
                 label: 'Số khách hàng',
                 data: customers,
@@ -184,8 +188,6 @@
                 pointColor: "rgb(9, 109, 239)",
                 strokeColor: "rgb(9, 109, 239)",
                 pointStrokeColor: "rgb(9, 109, 239)",
-                // pointHighlightFill: "rgb(9, 109, 239)",
-                // pointHighlightStroke: "rgb(9, 109, 239)",
             },
             {
                 label: 'Số đơn hàng',
@@ -201,7 +203,7 @@
     var lineChartCtx = document.getElementById('lineChartDemo').getContext('2d');
     var lineChart = new Chart(lineChartCtx, {
         type: 'line',
-        data: chartData,
+        data: chartDataLine,
         options: {
             responsive: true,
             scales: {
@@ -212,18 +214,18 @@
         }
     });
 
-    // var barChartCtx = document.getElementById('barChartDemo').getContext('2d');
-    // var barChart = new Chart(barChartCtx, {
-    //     type: 'bar',
-    //     data: chartData,
-    //     options: {
-    //         responsive: true,
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // });
+    var barChartCtx = document.getElementById('barChartDemo').getContext('2d');
+    var barChart = new Chart(barChartCtx, {
+        type: 'bar',
+        data: chartDataBar,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>
 @endsection
