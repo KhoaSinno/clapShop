@@ -46,17 +46,17 @@
     <!--Right-->
     <div class="col-md-12 col-lg-6">
         <div class="row">
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
                 <div class="tile">
-                    <h3 class="tile-title">Doanh thu 6 tháng gần nhất</h3>
+                    <h3 class="tile-title">Thống kê 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
+            </div> -->
+            <div class="col-lg-12">
                 <div class="tile">
-                    <h3 class="tile-title">Thống kê 6 tháng gần nhất</h3>
+                    <h3 class="tile-title">Doanh thu 6 tháng gần nhất</h3>
                     <div class="embed-responsive embed-responsive-16by9">
                         <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
                     </div>
@@ -163,7 +163,11 @@
         customers.push(data.total);
     });
 
-    var chartDataLine = {
+    odersData.forEach(function(data) {
+        odersData.push(data.total);
+    });
+
+    var chartDataBar = {
         labels: months,
         datasets: [
             {
@@ -178,41 +182,41 @@
         ]
     };
 
-    var chartDataBar = {
-        labels: months,
-        datasets: [
-            {
-                label: 'Số khách hàng',
-                data: customers,
-                fillColor: "rgba(9, 109, 239, 0.651)  ",
-                pointColor: "rgb(9, 109, 239)",
-                strokeColor: "rgb(9, 109, 239)",
-                pointStrokeColor: "rgb(9, 109, 239)",
-            },
-            {
-                label: 'Số đơn hàng',
-                data: odersData,
-                fillColor: "rgba(255, 99, 132, 0.2)",
-                strokeColor: "rgb(255, 99, 132)",
-                pointColor: "rgb(255, 99, 132)",
-                pointStrokeColor: "rgb(255, 99, 132)",
-            }
-        ]
-    };
+    // var chartDataLine = {
+    //     labels: months,
+    //     datasets: [
+    //         {
+    //             label: 'Số khách hàng',
+    //             data: customers,
+    //             fillColor: "rgba(9, 109, 239, 0.651)  ",
+    //             pointColor: "rgb(9, 109, 239)",
+    //             strokeColor: "rgb(9, 109, 239)",
+    //             pointStrokeColor: "rgb(9, 109, 239)",
+    //         },
+    //         {
+    //             label: 'Số đơn hàng',
+    //             data: odersData,
+    //             fillColor: "rgba(255, 99, 132, 0.2)",
+    //             strokeColor: "rgb(255, 99, 132)",
+    //             pointColor: "rgb(255, 99, 132)",
+    //             pointStrokeColor: "rgb(255, 99, 132)",
+    //         }
+    //     ]
+    // };
 
-    var lineChartCtx = document.getElementById('lineChartDemo').getContext('2d');
-    var lineChart = new Chart(lineChartCtx, {
-        type: 'line',
-        data: chartDataLine,
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // var lineChartCtx = document.getElementById('lineChartDemo').getContext('2d');
+    // var lineChart = new Chart(lineChartCtx, {
+    //     type: 'line',
+    //     data: chartDataLine,
+    //     options: {
+    //         responsive: true,
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // });
 
     var barChartCtx = document.getElementById('barChartDemo').getContext('2d');
     var barChart = new Chart(barChartCtx, {
