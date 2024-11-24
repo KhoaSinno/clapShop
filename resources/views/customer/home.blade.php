@@ -128,64 +128,6 @@
         </div>
     </div>
 </section>
-<!-- Latest Product Section End -->
-
-<!-- Blog Section Begin -->
-<!-- <section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>From The Blog</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-
-            @php
-                $sampleBlogPosts = [
-                    [
-                        'image' => asset('e_customerSN/image_Laptop/Acer/Acer-Nitro-5-Tiger-2022-AN515-58/Acer-Nitro-5-Tiger-2022-AN515-58-(2).jpg'),
-                        'title' => 'Sample Blog Post 1',
-                        'content' => 'This is a sample content for blog post 1.',
-                        'created_at' => now()->subDays(1),
-                    ],
-                    [
-                        'image' => asset('e_customerSN/image_Laptop/Acer/Acer-Nitro-5-Tiger-2022-AN515-58/Acer-Nitro-5-Tiger-2022-AN515-58 (3).jpg'),
-                        'title' => 'Sample Blog Post 2',
-                        'content' => 'This is a sample content for blog post 2.',
-                        'created_at' => now()->subDays(2),
-                    ],
-                    [
-                        'image' => asset('e_customerSN/image_Laptop/Acer/Acer-Nitro-5-Tiger-2022-AN515-58/Acer-Nitro-5-Tiger-2022-AN515-58.jpg'),
-                        'title' => 'Sample Blog Post 3',
-                        'content' => 'This is a sample content for blog post 3.',
-                        'created_at' => now()->subDays(3),
-                    ],
-                ];
-            @endphp
-
-            @foreach($sampleBlogPosts as $post)
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="{{ $post['image'] }}" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> {{ $post['created_at']->format('M d, Y') }}</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
-                            </ul>
-                            <h5><a href="#">{{ $post['title'] }}</a></h5>
-                            <p>{{ Str::limit($post['content'], 100) }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</section> -->
-<!-- Blog Section End -->
 @endsection
 
 @section('footer')
