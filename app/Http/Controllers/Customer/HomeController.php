@@ -33,10 +33,9 @@ class HomeController extends Controller
             ->selectRaw('SUM(order__details.quantity) as total_sold')
             ->groupBy('products.id')
             ->orderByDesc('total_sold')
-            ->take(9) // Lấy top 9 sản phẩm
+            ->take(8) // Lấy top 9 sản phẩm
             ->get();
 
         return view('customer.home', compact('categories', 'latestProducts', 'title', 'bestSellingProducts'));
     }
-
 }

@@ -188,7 +188,7 @@
                 $('.span__quantity_cart').text(response.totalQuantity);
             },
             error: function(xhr) {
-                alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+                // alert('Đã xảy ra lỗi. Vui lòng thử lại!');
             }
         });
     });
