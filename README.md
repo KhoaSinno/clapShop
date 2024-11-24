@@ -209,3 +209,6 @@ php artisan view:clear
 ### Note's Nguyên kĩ thuật `symbolic link` để thêm link cho nơi lưu trữ file
 
 php artisan storage:link
+
+// Debug user
+dd($user, $request->input('password'));
